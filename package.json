@@ -1,0 +1,13 @@
+{
+  "name": "hypertube",
+  "version": "0.0.0",
+  "description": "Dernier projet de la branche web de 42",
+  "main": "index.js",
+  "repository": "git@github.com:abarriel/Hypertube.git",
+  "author": "<abarriel@student.42.fr>",
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "lodash": "^4.17.4"
+  }
+}
