@@ -1,6 +1,6 @@
-## Projet Hypertube
+# Projet Hypertube
 
-### Table des matières
+## Table des matières
 
 - Introduction
 - Consignes générales
@@ -11,7 +11,7 @@
    -  Partie vidéo
 - Partie bonus
 
-## Introduction
+# Introduction
 
 Ce projet vous propose de créer une application web permettant à un utilisateur de
 rechercher et visionner des vidéos.
@@ -26,7 +26,7 @@ Une fois un élément sélectionné, il sera téléchargé sur le serveur et dif
 web en même temps. Autrement dit, le lecteur ne se contentera pas d’afficher la vidéo
 une fois le téléchargement complété, mais sera capable de streamer directement le flux.
 
-## Consignes générales
+# Consignes générales
 
 Tous les framework, micro-framework, librairies etc... sont autorisés dans la limite où
 ils ne servent pas à créer un flux vidéo à partir d’un torrent.
@@ -36,21 +36,25 @@ ils ne servent pas à créer un flux vidéo à partir d’un torrent.
 :iphone:  Votre site devra être présentable sur mobile, et garder une mise en page acceptable
 sur de petites résolutions.
 
-## Partie utilisateur
+# Partie utilisateur
 
 - L’application doit permettre à un utilisateur de s’inscrire avec:
 	- **adresse email**
-	- **logib**
+	- **login**
 	- **nom**
     - **prénom** 
     - **mot de passe**
+
 - :warning: L’utilisateur doit pouvoir s’inscrire et se connecter via **Omniauth**. 
 	- **Deux stratégie obligatoire**, 42 et une autre au choix.
+	
 - L’utilisateur doit être capable de se connecter avec:
 	- **login**
     - **mot de passe**
+   
 - Il doit également pouvoir recevoir un **mail de réinitialisation**
     de son mot de passe en cas d’oubli.
+    
 - L’utilisateur doit pouvoir se **déconnecter en un seul clic** depuis n’importe quelle
     page du site.
   
@@ -61,7 +65,8 @@ sur de petites résolutions.
 -  **Consulter** le **profil d’un autre utilisateur**. C’est à dire afficher sa photo de profil,
     ses informations. **L’ email, en revanche, doit rester privé.**
 
-## Partie bibliothèque
+
+# Partie bibliothèque
 
 :warning: **Cette partie ne doit être accessible qu’aux utilisateurs connectés.**
 
@@ -70,13 +75,13 @@ sur de petites résolutions.
 - Un champ de recherche.
 - Une liste de miniatures.
 
-#### **Recherche**
+### **Recherche**
 
 Le moteur de recherche devra interroger au moins deux sources externes de votre
 choix, et retourner l’ensemble des résultats sous la forme de miniatures.
 Vous devez limiter les résultats aux vidéos uniquement.
 
-#### **Miniatures**
+### **Miniatures**
 
 - **Si une recherche a été faite,** les résultats doivent s’afficher sous la **forme d’une liste de miniatures**, **triées par nom**.
 
@@ -100,7 +105,7 @@ chaque page.
 :information_source: La liste devra être triable et filtrable selon des critères tels que le nom, le genre, un
 intervalle de note, un intervalle d’année de production, etc...
 
-## Partie vidéo
+# Partie vidéo
 
 :warning: **Cette partie ne doit être accessible qu’aux utilisateurs connectés.**
 
@@ -113,7 +118,7 @@ Cette section devra **présenter le détail d’une vidéo**, c’est à dire:
     - l’année de production
     - la durée
     - la note
-     - une image de couverture et tout ce qui vous semblerait pertinent.
+    - une image de couverture et tout ce qui vous semblerait pertinent.
 
 :warning:  Vous devez également donner aux utilisateurs la possibilité de **laisser un commentaire**
 sur la vidéo, et **afficher la liste des commentaires précédents.**
@@ -138,7 +143,7 @@ langue, ils devront également être téléchargés et sélectionnables.
 
 Si la vidéo n’est pas nativement lisible pour le navigateur(c-ad que ce n’est ni dump4, ni du webm). vous devrez la convertir à la volée dans un format acceptable. **Le support du format mkv est un minimum.**
 
-## Partie bonus
+# Partie bonus
 - Ajouter des stratégies Omniauth supplémentaires.
 - Gérer différentes résolutions de vidéo.
 - Développer une API RESTful.
