@@ -41,6 +41,7 @@ sur de petites résolutions.
 - L’application doit permettre à un utilisateur de s’inscrire avec:
 	- **adresse email**
 	- **login**
+	- **photo de profil**
 	- **nom**
     - **prénom** 
     - **mot de passe**
