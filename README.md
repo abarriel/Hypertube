@@ -3,13 +3,13 @@
 ## Table des matières
 
 - [Introduction](#introduction)
-- Consignes générales
-- Partie utilisateur
-- Partie bibliothèque
-      - Recherche
-      -  Miniatures
-   -  Partie vidéo
-- Partie bonus
+- [Consignes générales](#consignes-générales)
+- [Partie utilisateur](#partie-utilisateur)
+- [Partie bibliothèque](#partie-bibliothèque)
+      - [Recherche](#recherche)
+      - [Miniatures](#miniatures)
+   -  [Partie vidéo](#partie-vidéo)
+- [Partie bonus](#partie-bonus)
 
 # Introduction
 
