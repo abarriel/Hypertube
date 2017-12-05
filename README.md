@@ -6,9 +6,9 @@
 - [Consignes générales](#consignes-générales)
 - [Partie utilisateur](#partie-utilisateur)
 - [Partie bibliothèque](#partie-bibliothèque)
-      - [Recherche](#recherche)
-      - [Miniatures](#miniatures)
-   -  [Partie vidéo](#partie-vidéo)
+	- [Recherche](#recherche)
+	- [Miniatures](#miniatures)
+- [Partie vidéo](#partie-vidéo)
 - [Partie bonus](#partie-bonus)
 
 # Introduction
