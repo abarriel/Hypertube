@@ -1,4 +1,8 @@
+require('@babel/register');
+
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
+const config = require('./config').default;
 
 module.exports = {
   entry: './src/client/index.js',
@@ -7,6 +11,10 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/dist/',
   },
+  devServer: config.devServer || {},
+  plugins: [
+    new CleanWebpackPlugin(['dist']),
+  ],
   module: {
     rules: [
       {
