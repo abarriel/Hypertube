@@ -90,10 +90,10 @@ vos sources externes, triés selon **le critère de votre choix** (téléchargem
 etc...).
 
 - :information_source: Une **miniature** doit être **composée** de: 
- - **nom de la vidéo**
- - **année de production**
- - **note**
-  - **image de couverture**
+ 	- **nom de la vidéo**
+ 	- **année de production**
+ 	- **note**
+  	- **image de couverture**
 
 :warning: Vous devrez **différencier** les vidéos vues des vidéos non-vues, de la manière de votre
 choix.
