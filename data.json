@@ -1,0 +1,41 @@
+{
+  "user": {
+    "id": {
+      "dataType": "Number",
+      "columnName": "id",
+      "nullable": "NO"
+    },
+    "profilePicture": {
+      "dataType": "String",
+      "columnName": "profile_picture",
+      "defaultValue": "/uploads/default.png",
+      "nullable": "NO"
+    },
+    "firstName": {
+      "dataType": "String",
+      "columnName": "first_name",
+      "nullable": "NO"
+    },
+    "lastName": {
+      "dataType": "String",
+      "columnName": "last_name",
+      "nullable": "NO"
+    },
+    "login": {
+      "dataType": "String",
+      "columnName": "login",
+      "nullable": "NO"
+    },
+    "email": {
+      "dataType": "String",
+      "columnName": "email",
+      "nullable": "NO"
+    },
+    "lang": {
+      "dataType": "String",
+      "columnName": "lang",
+      "defaultValue": "EN",
+      "nullable": "NO"
+    }
+  }
+}
