@@ -2,6 +2,7 @@ node_modules
 package-lock.json
 yarn.lock
 dist/
+public/bundle.js
 config/parameters.js
 .DS_Store
 .DS_Store?
