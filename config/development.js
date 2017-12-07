@@ -9,10 +9,10 @@ const client = {
 const developmentConfig = {
   db: {
     postgres: {
-      host: 'baasu.db.elephantsql.com',
+      host: '95.85.22.142',
       port: 5432,
-      database: 'dwvmifqb',
-      user: 'dwvmifqb',
+      database: 'postgres',
+      user: 'postgres',
     },
   },
   client,
