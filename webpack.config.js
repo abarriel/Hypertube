@@ -1,7 +1,6 @@
 require('@babel/register');
 
 const path = require('path');
-const config = require('./config').default;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 module.exports = {
@@ -12,7 +11,23 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
-    new BrowserSyncPlugin(config.browserSync),
+    new BrowserSyncPlugin({
+      host: '0.0.0.0',
+      port: 8080,
+      server: {
+        baseDir: 'public',
+      },
+      logSnippet: false,
+      reloadOnRestart: true,
+      notify: false,
+      snippetOptions: {
+        blacklist: '*',
+        rule: {
+          match: /<\/body>/i,
+          fn: () => '',
+        },
+      },
+    }),
   ],
   module: {
     rules: [
