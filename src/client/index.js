@@ -1,8 +1,6 @@
-import _ from 'lodash';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
-_.map(['1','2'], (i) => console.log(i));
-console.log('okoj');
-console.log('okijijiopjfdgfgouhiuhiuhijoioj');
-console.log('okoj');
+const Root = () => 'My App';
 
-
+ReactDOM.render(<Root />, document.getElementById('__HYPERTUBE__'));

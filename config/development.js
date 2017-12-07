@@ -3,7 +3,7 @@ const path = require('path');
 
 const client = {
   host: '0.0.0.0',
-  port: 8000,
+  port: 8080,
 };
 
 const developmentConfig = {
@@ -15,26 +15,30 @@ const developmentConfig = {
       user: 'dwvmifqb',
     },
   },
+  client,
   server: {
     host: '0.0.0.0',
     port: 8888,
   },
-  client,
   jwt: {
     expiresIn: '10h',
   },
-  devServer: {
-    contentBase: path.join(__dirname, '../public'),
-    clientLogLevel: 'none',
-    historyApiFallback: true, // check this option, it's important
-    hot: true,
-    hotOnly: true,
-    inline: false,
-    noInfo: true,
-    open: true,
-    watchContentBase: true,
-    host: client.host,
-    port: client.port,
+  browserSync: {
+    ...client,
+    server: {
+      baseDir: 'public',
+    },
+    ui: false,
+    logSnippet: false,
+    reloadOnRestart: true,
+    notify: false,
+    snippetOptions: {
+      blacklist: '*',
+      rule: {
+        match: /<\/body>/i,
+        fn: () => '',
+      },
+    },
   },
   debug: false,
 };

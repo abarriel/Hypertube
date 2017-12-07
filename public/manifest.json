@@ -1,0 +1,16 @@
+{
+  "name": "Hypertube",
+  "short_name": "Hypertube",
+  "description": "Project Torrent-Stream",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "lang": "en-US",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "theme_color": "#34495e"
+}
