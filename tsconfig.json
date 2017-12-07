@@ -3,7 +3,16 @@
     "target": "es6",
     "module": "commonjs",
     "outDir": "dist",
-    "sourceMap": true
+    "rootDir": ".",
+    "baseUrl": ".",
+    "noImplicitAny": true,
+    "sourceMap": true,
+    "paths": {
+      "*": [
+          "node_modules/*",
+          "src/server/types/*"
+      ]
+    }
   },
   "include": [
     "src/server/**/*.ts"
