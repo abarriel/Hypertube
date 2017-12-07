@@ -4,14 +4,26 @@
   "description": "Dernier projet de la branche web de 42",
   "main": "index.js",
   "repository": "git@github.com:abarriel/Hypertube.git",
-  "author": "<abarriel@student.42.fr>",
-  "license": "MIT",
+  "author": "abarriel <abarriel@student.42.fr>",
   "scripts": {
     "build": "webpack -p",
     "cli": "webpack --watch --display none",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
     "srv": "rm -rf dist && nodemon -e ts --watch src/server --exec 'tsc && node dist/src/server/index.js'"
   },
+  "contributors": [
+    {
+      "name": "Allan Barrielle",
+      "email": "abarriel@student.42.fr",
+      "url": "https://github.com/abarriel"
+    },
+    {
+      "name": "Lucas Charvolin",
+      "email": "lcharvol@student.42.fr",
+      "url": "https://github.com/Lcharvol"
+    }
+  ],
+  "license": "MIT",
   "dependencies": {
     "@babel/core": "^7.0.0-beta.34",
     "@babel/preset-env": "^7.0.0-beta.34",
@@ -26,7 +38,8 @@
     "debug": "^3.1.0",
     "errorhandler": "^1.5.0",
     "express": "^4.16.2",
-    "global": "^4.3.2",
+    "express-graphql": "^0.6.11",
+    "graphql": "^0.11.7",
     "lodash": "^4.17.4",
     "morgan": "^1.9.0",
     "pg-promise": "^7.3.2",

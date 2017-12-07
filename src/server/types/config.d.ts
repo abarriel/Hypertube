@@ -1,3 +1,8 @@
+/**
+ *
+ *  The schema of the config injected.
+ * @interface Iconfig
+ */
 interface Iconfig {
   db: {
     postgres: {
