@@ -36,6 +36,7 @@
     "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "redux": "^3.7.2",
+    "styled-components": "^2.2.4",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
