@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { ListStyled } from './styles';
+import { ListContainer } from './styles';
 import MoviePreview from '../../components/MoviePreview';
 
 const MovieList = () => (
-  <ListStyled>
+  <ListContainer>
     <MoviePreview />
     <MoviePreview />
     <MoviePreview />
@@ -13,7 +13,7 @@ const MovieList = () => (
     <MoviePreview />
     <MoviePreview />
     <MoviePreview />
-  </ListStyled>
+  </ListContainer>
 );
 
 export default MovieList;

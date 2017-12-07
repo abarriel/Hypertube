@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const ListStyled = styled.div`
+export const ListContainer = styled.div`
   display:flex;
   justify-content: flex-start;
   align-items: flex-start;
