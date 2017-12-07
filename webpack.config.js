@@ -2,6 +2,7 @@ require('@babel/register');
 
 const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const historyApiFallback = require('connect-history-api-fallback')
 
 module.exports = {
   entry: './src/client/index.js',
@@ -20,6 +21,7 @@ module.exports = {
       logSnippet: false,
       reloadOnRestart: true,
       notify: false,
+      middleware: [historyApiFallback()],
       snippetOptions: {
         blacklist: '*',
         rule: {
