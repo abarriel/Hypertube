@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 import GoHome from 'react-icons/lib/go/home';
+import GoPerson from 'react-icons/lib/go/person';
+
+import { MAIN_COLOR } from '../../colors';
 
 export const SideMenuStyled = styled.div`
   position:fixed;
@@ -10,8 +13,7 @@ export const SideMenuStyled = styled.div`
   left:0;
   top:0;
   width:85px;
-  // background:linear-gradient( 160deg, #72EDF2, #5151E5  120%);
-  background-color:rgb(20,20,20);
+  background:linear-gradient( 160deg, rgb(25,25,25), rgb(20,20,20));  60%);
   height:100%;
 `;
 
@@ -25,6 +27,11 @@ export const MenuElemStyled = styled.div`
 `;
 
 export const HomeIcon = styled(GoHome)`
+  color:${MAIN_COLOR};
+  font-size:2em;
+`;
+
+export const ProfilIcon = styled(GoPerson)`
   color:white;
   font-size:2em;
 `;

@@ -2,7 +2,12 @@ import React from 'react';
 import { map } from 'lodash';
 
 import Menuelem from './MenuElem';
-import { SideMenuStyled, Header, HomeIcon } from './styles';
+import {
+  SideMenuStyled,
+  Header,
+  HomeIcon,
+  ProfilIcon,
+} from './styles';
 
 const menu = [
   {
@@ -12,8 +17,8 @@ const menu = [
   },
   {
     id: 1,
-    name:'home',
-    icon: <HomeIcon/>,
+    name:'profil',
+    icon: <ProfilIcon/>,
   }
 ]
 
