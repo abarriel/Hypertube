@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const MoviePreviewContainer = styled.div`
   display:flex;
-  width:200px;
-  height:300px;
+  width:250px;
+  height:380px;
   background-color:rgb(45,45,45);
   border-radius:2px;
   margin:20px;
