@@ -11,12 +11,12 @@ import {
 const menu = [
   {
     id: 0,
-    name: 'home',
+    to: '/',
     icon: <HomeIcon />,
   },
   {
     id: 1,
-    name: 'profil',
+    to: '/profil',
     icon: <ProfilIcon />,
   },
 ];
@@ -24,7 +24,7 @@ const menu = [
 const SideMenu = () => (
   <SideMenuStyled>
     <Header />
-    {menu.map(item => <Menuelem key={item.id} icon={item.icon} last={item.id === menu.length - 1} />)}
+    {menu.map(item => <Menuelem key={item.id} icon={item.icon} to={item.to} last={item.id === menu.length - 1} />)}
   </SideMenuStyled>
 );
 

@@ -13,7 +13,7 @@ export const SideMenuStyled = styled.div`
   left:0;
   top:0;
   width:85px;
-  background:linear-gradient( 160deg, rgb(25,25,25), rgb(20,20,20));  60%);
+  background:linear-gradient( 160deg, rgb(27,27,27), rgb(20,20,20));  60%);
   height:100%;
 `;
 
@@ -24,6 +24,11 @@ export const MenuElemStyled = styled.div`
   align-items: center;
   width:100%;
   cursor:pointer;
+  min-height:70px;
+  transition:all 0.2s ease;
+  &:hover {
+    width:110%;
+  }
 `;
 
 export const HomeIcon = styled(GoHome)`
