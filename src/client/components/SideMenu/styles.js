@@ -19,10 +19,10 @@ export const SideMenuStyled = styled.div`
 
 export const MenuElemStyled = styled.div`
   display:flex;
+  flex-direction:column;
   justify-content: center;
   align-items: center;
   width:100%;
-  height:75px;
   cursor:pointer;
 `;
 
@@ -38,4 +38,13 @@ export const ProfilIcon = styled(GoPerson)`
 
 export const Header = styled.div`
   height:225px;
+`;
+
+export const Separator = styled.div`
+  width:60%;
+  height:2px;
+  border-radius:3px;
+  background-color:white;
+  margin-top:20px;
+  margin-bottom:20px;
 `;

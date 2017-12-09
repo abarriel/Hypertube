@@ -1,5 +1,4 @@
 import React from 'react';
-import { map } from 'lodash';
 
 import Menuelem from './MenuElem';
 import {
@@ -12,20 +11,20 @@ import {
 const menu = [
   {
     id: 0,
-    name:'home',
-    icon: <HomeIcon/>,
+    name: 'home',
+    icon: <HomeIcon />,
   },
   {
     id: 1,
-    name:'profil',
-    icon: <ProfilIcon/>,
-  }
-]
+    name: 'profil',
+    icon: <ProfilIcon />,
+  },
+];
 
 const SideMenu = () => (
   <SideMenuStyled>
     <Header />
-    {menu.map(item => <Menuelem key={item.id} icon={item.icon} />)}
+    {menu.map(item => <Menuelem key={item.id} icon={item.icon} last={item.id === menu.length - 1} />)}
   </SideMenuStyled>
 );
 
