@@ -21,10 +21,19 @@ const menu = [
   },
 ];
 
+const isSelected = pathName => window.location.pathname === pathName;
+
 const SideMenu = () => (
   <SideMenuStyled>
     <Header />
-    {menu.map(item => <Menuelem key={item.id} icon={item.icon} to={item.to} last={item.id === menu.length - 1} />)}
+    {menu.map(item => (
+      <Menuelem
+        key={item.id}
+        icon={item.icon}
+        selected={isSelected(item.to)}
+        to={item.to}
+        last={item.id === menu.length - 1}
+      />))}
   </SideMenuStyled>
 );
 

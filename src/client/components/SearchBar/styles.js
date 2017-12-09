@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 export const SearchBarStyled = styled.input`
   display:flex;
-  width:200px;
+  width:300px;
   height:30px;
-  border-radius:200px;
+  border-radius:300px;
   border:0;
   padding:3px;
   padding-left:15px;

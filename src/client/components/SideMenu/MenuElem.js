@@ -1,15 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
-import { MenuElemStyled, Separator } from './styles';
+import {
+  MenuElemStyled,
+  Separator,
+  LinkStyled,
+} from './styles';
 
-const MenuElem = ({ icon, last, to }) => (
+const MenuElem = ({
+  icon,
+  last,
+  to,
+  selected,
+}) => (
   <MenuElemStyled>
-    <Link to={to}>
+    <LinkStyled to={to} selected={selected}>
       {icon}
       {!last && <Separator />}
-    </Link>
+    </LinkStyled>
   </MenuElemStyled>
 );
 
@@ -17,6 +25,7 @@ MenuElem.propTypes = {
   icon: PropTypes.node.isRequired,
   last: PropTypes.bool.isRequired,
   to: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired,
 };
 
 export default MenuElem;

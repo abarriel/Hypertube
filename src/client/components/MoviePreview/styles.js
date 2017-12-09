@@ -13,9 +13,6 @@ export const MoviePreviewContainer = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  &:hover {
-      margin-top:18px;
-  }
 `;
 
 export const Shadow = styled.div`

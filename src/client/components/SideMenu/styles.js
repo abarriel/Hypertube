@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 import GoHome from 'react-icons/lib/go/home';
 import GoPerson from 'react-icons/lib/go/person';
+import { Link } from 'react-router-dom';
 
-import { MAIN_COLOR } from '../../colors';
+import {
+  MAIN_COLOR,
+  MAIN_COLOR_HOVER,
+  DARK_GREY,
+} from '../../colors';
 
 export const SideMenuStyled = styled.div`
   position:fixed;
@@ -26,19 +31,13 @@ export const MenuElemStyled = styled.div`
   cursor:pointer;
   min-height:70px;
   transition:all 0.2s ease;
-  &:hover {
-    width:110%;
-  }
 `;
 
 export const HomeIcon = styled(GoHome)`
-  color:${MAIN_COLOR};
-  font-size:2em;
+
 `;
 
 export const ProfilIcon = styled(GoPerson)`
-  color:white;
-  font-size:2em;
 `;
 
 export const Header = styled.div`
@@ -46,10 +45,18 @@ export const Header = styled.div`
 `;
 
 export const Separator = styled.div`
-  width:60%;
+  width:100%;
   height:2px;
   border-radius:3px;
-  background-color:white;
+  background-color:${DARK_GREY};
   margin-top:20px;
-  margin-bottom:20px;
+  margin-bottom:0px;
+`;
+
+export const LinkStyled = styled(Link)`
+  color:${({ selected }) => selected ? MAIN_COLOR : DARK_GREY };
+  font-size:2em;
+  &:hover {
+    color:${MAIN_COLOR_HOVER};
+  }
 `;
