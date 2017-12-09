@@ -1,21 +1,18 @@
 // *#FCK#jd^@GITHUB-7558e9f6
 const path = require('path');
 
-const client = {
-  host: '0.0.0.0',
-  port: 8080,
-};
 
-const developmentConfig = {
+const productionConfig = {
   db: {
-    postgres: {
+    client: 'postgresql',
+    connection: {
       host: '95.85.22.142',
       port: 5432,
       database: 'postgres',
       user: 'postgres',
+      },
     },
   },
-  client,
   server: {
     host: '0.0.0.0',
     port: 8888,
@@ -24,7 +21,8 @@ const developmentConfig = {
     expiresIn: '10h',
   },
   browserSync: {
-    ...client,
+    host: '0.0.0.0',
+    port: 8080,
     server: {
       baseDir: 'public',
     },
@@ -43,4 +41,4 @@ const developmentConfig = {
   debug: false,
 };
 
-export default developmentConfig;
+export default productionConfig;

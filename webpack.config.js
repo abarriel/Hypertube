@@ -2,7 +2,7 @@ require('@babel/register');
 
 const path = require('path');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
-const historyApiFallback = require('connect-history-api-fallback')
+const historyApiFallback = require('connect-history-api-fallback');
 
 module.exports = {
   entry: './src/client/index.js',

@@ -1,5 +1,6 @@
-import config from '../../config';
+import config from '../config';
 import initPostgresSQL from './db';
+import * as Knex from 'knex';
 import initServer from './api';
 
 /**
