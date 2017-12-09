@@ -1,13 +1,17 @@
-import React from 'react';
-import { Route, Redirect } from 'react-router';
-import { Switch } from 'react-router-dom';
-
 import Home from './pages/Home';
+import Profil from './pages/Profil';
 
-export default (
-  <Switch>
-    <Route path="/" component={Home} />
-    <Route path="/test" component={Home} />
-    <Redirect from="*" to="/" />
-  </Switch>
-);
+const routes = [
+  {
+    path: '/',
+    component: Home,
+    id: 0,
+  },
+  {
+    path: '/profil',
+    component: Profil,
+    id: 1,
+  },
+];
+
+export default routes;

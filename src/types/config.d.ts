@@ -5,16 +5,13 @@
  */
 interface Iconfig {
   db: {
-    postgres: {
+    client: string,
+    connection: {
         host: string;
         port: number;
         database: string;
         user: string;
     };
-  };
-  client: {
-    host: string;
-    port: number;
   };
   server: {
     host: string;

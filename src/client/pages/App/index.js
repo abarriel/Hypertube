@@ -1,15 +1,27 @@
 import React from 'react';
-import { Router, browserHistory } from 'react-router';
+import {
+  BrowserRouter as Router,
+  Route,
+} from 'react-router-dom';
 
+import SideMenu from '../../components/SideMenu';
 import routes from '../../routes';
 import { AppContainer } from './style';
 
+const RouteWithSubRoutes = (route) => (
+  <Route path={route.path} render={props => <route.component {...props} />} />
+);
+
 const App = () => (
   <AppContainer>
-    <Router
-      history={browserHistory}
-      routes={routes}
-    />
+    <Router>
+      <div>
+        <SideMenu />
+        {routes.map(route => (
+          <RouteWithSubRoutes key={route.id} {...route} />
+        ))}
+      </div>
+    </Router>
   </AppContainer>
 );
 
