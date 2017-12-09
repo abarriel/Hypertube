@@ -6,6 +6,7 @@ import {
   Header,
   HomeIcon,
   ProfilIcon,
+  UsersIcon,
 } from './styles';
 
 const menu = [
@@ -18,6 +19,11 @@ const menu = [
     id: 1,
     to: '/profil',
     icon: <ProfilIcon />,
+  },
+  {
+    id: 2,
+    to: '/users',
+    icon: <UsersIcon />,
   },
 ];
 

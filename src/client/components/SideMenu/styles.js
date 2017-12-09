@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import GoHome from 'react-icons/lib/go/home';
 import GoPerson from 'react-icons/lib/go/person';
+import GoOrganization from 'react-icons/lib/go/organization';
 import { Link } from 'react-router-dom';
 
 import {
@@ -18,7 +19,7 @@ export const SideMenuStyled = styled.div`
   left:0;
   top:0;
   width:85px;
-  background:linear-gradient( 160deg, rgb(27,27,27), rgb(20,20,20));  60%);
+  background:linear-gradient( 160deg, rgb(33,33,33), rgb(26,26,26));  60%);
   height:100%;
 `;
 
@@ -38,6 +39,9 @@ export const HomeIcon = styled(GoHome)`
 `;
 
 export const ProfilIcon = styled(GoPerson)`
+`;
+
+export const UsersIcon = styled(GoOrganization)`
 `;
 
 export const Header = styled.div`

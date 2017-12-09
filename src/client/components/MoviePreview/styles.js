@@ -21,7 +21,7 @@ export const Shadow = styled.div`
   align-items: flex-start;
   width:100%;
   height:100%;
-  background-color:rgba(0,0,0,0.4);
+  background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   padding:10px;
 `;
 

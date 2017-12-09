@@ -12,6 +12,11 @@ const routes = [
     component: Profil,
     id: 1,
   },
+  {
+    path: '/users',
+    component: Profil,
+    id: 2,
+  },
 ];
 
 export default routes;

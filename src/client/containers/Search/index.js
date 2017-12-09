@@ -1,11 +1,12 @@
 import React from 'react';
 
-import { SearchContainer } from './styles';
+import { SearchContainer, SeachIcon  } from './styles';
 import SearchBar from '../../components/SearchBar';
 
 const Search = () => (
   <SearchContainer>
     <SearchBar />
+    <SeachIcon />
   </SearchContainer>
 );
 
