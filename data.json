@@ -1,41 +1,66 @@
 {
   "user": {
     "id": {
-      "dataType": "Number",
+      "dataType": "integer",
       "columnName": "id",
-      "nullable": "NO"
+      "nullable": false
     },
     "profilePicture": {
-      "dataType": "String",
+      "dataType": "string",
       "columnName": "profile_picture",
       "defaultValue": "/uploads/default.png",
-      "nullable": "NO"
+      "nullable": false
     },
     "firstName": {
-      "dataType": "String",
+      "dataType": "string",
       "columnName": "first_name",
-      "nullable": "NO"
+      "nullable": false
     },
     "lastName": {
-      "dataType": "String",
+      "dataType": "string",
       "columnName": "last_name",
-      "nullable": "NO"
+      "nullable": false
     },
     "login": {
-      "dataType": "String",
+      "dataType": "string",
       "columnName": "login",
-      "nullable": "NO"
+      "nullable": false
     },
     "email": {
-      "dataType": "String",
+      "dataType": "string",
       "columnName": "email",
-      "nullable": "NO"
+      "nullable": false
     },
     "lang": {
-      "dataType": "String",
+      "dataType": "string",
       "columnName": "lang",
       "defaultValue": "EN",
-      "nullable": "NO"
+      "nullable": false
+    },
+    "password": {
+      "dataType": "string",
+      "columnName": "password",
+      "nullable": false
+    }
+  },
+  "moviesMiniature": {
+    "name": {
+      "dataType": "string",
+      "nullable": false
+    },
+    "year": {
+      "dataType": "integer",
+      "nullable": false
+    },
+    "rating": {
+      "dataType": "string",
+      "nullable": true,
+      "ifNull": "no"
+    },
+    "coverImage": {
+      "dataType": "string",
+      "nullable": true,
+      "ifNull": "/uploads/coverDefaultImage.png"
     }
   }
 }
