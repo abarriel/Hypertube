@@ -3,23 +3,36 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import SideMenu from '../../components/SideMenu';
 import routes from '../../routes';
 import { AppContainer } from './style';
 
-const RouteWithSubRoutes = route => (
-  <Route path={route.path} exact={route.exact} render={props => <route.component {...props} />} />
+const Fade = ({ children }) => (
+  <CSSTransition
+    transitionName="fade"
+    timeout={1000}
+  >
+    {children}
+  </CSSTransition>
 );
+
+
+const RouteWithSubRoutes = route => <Route path={route.path} exact={route.exact} render={props => <route.component {...props} />} />;
 
 const App = () => (
   <AppContainer>
     <Router>
       <div>
         <SideMenu />
-        {routes.map(route => (
-          <RouteWithSubRoutes key={route.id} {...route} />
-        ))}
+        <TransitionGroup >
+          {routes.map(route => (
+            <Fade key={route.id}>
+              <RouteWithSubRoutes {...route} />
+            </Fade>
+          ))}
+        </TransitionGroup>
       </div>
     </Router>
   </AppContainer>

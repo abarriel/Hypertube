@@ -11,7 +11,7 @@ export const LogoContainer = styled.div`
 
 export const Bar1 = styled.div`
   display:flex;
-  height:15px;
+  height:13px;
   width:100%;
   background-color: ${MAIN_COLOR};
 `;
@@ -19,8 +19,8 @@ export const Bar1 = styled.div`
 export const Bar2 = styled.div`
   position:absolute;
   display:flex;
-  height:70px;
-  width:15px;
+  height:65px;
+  width:13px;
   right:19px;
   background-color: ${MAIN_COLOR};
   border-radius:100px;
@@ -29,8 +29,8 @@ export const Bar2 = styled.div`
 export const Bar3 = styled.div`
   position:absolute;
   display:flex;
-  height:70px;
-  width:15px;
+  height:65px;
+  width:13px;
   left:19px;
   background-color: ${MAIN_COLOR};
   border-radius:100px;

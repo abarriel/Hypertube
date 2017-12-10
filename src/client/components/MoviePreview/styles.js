@@ -9,7 +9,7 @@ export const MoviePreviewContainer = styled.div`
   margin:20px;
   transition: all 0.2s ease;
   cursor: pointer;
-  background-image: url(http://static1.purebreak.com/articles/6/42/74/6/@/127325-affiche-de-le-saison-2-de-walking-dead-950x0-3.jpg);
+  background-image:${({ coverImage }) => `url(${coverImage})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

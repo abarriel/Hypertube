@@ -60,7 +60,7 @@ export const Separator = styled.div`
 `;
 
 export const LinkStyled = styled(Link)`
-  color:${({ selected }) => selected ? MAIN_COLOR : DARK_GREY };
+  color:${({ selected }) => selected ? MAIN_COLOR : DARK_GREY};
   font-size:2em;
   &:hover {
     color:${MAIN_COLOR_HOVER};

@@ -5,9 +5,7 @@ import { withStateHandlers } from 'recompose';
 import { MoviePreviewContainer, Shadow, Title } from './styles';
 
 const MoviePreview = ({
-  movie = {
-    title: 'The Walking Dead',
-  },
+  movie,
   displayShadow,
   showShadow,
   hideShadow,
@@ -15,17 +13,18 @@ const MoviePreview = ({
   <MoviePreviewContainer
     onMouseEnter={showShadow}
     onMouseLeave={hideShadow}
+    coverImage={movie.coverImage}
   >
     {displayShadow &&
       <Shadow>
-        <Title>{movie.title}</Title>
+        <Title>{movie.name}</Title>
       </Shadow>
     }
   </MoviePreviewContainer>
 );
 
 MoviePreview.propTypes = {
-  movie: PropTypes.object,
+  movie: PropTypes.object.isRequired,
   displayShadow: PropTypes.bool.isRequired,
   showShadow: PropTypes.func.isRequired,
   hideShadow: PropTypes.func.isRequired,

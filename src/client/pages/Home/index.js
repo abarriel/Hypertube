@@ -1,6 +1,6 @@
 import React from 'react';
-import { HomeContainer, MainContent } from './styles';
 
+import { HomeContainer, MainContent } from './styles';
 import MovieList from '../../containers/MovieList';
 import Search from '../../containers/Search';
 
