@@ -7,6 +7,7 @@ import {
   Shadow,
   Title,
   PlayLogo,
+  LinkStyed,
 } from './styles';
 
 const MoviePreview = ({
@@ -15,19 +16,20 @@ const MoviePreview = ({
   showShadow,
   hideShadow,
 }) => (
-  <MoviePreviewContainer
-    to={`/movie/${movie.id}`}
-    onMouseEnter={showShadow}
-    onMouseLeave={hideShadow}
-    coverImage={movie.coverImage}
-  >
-    {displayShadow &&
-      <Shadow>
-        <Title>{movie.name}</Title>
-        <PlayLogo />
-      </Shadow>
-    }
-  </MoviePreviewContainer>
+  <LinkStyed to={`/movie/${movie.id}`}>
+    <MoviePreviewContainer
+      onMouseEnter={showShadow}
+      onMouseLeave={hideShadow}
+      coverImage={movie.coverImage}
+    >
+      {displayShadow &&
+        <Shadow>
+          <Title>{`${movie.name} (${movie.year})`}</Title>
+          <PlayLogo />
+        </Shadow>
+      }
+    </MoviePreviewContainer>
+  </LinkStyed>
 );
 
 MoviePreview.propTypes = {

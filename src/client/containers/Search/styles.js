@@ -8,7 +8,7 @@ export const SearchContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   height:50px;
-  padding-left:45px;
+  padding-left:35px;
   margin-top:30px;
 `;
 

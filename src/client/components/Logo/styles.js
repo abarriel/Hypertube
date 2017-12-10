@@ -12,7 +12,7 @@ export const LogoContainer = styled.div`
 export const Bar1 = styled.div`
   display:flex;
   height:13px;
-  width:90%;
+  width:85%;
   background-color: ${MAIN_COLOR};
   border-radius:100px;
 `;

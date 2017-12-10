@@ -1,8 +1,13 @@
 import styled from 'styled-components';
 import GoDiffAdded from 'react-icons/lib/go/diff-added';
 import { Link } from 'react-router-dom';
+import { MAIN_COLOR } from '../../colors';
 
-export const MoviePreviewContainer = styled(Link)`
+export const LinkStyed = styled(Link)`
+  text-decoration:none;
+`;
+
+export const MoviePreviewContainer = styled.div`
   display:flex;
   width:270px;
   height:400px;
@@ -15,7 +20,6 @@ export const MoviePreviewContainer = styled(Link)`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  text-decoration:none;
 `;
 
 export const Shadow = styled.div`
@@ -26,7 +30,7 @@ export const Shadow = styled.div`
   width:100%;
   height:100%;
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
-  padding:10px;
+  padding:25px;
 `;
 
 export const Title = styled.p`
@@ -36,8 +40,9 @@ export const Title = styled.p`
 `;
 
 export const PlayLogo = styled(GoDiffAdded)`
-  align-self:center;
-  color:white;
+  position:absolute;
+  color:${MAIN_COLOR};
   font-size:3em;
-  margin-top:140px;
+  margin-top:160px;
+  margin-left:85px;
 `;

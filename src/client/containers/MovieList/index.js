@@ -12,7 +12,7 @@ const fakeMovies = [
   },
   {
     id: 1,
-    name: 'Game of THrone',
+    name: 'Game of Throne',
     year: '2010',
     rating: 3,
     coverImage: 'http://static.hitek.fr/img/actualite/2017/06/23/w-1343232-mkt-pm-got-s7-jon-po.jpeg',

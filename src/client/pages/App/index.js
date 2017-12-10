@@ -6,6 +6,7 @@ import {
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import SideMenu from '../../components/SideMenu';
+import LogoutButon from '../../components/LogoutButton';
 import routes from '../../routes';
 import { AppContainer } from './style';
 
@@ -26,6 +27,7 @@ const App = () => (
     <Router>
       <div>
         <SideMenu />
+        <LogoutButon />
         <TransitionGroup >
           {routes.map(route => (
             <Fade key={route.id}>
