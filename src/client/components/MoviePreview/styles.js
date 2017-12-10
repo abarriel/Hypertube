@@ -5,6 +5,9 @@ import { MAIN_COLOR, MAIN_COLOR_HOVER } from '../../colors';
 
 export const LinkStyed = styled(Link)`
   text-decoration:none;
+  &:focus {
+    outline:none;
+  }
 `;
 
 export const MoviePreviewContainer = styled.div`

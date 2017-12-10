@@ -17,7 +17,12 @@ export const SeachIcon = styled(GoSearch)`
   color: ${MAIN_COLOR};
   margin-left:20px;
   cursor:pointer;
+  transition:all 0.1s ease;
   &:hover {
     color:${MAIN_COLOR_HOVER};
+  }
+  &:active {
+    font-size:1.4em;
+    margin-top:4px;
   }
 `;
