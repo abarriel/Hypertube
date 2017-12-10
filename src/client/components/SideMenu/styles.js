@@ -45,6 +45,8 @@ export const UsersIcon = styled(GoOrganization)`
 `;
 
 export const Header = styled.div`
+  padding-top:20px;
+  width:100%;
   height:225px;
 `;
 

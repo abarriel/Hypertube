@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Menuelem from './MenuElem';
+import Logo from '../Logo';
 import {
   SideMenuStyled,
   Header,
@@ -31,7 +32,9 @@ const isSelected = pathName => window.location.pathname === pathName;
 
 const SideMenu = () => (
   <SideMenuStyled>
-    <Header />
+    <Header>
+      <Logo />
+    </Header>
     {menu.map(item => (
       <Menuelem
         key={item.id}
