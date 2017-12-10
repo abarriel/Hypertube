@@ -2,7 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
-import { MoviePreviewContainer, Shadow, Title } from './styles';
+import {
+  MoviePreviewContainer,
+  Shadow,
+  Title,
+  PlayLogo,
+} from './styles';
 
 const MoviePreview = ({
   movie,
@@ -11,6 +16,7 @@ const MoviePreview = ({
   hideShadow,
 }) => (
   <MoviePreviewContainer
+    to={`/movie/${movie.id}`}
     onMouseEnter={showShadow}
     onMouseLeave={hideShadow}
     coverImage={movie.coverImage}
@@ -18,6 +24,7 @@ const MoviePreview = ({
     {displayShadow &&
       <Shadow>
         <Title>{movie.name}</Title>
+        <PlayLogo />
       </Shadow>
     }
   </MoviePreviewContainer>

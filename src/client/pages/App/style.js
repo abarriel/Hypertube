@@ -6,4 +6,5 @@ export const AppContainer = styled.div`
   min-height:100vh;
   padding-bottom:100px;
   background-color: rgb(7,7,7);
+  background:linear-gradient( 160deg, rgb(18,18,18), rgb(7,7,7));  60%);
 `;

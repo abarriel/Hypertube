@@ -12,8 +12,9 @@ export const LogoContainer = styled.div`
 export const Bar1 = styled.div`
   display:flex;
   height:13px;
-  width:100%;
+  width:90%;
   background-color: ${MAIN_COLOR};
+  border-radius:100px;
 `;
 
 export const Bar2 = styled.div`
@@ -21,7 +22,7 @@ export const Bar2 = styled.div`
   display:flex;
   height:65px;
   width:13px;
-  right:19px;
+  right:22px;
   background-color: ${MAIN_COLOR};
   border-radius:100px;
 `;
@@ -31,7 +32,7 @@ export const Bar3 = styled.div`
   display:flex;
   height:65px;
   width:13px;
-  left:19px;
+  left:22px;
   background-color: ${MAIN_COLOR};
   border-radius:100px;
 `;
