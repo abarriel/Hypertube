@@ -7,21 +7,21 @@ const fakeMovies = [
     id: 0,
     name: 'The Walking Dead',
     year: '2010',
-    rating: 3,
+    rating:2,
     coverImage: 'http://static1.purebreak.com/articles/6/42/74/6/@/127325-affiche-de-le-saison-2-de-walking-dead-950x0-3.jpg',
   },
   {
     id: 1,
     name: 'Game of Throne',
     year: '2010',
-    rating: 3,
+    rating: 5,
     coverImage: 'http://static.hitek.fr/img/actualite/2017/06/23/w-1343232-mkt-pm-got-s7-jon-po.jpeg',
   },
   {
     id: 2,
     name: 'Harry Potter à l\'école des sorciers',
     year: '2001',
-    rating: 3,
+    rating: 4,
     coverImage: 'http://img.over-blog-kiwi.com/1/88/59/62/20160508/ob_1a62f7_affiche.jpg',
   },
   {
@@ -35,7 +35,7 @@ const fakeMovies = [
     id: 4,
     name: 'Harry Potter et le Prisonnier d’Azkaban',
     year: '2001',
-    rating: 3,
+    rating: 2,
     coverImage: 'http://fr.web.img3.acsta.net/medias/nmedia/18/35/23/41/18378766.jpg',
   },
   {
@@ -56,7 +56,7 @@ const fakeMovies = [
     id: 7,
     name: 'Harry Potter et le Prince de sang-mêlé',
     year: '2001',
-    rating: 3,
+    rating: 4,
     coverImage: 'http://fr.web.img3.acsta.net/medias/nmedia/18/65/64/35/19116953.jpg',
   },
   {
@@ -70,7 +70,7 @@ const fakeMovies = [
     id: 9,
     name: 'Harry Potter et les Reliques de la Mort (partie 2)',
     year: '2001',
-    rating: 3,
+    rating: 4,
     coverImage: 'http://fr.web.img3.acsta.net/medias/nmedia/18/78/64/49/19762436.jpg',
   },
 ];

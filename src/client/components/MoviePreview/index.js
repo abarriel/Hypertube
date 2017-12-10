@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
+import Rating from '../Rating';
+
 import {
   MoviePreviewContainer,
   Shadow,
@@ -24,6 +26,7 @@ const MoviePreview = ({
     >
       {displayShadow &&
         <Shadow>
+          <Rating rating={movie.rating}/>
           <Title>{`${movie.name} (${movie.year})`}</Title>
           <PlayLogo />
         </Shadow>

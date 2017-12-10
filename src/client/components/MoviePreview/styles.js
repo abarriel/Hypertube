@@ -26,7 +26,7 @@ export const Shadow = styled.div`
   positon:relative;
   display:flex;
   flex-direction:column;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: flex-start;
   width:calc(100% - 50px);
   height:calc(100% - 50px);
@@ -44,7 +44,7 @@ export const PlayLogo = styled(GoDiffAdded)`
   position:absolute;
   color:${MAIN_COLOR};
   font-size:3em;
-  margin-bottom:160px;
+  margin-top:140px;
   margin-left:90px;
   &:hover {
     color:${MAIN_COLOR_HOVER};
