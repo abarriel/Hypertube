@@ -15,6 +15,6 @@ export const SearchContainer = styled.div`
 export const SeachIcon = styled(GoSearch)`
   font-size:1.6em;
   color: ${MAIN_COLOR};
-  margin-left:10px;
+  margin-left:20px;
   cursor:pointer;
 `;

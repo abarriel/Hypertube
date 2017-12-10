@@ -8,8 +8,8 @@ import SideMenu from '../../components/SideMenu';
 import routes from '../../routes';
 import { AppContainer } from './style';
 
-const RouteWithSubRoutes = (route) => (
-  <Route path={route.path} render={props => <route.component {...props} />} />
+const RouteWithSubRoutes = route => (
+  <Route path={route.path} exact={route.exact} render={props => <route.component {...props} />} />
 );
 
 const App = () => (

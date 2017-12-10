@@ -4,6 +4,7 @@ import Profil from './pages/Profil';
 const routes = [
   {
     path: '/',
+    exact: true,
     component: Home,
     id: 0,
   },

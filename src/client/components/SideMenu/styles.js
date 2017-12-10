@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import GoHome from 'react-icons/lib/go/home';
+import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
 import GoPerson from 'react-icons/lib/go/person';
 import GoOrganization from 'react-icons/lib/go/organization';
 import { Link } from 'react-router-dom';
@@ -34,7 +34,7 @@ export const MenuElemStyled = styled.div`
   transition:all 0.2s ease;
 `;
 
-export const HomeIcon = styled(GoHome)`
+export const HomeIcon = styled(GoPlaybackPlay)`
 
 `;
 
