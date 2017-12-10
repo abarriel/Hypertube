@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import GoDiffAdded from 'react-icons/lib/go/diff-added';
 import { Link } from 'react-router-dom';
-import { MAIN_COLOR } from '../../colors';
+import { MAIN_COLOR, MAIN_COLOR_HOVER } from '../../colors';
 
 export const LinkStyed = styled(Link)`
   text-decoration:none;
@@ -23,12 +23,13 @@ export const MoviePreviewContainer = styled.div`
 `;
 
 export const Shadow = styled.div`
+  positon:relative;
   display:flex;
   flex-direction:column;
-  justify-content: flex-start;
+  justify-content: flex-end;
   align-items: flex-start;
-  width:100%;
-  height:100%;
+  width:calc(100% - 50px);
+  height:calc(100% - 50px);
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   padding:25px;
 `;
@@ -43,6 +44,9 @@ export const PlayLogo = styled(GoDiffAdded)`
   position:absolute;
   color:${MAIN_COLOR};
   font-size:3em;
-  margin-top:160px;
-  margin-left:85px;
+  margin-bottom:160px;
+  margin-left:90px;
+  &:hover {
+    color:${MAIN_COLOR_HOVER};
+  }
 `;

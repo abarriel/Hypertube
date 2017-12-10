@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import GoSignOut from 'react-icons/lib/go/sign-out';
-import { MAIN_COLOR } from '../../colors';
+import { MAIN_COLOR, MAIN_COLOR_HOVER } from '../../colors';
 
 export const LogoutButtonContainer = styled(GoSignOut)`
   position:absolute;
@@ -9,4 +9,7 @@ export const LogoutButtonContainer = styled(GoSignOut)`
   color:${MAIN_COLOR};
   font-size:1.7em;
   cursor:pointer;
+  &:hover {
+    color:${MAIN_COLOR_HOVER};
+  }
 `;
