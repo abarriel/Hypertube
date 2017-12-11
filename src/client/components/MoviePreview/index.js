@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
+import Rating from '../Rating';
+
 import {
   MoviePreviewContainer,
   Shadow,

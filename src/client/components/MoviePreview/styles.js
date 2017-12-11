@@ -9,6 +9,9 @@ const TRANSITION = 0.2;
 
 export const LinkStyed = styled(Link)`
   text-decoration:none;
+  &:focus {
+    outline:none;
+  }
 `;
 
 export const MoviePreviewContainer = styled.div`
@@ -30,9 +33,10 @@ export const MoviePreviewContainer = styled.div`
 `;
 
 export const Shadow = styled.div`
+  positon:relative;
   display:flex;
   flex-direction:column;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-start;
   transition: all ${TRANSITION}s ease;
   transition-delay: 0.1s;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import GoSearch from 'react-icons/lib/go/search';
 
-import { MAIN_COLOR } from '../../colors';
+import { MAIN_COLOR, MAIN_COLOR_HOVER } from '../../colors';
 
 export const SearchContainer = styled.div`
   display:flex;
@@ -17,4 +17,12 @@ export const SeachIcon = styled(GoSearch)`
   color: ${MAIN_COLOR};
   margin-left:20px;
   cursor:pointer;
+  transition:all 0.1s ease;
+  &:hover {
+    color:${MAIN_COLOR_HOVER};
+  }
+  &:active {
+    font-size:1.4em;
+    margin-top:4px;
+  }
 `;
