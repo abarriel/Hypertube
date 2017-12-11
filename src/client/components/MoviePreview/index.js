@@ -21,6 +21,7 @@ const MoviePreview = ({
 }) => (
   <MainContainer>
     <LinkStyed to={`/movie/${movie.id}`}>
+      <FakeDiv  displayShadow={displayShadow}/>
       <MoviePreviewContainer
         onMouseEnter={showShadow}
         onMouseLeave={hideShadow}
