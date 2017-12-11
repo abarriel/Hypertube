@@ -12,4 +12,3 @@ export const MainContent = styled.div`
   margin-left: ${({ hidden }) => hidden ? '-85px' : '85px'};
   width:calc(100%) - 85px;
 `;
-

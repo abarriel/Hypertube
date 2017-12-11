@@ -18,6 +18,7 @@
     "jsx-a11y/no-static-element-interactions": [0],
     "array-callback-return": [0],
     "prefer-promise-reject-errors": [0],
-    "react/self-closing-comp": [0]
+    "react/self-closing-comp": [0],
+    "react/forbid-prop-types": [0, { "forbid": ["any", "array", "object"] }]
   }
 }
