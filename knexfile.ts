@@ -1,7 +1,3 @@
-import * as _ from 'lodash';
+import config from './src/config';
 
-const { db: config } = require('./src/config');
-
-_.forOwn(config, (value, key) => config[key] = value.database);
-
-module.exports = config;
+module.exports = config.db;

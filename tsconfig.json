@@ -9,13 +9,14 @@
     "sourceMap": true,
     "paths": {
       "*": [
+          "src/types/*",
           "node_modules/*",
           "src/server/types/*"
       ]
     }
   },
   "include": [
-    "src/server/**/*.ts"
+    "*/**/*.ts"
   ],
   "exclude": [
     "node_modules"

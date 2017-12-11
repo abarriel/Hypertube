@@ -9,7 +9,7 @@
     "build": "webpack -p",
     "cli": "webpack --watch --display none",
     "tslint": "tslint -c tslint.json -p tsconfig.json",
-    "srv": "rm -rf dist && nodemon -e ts --watch src/server --exec 'tsc && node dist/src/server/index.js'"
+    "srv": "rm -rf dist && nodemon"
   },
   "contributors": [
     {
@@ -57,6 +57,7 @@
     "recompose": "^0.26.0",
     "redux": "^3.7.2",
     "styled-components": "^2.2.4",
+    "ts-node": "^4.0.1",
     "webpack": "^3.10.0"
   },
   "devDependencies": {
@@ -69,6 +70,7 @@
     "@types/cookie-parser": "^1.4.1",
     "@types/cors": "^2.8.3",
     "@types/express": "^4.0.39",
+    "@types/express-graphql": "^0.0.35",
     "@types/knex": "^0.0.67",
     "@types/lodash": "^4.14.88",
     "@types/morgan": "^1.7.35",
@@ -77,6 +79,7 @@
     "babel-plugin-lodash": "^3.3.2",
     "browser-sync": "^2.18.13",
     "browser-sync-webpack-plugin": "^1.2.0",
+    "concurrently": "^3.5.1",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-plugin-import": "^2.7.0",

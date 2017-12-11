@@ -9,8 +9,14 @@ const developmentConfig = {
       database: 'postgres',
       user: 'postgres',
       },
+    migrations: {
+      directory: './src/server/database/migrations',
+      tableName: 'version'
+      },
+    seeds: {
+        directory: './src/server/database/seeds',
+      },
     },
-  },
   server: {
     host: '0.0.0.0',
     port: 8888,
@@ -36,7 +42,7 @@ const developmentConfig = {
       },
     },
   },
-  debug: false,
+  debug: false
 };
 
 export default developmentConfig;

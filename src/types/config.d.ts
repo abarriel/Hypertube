@@ -12,6 +12,13 @@ interface Iconfig {
         database: string;
         user: string;
     };
+    migrations: {
+      directory: string,
+      tableName: string
+    };
+    seeds: {
+        directory: string,
+    };
   };
   server: {
     host: string;
@@ -21,22 +28,22 @@ interface Iconfig {
     expiresIn: string;
   };
   browserSync: {
+    host: string;
+    port: number;
     server: {
         baseDir: string;
     };
-      ui: boolean;
-      logSnippet: boolean;
-  reloadOnRestart: boolean;
-  notify: boolean;
-  snippetOptions: {
+    ui: boolean;
+    logSnippet: boolean;
+    reloadOnRestart: boolean;
+    notify: boolean;
+    snippetOptions: {
       blacklist: string;
       rule: {
           match: RegExp;
           fn: () => string;
       };
-  };
-  host: string;
-  port: number;
+    };
   };
   debug: boolean;
 }

@@ -1,6 +1,4 @@
-// *#FCK#jd^@GITHUB-7558e9f6
 const path = require('path');
-
 
 const productionConfig = {
   db: {
@@ -11,8 +9,14 @@ const productionConfig = {
       database: 'postgres',
       user: 'postgres',
       },
+    migrations: {
+      directory: './src/server/database/migrations',
+      tableName: 'version'
+      },
+    seeds: {
+        directory: './src/server/database/seeds',
+      },
     },
-  },
   server: {
     host: '0.0.0.0',
     port: 8888,
@@ -38,7 +42,7 @@ const productionConfig = {
       },
     },
   },
-  debug: false,
+  debug: false
 };
 
 export default productionConfig;

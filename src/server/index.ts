@@ -1,13 +1,19 @@
-import config from '../config';
-import initPostgresSQL from './db';
+import { Environment } from './core/Environment';
+import initDb from './database';
 import * as Knex from 'knex';
-import initServer from './api';
 
 /**
- * Init chain of the server.   DB -> HTTP
+ * Init chain of the server. DB -> HTTP
  *
  * @param {Config DB}
  */
-initPostgresSQL(config.db)
-  .then((db: any) => initServer(config, db))
-  .catch((err: any) => console.log(err));
+const init =  async () => {
+  try {
+    await initDb();
+    // await initServer(config);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+init();

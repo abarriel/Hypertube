@@ -1,6 +1,5 @@
 {
-  "extends": "tslint-eslint-rules",
-  "rules": {
-    "quotes": ["single", { "avoidEscape": true }]
-  }
+  "extends": [
+    "tslint-eslint-rules"
+  ]
 }

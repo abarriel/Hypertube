@@ -42,5 +42,9 @@
     "suppressWelcomeNotice": true
   },
   "workbench.startupEditor": "newUntitledFile",
-  "explorer.confirmDragAndDrop": false
+  "explorer.confirmDragAndDrop": false,
+  "cSpell.words": [
+    "",
+    "iconfig"
+  ]
 }

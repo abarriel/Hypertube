@@ -14,5 +14,4 @@ _.forEach(supportedModes, (config) => _.merge(
   userConfig,
 ));
 
-
 export default supportedModes[process.env.NODE_ENV];
