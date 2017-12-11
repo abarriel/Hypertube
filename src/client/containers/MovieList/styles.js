@@ -5,6 +5,6 @@ export const ListContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap:wrap;
-  padding-left:25px;
-  padding-top:25px;
+  margin:50px;
+  flex:1;
 `;

@@ -10,6 +10,7 @@ import {
   Title,
   LinkStyed,
   FakeDiv,
+  MainContainer,
 } from './styles';
 
 const MoviePreview = ({
@@ -18,21 +19,22 @@ const MoviePreview = ({
   showShadow,
   hideShadow,
 }) => (
-  <LinkStyed to={`/movie/${movie.id}`}>
-    <MoviePreviewContainer
-      onMouseEnter={showShadow}
-      onMouseLeave={hideShadow}
-      coverImage={movie.coverImage}
-      displayShadow={displayShadow}
-    >
-      {displayShadow && <FakeDiv />}
-      {displayShadow &&
-        <Shadow displayShadow={displayShadow}>
-          <Title>{`${movie.name} (${movie.year})`}</Title>
-        </Shadow>
-      }
-    </MoviePreviewContainer>
-  </LinkStyed>
+  <MainContainer>
+    <LinkStyed to={`/movie/${movie.id}`}>
+      <MoviePreviewContainer
+        onMouseEnter={showShadow}
+        onMouseLeave={hideShadow}
+        coverImage={movie.coverImage}
+        displayShadow={displayShadow}
+      >
+        {displayShadow &&
+          <Shadow displayShadow={displayShadow}>
+            <Title>{`${movie.name} (${movie.year})`}</Title>
+          </Shadow>
+        }
+      </MoviePreviewContainer>
+    </LinkStyed>
+  </MainContainer>
 );
 
 MoviePreview.propTypes = {
