@@ -6,8 +6,8 @@ import {
   MoviePreviewContainer,
   Shadow,
   Title,
-  PlayLogo,
   LinkStyed,
+  FakeDiv,
 } from './styles';
 
 const MoviePreview = ({
@@ -21,11 +21,12 @@ const MoviePreview = ({
       onMouseEnter={showShadow}
       onMouseLeave={hideShadow}
       coverImage={movie.coverImage}
+      displayShadow={displayShadow}
     >
+      {displayShadow && <FakeDiv />}
       {displayShadow &&
-        <Shadow>
+        <Shadow displayShadow={displayShadow}>
           <Title>{`${movie.name} (${movie.year})`}</Title>
-          <PlayLogo />
         </Shadow>
       }
     </MoviePreviewContainer>
