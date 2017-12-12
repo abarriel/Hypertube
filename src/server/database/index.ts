@@ -1,9 +1,7 @@
-import * as Knex from 'knex';
+import { DB } from '../core';
 
 const initDb = async () => {
-  console.log('Knex', Knex);
-  // await Knex.migrate.latest();
-  // console.log('init');
+  await DB.migrate.latest();
 };
 
 export default initDb;

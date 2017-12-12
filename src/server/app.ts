@@ -20,34 +20,30 @@ const getUrl = (server: any) => `http://${server.address().address}:${server.add
  * @param {Client} db
  */
 const initServer = async (config: Iconfig) => {
-  try {
-    const app = await express();
-    const { server: { host, port }, db } = config;
+  const app = await express();
+  const { server: { host, port }, db } = config;
 
-    await app
-      .use(compression())
-      .use(logger('dev'))
-      .use(cookieParser())
-      .use(bodyParser.json())
-      .use(bodyParser.urlencoded({ extended: true }))
-      .use(cors())
-      .use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-        err.status = 201;
-        next(err);
-      })
-      .use(errorHandler());
-      // .use(getToken)
-      // .use(getUserFromTokenWithoutErr)
+  await app
+    .use(compression())
+    .use(logger('dev'))
+    .use(cookieParser())
+    .use(bodyParser.json())
+    .use(bodyParser.urlencoded({ extended: true }))
+    .use(cors())
+    .use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+      err.status = 201;
+      next(err);
+    })
+    .use(errorHandler());
 
+    // .use(getToken)
+    // .use(getUserFromTokenWithoutErr)
     await app
       .get('/', (req, res) => res.json({ ping: 'Hello World' }));
 
-    // await GraphQLRoutes.map(app);
+  // await GraphQLRoutes.map(app);
 
-      const httpServer = await app.listen(port, host, () => {
-        console.log(`Server serve: ${getUrl(httpServer)}`);
-      });
-  } catch (err) {
-
-  }
+    const httpServer = await app.listen(port, host, () => {
+      console.log(`Server serve: ${getUrl(httpServer)}`);
+    });
 };

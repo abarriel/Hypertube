@@ -1,9 +1,5 @@
 import * as Knex from 'knex';
 
-import { Environment } from './Environment';
+import * as config from '../../../knexfile';
 
-export const DB: Knex = Knex({
-    client: Environment.getConfig().db.client,
-    connection: Environment.getConfig().db.connection,
-    pool: { min: 0, max: 10 },
-});
+export const DB: Knex = Knex(config);

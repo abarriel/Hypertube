@@ -4,5 +4,7 @@ yarn.lock
 dist
 public/bundle.js
 config/parameters.js
+parameters.*
+src/config/parameters.ts
 .DS_Store
 .DS_Store?

@@ -1,5 +1,6 @@
 import { Environment } from './core/Environment';
 import initDb from './database';
+import initServer from './app';
 import * as Knex from 'knex';
 
 /**
@@ -10,7 +11,7 @@ import * as Knex from 'knex';
 const init =  async () => {
   try {
     await initDb();
-    // await initServer(config);
+    await initServer(Environment.getConfig());
   } catch (err) {
     console.log(err);
   }
