@@ -1,16 +1,25 @@
-import { Environment } from './core/Environment';
+import { Environment, DB } from './core';
+import * as cron from 'cron';
 import initDb from './database';
+import initScrapper from './scrapper';
 import initServer from './app';
-import * as Knex from 'knex';
+import axios from 'axios';
 
 /**
  * Init chain of the server. DB -> HTTP
  *
  * @param {Config DB}
  */
-const init =  async () => {
+const scrapperJob = new cron.CronJob({
+  cronTime: '0 0 * * 1',
+  onTick: initScrapper,
+  // runOnInit: true,
+})
+
+ const init =  async () => {
   try {
     await initDb();
+    scrapperJob.start();
     await initServer(Environment.getConfig());
   } catch (err) {
     console.log(err);

@@ -24,6 +24,7 @@ interface Iconfig {
     host: string;
     port: number;
   };
+  omdb: string,
   jwt: {
     expiresIn: string;
   };

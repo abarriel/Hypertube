@@ -6,6 +6,7 @@ import * as logger from 'morgan';
 import * as errorHandler from 'errorhandler';
 import * as cors from 'cors';
 import * as _ from 'lodash';
+import dispatchRoute from './service';
 
 import * as config from '../config';
 // import { GraphQLRoutes } from './routes';
@@ -14,14 +15,14 @@ const getUrl = (server: any) => `http://${server.address().address}:${server.add
 
 /**
  *  The Server is actually working and functional once the callback of app.listen is called.
- *  Meaning, without le console.log prompt, the server is not actually functional.
+ *  Meaning, without the console.log prompt, the server is not actually functional.
  *
  * @param {Iconfig} config
- * @param {Client} db
  */
-const initServer = async (config: Iconfig) => {
+
+ const initServer = async (config: Iconfig) => {
   const app = await express();
-  const { server: { host, port }, db } = config;
+  const { server: { host, port } } = config;
 
   await app
     .use(compression())
@@ -36,14 +37,13 @@ const initServer = async (config: Iconfig) => {
     })
     .use(errorHandler());
 
-    // .use(getToken)
-    // .use(getUserFromTokenWithoutErr)
     await app
-      .get('/', (req, res) => res.json({ ping: 'Hello World' }));
-
-  // await GraphQLRoutes.map(app);
+      .get('/', (req, res) => res.json({ ping: 'Hello World' }))
+      .use('/api', dispatchRoute);
 
     const httpServer = await app.listen(port, host, () => {
       console.log(`Server serve: ${getUrl(httpServer)}`);
     });
 };
+
+export default initServer;

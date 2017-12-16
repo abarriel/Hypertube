@@ -49,7 +49,7 @@
       "nullable": false
     },
     "year": {
-      "dataType": "integer",
+      "dataType": "string",
       "nullable": false
     },
     "rating": {
@@ -59,8 +59,70 @@
     },
     "coverImage": {
       "dataType": "string",
+      "columnName": "cover_image",
       "nullable": true,
       "ifNull": "/uploads/coverDefaultImage.png"
+    }
+  },
+  "movies": {
+    "imdbId": {
+      "dataType": "string",
+      "coloumnName": "imdb_id"
+    },
+    "title": {
+      "dataType": "string",
+      "nullable": false
+    },
+    "year": {
+      "dataType": "string",
+      "nullable": false
+    },
+    "imdbRating": {
+      "dataType": "string",
+      "nullable": true,
+      "ifNull": "no",
+      "columnName": "imdb_rating"
+    },
+    "coverImage": {
+      "dataType": "string",
+      "columnName": "cover_image",
+      "nullable": true,
+      "ifNull": "/uploads/coverDefaultImage.png"
+    },
+    "backgroundImage": {
+      "dataType": "string",
+      "columnName": "background_image"
+    },
+    "summary": {
+      "dataType": "text"
+    },
+    "genres": {
+      "dataType": "array"
+    },
+    "torrents": {
+      "dataType": "array"
+    },
+    "pg": {
+      "dataType": "string"
+    },
+    "runtime": {
+      "dataType": "string"
+    },
+    "director": {
+      "dataType": "string"
+    },
+    "actors": {
+      "dataType": "array"
+    },
+    "ratings": {
+      "dataType": "array"
+    },
+    "boxOffice": {
+      "dataType": "string",
+      "columnName": "box_office"
+    },
+    "production": {
+      "dataType": "string"
     }
   }
 }
