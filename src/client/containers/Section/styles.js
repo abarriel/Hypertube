@@ -10,7 +10,8 @@ export const SectionContainer = styled.div`
 
 export const Title = styled.p`
   color:white;
-  font-size:1.3em;
-  color:${MAIN_COLOR};
+  font-size:1.1em;
+  color:white;
+  margin:0;
   margin-left:50px;
 `;

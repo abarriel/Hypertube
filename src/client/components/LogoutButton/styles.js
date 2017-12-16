@@ -6,10 +6,7 @@ export const LogoutButtonContainer = styled(GoSignOut)`
   position:absolute;
   top:40px;
   right:30px;
-  color:${MAIN_COLOR};
+  color:white;
   font-size:1.7em;
   cursor:pointer;
-  &:hover {
-    color:${MAIN_COLOR_HOVER};
-  }
 `;

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Header from './Header';
 import { HomeContainer, MainContent } from './styles';
 import Search from '../../containers/Search';
 import Section from '../../containers/Section';
@@ -7,7 +8,7 @@ import Section from '../../containers/Section';
 const Home = () => (
   <HomeContainer>
     <MainContent>
-      <Search />
+      <Header />
       <Section title="Nouveautés" />
       <Section title="Tendances actuelles" />
     </MainContent>
