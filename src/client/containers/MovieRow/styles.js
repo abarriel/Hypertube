@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const HEIGHT = 130;
+const HEIGHT = 330;
 const WIDTH = 220;
 const TRANSITION = 0.2;
 
@@ -27,12 +27,12 @@ export const MoviePreviewContainer = styled.div`
   background-repeat: no-repeat;
   cursor:pointer;
   transition: all ${TRANSITION}s;
-  transition-delay:0.5s;
+  transition-delay:0.3s;
   z-index:100;
   &:hover {
-    transform: scale(2);
+    transform: scale(1.3);
     z-index:1000;
   }
-  margin-left:5px;
-  margin-right:
+  margin-left:7.5px;
+  margin-right:7.5px;
 `;

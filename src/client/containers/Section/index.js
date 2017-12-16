@@ -20,10 +20,14 @@ const Section = ({
   <SectionContainer>
     <TitleContainer>
       <Title>{title}</Title>
-      <LeftArrow onClick={() => handleGoLeft(start - 1)} />
-      <RightArrow onClick={() => handleGoRight(start + 1)} />
+      <LeftArrow onClick={() => handleGoLeft(start - 2 >= 0 ? start - 2 : 0)} />
+      <RightArrow onClick={() => handleGoRight(start + 2)} />
     </TitleContainer>
-    <MovieRow start={start} />
+    <MovieRow
+      start={start}
+      handleGoLeft={handleGoLeft}
+      handleGoRight={handleGoRight}
+    />
   </SectionContainer>
 );
 
@@ -39,7 +43,7 @@ const enhance = withStateHandlers(
     start: 0,
   },
   {
-    handleGoLeft: () => newStart => ({ start: newStart >= 0 ? newStart : 0}),
+    handleGoLeft: () => newStart => ({ start: newStart }),
     handleGoRight: () => newStart => ({ start: newStart }),
   },
 );

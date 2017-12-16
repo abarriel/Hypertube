@@ -80,6 +80,8 @@ const fakeMovies = [
 const MovieRow = ({
   movies = fakeMovies,
   start,
+  handleGoLeft,
+  handleGoRight,
 }) => (
   <MovieRowContainer
     start={start}
@@ -88,6 +90,9 @@ const MovieRow = ({
       (<MoviePreview
         key={movie.id}
         movie={movie}
+        start={start}
+        handleGoLeft={handleGoLeft}
+        handleGoRight={handleGoRight}
       />))}
   </MovieRowContainer>
 );
@@ -95,6 +100,8 @@ const MovieRow = ({
 MovieRow.propTypes = {
   movies: PropTypes.array,
   start: PropTypes.number.isRequired,
+  handleGoLeft: PropTypes.func.isRequired,
+  handleGoRight: PropTypes.func.isRequired,
 };
 
 export default MovieRow;
