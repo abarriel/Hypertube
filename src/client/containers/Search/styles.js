@@ -10,7 +10,7 @@ export const SearchContainer = styled.div`
   height:50px;
   padding-left:35px;
   margin-top:30px;
-  margin-bottom:75px;
+  margin-bottom:30px;
 `;
 
 export const SeachIcon = styled(GoSearch)`

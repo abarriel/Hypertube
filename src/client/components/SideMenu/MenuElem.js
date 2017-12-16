@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   MenuElemStyled,
   Separator,
-  LinkStyled,
 } from './styles';
 
 const MenuElem = ({
@@ -13,11 +12,9 @@ const MenuElem = ({
   to,
   selected,
 }) => (
-  <MenuElemStyled>
-    <LinkStyled to={to} selected={selected}>
-      {icon}
-      {!last && <Separator />}
-    </LinkStyled>
+  <MenuElemStyled to={to} selected={selected}>
+    {icon}
+    {!last && <Separator />}
   </MenuElemStyled>
 );
 

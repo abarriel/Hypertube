@@ -1,6 +1,8 @@
 import React from 'react';
-import { ListContainer } from './styles';
-import MoviePreview from '../../components/MoviePreview';
+import PropTypes from 'prop-types';
+
+import { MovieRowContainer } from './styles';
+import MoviePreview from './MoviePreview';
 
 const fakeMovies = [
   {
@@ -22,7 +24,7 @@ const fakeMovies = [
     name: 'Harry Potter à l\'école des sorciers',
     year: '2001',
     rating: 4,
-    coverImage: 'https://i.pinimg.com/564x/bf/80/95/bf8095a03e5f3dc642e043d078aa1cfd.jp',
+    coverImage: 'https://i.pinimg.com/564x/bf/80/95/bf8095a03e5f3dc642e043d078aa1cfd.jpg',
   },
   {
     id: 3,
@@ -75,10 +77,31 @@ const fakeMovies = [
   },
 ];
 
-const MovieList = () => (
-  <ListContainer>
-    {fakeMovies.map(movie => <MoviePreview key={movie.id} movie={movie} />)}
-  </ListContainer>
+const MovieRow = ({
+  movies = fakeMovies,
+  start,
+  handleGoLeft,
+  handleGoRight,
+}) => (
+  <MovieRowContainer
+    start={start}
+  >
+    {movies.map(movie =>
+      (<MoviePreview
+        key={movie.id}
+        movie={movie}
+        start={start}
+        handleGoLeft={handleGoLeft}
+        handleGoRight={handleGoRight}
+      />))}
+  </MovieRowContainer>
 );
 
-export default MovieList;
+MovieRow.propTypes = {
+  movies: PropTypes.array,
+  start: PropTypes.number.isRequired,
+  handleGoLeft: PropTypes.func.isRequired,
+  handleGoRight: PropTypes.func.isRequired,
+};
+
+export default MovieRow;

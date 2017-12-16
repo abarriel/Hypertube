@@ -12,7 +12,7 @@ export const MainContainer = styled.div`
   display:flex;
   position:relative;
   height:${HEIGHT + 40}px;
-  margin-;eft:5px;
+  margin-left:5px;
   margin-right:5px;
 `;
 

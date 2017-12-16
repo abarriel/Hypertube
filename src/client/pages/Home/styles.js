@@ -12,3 +12,13 @@ export const MainContent = styled.div`
   margin-left: ${({ hidden }) => hidden ? '-85px' : '85px'};
   width:calc(100%) - 85px;
 `;
+
+export const HeaderContainer = styled.div`
+  min-width:800px;
+  margin-bottom:35px;
+`;
+
+export const HeaderImage = styled.img`
+  width:calc(100vw - 85px);
+  height:auto;
+`;
