@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
+import GoFlame from 'react-icons/lib/go/flame';
 import GoPerson from 'react-icons/lib/go/person';
 import GoOrganization from 'react-icons/lib/go/organization';
+import GoListUnordered from 'react-icons/lib/go/list-unordered';
 import { Link } from 'react-router-dom';
 
 import {
@@ -21,6 +22,7 @@ export const SideMenuStyled = styled.div`
   width:85px;
   background:linear-gradient( 160deg, rgb(33,33,33), rgb(26,26,26));  60%);
   height:100%;
+  z-index:2000;
 `;
 
 export const MenuElemStyled = styled(Link)`
@@ -45,13 +47,16 @@ export const MenuElemStyled = styled(Link)`
   }
 `;
 
-export const HomeIcon = styled(GoPlaybackPlay)`
+export const HomeIcon = styled(GoFlame)`
 `;
 
 export const ProfilIcon = styled(GoPerson)`
 `;
 
 export const UsersIcon = styled(GoOrganization)`
+`;
+
+export const ListIcon = styled(GoListUnordered)`
 `;
 
 export const Header = styled.div`

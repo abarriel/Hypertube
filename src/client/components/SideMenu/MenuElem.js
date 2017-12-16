@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import {
   MenuElemStyled,
   Separator,
-  LinkStyled,
 } from './styles';
 
 const MenuElem = ({

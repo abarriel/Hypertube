@@ -14,12 +14,11 @@ export const MainContent = styled.div`
 `;
 
 export const HeaderContainer = styled.div`
-  width:100%;
   min-width:800px;
   margin-bottom:35px;
 `;
 
 export const HeaderImage = styled.img`
-  width:100%;
+  width:calc(100vw - 85px);
   height:auto;
 `;

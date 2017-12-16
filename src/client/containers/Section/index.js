@@ -1,18 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStateHandlers } from 'recompose';
 
-import { Title, SectionContainer } from './styles';
-import MovieList from '../MovieList';
+import {
+  TitleContainer,
+  Title,
+  SectionContainer,
+  RightArrow,
+  LeftArrow,
+} from './styles';
+import MovieRow from '../MovieRow';
 
-const Section = ({ title }) => (
+const Section = ({
+  title,
+  start,
+  handleGoLeft,
+  handleGoRight,
+}) => (
   <SectionContainer>
-    <Title>{title}</Title>
-    <MovieList />
+    <TitleContainer>
+      <Title>{title}</Title>
+      <LeftArrow onClick={() => handleGoLeft(start - 1)} />
+      <RightArrow onClick={() => handleGoRight(start + 1)} />
+    </TitleContainer>
+    <MovieRow start={start} />
   </SectionContainer>
 );
 
 Section.propTypes = {
   title: PropTypes.string.isRequired,
+  start: PropTypes.number.isRequired,
+  handleGoLeft: PropTypes.func.isRequired,
+  handleGoRight: PropTypes.func.isRequired,
 };
 
-export default Section;
+const enhance = withStateHandlers(
+  {
+    start: 0,
+  },
+  {
+    handleGoLeft: () => newStart => ({ start: newStart >= 0 ? newStart : 0}),
+    handleGoRight: () => newStart => ({ start: newStart }),
+  },
+);
+
+export default enhance(Section);

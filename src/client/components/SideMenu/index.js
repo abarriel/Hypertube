@@ -8,6 +8,7 @@ import {
   HomeIcon,
   ProfilIcon,
   UsersIcon,
+  ListIcon,
 } from './styles';
 
 const menu = [
@@ -18,11 +19,16 @@ const menu = [
   },
   {
     id: 1,
+    to: '/movies',
+    icon: <ListIcon />,
+  },
+  {
+    id: 2,
     to: '/profil',
     icon: <ProfilIcon />,
   },
   {
-    id: 2,
+    id: 3,
     to: '/users',
     icon: <UsersIcon />,
   },

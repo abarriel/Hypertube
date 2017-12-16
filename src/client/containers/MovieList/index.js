@@ -7,7 +7,7 @@ const fakeMovies = [
     id: 0,
     name: 'The Walking Dead',
     year: '2010',
-    rating:2,
+    rating: 2,
     coverImage: 'http://static1.purebreak.com/articles/6/42/74/6/@/127325-affiche-de-le-saison-2-de-walking-dead-950x0-3.jpg',
   },
   {
