@@ -23,7 +23,7 @@ export const SideMenuStyled = styled.div`
   height:100%;
 `;
 
-export const MenuElemStyled = styled.div`
+export const MenuElemStyled = styled(Link)`
   display:flex;
   flex-direction:column;
   justify-content: center;
@@ -32,10 +32,20 @@ export const MenuElemStyled = styled.div`
   cursor:pointer;
   min-height:70px;
   transition:all 0.2s ease;
+  color:${({ selected }) => selected ? MAIN_COLOR : DARK_GREY};
+  font-size:2em;
+  &:active {
+    transition:all 0.1s ease;
+  }
+  &:hover {
+    color:${MAIN_COLOR_HOVER};
+  }
+  &:focus {
+    outline:none;
+  }
 `;
 
 export const HomeIcon = styled(GoPlaybackPlay)`
-
 `;
 
 export const ProfilIcon = styled(GoPerson)`
@@ -51,26 +61,10 @@ export const Header = styled.div`
 `;
 
 export const Separator = styled.div`
-  width:100%;
-  height:2px;
+  width:40%;
+  height:1px;
   border-radius:3px;
   background-color:${DARK_GREY};
   margin-top:20px;
   margin-bottom:0px;
-`;
-
-export const LinkStyled = styled(Link)`
-  color:${({ selected }) => selected ? MAIN_COLOR : DARK_GREY};
-  font-size:2em;
-  &:active {
-    font-size:1.8em;
-    margin-top:4px;
-    transition:all 0.1s ease;
-  }
-  &:hover {
-    color:${MAIN_COLOR_HOVER};
-  }
-  &:focus {
-    outline:none;
-  }
 `;
