@@ -22,6 +22,7 @@ export const Title = styled.p`
   color:white;
   margin:0;
   margin-left:30px;
+  user-select: none;
 `;
 
 export const RightArrow = styled(GoChevronRight)`

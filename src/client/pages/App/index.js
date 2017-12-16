@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import Scrollbar from 'react-smooth-scrollbar';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import SideMenu from '../../components/SideMenu';
@@ -28,13 +29,15 @@ const App = () => (
       <div>
         <SideMenu />
         <LogoutButon />
-        <TransitionGroup >
-          {routes.map(route => (
-            <Fade key={route.id}>
-              <RouteWithSubRoutes {...route} />
-            </Fade>
-          ))}
-        </TransitionGroup>
+        <Scrollbar damping={0.1}>
+          <TransitionGroup >
+            {routes.map(route => (
+              <Fade key={route.id}>
+                <RouteWithSubRoutes {...route} />
+              </Fade>
+            ))}
+          </TransitionGroup>
+        </Scrollbar>
       </div>
     </Router>
   </AppContainer>

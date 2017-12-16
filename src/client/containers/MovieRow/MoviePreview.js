@@ -11,7 +11,6 @@ const MoviePreview = ({
 }) => (
   <MoviePreviewContainer
     coverImage={movie.coverImage}
-    onMouseEnter={() => handleGoLeft(start - 1)}
   >
   </MoviePreviewContainer>
 );
