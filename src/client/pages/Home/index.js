@@ -10,6 +10,7 @@ const Home = () => (
       <Header />
       <Section title="Nouveautés" />
       <Section title="Tendances actuelles" />
+      <Section title="Les plus vus" />
     </MainContent>
   </HomeContainer>
 );

@@ -11,6 +11,7 @@ const MoviePreview = ({
 }) => (
   <MoviePreviewContainer
     coverImage={movie.coverImage}
+    hidden={movie.id >= start}
   >
   </MoviePreviewContainer>
 );

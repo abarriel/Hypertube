@@ -18,7 +18,7 @@ export const MovieRowContainer = styled.div`
   margin-top:20px;
   transition: all ${TRANSITION}s ease;
   margin-bottom:20px;
-  margin-left:${({ margin }) => `${(margin * (WIDTH)) + 25}px`};
+  margin-left:${({ margin }) => `${(margin * (WIDTH + 15)) + 25}px`};
 `;
 
 export const MoviePreviewContainer = styled.div`
@@ -28,19 +28,22 @@ export const MoviePreviewContainer = styled.div`
   height:${HEIGHT}px;
   width:${WIDTH}px;
   background-image:${({ coverImage }) => `url(${coverImage})`};
+  opacity:${({ hidden }) => hidden ? 1 : 0.5};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   cursor:pointer;
   transition: all ${TRANSITION}s;
-  transition-delay:0.3s;
+  transition-delay:0s;
   z-index:100;
+  transform:${({ hidden }) => hidden ? 'scale(1)' : 'scale(0.8)'};
   &:hover {
     transform: scale(1.3);
     z-index:1000;
-  }
+  };
   margin-left:7.5px;
   margin-right:7.5px;
+  border-radius:1px;
 `;
 
 export const ScrollBarContainer = styled.div`
@@ -48,7 +51,7 @@ export const ScrollBarContainer = styled.div`
   display:flex;
   justify-content: flex-start;
   align-items: center;
-  width:calc(100vw - 110px);
+  width:calc(100vw - 140px);
   min-height:10px;
   margin-bottom:15px;
   margin-left:25px;

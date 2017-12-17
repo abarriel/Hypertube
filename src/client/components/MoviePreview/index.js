@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
-import Rating from '../Rating';
-
 import {
   MoviePreviewContainer,
   Shadow,
@@ -21,7 +19,7 @@ const MoviePreview = ({
 }) => (
   <MainContainer>
     <LinkStyed to={`/movie/${movie.id}`}>
-      <FakeDiv  displayShadow={displayShadow}/>
+      <FakeDiv displayShadow={displayShadow}/>
       <MoviePreviewContainer
         onMouseEnter={showShadow}
         onMouseLeave={hideShadow}

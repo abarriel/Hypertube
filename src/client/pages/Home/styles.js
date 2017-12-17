@@ -9,8 +9,9 @@ export const MainContent = styled.div`
   display:flex;
   flex-direction:column;
   transition:all 1s ease;
-  margin-left: ${({ hidden }) => hidden ? '-85px' : '85px'};
-  width:calc(100%) - 85px;
+  margin-left: 85px;
+  width:100%;
+  overflow-x:hidden;
 `;
 
 export const HeaderContainer = styled.div`
