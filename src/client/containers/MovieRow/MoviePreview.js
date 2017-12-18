@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
+import Shadow from './Shadow';
 import {
   MoviePreviewContainer,
-  Shadow,
   Title,
   PlayLogo,
   DescriptionContainer,
   Description,
 } from './styles';
 
+const isHidden = (movie, start, end) => movie.id < start || movie.id >= ((end + start) - 1);
+
 const MoviePreview = ({
   movie,
-  handleGoLeft,
-  handleGoRight,
   start,
   end,
   displayShadow,
@@ -25,9 +25,9 @@ const MoviePreview = ({
     onMouseEnter={showShadow}
     onMouseLeave={hideShadow}
     coverImage={movie.coverImage}
-    hidden={movie.id < start || movie.id >= ((end + start) - 1)}
+    hidden={isHidden(movie, start, end)}
   >
-    {displayShadow &&
+    {displayShadow && !isHidden(movie, start, end) &&
       <Shadow displayShadow={displayShadow}>
         <Title>{`${movie.name} (${movie.year})`}</Title>
         <PlayLogo />
@@ -43,8 +43,6 @@ const MoviePreview = ({
 
 MoviePreview.propTypes = {
   movie: PropTypes.object.isRequired,
-  handleGoLeft: PropTypes.func.isRequired,
-  handleGoRight: PropTypes.func.isRequired,
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
   displayShadow: PropTypes.bool.isRequired,

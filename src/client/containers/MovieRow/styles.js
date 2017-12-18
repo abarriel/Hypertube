@@ -13,10 +13,9 @@ export const MovieRowContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   min-width:100%;
-  margin-top:20px;
   transition: all ${TRANSITION}s ease;
   margin-bottom:20px;
-  margin-left:${({ margin }) => `${(margin * (WIDTH + 15)) + 25}px`};
+  margin-left:${({ margin }) => `${(margin * (WIDTH + 15)) + 45}px`};
 `;
 
 export const MoviePreviewContainer = styled.div`
@@ -34,12 +33,13 @@ export const MoviePreviewContainer = styled.div`
   transition-delay:0s;
   z-index:100;
   transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
+  margin-left:${MARGIN}px;
+  margin-right:${MARGIN}px;
+  margin-top:${({ hidden }) => hidden ? '30px' : ''};
   &:hover {
     transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.2)'};
     z-index:${({ hidden }) => hidden ? '100' : '1000'};
   };
-  margin-left:${MARGIN}px;
-  margin-right:${MARGIN}px;
   border-radius:1px;
 `;
 
@@ -65,13 +65,14 @@ export const ScrollBarInner = styled.div`
   margin-left:${({ margin }) => `${margin}px`};
 `;
 
-export const Shadow = styled.div`
+export const ShadowContainer = styled.div`
   display:flex;
   flex-direction:column;
   justify-content: space-between;
   align-items: center;
   width:100%;
   height:calc(100% - 30px);
+  opacity: ${({ isHover }) => isHover ? 1 : 0};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   transition: all ${TRANSITION}s;
   transition-delay: 0.1s;
@@ -81,7 +82,7 @@ export const Shadow = styled.div`
 export const Title = styled.p`
   color:rgb(240,240,240);
   margin:0;
-  font-size:1em;
+  font-size:0.9em;
 `;
 
 export const PlayLogo = styled(GoPlaybackPlay)`
@@ -91,7 +92,7 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   transition: all ${TRANSITION}s;
   &:hover {
     color:${MAIN_COLOR};
-    transform: scale(1.2);
+    transform: scale(0.8);
   }
 `;
 

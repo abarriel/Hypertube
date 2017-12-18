@@ -10,8 +10,6 @@ const MovieRow = ({
   start,
   end,
   width,
-  handleGoLeft,
-  handleGoRight,
 }) => (
   <MovieRowContent>
     <MovieRowContainer
@@ -23,8 +21,6 @@ const MovieRow = ({
           movie={movie}
           start={start}
           end={end}
-          handleGoLeft={handleGoLeft}
-          handleGoRight={handleGoRight}
         />))}
     </MovieRowContainer>
     <ScrollBar
@@ -41,8 +37,6 @@ MovieRow.propTypes = {
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
-  handleGoLeft: PropTypes.func.isRequired,
-  handleGoRight: PropTypes.func.isRequired,
 };
 
 export default MovieRow;

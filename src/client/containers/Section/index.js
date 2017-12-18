@@ -42,8 +42,6 @@ const Section = ({
       start={start}
       width={width}
       end={getEnd(width)}
-      handleGoLeft={handleGoLeft}
-      handleGoRight={handleGoRight}
       movies={movies}
     />
   </SectionContainer>
