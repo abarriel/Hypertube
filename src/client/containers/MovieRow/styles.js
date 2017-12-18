@@ -27,10 +27,10 @@ export const MoviePreviewContainer = styled.div`
   width:${WIDTH}px;
   background-image:${({ coverImage }) => `url(${coverImage})`};
   opacity:${({ hidden }) => hidden ? 0.5 : 1};
-  background-size: cover;
+  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all ${TRANSITION}s;
+  transition: all ${TRANSITION}s ease, background-size ${TRANSITION + 1}s ease;
   transition-delay:0s;
   z-index:100;
   transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
@@ -40,6 +40,7 @@ export const MoviePreviewContainer = styled.div`
   &:hover {
     transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.2)'};
     z-index:${({ hidden }) => hidden ? '100' : '1000'};
+    background-size: ${({ hidden }) => hidden ? 'cover' : '110%'}
   };
   border-radius:1px;
 `;
@@ -72,18 +73,17 @@ export const ShadowContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width:100%;
-  height:calc(100% - 30px);
+  height:calc(100% - 40px);
   opacity: ${({ isHover }) => isHover ? 1 : 0};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
-  transition: all ${TRANSITION}s;
-  transition-delay: 0.1s;
-  padding:15px;
+  transition: all ${TRANSITION + 0.5}s;
+  padding:20px;
 `;
 
 export const Title = styled.p`
   color:rgb(240,240,240);
   margin:0;
-  font-size:0.9em;
+  font-size:1em;
   align-self:flex-start;
 `;
 
@@ -92,16 +92,23 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   font-size:3em;
   cursor: pointer;
   transition: all ${TRANSITION}s;
+  transition-delay:0.2s;
   &:hover {
     color:${MAIN_COLOR};
     transform: scale(0.8);
   }
+  margin-left:5px;
 `;
 
 export const DescriptionContainer = styled.div`
   display:flex;
   max-height: ${HEIGHT / 3}px;
-  overflow: hidden;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  hyphens: auto;
+  transition: all ${TRANSITION + 1}s;
+  opacity: ${({ isHover }) => isHover ? 1 : 0};
+  transition-delay: 0.3s;
 `;
 
 export const Description = styled.p`
@@ -110,8 +117,20 @@ export const Description = styled.p`
 `;
 
 export const LinkStyed = styled(Link)`
+  display:flex;
+  justify-content: center;
+  align-items: center;
   text-decoration:none;
+  border-width:2px;
+  border-style: solid;
+  border-color:white;
+  border-radius:100%;
+  width:37px;
+  height:37px;
   &:focus {
     outline:none;
   }
+  transition: all ${TRANSITION + 1}s;
+  opacity: ${({ isHover }) => isHover ? 1 : 0};
+  transition-delay: 0.15s;
 `;

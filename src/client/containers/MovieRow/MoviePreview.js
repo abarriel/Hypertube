@@ -29,17 +29,7 @@ const MoviePreview = ({
     hidden={isHidden(movie, start, end)}
   >
     {displayShadow && !isHidden(movie, start, end) &&
-      <Shadow displayShadow={displayShadow}>
-        <Title>{`${movie.name} (${movie.year})`}</Title>
-        <LinkStyed to={`/movie/${movie.id}`}>
-          <PlayLogo />
-        </LinkStyed>
-        <DescriptionContainer>
-          <Description>
-            {movie.description}
-          </Description>
-        </DescriptionContainer>
-      </Shadow>
+      <Shadow movie={movie} displayShadow={displayShadow} />
     }
   </MoviePreviewContainer>
 );
