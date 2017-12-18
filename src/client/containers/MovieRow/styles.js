@@ -27,7 +27,7 @@ export const MoviePreviewContainer = styled.div`
   width:${WIDTH}px;
   background-image:${({ coverImage }) => `url(${coverImage})`};
   opacity:${({ hidden }) => hidden ? 0.5 : 1};
-  background-size: 100%;
+  background-size: 110%;
   background-position: center;
   background-repeat: no-repeat;
   transition: all ${TRANSITION}s ease, background-size ${TRANSITION + 1}s ease;
@@ -40,7 +40,7 @@ export const MoviePreviewContainer = styled.div`
   &:hover {
     transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.2)'};
     z-index:${({ hidden }) => hidden ? '100' : '1000'};
-    background-size: ${({ hidden }) => hidden ? 'cover' : '110%'}
+    background-size: ${({ hidden }) => hidden ? '110%' : '120%'}
   };
   border-radius:1px;
 `;
