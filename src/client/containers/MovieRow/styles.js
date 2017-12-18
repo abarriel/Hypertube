@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
 import { MAIN_COLOR } from '../../colors';
 import { HEIGHT, WIDTH, TRANSITION, MARGIN } from './constants';
 
@@ -34,9 +35,8 @@ export const MoviePreviewContainer = styled.div`
   z-index:100;
   transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
   &:hover {
-    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.3)'};
+    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.2)'};
     z-index:${({ hidden }) => hidden ? '100' : '1000'};
-    cursor:${({ hidden }) => hidden ? 'auto' : 'pointer'};
   };
   margin-left:${MARGIN}px;
   margin-right:${MARGIN}px;
@@ -63,4 +63,45 @@ export const ScrollBarInner = styled.div`
   transition: all ${TRANSITION}s;
   width:${({ width }) => `${width}px`};
   margin-left:${({ margin }) => `${margin}px`};
+`;
+
+export const Shadow = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+  height:calc(100% - 30px);
+  background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
+  transition: all ${TRANSITION}s;
+  transition-delay: 0.1s;
+  padding:15px;
+`;
+
+export const Title = styled.p`
+  color:rgb(240,240,240);
+  margin:0;
+  font-size:1em;
+`;
+
+export const PlayLogo = styled(GoPlaybackPlay)`
+  color:white;
+  font-size:3em;
+  cursor: pointer;
+  transition: all ${TRANSITION}s;
+  &:hover {
+    color:${MAIN_COLOR};
+    transform: scale(1.2);
+  }
+`;
+
+export const DescriptionContainer = styled.div`
+  display:flex;
+  max-height: ${HEIGHT / 3}px;
+  overflow: hidden;
+`;
+
+export const Description = styled.p`
+  color:white;
+  font-size:0.7em;
 `;

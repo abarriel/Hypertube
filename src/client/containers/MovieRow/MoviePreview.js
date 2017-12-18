@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withStateHandlers } from 'recompose';
 
-import { MoviePreviewContainer } from './styles';
+import {
+  MoviePreviewContainer,
+  Shadow,
+  Title,
+  PlayLogo,
+  DescriptionContainer,
+  Description,
+} from './styles';
 
 const MoviePreview = ({
   movie,
@@ -9,11 +17,27 @@ const MoviePreview = ({
   handleGoRight,
   start,
   end,
+  displayShadow,
+  showShadow,
+  hideShadow,
 }) => (
   <MoviePreviewContainer
+    onMouseEnter={showShadow}
+    onMouseLeave={hideShadow}
     coverImage={movie.coverImage}
     hidden={movie.id < start || movie.id >= ((end + start) - 1)}
   >
+    {displayShadow &&
+      <Shadow displayShadow={displayShadow}>
+        <Title>{`${movie.name} (${movie.year})`}</Title>
+        <PlayLogo />
+        <DescriptionContainer>
+          <Description>
+            {movie.description}
+          </Description>
+        </DescriptionContainer>
+      </Shadow>
+    }
   </MoviePreviewContainer>
 );
 
@@ -23,6 +47,21 @@ MoviePreview.propTypes = {
   handleGoRight: PropTypes.func.isRequired,
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
+  displayShadow: PropTypes.bool.isRequired,
+  showShadow: PropTypes.func.isRequired,
+  hideShadow: PropTypes.func.isRequired,
 };
 
-export default MoviePreview;
+
+const enhance = withStateHandlers(
+  {
+    displayShadow: false,
+  },
+  {
+    showShadow: () => () => ({ displayShadow: true }),
+    hideShadow: () => () => ({ displayShadow: false }),
+  },
+);
+
+export default enhance(MoviePreview);
+
