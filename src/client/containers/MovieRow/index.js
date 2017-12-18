@@ -6,8 +6,10 @@ import MoviePreview from './MoviePreview';
 import ScrollBar from './ScrollBar';
 
 const MovieRow = ({
-  movies = fakeMovies,
+  movies,
   start,
+  end,
+  width,
   handleGoLeft,
   handleGoRight,
 }) => (
@@ -20,17 +22,25 @@ const MovieRow = ({
           key={movie.id}
           movie={movie}
           start={start}
+          end={end}
           handleGoLeft={handleGoLeft}
           handleGoRight={handleGoRight}
         />))}
     </MovieRowContainer>
-    <ScrollBar start={start} length={movies.length}/>
+    <ScrollBar
+      start={start}
+      length={movies.length}
+      end={end}
+      width={width}
+    />
   </MovieRowContent>
 );
 
 MovieRow.propTypes = {
-  movies: PropTypes.array,
+  movies: PropTypes.array.isRequired,
   start: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
   handleGoLeft: PropTypes.func.isRequired,
   handleGoRight: PropTypes.func.isRequired,
 };

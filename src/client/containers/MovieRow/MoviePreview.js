@@ -8,10 +8,11 @@ const MoviePreview = ({
   handleGoLeft,
   handleGoRight,
   start,
+  end,
 }) => (
   <MoviePreviewContainer
     coverImage={movie.coverImage}
-    hidden={movie.id >= start}
+    hidden={movie.id < start || movie.id >= ((end + start) - 1)}
   >
   </MoviePreviewContainer>
 );
@@ -21,6 +22,7 @@ MoviePreview.propTypes = {
   handleGoLeft: PropTypes.func.isRequired,
   handleGoRight: PropTypes.func.isRequired,
   start: PropTypes.number.isRequired,
+  end: PropTypes.number.isRequired,
 };
 
 export default MoviePreview;

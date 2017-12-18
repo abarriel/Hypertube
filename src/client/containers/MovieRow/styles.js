@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 import { MAIN_COLOR } from '../../colors';
-
-const HEIGHT = 330;
-const WIDTH = 220;
-const TRANSITION = 0.2;
+import { HEIGHT, WIDTH, TRANSITION, MARGIN } from './constants';
 
 export const MovieRowContent = styled.div`
   display:flex;
@@ -28,33 +25,33 @@ export const MoviePreviewContainer = styled.div`
   height:${HEIGHT}px;
   width:${WIDTH}px;
   background-image:${({ coverImage }) => `url(${coverImage})`};
-  opacity:${({ hidden }) => hidden ? 1 : 0.5};
+  opacity:${({ hidden }) => hidden ? 0.5 : 1};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  cursor:pointer;
   transition: all ${TRANSITION}s;
   transition-delay:0s;
   z-index:100;
-  transform:${({ hidden }) => hidden ? 'scale(1)' : 'scale(0.8)'};
+  transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
   &:hover {
-    transform: scale(1.3);
-    z-index:1000;
+    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.3)'};
+    z-index:${({ hidden }) => hidden ? '100' : '1000'};
+    cursor:${({ hidden }) => hidden ? 'auto' : 'pointer'};
   };
-  margin-left:7.5px;
-  margin-right:7.5px;
+  margin-left:${MARGIN}px;
+  margin-right:${MARGIN}px;
   border-radius:1px;
 `;
 
 export const ScrollBarContainer = styled.div`
   position:relative;
   display:flex;
-  justify-content: flex-start;
+  justify-content: ${({ isEnd }) => isEnd ? 'flex-end' : 'flex-start'};
   align-items: center;
-  width:calc(100vw - 140px);
+  width:calc(100vw - 200px);
   min-height:10px;
   margin-bottom:15px;
-  margin-left:25px;
+  margin-left:35px;
 `;
 
 export const ScrollBarInner = styled.div`
@@ -64,6 +61,6 @@ export const ScrollBarInner = styled.div`
   height:2px;
   border-radius:100px;
   transition: all ${TRANSITION}s;
-  width:${({ width }) => `${width}%`};
-  margin-left:${({ margin }) => `${margin}%`};
+  width:${({ width }) => `${width}px`};
+  margin-left:${({ margin }) => `${margin}px`};
 `;
