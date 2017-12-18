@@ -22,7 +22,7 @@ const goRight = (start, length, end) => {
   return newStart;
 };
 
-const getEnd = width => Math.round(width / (WIDTH + (2 * MARGIN)));
+const getEnd = width => Math.round((width - 25) / (WIDTH + (2 * MARGIN)));
 
 const Section = ({
   movies,

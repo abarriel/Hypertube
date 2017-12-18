@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
+import { Link } from 'react-router-dom';
 import { MAIN_COLOR } from '../../colors';
 import { HEIGHT, WIDTH, TRANSITION, MARGIN } from './constants';
 
@@ -83,6 +84,7 @@ export const Title = styled.p`
   color:rgb(240,240,240);
   margin:0;
   font-size:0.9em;
+  align-self:flex-start;
 `;
 
 export const PlayLogo = styled(GoPlaybackPlay)`
@@ -105,4 +107,11 @@ export const DescriptionContainer = styled.div`
 export const Description = styled.p`
   color:white;
   font-size:0.7em;
+`;
+
+export const LinkStyed = styled(Link)`
+  text-decoration:none;
+  &:focus {
+    outline:none;
+  }
 `;

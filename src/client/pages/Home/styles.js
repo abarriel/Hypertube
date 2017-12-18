@@ -22,4 +22,6 @@ export const HeaderContainer = styled.div`
 export const HeaderImage = styled.img`
   width:calc(100vw - 85px);
   height:auto;
+  max-width:1500px;
+  min-width:1000px;
 `;

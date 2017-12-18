@@ -9,6 +9,7 @@ import {
   PlayLogo,
   DescriptionContainer,
   Description,
+  LinkStyed,
 } from './styles';
 
 const isHidden = (movie, start, end) => movie.id < start || movie.id >= ((end + start) - 1);
@@ -30,7 +31,9 @@ const MoviePreview = ({
     {displayShadow && !isHidden(movie, start, end) &&
       <Shadow displayShadow={displayShadow}>
         <Title>{`${movie.name} (${movie.year})`}</Title>
-        <PlayLogo />
+        <LinkStyed to={`/movie/${movie.id}`}>
+          <PlayLogo />
+        </LinkStyed>
         <DescriptionContainer>
           <Description>
             {movie.description}
