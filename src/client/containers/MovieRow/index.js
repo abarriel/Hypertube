@@ -23,6 +23,7 @@ const MovieRow = ({
           start={start}
           end={end}
           move={move}
+          length={movies.length}
         />))}
     </MovieRowContainer>
     <ScrollBar

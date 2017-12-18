@@ -21,12 +21,15 @@ const getDelay = (wichHover, position) => {
   return false;
 }
 
-const getDirection = (start, end, id) => {
+const getDirection = (start, end, id, length) => {
   if (id <= start + Math.round(end / 2) - 2) {
     if (start - 1 < 0) {
       return 0;
     }
     return -1;
+  }
+  if (start + 1 + end > length + 1) {
+    return 0;
   }
   return 1;
 }
@@ -35,6 +38,7 @@ const MoviePreview = ({
   movie,
   start,
   end,
+  length,
   displayShadow,
   showShadow,
   hideShadow,
@@ -45,7 +49,7 @@ const MoviePreview = ({
     onMouseLeave={hideShadow}
     coverImage={movie.coverImage}
     hidden={isHidden(movie, start, end)}
-    onClick={() => move(getDirection(start, end, movie.id))}
+    onClick={() => move(getDirection(start, end, movie.id, length))}
   >
     {displayShadow && !isHidden(movie, start, end) &&
       <Shadow movie={movie} displayShadow={displayShadow} />
@@ -57,6 +61,7 @@ MoviePreview.propTypes = {
   movie: PropTypes.object.isRequired,
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
+  length: PropTypes.number.isRequired,
   displayShadow: PropTypes.bool.isRequired,
   showShadow: PropTypes.func.isRequired,
   hideShadow: PropTypes.func.isRequired,
