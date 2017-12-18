@@ -14,6 +14,23 @@ import {
 
 const isHidden = (movie, start, end) => movie.id < start || movie.id >= ((end + start) - 1);
 
+const getDelay = (wichHover, position) => {
+  if (wichHover === position - 1 || wichHover === position + 1) {
+    return true;
+  }
+  return false;
+}
+
+const getDirection = (start, end, id) => {
+  if (id <= start + Math.round(end / 2) - 2) {
+    if (start - 1 < 0) {
+      return 0;
+    }
+    return -1;
+  }
+  return 1;
+}
+
 const MoviePreview = ({
   movie,
   start,
@@ -21,12 +38,14 @@ const MoviePreview = ({
   displayShadow,
   showShadow,
   hideShadow,
+  move
 }) => (
   <MoviePreviewContainer
     onMouseEnter={showShadow}
     onMouseLeave={hideShadow}
     coverImage={movie.coverImage}
     hidden={isHidden(movie, start, end)}
+    onClick={() => move(getDirection(start, end, movie.id))}
   >
     {displayShadow && !isHidden(movie, start, end) &&
       <Shadow movie={movie} displayShadow={displayShadow} />
@@ -41,8 +60,8 @@ MoviePreview.propTypes = {
   displayShadow: PropTypes.bool.isRequired,
   showShadow: PropTypes.func.isRequired,
   hideShadow: PropTypes.func.isRequired,
+  move: PropTypes.func.isRequired,
 };
-
 
 const enhance = withStateHandlers(
   {

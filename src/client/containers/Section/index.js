@@ -12,14 +12,14 @@ import {
 import MovieRow from '../MovieRow';
 import { WIDTH, MARGIN } from '../MovieRow/constants';
 
-const goLeft = start => start - 2 >= 0 ? start - 1 : 0;
+const goLeft = start => start - 1 >= 0 ? -1 : 0;
 
 const goRight = (start, length, end) => {
   const newStart = start + 1;
   if (newStart + end > length + 1) {
-    return start;
+    return 0;
   }
-  return newStart;
+  return 1;
 };
 
 const getEnd = width => Math.round((width - 25) / (WIDTH + (2 * MARGIN)));
@@ -31,18 +31,20 @@ const Section = ({
   width,
   handleGoLeft,
   handleGoRight,
+  move,
 }) => (
   <SectionContainer>
     <TitleContainer>
       <Title>{title}</Title>
-      <LeftArrow onClick={() => handleGoLeft(goLeft(start))} />
-      <RightArrow onClick={() => handleGoRight(goRight(start, movies.length, getEnd(width)))} />
+      <LeftArrow onClick={() => move(goLeft(start))} />
+      <RightArrow onClick={() => move(goRight(start, movies.length, getEnd(width)))} />
     </TitleContainer>
     <MovieRow
       start={start}
       width={width}
       end={getEnd(width)}
       movies={movies}
+      move={move}
     />
   </SectionContainer>
 );
@@ -52,8 +54,7 @@ Section.propTypes = {
   width: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   start: PropTypes.number.isRequired,
-  handleGoLeft: PropTypes.func.isRequired,
-  handleGoRight: PropTypes.func.isRequired,
+  move: PropTypes.func.isRequired,
 };
 
 const enhance = compose(
@@ -63,8 +64,7 @@ const enhance = compose(
       width: 0,
     },
     {
-      handleGoLeft: () => newStart => ({ start: newStart }),
-      handleGoRight: () => newStart => ({ start: newStart }),
+      move: ({ start }) => direction => ({ start: start + direction }),
       updateWindowDimensions: () => () => ({ width: window.innerWidth }),
     },
   ),

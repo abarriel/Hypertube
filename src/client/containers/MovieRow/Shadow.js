@@ -13,20 +13,20 @@ import {
 
 const Shadow = ({
   movie,
-  isHover,
+  ishover,
   handleHover,
   handleNotHover,
 }) => (
   <ShadowContainer
-    isHover={isHover}
+    ishover={ishover}
     onMouseEnter={handleHover}
     onMouseLeave={handleNotHover}
   >
     <Title>{`${movie.name} (${movie.year})`}</Title>
-    <LinkStyed isHover={isHover} to={`/movie/${movie.id}`}>
+    <LinkStyed ishover={ishover} to={`/movie/${movie.id}`}>
       <PlayLogo />
     </LinkStyed>
-    <DescriptionContainer isHover={isHover}>
+    <DescriptionContainer ishover={ishover}>
       <Description >
         {movie.description}
       </Description>
@@ -35,7 +35,7 @@ const Shadow = ({
 );
 
 Shadow.propTypes = {
-  isHover: PropTypes.bool.isRequired,
+  ishover: PropTypes.bool.isRequired,
   handleHover: PropTypes.func.isRequired,
   handleNotHover: PropTypes.func.isRequired,
   movie: PropTypes.object.isRequired,
@@ -43,11 +43,11 @@ Shadow.propTypes = {
 
 const enhance = withStateHandlers(
   {
-    isHover: false,
+    ishover: false,
   },
   {
-    handleHover: () => () => ({ isHover: true }),
-    handleNotHover: () => () => ({ isHover: false }),
+    handleHover: () => () => ({ ishover: true }),
+    handleNotHover: () => () => ({ ishover: false }),
   },
 );
 

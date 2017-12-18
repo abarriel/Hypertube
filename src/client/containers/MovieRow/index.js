@@ -10,6 +10,7 @@ const MovieRow = ({
   start,
   end,
   width,
+  move,
 }) => (
   <MovieRowContent>
     <MovieRowContainer
@@ -21,6 +22,7 @@ const MovieRow = ({
           movie={movie}
           start={start}
           end={end}
+          move={move}
         />))}
     </MovieRowContainer>
     <ScrollBar
@@ -37,6 +39,7 @@ MovieRow.propTypes = {
   start: PropTypes.number.isRequired,
   end: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
+  move: PropTypes.func.isRequired,
 };
 
-export default MovieRow;
+export default MovieRow

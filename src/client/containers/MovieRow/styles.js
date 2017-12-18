@@ -36,11 +36,11 @@ export const MoviePreviewContainer = styled.div`
   transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
   margin-left:${MARGIN}px;
   margin-right:${MARGIN}px;
-  margin-top:${({ hidden }) => hidden ? '30px' : ''};
+  margin-top:25px;
   &:hover {
-    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.2)'};
+    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
     z-index:${({ hidden }) => hidden ? '100' : '1000'};
-    background-size: ${({ hidden }) => hidden ? '110%' : '120%'}
+    background-size: ${({ hidden }) => hidden ? '110%' : '120%'};
   };
   border-radius:1px;
 `;
@@ -74,7 +74,7 @@ export const ShadowContainer = styled.div`
   align-items: center;
   width:100%;
   height:calc(100% - 40px);
-  opacity: ${({ isHover }) => isHover ? 1 : 0};
+  opacity: ${({ ishover }) => ishover ? 1 : 0};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   transition: all ${TRANSITION + 0.5}s;
   padding:20px;
@@ -85,6 +85,7 @@ export const Title = styled.p`
   margin:0;
   font-size:1em;
   align-self:flex-start;
+  user-select: none;
 `;
 
 export const PlayLogo = styled(GoPlaybackPlay)`
@@ -107,13 +108,14 @@ export const DescriptionContainer = styled.div`
   text-overflow:ellipsis;
   hyphens: auto;
   transition: all ${TRANSITION + 1}s;
-  opacity: ${({ isHover }) => isHover ? 1 : 0};
+  opacity: ${({ ishover }) => ishover ? 1 : 0};
   transition-delay: 0.3s;
 `;
 
 export const Description = styled.p`
   color:white;
   font-size:0.7em;
+  user-select: none;
 `;
 
 export const LinkStyed = styled(Link)`
@@ -131,6 +133,6 @@ export const LinkStyed = styled(Link)`
     outline:none;
   }
   transition: all ${TRANSITION + 1}s;
-  opacity: ${({ isHover }) => isHover ? 1 : 0};
+  opacity: ${({ ishover }) => ishover ? 1 : 0};
   transition-delay: 0.15s;
 `;
