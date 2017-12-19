@@ -121,12 +121,15 @@ export const LinkStyed = styled(Link)`
   justify-content: center;
   align-items: center;
   text-decoration:none;
-  border-width:2px;
+  border-width:3px;
   border-style: solid;
   border-color:white;
   border-radius:100%;
-  width:37px;
-  height:37px;
+  margin:20px;
+  min-width:37px;
+  min-height:37px;
+  max-width:37px;
+  max-height:37px;
   &:focus {
     outline:none;
   }

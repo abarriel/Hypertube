@@ -9,6 +9,7 @@ import {
   DescriptionContainer,
   PlayLogo,
 } from './styles';
+import Rating from '../../components/Rating';
 
 const Shadow = ({
   movie,
@@ -24,8 +25,9 @@ const Shadow = ({
     <LinkStyed opacity={opacity} to={`/movie/${movie.id}`}>
       <PlayLogo />
     </LinkStyed>
+    <Rating rating={3} opacity={opacity}/>
     <DescriptionContainer opacity={opacity}>
-      {movie.description}>
+      {movie.description}
     </DescriptionContainer>
   </ShadowContainer>
 );
