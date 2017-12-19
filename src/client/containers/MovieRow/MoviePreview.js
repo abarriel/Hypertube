@@ -1,27 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { number, func, object, bool } from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
+import { getMoveDirection, isMovieHidden } from './utils';
 import Shadow from './Shadow';
 import {
   MoviePreviewContainer,
   BackgroundImage,
 } from './styles';
-
-const isHidden = (index, start, end) => index < start || index >= ((end + start) - 1);
-
-const getDirection = (start, end, id, length) => {
-  if (id <= start + (Math.round(end / 2) - 2)) {
-    if (start - 1 < 0) {
-      return 0;
-    }
-    return -1;
-  }
-  if (start + 1 + end > length + 1) {
-    return 0;
-  }
-  return 1;
-};
 
 const MoviePreview = ({
   movie,
@@ -29,34 +15,37 @@ const MoviePreview = ({
   end,
   length,
   displayShadow,
-  showShadow,
-  hideShadow,
+  handleChangeShadowDisplay,
   move,
   index,
 }) => (
   <MoviePreviewContainer
-    onMouseEnter={showShadow}
-    onMouseLeave={hideShadow}
-    hidden={isHidden(index, start, end)}
-    onClick={() => move(getDirection(start, end, index, length))}
+    onMouseEnter={() => handleChangeShadowDisplay(true)}
+    onMouseLeave={() => handleChangeShadowDisplay(false)}
+    onClick={() => move(getMoveDirection(start, end, index, length))}
+    hidden={isMovieHidden(index, start, end)}
   >
-    <BackgroundImage hidden={isHidden(index, start, end)} coverImage={movie.cover_image} displayShadow={displayShadow} />
-    {displayShadow && !isHidden(index, start, end) &&
+    <BackgroundImage
+      hidden={isMovieHidden(index, start, end)}
+      coverImage={movie.cover_image}
+      displayShadow={displayShadow}
+    />
+    {
+      displayShadow && !isMovieHidden(index, start, end) &&
       <Shadow index={index} movie={movie} displayShadow={displayShadow} />
     }
   </MoviePreviewContainer>
 );
 
 MoviePreview.propTypes = {
-  movie: PropTypes.object.isRequired,
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number.isRequired,
-  length: PropTypes.number.isRequired,
-  displayShadow: PropTypes.bool.isRequired,
-  showShadow: PropTypes.func.isRequired,
-  hideShadow: PropTypes.func.isRequired,
-  move: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
+  movie: object.isRequired,
+  start: number.isRequired,
+  end: number.isRequired,
+  length: number.isRequired,
+  displayShadow: bool.isRequired,
+  handleChangeShadowDisplay: func.isRequired,
+  move: func.isRequired,
+  index: number.isRequired,
 };
 
 const enhance = withStateHandlers(
@@ -64,8 +53,7 @@ const enhance = withStateHandlers(
     displayShadow: false,
   },
   {
-    showShadow: () => () => ({ displayShadow: true }),
-    hideShadow: () => () => ({ displayShadow: false }),
+    handleChangeShadowDisplay: () => display => ({ displayShadow: display }),
   },
 );
 

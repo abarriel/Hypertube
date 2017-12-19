@@ -64,6 +64,7 @@ const enhance = compose(
     {
       move: ({ start }) => direction => ({ start: start + direction }),
       updateWindowDimensions: () => () => ({ width: window.innerWidth }),
+      handleScroll: () => () => console.log('scroll'),
     },
   ),
   lifecycle({

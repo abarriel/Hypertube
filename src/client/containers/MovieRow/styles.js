@@ -7,14 +7,12 @@ import { HEIGHT, WIDTH, TRANSITION, MARGIN } from './constants';
 export const MovieRowContent = styled.div`
   display:flex;
   flex-direction:column;
-  width:100%;
 `;
 export const MovieRowContainer = styled.div`
   display:flex;
   justify-content: flex-start;
   align-items: center;
-  min-width:100%;
-  transition: all ${TRANSITION}s ease;
+  transition: all ${TRANSITION}s ease-out;
   margin-bottom:20px;
   margin-left:${({ margin }) => `${(margin * (WIDTH + 15)) + 45}px`};
 `;
@@ -25,18 +23,16 @@ export const MoviePreviewContainer = styled.div`
   height:${HEIGHT}px;
   width:${WIDTH}px;
   opacity:${({ hidden }) => hidden ? 0.5 : 1};
-  transition: all ${TRANSITION}s ease, background-size ${TRANSITION }s ease;
-  transition-delay:0s;
+  transition: all ${TRANSITION}s ease;
   z-index:100;
   transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
-  margin-left:${MARGIN}px;
-  margin-right:${MARGIN}px;
+  margin:${MARGIN}px;
   margin-top:25px;
   &:hover {
     transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
-    z-index:${({ hidden }) => hidden ? '100' : '1000'};
+    z-index:${({ hidden }) => hidden ? '100' : '110'};
   };
-  border-radius:1px;
+  border-radius:2px;
   overflow:hidden;
 `;
 
@@ -55,11 +51,12 @@ export const ScrollBarInner = styled.div`
   position:relative;
   display:flex;
   background-color:${MAIN_COLOR};
-  height:2px;
+  height:3px;
   border-radius:100px;
   transition: all ${TRANSITION}s;
   width:${({ width }) => `${width}px`};
   margin-left:${({ margin }) => `${margin}px`};
+  opacity: 0.8;
 `;
 
 export const ShadowContainer = styled.div`
@@ -72,30 +69,56 @@ export const ShadowContainer = styled.div`
   opacity: ${({ opacity }) => opacity};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   transition: all ${TRANSITION + 0.5}s;
+  transition-delay:1s;
   padding:20px;
   padding-bottom:0;
-  z-index:10000;
+  z-index:120;
 `;
 
 export const Title = styled.p`
-  color:rgb(240,240,240);
+  color:white;
   margin:0;
   font-size:1em;
+  font-weight:900;
   align-self:flex-start;
   user-select: none;
 `;
 
 export const PlayLogo = styled(GoPlaybackPlay)`
   color:white;
-  font-size:3em;
+  font-size:2.8em;
   cursor: pointer;
-  transition: all ${TRANSITION}s;
+  transition: all 0.2s;
   transition-delay:0.2s;
   &:hover {
     color:${MAIN_COLOR};
-    transform: scale(0.9);
   }
   margin-left:5px;
+`;
+
+export const LinkStyed = styled(Link)`
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration:none;
+  border-width:3px;
+  border-style: solid;
+  border-color:white;
+  border-radius:100%;
+  margin:25px;
+  min-width:37px;
+  min-height:37px;
+  max-width:37px;
+  max-height:37px;
+  &:focus {
+    outline:none;
+  }
+  transition: all ${TRANSITION + 1}s;
+  opacity: ${({ opacity }) => opacity};
+  transition-delay: 1.2s;
+  &:hover {
+    color:${MAIN_COLOR};
+  }
 `;
 
 export const DescriptionContainer = styled.div`
@@ -116,28 +139,6 @@ export const DescriptionContainer = styled.div`
   text-align: justify;
 `;
 
-export const LinkStyed = styled(Link)`
-  display:flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration:none;
-  border-width:3px;
-  border-style: solid;
-  border-color:white;
-  border-radius:100%;
-  margin:20px;
-  min-width:37px;
-  min-height:37px;
-  max-width:37px;
-  max-height:37px;
-  &:focus {
-    outline:none;
-  }
-  transition: all ${TRANSITION + 1}s;
-  opacity: ${({ opacity }) => opacity};
-  transition-delay: 0.15s;
-`;
-
 export const BackgroundImage = styled.div`
   position:absolute;
   display:flex;
@@ -147,6 +148,6 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all ${TRANSITION + 1.2}s;
-  transform:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'scale(1.2)' : 'scale(1)'};
+  transition: all ${TRANSITION + 3.2}s ease-in;
+  transform:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'scale(0.95)' : 'scale(1)'};
 `;

@@ -43,7 +43,7 @@ const enhance = withStateHandlers(
     opacity: 0,
   },
   {
-    handleChangeOpacity: () => newOpacity => ({ opacity: newOpacity }),
+    handleChangeOpacity: () => opacity => ({ opacity }),
   },
 );
 

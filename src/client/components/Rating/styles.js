@@ -5,8 +5,10 @@ export const RatingContainer = styled.div`
   justify-content: space-around;
   align-items: center;
   width:100%;
-  height:70px;
+  height:30px;
   opacity: ${({ opacity }) => opacity};
+  transition: all 1.3s;
+  transition-delay: 1.4s;
 `;
 
 export const Full = styled.div`
