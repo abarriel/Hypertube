@@ -7,7 +7,6 @@ import Scrollbar from 'react-smooth-scrollbar';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import SideMenu from '../../components/SideMenu';
-import LogoutButon from '../../components/LogoutButton';
 import routes from '../../routes';
 import { AppContainer } from './style';
 
@@ -28,7 +27,6 @@ const App = () => (
     <Router>
       <div>
         <SideMenu />
-        <LogoutButon />
         <Scrollbar damping={0.1}>
           <TransitionGroup >
             {routes.map(route => (
