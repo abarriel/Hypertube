@@ -7,47 +7,41 @@ import {
   Title,
   LinkStyed,
   DescriptionContainer,
-  Description,
   PlayLogo,
 } from './styles';
 
 const Shadow = ({
   movie,
-  ishover,
-  handleHover,
-  handleNotHover,
+  opacity,
+  handleChangeOpacity,
 }) => (
   <ShadowContainer
-    ishover={ishover}
-    onMouseEnter={handleHover}
-    onMouseLeave={handleNotHover}
+    opacity={opacity}
+    onMouseEnter={() => handleChangeOpacity(1)}
+    onMouseLeave={() => handleChangeOpacity(0)}
   >
     <Title>{`${movie.name} (${movie.year})`}</Title>
-    <LinkStyed ishover={ishover} to={`/movie/${movie.id}`}>
+    <LinkStyed opacity={opacity} to={`/movie/${movie.id}`}>
       <PlayLogo />
     </LinkStyed>
-    <DescriptionContainer ishover={ishover}>
-      <Description >
-        {movie.description}
-      </Description>
+    <DescriptionContainer opacity={opacity}>
+      {movie.description}>
     </DescriptionContainer>
   </ShadowContainer>
 );
 
 Shadow.propTypes = {
-  ishover: PropTypes.bool.isRequired,
-  handleHover: PropTypes.func.isRequired,
-  handleNotHover: PropTypes.func.isRequired,
+  opacity: PropTypes.number.isRequired,
+  handleChangeOpacity: PropTypes.func.isRequired,
   movie: PropTypes.object.isRequired,
 };
 
 const enhance = withStateHandlers(
   {
-    ishover: false,
+    opacity: 0,
   },
   {
-    handleHover: () => () => ({ ishover: true }),
-    handleNotHover: () => () => ({ ishover: false }),
+    handleChangeOpacity: () => newOpacity => ({ opacity: newOpacity }),
   },
 );
 

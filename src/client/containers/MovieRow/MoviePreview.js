@@ -39,7 +39,7 @@ const MoviePreview = ({
     hidden={isHidden(movie, start, end)}
     onClick={() => move(getDirection(start, end, movie.id, length))}
   >
-    <BackgroundImage hidden={isHidden(movie, start, end)} coverImage={movie.coverImage} />
+    <BackgroundImage hidden={isHidden(movie, start, end)} coverImage={movie.coverImage} displayShadow={displayShadow} />
     {displayShadow && !isHidden(movie, start, end) &&
       <Shadow movie={movie} displayShadow={displayShadow} />
     }
