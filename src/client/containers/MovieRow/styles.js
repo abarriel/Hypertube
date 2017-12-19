@@ -68,11 +68,12 @@ export const ShadowContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   width:100%;
-  height:calc(100% - 40px);
-  opacity: ${({ ishover }) => ishover ? 1 : 0};
+  height:calc(100% - 20px);
+  opacity: ${({ opacity }) => opacity};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   transition: all ${TRANSITION + 0.5}s;
   padding:20px;
+  padding-bottom:0;
   z-index:10000;
 `;
 
@@ -92,26 +93,27 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   transition-delay:0.2s;
   &:hover {
     color:${MAIN_COLOR};
-    transform: scale(0.8);
+    transform: scale(0.9);
   }
   margin-left:5px;
 `;
 
 export const DescriptionContainer = styled.div`
   display:flex;
-  max-height: ${HEIGHT / 3}px;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  hyphens: auto;
+  height: ${HEIGHT / 2}px;
+  width:100%;
   transition: all ${TRANSITION + 1}s;
-  opacity: ${({ ishover }) => ishover ? 1 : 0};
+  opacity: ${({ opacity }) => opacity};
   transition-delay: 0.3s;
-`;
-
-export const Description = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
   color:white;
   font-size:0.7em;
   user-select: none;
+  background: -webkit-linear-gradient(#eee, rgba(0,0,0,0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: justify;
 `;
 
 export const LinkStyed = styled(Link)`
@@ -129,7 +131,7 @@ export const LinkStyed = styled(Link)`
     outline:none;
   }
   transition: all ${TRANSITION + 1}s;
-  opacity: ${({ ishover }) => ishover ? 1 : 0};
+  opacity: ${({ opacity }) => opacity};
   transition-delay: 0.15s;
 `;
 
@@ -139,12 +141,9 @@ export const BackgroundImage = styled.div`
   height:${HEIGHT}px;
   width:${WIDTH}px;
   background-image:${({ coverImage }) => `url(${coverImage})`};
-  background-size: 110%;
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all ${TRANSITION + 1}s;
-  &:hover {
-    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.2)'};
-    z-index:${({ hidden }) => hidden ? '100' : '1000'};
-  };
+  transition: all ${TRANSITION + 1.2}s;
+  transform:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'scale(1.2)' : 'scale(1)'};
 `;
