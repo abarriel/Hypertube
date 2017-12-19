@@ -125,18 +125,21 @@ export const DescriptionContainer = styled.div`
   display:flex;
   height: ${HEIGHT / 2}px;
   width:100%;
-  transition: all ${TRANSITION + 1}s;
-  opacity: ${({ opacity }) => opacity};
-  transition-delay: 0.3s;
   overflow: hidden;
   text-overflow: ellipsis;
   color:white;
-  font-size:0.7em;
+  font-size:0.8em;
+  margin-top:15px;
   user-select: none;
-  background: -webkit-linear-gradient(#eee, rgba(0,0,0,0));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(white, rgba(0,0,0,0));
+  background-clip: text;
+  text-fill-color: transparent;
   text-align: justify;
+`;
+
+export const DesciptionText = styled.p`
+  opacity: ${({ opacity }) => opacity};
+  transition: all ${TRANSITION + 1}s;
 `;
 
 export const BackgroundImage = styled.div`
@@ -148,6 +151,7 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all ${TRANSITION + 3.2}s ease-in;
-  transform:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'scale(0.95)' : 'scale(1)'};
+  transition: all ${TRANSITION + 1.2}s ease-in;
+  transition-delay:1s;
+  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(3px)' : ' blur(0px)'};
 `;
