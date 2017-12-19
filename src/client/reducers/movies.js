@@ -5,7 +5,7 @@ import {
 const reducer = (state = [], action) => {
   switch (action.type) {
     case LOAD_MOVIES: {
-      return { ...state };
+      return action.movies;
     }
     default:
       return state;

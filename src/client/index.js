@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 
 import configureStore from './store';
 import { loadMovies } from './actions/movies';
+import { reqMovies } from './request';
 import App from './pages/App';
 
 const initialState = {};
 const store = configureStore(initialState);
 
-store.dispatch(loadMovies());
+reqMovies(loadMovies).then(movies => store.dispatch(loadMovies(movies)));
 
-const Root = () => <App />;
+const Root = () => <Provider store={store}><App /></Provider>;
 
 ReactDOM.render(<Root />, document.getElementById('__HYPERTUBE__'));

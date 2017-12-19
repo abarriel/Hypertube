@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { ScrollBarContainer, ScrollBarInner } from './styles';
 
-const getScrollBarWidth = (width, length) => Math.round(width / length);
+const getScrollBarWidth = (width, length) => Math.ceil(width / length);
 
 const getScrollBarMargin = (width, barWidth, start, length, end) => {
   const margin = (width - (barWidth + 200)) * ((start) / ((length + 1) - end));

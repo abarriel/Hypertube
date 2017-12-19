@@ -5,6 +5,14 @@ import { MovieRowContainer, MovieRowContent } from './styles';
 import MoviePreview from './MoviePreview';
 import ScrollBar from './ScrollBar';
 
+const getMoviesLength = movies => {
+  const length = movies.length;
+  if (length === 0) {
+    return 1;
+  }
+  return length;
+}
+
 const MovieRow = ({
   movies,
   start,
@@ -16,19 +24,20 @@ const MovieRow = ({
     <MovieRowContainer
       margin={-start}
     >
-      {movies.map(movie =>
+      {movies.map((movie, index) =>
         (<MoviePreview
-          key={movie.id}
+          key={movie.imdb_id}
           movie={movie}
           start={start}
           end={end}
           move={move}
-          length={movies.length}
+          length={getMoviesLength(movies)}
+          index={index}
         />))}
     </MovieRowContainer>
     <ScrollBar
       start={start}
-      length={movies.length}
+      length={getMoviesLength(movies)}
       end={end}
       width={width}
     />
@@ -43,4 +52,4 @@ MovieRow.propTypes = {
   move: PropTypes.func.isRequired,
 };
 
-export default MovieRow
+export default MovieRow;

@@ -29,8 +29,6 @@ const Section = ({
   title,
   start,
   width,
-  handleGoLeft,
-  handleGoRight,
   move,
 }) => (
   <SectionContainer>

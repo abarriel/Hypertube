@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Header from './Header';
 import { HomeContainer, MainContent } from './styles';
@@ -87,15 +89,23 @@ const fakeMovies = [
   },
 ];
 
-const Home = () => (
+const Home = ({ movies }) => (
   <HomeContainer>
     <MainContent>
       <Header />
-      <Section movies={fakeMovies} title="Nouveautés" />
-      <Section movies={fakeMovies} title="Tendances actuelles" />
-      <Section movies={fakeMovies} title="Les plus vus" />
+      <Section movies={movies} title="Nouveautés" />
+      <Section movies={movies} title="Tendances actuelles" />
+      <Section movies={movies} title="Les plus vus" />
     </MainContent>
   </HomeContainer>
 );
 
-export default Home;
+Home.propTypes = {
+  movies: PropTypes.array.isRequired,
+};
+
+const mapStateToProps = state => ({
+  movies: state.movies,
+});
+
+export default connect(mapStateToProps)(Home);

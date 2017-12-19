@@ -8,7 +8,7 @@ import {
   BackgroundImage,
 } from './styles';
 
-const isHidden = (movie, start, end) => movie.id < start || movie.id >= ((end + start) - 1);
+const isHidden = (index, start, end) => index < start || index >= ((end + start) - 1);
 
 const getDirection = (start, end, id, length) => {
   if (id <= start + (Math.round(end / 2) - 2)) {
@@ -32,16 +32,17 @@ const MoviePreview = ({
   showShadow,
   hideShadow,
   move,
+  index,
 }) => (
   <MoviePreviewContainer
     onMouseEnter={showShadow}
     onMouseLeave={hideShadow}
-    hidden={isHidden(movie, start, end)}
-    onClick={() => move(getDirection(start, end, movie.id, length))}
+    hidden={isHidden(index, start, end)}
+    onClick={() => move(getDirection(start, end, index, length))}
   >
-    <BackgroundImage hidden={isHidden(movie, start, end)} coverImage={movie.coverImage} displayShadow={displayShadow} />
-    {displayShadow && !isHidden(movie, start, end) &&
-      <Shadow movie={movie} displayShadow={displayShadow} />
+    <BackgroundImage hidden={isHidden(index, start, end)} coverImage={movie.cover_image} displayShadow={displayShadow} />
+    {displayShadow && !isHidden(index, start, end) &&
+      <Shadow index={index} movie={movie} displayShadow={displayShadow} />
     }
   </MoviePreviewContainer>
 );
@@ -55,6 +56,7 @@ MoviePreview.propTypes = {
   showShadow: PropTypes.func.isRequired,
   hideShadow: PropTypes.func.isRequired,
   move: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };
 
 const enhance = withStateHandlers(
