@@ -22,15 +22,10 @@ export const MovieRowContainer = styled.div`
 export const MoviePreviewContainer = styled.div`
   position:relative;
   display:flex;
-  position:relative;
   height:${HEIGHT}px;
   width:${WIDTH}px;
-  background-image:${({ coverImage }) => `url(${coverImage})`};
   opacity:${({ hidden }) => hidden ? 0.5 : 1};
-  background-size: 110%;
-  background-position: center;
-  background-repeat: no-repeat;
-  transition: all ${TRANSITION}s ease, background-size ${TRANSITION + 1}s ease;
+  transition: all ${TRANSITION}s ease, background-size ${TRANSITION }s ease;
   transition-delay:0s;
   z-index:100;
   transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
@@ -40,9 +35,9 @@ export const MoviePreviewContainer = styled.div`
   &:hover {
     transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
     z-index:${({ hidden }) => hidden ? '100' : '1000'};
-    background-size: ${({ hidden }) => hidden ? '110%' : '120%'};
   };
   border-radius:1px;
+  overflow:hidden;
 `;
 
 export const ScrollBarContainer = styled.div`
@@ -78,6 +73,7 @@ export const ShadowContainer = styled.div`
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   transition: all ${TRANSITION + 0.5}s;
   padding:20px;
+  z-index:10000;
 `;
 
 export const Title = styled.p`
@@ -135,4 +131,20 @@ export const LinkStyed = styled(Link)`
   transition: all ${TRANSITION + 1}s;
   opacity: ${({ ishover }) => ishover ? 1 : 0};
   transition-delay: 0.15s;
+`;
+
+export const BackgroundImage = styled.div`
+  position:absolute;
+  display:flex;
+  height:${HEIGHT}px;
+  width:${WIDTH}px;
+  background-image:${({ coverImage }) => `url(${coverImage})`};
+  background-size: 110%;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: all ${TRANSITION + 1}s;
+  &:hover {
+    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.2)'};
+    z-index:${({ hidden }) => hidden ? '100' : '1000'};
+  };
 `;
