@@ -48,9 +48,6 @@ const enhance = compose(
     componentDidMount() {
       window.setInterval(() => this.props.handleChangePosition(getNewPosition(this.props.position)), DELAY);
     },
-    componentWillUnmount() {
-      window.setInterval();
-    },
   }),
 );
 

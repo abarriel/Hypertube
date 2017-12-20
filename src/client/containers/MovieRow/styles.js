@@ -23,7 +23,8 @@ export const MoviePreviewContainer = styled.div`
   height:${HEIGHT}px;
   width:${WIDTH}px;
   opacity:${({ hidden }) => hidden ? 0.5 : 1};
-  transition: all ${TRANSITION}s ease;
+  transition: all ${TRANSITION}s ease-in-out;
+  transition-delay: 0.05s;
   z-index:100;
   transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
   margin:${MARGIN}px;

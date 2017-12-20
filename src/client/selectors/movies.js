@@ -1,15 +1,7 @@
 import {
-  compose,
-  sortBy,
-  map,
-  path,
   filter,
-  not,
-  isNil,
-  uniqBy,
-  toLower,
-  values,
-  isEmpty,
-} from 'ramda';
+} from 'lodash';
 
 export const getMovies = state => state.movies.data;
+
+export const getPreferedMovies = movies => filter(movies, (movie) => parseInt(movie.imdbRating, 0) > 6);

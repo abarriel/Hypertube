@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { getMovies } from '../../selectors/movies';
+import { getMovies, getPreferedMovies } from '../../selectors/movies';
 import MoviePreviewSlider from '../../components/MoviePreviewSlider';
 import Spinner from '../../components/Spinner';
 import { HomeContainer, MainContent } from './styles';
@@ -15,8 +15,8 @@ const Home = ({ movies }) => (
       {movies.length > 0 &&
         <div>
           <Section movies={movies} title="Nouveautés" />
+          <Section movies={getPreferedMovies(movies)} title="Les plus vus" />
           <Section movies={movies} title="Tendances actuelles" />
-          <Section movies={movies} title="Les plus vus" />
         </div>
       }
       {movies.length <= 0 && <Spinner />}
