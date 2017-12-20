@@ -26,7 +26,7 @@ const MovieRow = ({
     >
       {movies.map((movie, index) =>
         (<MoviePreview
-          key={movie.imdb_id}
+          key={movie.imdbId}
           movie={movie}
           start={start}
           end={end}
