@@ -2,10 +2,12 @@ import React from 'react';
 import { withStateHandlers, lifecycle, compose } from 'recompose';
 import { number, func } from 'prop-types';
 
+import { DELAY } from './constant';
 import { images } from './images';
 import {
   MoviePreviewSliderContainer,
   MoviePreviewSliderImageContainer,
+  MoviePreviewSliderImage,
 } from './styles';
 
 const getNewPosition = position => {
@@ -20,7 +22,11 @@ const MoviePreviewSlider = ({
   handleChangePosition,
 }) => (
   <MoviePreviewSliderContainer position={position} onClick={() => handleChangePosition(getNewPosition(position))}>
-    {images.map(image => <MoviePreviewSliderImageContainer key={image.id} coverImage={image.coverImage} />)}
+    {images.map(image => (
+      <MoviePreviewSliderImageContainer key={image.id}>
+        <MoviePreviewSliderImage coverImage={image.coverImage} />
+      </MoviePreviewSliderImageContainer>
+    ))}
   </MoviePreviewSliderContainer>
 );
 
@@ -40,7 +46,7 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      window.setInterval(() => this.props.handleChangePosition(getNewPosition(this.props.position)), 10000);
+      window.setInterval(() => this.props.handleChangePosition(getNewPosition(this.props.position)), DELAY);
     },
     componentWillUnmount() {
       window.setInterval();

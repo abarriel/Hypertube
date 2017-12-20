@@ -11,15 +11,20 @@ export const MoviePreviewSliderContainer = styled.div`
   margin-bottom:35px;
   transition: all 0.3s ease-in-out;
   background-color: rgb(20,20,20);
-  z-index:10;
   box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
 `;
 
 export const MoviePreviewSliderImageContainer = styled.div`
   display:flex;
+  justify-content: center;
   min-width:100%;
   height:100%;
-  z-index:20;
+`;
+
+export const MoviePreviewSliderImage = styled.div`
+  display:flex;
+  width:100%;
+  max-width:1500px;
   background-image:${({ coverImage }) => `url(${coverImage})`};
   background-size: cover;
   background-position: center;
