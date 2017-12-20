@@ -1,12 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {
-  RatingContainer,
-  Full,
-  Empty,
-} from './styles';
-
+import { RatingContainer, Full, Empty } from './styles';
 
 const Rating = ({ rating, opacity }) => (
   <RatingContainer opacity={opacity}>

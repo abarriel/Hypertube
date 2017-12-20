@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import { getMovies } from '../../selectors/movies';
 import Header from './Header';
+import Spinner from '../../components/Spinner';
 import { HomeContainer, MainContent } from './styles';
 import Section from '../../containers/Section';
 
@@ -18,6 +19,7 @@ const Home = ({ movies }) => (
           <Section movies={movies} title="Les plus vus" />
         </div>
       }
+      {movies.length <= 0 && <Spinner />}
     </MainContent>
   </HomeContainer>
 );

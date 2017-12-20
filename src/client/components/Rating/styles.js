@@ -7,7 +7,7 @@ export const RatingContainer = styled.div`
   align-items: center;
   width:100%;
   height:30px;
-  opacity: ${({ opacity }) => opacity - 0.3};
+  opacity: ${({ opacity }) => opacity};
   transition: all 1.3s;
   transition-delay: 1.4s;
   margin-top:10px;

@@ -31,6 +31,7 @@ export const MoviePreviewContainer = styled.div`
   &:hover {
     transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
     z-index:${({ hidden }) => hidden ? '100' : '110'};
+    box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
   };
   border-radius:2px;
   overflow:hidden;
@@ -127,19 +128,19 @@ export const DescriptionContainer = styled.div`
   width:100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  color:white;
   font-size:0.8em;
   margin-top:15px;
-  user-select: none;
-  background: linear-gradient(white, rgba(0,0,0,0));
-  background-clip: text;
-  text-fill-color: transparent;
-  text-align: justify;
 `;
 
 export const DesciptionText = styled.p`
+  color:white;
   opacity: ${({ opacity }) => opacity};
   transition: all ${TRANSITION + 1}s;
+  user-select: none;
+  background: linear-gradient(white, rgba(0,0,0,0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-align: justify;
 `;
 
 export const BackgroundImage = styled.div`
@@ -154,4 +155,8 @@ export const BackgroundImage = styled.div`
   transition: all ${TRANSITION + 1.2}s ease-in;
   transition-delay:1s;
   filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(3px)' : ' blur(0px)'};
+  -webkit-backface-visibility: hidden;
+  -ms-transform: translateZ(0); /* IE 9 */
+  -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+  transform: translateZ(0);
 `;

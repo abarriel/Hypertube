@@ -23,6 +23,7 @@ export const SideMenuStyled = styled.div`
   background:linear-gradient( 160deg, rgb(33,33,33), rgb(26,26,26));  60%);
   height:100%;
   z-index:2000;
+  box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
 `;
 
 export const MenuElemStyled = styled(Link)`

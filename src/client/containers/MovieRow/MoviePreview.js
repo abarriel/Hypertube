@@ -27,7 +27,7 @@ const MoviePreview = ({
   >
     <BackgroundImage
       hidden={isMovieHidden(index, start, end)}
-      coverImage={movie.cover_image}
+      coverImage={movie.coverImage}
       displayShadow={displayShadow}
     />
     {
