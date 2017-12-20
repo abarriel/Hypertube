@@ -9,8 +9,8 @@ const service = {
   async delete(req, res) {
   },
   async get(req, res) {
-    const ok = await DB.select().from('movies_miniature').limit(50);
-    res.json({ movies: ok});
+    const ok = await DB.select('imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary').from('movies').limit(50);
+    res.json({ movies: ok });
   },
 };
 

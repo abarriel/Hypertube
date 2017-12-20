@@ -2,6 +2,7 @@ import { DB, Environment } from './core';
 import { createMoviesTable, deleteMovieTable } from './database/migrations/movies';
 import * as _ from 'lodash';
 import axios from 'axios';
+import { Promise } from 'bluebird';
 
 
 /**
@@ -21,7 +22,7 @@ const YTS_DETAIL = 'https://yts.am/api/v2/movie_details.json?movie_id=6941';
  * omdb url with a  API key registered.
  * @param {imdbId}
 **/
-const omdbUrl = (imdbId: string) => `http://www.omdbapi.com/?i=${imdbId}&apikey=${Environment.getConfig().omdb}`;
+const omdbUrl = (imdbId: string) => `http://localhost:3001/?i=${imdbId}&apikey=${Environment.getConfig().omdb}`;
 
 /**
  *
@@ -30,6 +31,7 @@ const omdbUrl = (imdbId: string) => `http://www.omdbapi.com/?i=${imdbId}&apikey=
  * @param {movie} // details from YTS
 **/
 const addMovie = async (movieNub: any, movie: any) => {
+  console.log(movieNub.Title);
   await DB('movies').insert({
     imdb_id: movieNub.imdbID,
     title: movieNub.Title,
@@ -47,13 +49,6 @@ const addMovie = async (movieNub: any, movie: any) => {
     ratings: movieNub.Ratings,
     box_office: movieNub.BoxOffice,
     production: movieNub.Production
-  });
-  await DB('movies_miniature').insert({
-    imdb_id: movieNub.imdbID,
-    title: movieNub.Title,
-    year: movieNub.Year,
-    imdb_rating: movieNub.imdbRating,
-    cover_image: movieNub.Poster,
   });
 }
 
@@ -74,20 +69,21 @@ const scrapYTS = async () => {
 
   const { data: { data: { movies, movie_count } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`);
   const pageNumber = movie_count / params.limit;
-  _.times(pageNumber, async (num) => {
+  const promisesT = _.times(pageNumber, async (num) => {
     if (num < 1) return ;
     params.page = num;
     const { data: { data: { movies } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`);
-    _.forEach(movies, async (movie) => {
+    const promises = _.map(movies, async (movie: any) => {
       try {
         const { data: movieNub } = await axios.get(omdbUrl(movie.imdb_code));
-        console.log(movieNub.title, 'pg:', params.page, 'pgExecpted:', pageNumber);
         await addMovie(movieNub, movie);
       } catch (err) {
-        console.log('ERROR SCRAPPER', err.code,);
+        console.log('ERROR SCRAPPER', err);
       }
     })
+    return Promise.all(promises);
   });
+  return Promise.all(promisesT);
 }
 
 /**
@@ -97,7 +93,7 @@ const scrapYTS = async () => {
 
 const initScrapper = async () => {
   await scrapYTS();
-  console.log('done scrapping');
+  console.log('Done scrapping');
 };
 
 export default initScrapper;

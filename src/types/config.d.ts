@@ -12,6 +12,7 @@ interface Iconfig {
         database: string;
         user: string;
     };
+    postProcessResponse: () => any,
     migrations: {
       directory: string,
       tableName: string

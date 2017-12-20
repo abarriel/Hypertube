@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const path = require('path');
 
 const developmentConfig = {
@@ -9,6 +10,15 @@ const developmentConfig = {
       database: 'postgres',
       user: 'postgres',
       },
+    postProcessResponse: (res: any) => {
+      if (Array.isArray(res)) {
+        return res.map(row => {
+          if(typeof row === 'object')
+            return _.mapKeys(row, (v:any , k:any) => _.camelCase(k));
+        });
+      }
+      return res;
+    },
     migrations: {
       directory: './src/server/database/migrations',
       tableName: 'version'
