@@ -1,4 +1,5 @@
 import React from 'react';
+import { object } from 'prop-types';
 
 import {
   ProfilContainer,
@@ -21,5 +22,9 @@ const Profil = ({ profil = fakeProfil }) => (
     </ProfilHeader>
   </ProfilContainer>
 );
+
+Profil.propTypes = {
+  profil: object.isRequired,
+};
 
 export default Profil;

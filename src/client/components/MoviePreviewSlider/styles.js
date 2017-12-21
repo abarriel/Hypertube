@@ -11,7 +11,7 @@ export const MoviePreviewSliderContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap:no-wrap;
-  transition: all 0.3s ease-in-out;
+  transition: margin-left 0.3s ease-in-out;
   background-color: rgb(20,20,20);
   box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
 `;

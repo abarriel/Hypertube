@@ -17,13 +17,13 @@ export const SideMenuStyled = styled.div`
   flex-direction:column;
   justify-content: flex-start;
   align-items: flex-start;
-  left:0;
   top:0;
+  left:0px;
   width:85px;
-  background:linear-gradient( 160deg, rgb(33,33,33), rgb(26,26,26));  60%);
+  background:linear-gradient( 160deg, rgb(27,27,27), rgb(26,26,26));  70%);
   height:100%;
   z-index:2000;
-  box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
+  box-shadow: 0 0 30px 1px rgba(0,0,0,0.4);
 `;
 
 export const MenuElemStyled = styled(Link)`

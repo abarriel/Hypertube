@@ -71,7 +71,7 @@ export const ShadowContainer = styled.div`
   opacity: ${({ opacity }) => opacity};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   transition: all ${TRANSITION + 0.5}s;
-  transition-delay:1s;
+  transition-delay:0.7s;
   padding:20px;
   padding-bottom:0;
   z-index:120;

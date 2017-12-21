@@ -1,3 +1,3 @@
 export const LOAD_MOVIES = 'LOAD_MOVIES';
 
-export const loadMovies = movies => ({ type: LOAD_MOVIES, movies });
+export const loadMovies = data => ({ type: LOAD_MOVIES, data });

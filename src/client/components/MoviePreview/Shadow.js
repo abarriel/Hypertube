@@ -26,7 +26,7 @@ const Shadow = ({
     <LinkStyed to={`/movie/${movie.imdbId}`}>
       <PlayLogo />
     </LinkStyed>
-    <Rating rating={3} opacity={0.9} />
+    <Rating rating={movie.imdbRating} opacity={0.9} />
     <DescriptionContainer>
       <DesciptionText>
         {movie.summary}
