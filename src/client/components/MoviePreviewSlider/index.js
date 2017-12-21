@@ -9,6 +9,7 @@ import {
   MoviePreviewSliderImageContainer,
   MoviePreviewSliderImage,
 } from './styles';
+import Pager from './Pager';
 
 const getNewPosition = position => {
   if (position + 1 > images.length - 1) {
@@ -21,13 +22,16 @@ const MoviePreviewSlider = ({
   position,
   handleChangePosition,
 }) => (
-  <MoviePreviewSliderContainer position={position} onClick={() => handleChangePosition(getNewPosition(position))}>
-    {images.map(image => (
-      <MoviePreviewSliderImageContainer key={image.id}>
-        <MoviePreviewSliderImage coverImage={image.coverImage} />
-      </MoviePreviewSliderImageContainer>
-    ))}
-  </MoviePreviewSliderContainer>
+  <div>
+    <MoviePreviewSliderContainer position={position} onClick={() => handleChangePosition(getNewPosition(position))}>
+      {images.map(image => (
+        <MoviePreviewSliderImageContainer key={image.id}>
+          <MoviePreviewSliderImage coverImage={image.coverImage} />
+        </MoviePreviewSliderImageContainer>
+      ))}
+    </MoviePreviewSliderContainer>
+    <Pager position={position} handleChangePosition={handleChangePosition} />
+  </div>
 );
 
 MoviePreviewSlider.propTypes = {
