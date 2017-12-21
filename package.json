@@ -46,6 +46,7 @@
     "json-caching-proxy": "^1.2.4",
     "knex": "^0.14.2",
     "lodash": "^4.17.4",
+    "longjohn": "^0.2.12",
     "morgan": "^1.9.0",
     "omdb": "^0.8.0",
     "omdbapi": "^2.0.1",

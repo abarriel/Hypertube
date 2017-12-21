@@ -4,7 +4,7 @@ import initDb from './database';
 import initScrapper from './scrapper';
 import initServer from './app';
 import axios from 'axios';
-
+require('longjohn');
 /**
  * Init chain of the server. DB -> HTTP
  *

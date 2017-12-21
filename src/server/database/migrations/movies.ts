@@ -5,8 +5,8 @@ const createMoviesTable = (): Promise<any> => Promise.all([
   DB.schema.createTableIfNotExists('movies', (table: Knex.CreateTableBuilder) => {
     table.string('imdb_id').primary();
     table.string('title').notNullable();
-    table.string('year').notNullable();
-    table.string('imdb_rating').notNullable();
+    table.integer('year').notNullable();
+    table.integer('imdb_rating').notNullable();
     table.text('cover_image').defaultTo('/uploads/default.png');
     table.text('background_image').defaultTo('/uploads/default.png');
     table.text('summary').notNullable();
