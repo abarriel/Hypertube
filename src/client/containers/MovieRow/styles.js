@@ -69,17 +69,20 @@ export const ShadowContainer = styled.div`
   width:100%;
   height:calc(100% - 20px);
   opacity: ${({ opacity }) => opacity};
-  background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
-  transition: all ${TRANSITION + 0.5}s;
-  transition-delay:0.7s;
+  background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.6));  30%);
+  transition: all ${TRANSITION}s;
+  transition-delay:0.3s;
   padding:20px;
   padding-bottom:0;
   z-index:120;
 `;
 
-export const Title = styled.p`
+export const Title = styled.div`
   color:white;
   margin:0;
+  opacity: ${({ opacity }) => opacity};
+  transition: all ${TRANSITION}s;
+  transition-delay:0.8s;
   font-size:1em;
   font-weight:900;
   align-self:flex-start;
@@ -91,7 +94,7 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   font-size:2.8em;
   cursor: pointer;
   transition: all 0.2s;
-  transition-delay:0.2s;
+  transition-delay:0.1s;
   &:hover {
     color:${MAIN_COLOR};
   }
@@ -126,6 +129,8 @@ export const LinkStyed = styled(Link)`
 export const DescriptionContainer = styled.div`
   display:flex;
   height: ${HEIGHT / 2}px;
+  opacity: ${({ opacity }) => opacity};
+  transition: all ${TRANSITION + 5}s;
   width:100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -135,8 +140,6 @@ export const DescriptionContainer = styled.div`
 
 export const DesciptionText = styled.p`
   color:white;
-  opacity: ${({ opacity }) => opacity};
-  transition: all ${TRANSITION + 1}s;
   user-select: none;
   background: linear-gradient(white, rgba(0,0,0,0));
   -webkit-background-clip: text;
@@ -153,11 +156,10 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all ${TRANSITION + 1.2}s ease-in;
-  transition-delay:1s;
-  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(3px)' : ' blur(0px)'};
+  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(1px)' : ' blur(0px)'};
   -webkit-backface-visibility: hidden;
-  -ms-transform: translateZ(0); /* IE 9 */
-  -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+  -ms-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  transition: all 0.4s ease;
 `;

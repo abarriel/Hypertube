@@ -33,13 +33,12 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: all ${TRANSITION + 1.2}s ease-in;
-  transition-delay:1s;
-  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(3px)' : ' blur(0px)'};
+  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(2px)' : ' blur(0px)'};
   -webkit-backface-visibility: hidden;
-  -ms-transform: translateZ(0); /* IE 9 */
-  -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+  -ms-transform: translateZ(0);
+  -webkit-transform: translateZ(0);
   transform: translateZ(0);
+  transition: all 0.4s ease;
 `;
 
 export const ShadowContainer = styled.div`

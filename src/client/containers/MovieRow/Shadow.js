@@ -22,13 +22,13 @@ const Shadow = ({
     onMouseEnter={() => handleChangeOpacity(1)}
     onMouseLeave={() => handleChangeOpacity(0)}
   >
-    <Title>{`${movie.title} (${movie.year})`}</Title>
+    <Title opacity={opacity}>{`${movie.title} (${movie.year})`}</Title>
     <LinkStyed opacity={opacity} to={`/movie/${movie.imdbId}`}>
       <PlayLogo />
     </LinkStyed>
     <Rating rating={movie.imdbRating} opacity={opacity}/>
-    <DescriptionContainer>
-      <DesciptionText opacity={opacity}>
+    <DescriptionContainer opacity={opacity}>
+      <DesciptionText>
         {movie.summary}
       </DesciptionText>
     </DescriptionContainer>

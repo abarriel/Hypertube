@@ -55,4 +55,7 @@ export const PagerElem = styled.div`
   transform: ${({ selected }) => selected ? 'scale(1.2)' : 'scale(1)'};
   opacity: ${({ selected }) => selected ? 0.8 : 0.2};
   cursor:pointer;
+  &:hover {
+    opacity: ${({ selected }) => selected ? 0.8 : 0.4};
+  }
 `;

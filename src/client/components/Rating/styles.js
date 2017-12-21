@@ -14,8 +14,8 @@ export const RatingContainer = styled.div`
 `;
 
 export const Full = styled.div`
-  width:15px;
-  height:15px;
+  width:13px;
+  height:13px;
   border-radius:100%;
   border-style: solid;
   border-width: 3px;
@@ -24,8 +24,8 @@ export const Full = styled.div`
 `;
 
 export const Empty = styled.div`
-  width:15px;
-  height:15px;
+  width:13px;
+  height:13px;
   border-radius:100%;
   border-style: solid;
   border-width: 3px;
