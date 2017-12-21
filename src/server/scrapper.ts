@@ -22,7 +22,7 @@ const YTS_DETAIL = 'https://yts.am/api/v2/movie_details.json?movie_id=6941';
  * omdb url with a  API key registered.
  * @param {imdbId}
 **/
-const omdbUrl = (imdbId: string) => `http://localhost:3001/?i=${imdbId}&apikey=${Environment.getConfig().omdb}`;
+const omdbUrl = (imdbId: string) => `http://www.omdbapi.com/?i=${imdbId}&apikey=${Environment.getConfig().omdb}`;
 
 /**
  *
@@ -35,8 +35,8 @@ const addMovie = async (movieNub: any, movie: any) => {
   await DB('movies').insert({
     imdb_id: movieNub.imdbID,
     title: movieNub.Title,
-    year: movieNub.Year,
-    imdb_rating: movieNub.imdbRating,
+    year: parseInt(movieNub.Year),
+    imdb_rating: Math.round((Math.round(movieNub.imdbRating) / 2)),
     cover_image: movieNub.Poster,
     background_image: movie.background_image,
     summary: movie.description_full,
@@ -68,7 +68,7 @@ const scrapYTS = async () => {
   };
 
   const { data: { data: { movies, movie_count } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`);
-  const pageNumber = movie_count / params.limit;
+  const pageNumber = Math.round(movie_count / params.limit) + 1;
   const promisesT = _.times(pageNumber, async (num) => {
     if (num < 1) return ;
     params.page = num;
@@ -78,7 +78,7 @@ const scrapYTS = async () => {
         const { data: movieNub } = await axios.get(omdbUrl(movie.imdb_code));
         await addMovie(movieNub, movie);
       } catch (err) {
-        console.log('ERROR SCRAPPER', err);
+        console.log('err');
       }
     })
     return Promise.all(promises);

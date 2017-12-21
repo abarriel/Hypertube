@@ -1,13 +1,14 @@
 const _ = require('lodash');
 const path = require('path');
 
+
 const developmentConfig = {
   db: {
     client: 'postgresql',
     connection: {
       host: '95.85.22.142',
       port: 5432,
-      database: 'postgres',
+      database: process.env.DB_NAME || 'postgres',
       user: 'postgres',
       },
     postProcessResponse: (res: any) => {
