@@ -3,13 +3,14 @@ import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
 import { Link } from 'react-router-dom';
 import { MAIN_COLOR } from '../../colors';
 
-import { HEIGHT, WIDTH, TRANSITION } from './constants';
+import { HEIGHT, WIDTH, TRANSITION, MARGIN } from './constants';
 
 export const MainContainer = styled.div`
   position:relative;
   display:flex;
   height:${HEIGHT}px;
   width:${WIDTH}px;
+  margin: ${MARGIN}px;
   transition: all ${TRANSITION}s ease-in-out;
   transition-delay: 0.05s;
   z-index:100;
@@ -48,7 +49,7 @@ export const ShadowContainer = styled.div`
   align-items: center;
   width:100%;
   height:calc(100% - 20px);
-  opacity: 0.3;
+  opacity: ${({ opacity }) => opacity};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
   transition: all ${TRANSITION + 0.5}s;
   transition-delay:1s;

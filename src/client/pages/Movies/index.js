@@ -4,12 +4,16 @@ import { connect } from 'react-redux';
 import { map } from 'lodash';
 
 import { getMovies } from '../../selectors/movies';
-import { MoviesContainer } from './styles';
+import { MoviesContainer, MoviePreviewContainer } from './styles';
 import MoviePreview from '../../components/MoviePreview';
+import SearchBar from '../../components/SearchBar';
 
 const Movies = ({ movies }) => (
   <MoviesContainer>
-    {map(movies, movie => <MoviePreview key={movie.imdbId} movie={movie} />)}
+    <SearchBar />
+    <MoviePreviewContainer>
+      {map(movies, movie => <MoviePreview key={movie.imdbId} movie={movie} />)}
+    </MoviePreviewContainer>
   </MoviesContainer>
 );
 

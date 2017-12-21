@@ -1,6 +1,6 @@
 import React from 'react';
 import { withStateHandlers } from 'recompose';
-import PropTypes from 'prop-types';
+import { number, object, func } from 'prop-types';
 
 import {
   ShadowContainer,
@@ -15,8 +15,10 @@ import Rating from '../Rating';
 const Shadow = ({
   movie,
   handleChangeOpacity,
+  opacity,
 }) => (
   <ShadowContainer
+    opacity={opacity}
     onMouseEnter={() => handleChangeOpacity(1)}
     onMouseLeave={() => handleChangeOpacity(0)}
   >
@@ -34,8 +36,9 @@ const Shadow = ({
 );
 
 Shadow.propTypes = {
-  handleChangeOpacity: PropTypes.func.isRequired,
-  movie: PropTypes.object.isRequired,
+  handleChangeOpacity: func.isRequired,
+  movie: object.isRequired,
+  opacity: number.isRequired,
 };
 
 const enhance = withStateHandlers(

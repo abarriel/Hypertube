@@ -10,4 +10,7 @@ export const SearchBarStyled = styled.input`
   padding-left:15px;
   padding-right:15px;
   background-color:white;
+  &:focus {
+    outline: none;
+  }
 `;
