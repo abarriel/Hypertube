@@ -1,14 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { map } from 'lodash';
 
 import { RatingContainer, Full, Empty } from './styles';
 
-const Rating = ({ rating, opacity }) => (
-  <RatingContainer opacity={opacity}>
-    {Array.from(new Array(rating), () => <Full />)}
-    {Array.from(new Array(5 - rating), () => <Empty />)}
-  </RatingContainer>
-);
+const ratingArray = [
+  {
+    id: 0,
+  },
+  {
+    id: 1,
+  },
+  {
+    id: 2,
+  },
+  {
+    id: 3,
+  },
+  {
+    id: 4,
+  },
+];
+
+const Rating = ({ rating, opacity }) => {
+  return (
+    <RatingContainer opacity={opacity}>
+      {map(ratingArray, elem => {
+        if (elem.id < rating) {
+          return <Full key={elem.id} />;
+        }
+        return <Empty key={elem.id} />;
+      })}
+    </RatingContainer>
+  );
+};
 
 Rating.propTypes = {
   rating: PropTypes.number.isRequired,

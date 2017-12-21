@@ -39,6 +39,7 @@ export const PagerContainer = styled.div`
   align-items: center;
   width:calc(100vw - 85px);
   min-height:50px;
+  margin-top:5px;
   margin-bottom:35px;
 `;
 

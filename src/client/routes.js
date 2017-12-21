@@ -1,5 +1,6 @@
 import Home from './pages/Home';
 import Profil from './pages/Profil';
+import Movies from './pages/Movies';
 
 const routes = [
   {
@@ -17,6 +18,11 @@ const routes = [
     path: '/users',
     component: Profil,
     id: 2,
+  },
+  {
+    path: '/movies',
+    component: Movies,
+    id: 3,
   },
 ];
 

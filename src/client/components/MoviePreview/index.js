@@ -1,46 +1,37 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { object, bool, func } from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
 import {
-  MoviePreviewContainer,
-  Shadow,
-  Title,
-  LinkStyed,
-  FakeDiv,
   MainContainer,
+  BackgroundImage,
 } from './styles';
+import Shadow from './Shadow';
 
 const MoviePreview = ({
   movie,
   displayShadow,
-  showShadow,
-  hideShadow,
+  handleChangeShadowDisplay,
 }) => (
-  <MainContainer>
-    <LinkStyed to={`/movie/${movie.id}`}>
-      <FakeDiv displayShadow={displayShadow}/>
-      <MoviePreviewContainer
-        onMouseEnter={showShadow}
-        onMouseLeave={hideShadow}
-        coverImage={movie.coverImage}
-        displayShadow={displayShadow}
-      >
-        {displayShadow &&
-          <Shadow displayShadow={displayShadow}>
-            <Title>{`${movie.name} (${movie.year})`}</Title>
-          </Shadow>
-        }
-      </MoviePreviewContainer>
-    </LinkStyed>
+  <MainContainer
+    onMouseEnter={() => handleChangeShadowDisplay(true)}
+    onMouseLeave={() => handleChangeShadowDisplay(false)}
+  >
+    <BackgroundImage
+      coverImage={movie.coverImage}
+      displayShadow={displayShadow}
+    />
+    {
+      displayShadow &&
+      <Shadow movie={movie} displayShadow={displayShadow} />
+    }
   </MainContainer>
 );
 
 MoviePreview.propTypes = {
-  movie: PropTypes.object.isRequired,
-  displayShadow: PropTypes.bool.isRequired,
-  showShadow: PropTypes.func.isRequired,
-  hideShadow: PropTypes.func.isRequired,
+  movie: object.isRequired,
+  displayShadow: bool.isRequired,
+  handleChangeShadowDisplay: func.isRequired,
 };
 
 const enhance = withStateHandlers(
@@ -48,8 +39,7 @@ const enhance = withStateHandlers(
     displayShadow: false,
   },
   {
-    showShadow: () => () => ({ displayShadow: true }),
-    hideShadow: () => () => ({ displayShadow: false }),
+    handleChangeShadowDisplay: () => display => ({ displayShadow: display }),
   },
 );
 

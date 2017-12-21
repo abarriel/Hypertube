@@ -10,25 +10,23 @@ import {
   PlayLogo,
   DesciptionText,
 } from './styles';
-import Rating from '../../components/Rating';
+import Rating from '../Rating';
 
 const Shadow = ({
   movie,
-  opacity,
   handleChangeOpacity,
 }) => (
   <ShadowContainer
-    opacity={opacity}
     onMouseEnter={() => handleChangeOpacity(1)}
     onMouseLeave={() => handleChangeOpacity(0)}
   >
     <Title>{`${movie.title} (${movie.year})`}</Title>
-    <LinkStyed opacity={opacity} to={`/movie/${movie.imdbId}`}>
+    <LinkStyed to={`/movie/${movie.imdbId}`}>
       <PlayLogo />
     </LinkStyed>
-    <Rating rating={3} opacity={opacity}/>
+    <Rating rating={3} opacity={0.9} />
     <DescriptionContainer>
-      <DesciptionText opacity={opacity}>
+      <DesciptionText>
         {movie.summary}
       </DesciptionText>
     </DescriptionContainer>
@@ -36,7 +34,6 @@ const Shadow = ({
 );
 
 Shadow.propTypes = {
-  opacity: PropTypes.number.isRequired,
   handleChangeOpacity: PropTypes.func.isRequired,
   movie: PropTypes.object.isRequired,
 };

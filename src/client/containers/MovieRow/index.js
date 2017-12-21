@@ -6,12 +6,12 @@ import MoviePreview from './MoviePreview';
 import ScrollBar from './ScrollBar';
 
 const getMoviesLength = movies => {
-  const length = movies.length;
+  const { length } = movies;
   if (length === 0) {
     return 1;
   }
   return length;
-}
+};
 
 const MovieRow = ({
   movies,
