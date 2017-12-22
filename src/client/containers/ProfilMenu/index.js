@@ -10,12 +10,12 @@ const ProfilMenu = ({
   displayMenu,
   handleChangeMenuDisplay,
 }) => (
-  <ProfilMenuContainer>
+  <ProfilMenuContainer onMouseLeave={() => handleChangeMenuDisplay(false)}>
     <MiniAvatar
       handleChangeMenuDisplay={handleChangeMenuDisplay}
       displayMenu={displayMenu}
     />
-    {displayMenu && <WrapMenu />}
+    <WrapMenu displayMenu={displayMenu} />
   </ProfilMenuContainer>
 );
 

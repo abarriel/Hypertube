@@ -10,7 +10,6 @@ export const MiniAvatarContainer = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  box-shadow: 0 0 30px 1px rgba(0,0,0,0.4);
   cursor:pointer;
   overflow:hidden;
 `;
