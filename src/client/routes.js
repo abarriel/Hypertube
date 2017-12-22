@@ -15,11 +15,6 @@ const routes = [
     id: 1,
   },
   {
-    path: '/users',
-    component: Profil,
-    id: 2,
-  },
-  {
     path: '/movies',
     component: Movies,
     id: 3,

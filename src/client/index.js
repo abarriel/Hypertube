@@ -10,7 +10,9 @@ import App from './pages/App';
 const initialState = {};
 const store = configureStore(initialState);
 
-reqMovies(50, 10).then(movies => store.dispatch(loadMovies(movies)));
+const initMovies = (number) => reqMovies(number, 0).then(movies => store.dispatch(loadMovies(movies)));
+
+initMovies(100);
 
 const Root = () => <Provider store={store}><App /></Provider>;
 

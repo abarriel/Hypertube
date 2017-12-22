@@ -5,6 +5,7 @@ import { bool, func } from 'prop-types';
 import {
   MiniAvatarContainer,
   Shadow,
+  ChevDown,
 } from './styles';
 
 const fakeProfil = {
@@ -17,22 +18,28 @@ const MiniAvatar = ({
   profil = fakeProfil,
   displayShadow,
   handleChangeShadowDisplay,
+  displayMenu,
+  handleChangeMenuDisplay,
 }) => (
   <MiniAvatarContainer
     onMouseEnter={() => handleChangeShadowDisplay(true)}
     onMouseLeave={() => handleChangeShadowDisplay(false)}
+    onClick={() => handleChangeMenuDisplay(!displayMenu)}
     avatar={profil.avatar}
   >
-    {displayShadow &&
-      <Shadow></Shadow>
-    }
+    <Shadow displayShadow={displayShadow}>
+      <ChevDown />
+    </Shadow>
   </MiniAvatarContainer>
 );
 
 MiniAvatar.propTypes = {
   displayShadow: bool.isRequired,
   handleChangeShadowDisplay: func.isRequired,
-}
+  displayMenu: bool.isRequired,
+  handleChangeMenuDisplay: func.isRequired,
+};
+
 const enhance = withStateHandlers(
   {
     displayShadow: false,

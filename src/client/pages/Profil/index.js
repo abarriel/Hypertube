@@ -24,7 +24,7 @@ const Profil = ({ profil = fakeProfil }) => (
 );
 
 Profil.propTypes = {
-  profil: object.isRequired,
+  profil: object,
 };
 
 export default Profil;
