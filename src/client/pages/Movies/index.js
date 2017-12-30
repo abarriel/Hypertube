@@ -7,13 +7,15 @@ import { getMovies } from '../../selectors/movies';
 import { MoviesContainer, MoviePreviewContainer } from './styles';
 import MoviePreview from '../../components/MoviePreview';
 import SearchBar from '../../components/SearchBar';
+import Spinner from '../../components/Spinner';
 
 const Movies = ({ movies }) => (
   <MoviesContainer>
     <SearchBar />
-    <MoviePreviewContainer>
+    {movies.length > 0 && <MoviePreviewContainer>
       {map(movies, movie => <MoviePreview key={movie.imdbId} movie={movie} />)}
-    </MoviePreviewContainer>
+    </MoviePreviewContainer>}
+    {movies.length <= 0 && <Spinner />}
   </MoviesContainer>
 );
 
