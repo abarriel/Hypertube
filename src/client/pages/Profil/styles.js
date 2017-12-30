@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ProfilContainer = styled.div`
   display:flex;
+  flex-direction:column;
   width:calc(100vw - 85px);
   margin-left:85px;
 `;
@@ -11,6 +12,9 @@ export const ProfilHeader = styled.div`
   width:100%;
   padding-top:50px;
   padding-left:50px;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 25px;
 `;
 
 export const Avatar = styled.div`

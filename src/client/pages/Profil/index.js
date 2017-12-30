@@ -7,6 +7,7 @@ import {
   Avatar,
   Name,
 } from './styles';
+import Card from '../../components/Card';
 
 const fakeProfil = {
   firstName: 'Lucas',
@@ -20,6 +21,7 @@ const Profil = ({ profil = fakeProfil }) => (
       <Avatar avatar={profil.avatar}/>
       <Name>{`${profil.firstName} ${profil.lastName}`}</Name>
     </ProfilHeader>
+    <Card />
   </ProfilContainer>
 );
 
