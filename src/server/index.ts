@@ -13,7 +13,7 @@ require('longjohn');
 const scrapperJob = new cron.CronJob({
   cronTime: '0 0 * * 1',
   onTick: initScrapper,
-  // runOnInit: true,
+  runOnInit: true,
 })
 
  const init =  async () => {

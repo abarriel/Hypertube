@@ -12,6 +12,5 @@ export const reqMovies = (limit, offset) => axios({
     offset,
   },
 }).then(({ data }) => {
-  console.log(data);
   return data;
-}).catch(err => err);
+}).catch(err => {});
