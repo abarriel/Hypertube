@@ -5,6 +5,7 @@ import {
   WrapMenuContainer,
   WrapMenuElem,
   WrapMenuElemText,
+  Icon,
 } from './styles';
 
 const WrapMenu = ({
@@ -12,9 +13,11 @@ const WrapMenu = ({
 }) => (
   <WrapMenuContainer displayMenu={displayMenu}>
     <WrapMenuElem>
+      <Icon />
       <WrapMenuElemText>Mon Compte</WrapMenuElemText>
     </WrapMenuElem>
     <WrapMenuElem>
+      <Icon />
       <WrapMenuElemText>Deconnexion</WrapMenuElemText>
     </WrapMenuElem>
   </WrapMenuContainer>

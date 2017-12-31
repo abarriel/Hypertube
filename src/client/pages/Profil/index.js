@@ -4,6 +4,7 @@ import { object } from 'prop-types';
 import {
   ProfilContainer,
   ProfilHeader,
+  ProfilContent,
   Avatar,
   Name,
 } from './styles';
@@ -21,7 +22,10 @@ const Profil = ({ profil = fakeProfil }) => (
       <Avatar avatar={profil.avatar}/>
       <Name>{`${profil.firstName} ${profil.lastName}`}</Name>
     </ProfilHeader>
-    <Card />
+    <ProfilContent>
+      <Card height="500px" />
+      <Card />
+    </ProfilContent>
   </ProfilContainer>
 );
 

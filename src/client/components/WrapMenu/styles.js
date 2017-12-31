@@ -11,6 +11,7 @@ export const WrapMenuContainer = styled.div`
   margin-right:20px;
   border-radius:3px;
   background-color:rgb(25,25,25);
+  border-radius:5px;
   overflow:hidden;
 `;
 
@@ -20,7 +21,7 @@ export const WrapMenuElem = styled.div`
   justify-content: flex-end;
   align-items: center;
   width:100%;
-  height:30px;
+  min-height:30px;
   background-color:rgb(25,25,25);
   padding-top:2.5px;
   padding-bottom:2.5px;
@@ -34,4 +35,8 @@ export const WrapMenuElemText = styled.p`
   user-select: none;
   margin-right:15px;
   font-size:0.9em;
+`;
+
+export const Icon = styled.div`
+
 `;

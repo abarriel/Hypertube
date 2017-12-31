@@ -1,6 +1,7 @@
 import Home from './pages/Home';
 import Profil from './pages/Profil';
 import Movies from './pages/Movies';
+import Users from './pages/Users';
 
 const routes = [
   {
@@ -18,6 +19,11 @@ const routes = [
     path: '/movies',
     component: Movies,
     id: 3,
+  },
+  {
+    path: '/users',
+    component: Users,
+    id: 4,
   },
 ];
 

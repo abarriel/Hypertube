@@ -17,6 +17,14 @@ export const ProfilHeader = styled.div`
   margin-bottom: 25px;
 `;
 
+export const ProfilContent = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-left:25px;
+`;
+
 export const Avatar = styled.div`
   display:flex;
   width:120px;
