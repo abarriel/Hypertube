@@ -18,3 +18,9 @@ export const MoviePreviewContainer = styled.div`
   width:100%;
   margin-top:25px;
 `;
+
+export const ParamsContainer = styled.div`
+  display:flex;
+  flex-wrap:wrap;
+  min-height:100px;
+`;
