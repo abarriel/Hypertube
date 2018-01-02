@@ -6,16 +6,17 @@ import {
   string,
 } from 'prop-types';
 
-import { INTERVALE } from './constants';
 import {
   SlideSelectContainer,
   Line,
   Circle,
   Label,
+  CircleLabel,
 } from './styles';
 
 const SlideSelect = ({
   label,
+  interval,
   start,
   end,
   handleChangePress,
@@ -23,21 +24,28 @@ const SlideSelect = ({
 }) => (
   <SlideSelectContainer onMouseUp={() => handleChangePress(0)}>
     <Label>{label}</Label>
-    <Line length={length}>
+    <Line length={length} interval={interval}>
       <Circle
         value={start}
+        interval={interval}
         onMouseDown={() => handleChangePress(1)}
-      />
+      >
+        <CircleLabel>{start}</CircleLabel>
+      </Circle>
       <Circle
         value={end}
+        interval={interval}
         onMouseDown={() => handleChangePress(2)}
-      />
+      >
+        <CircleLabel>{end}</CircleLabel>
+      </Circle>
     </Line>
   </SlideSelectContainer>
 );
 
 SlideSelect.propTypes = {
   label: string.isRequired,
+  interval: number.isRequired,
   start: number.isRequired,
   end: number.isRequired,
   handleChangePress: func.isRequired,
@@ -52,9 +60,9 @@ const enhance = compose(
       isPressed: 0,
     },
     {
-      handleChangeValues: ({ start, end, isPressed }) => (e, length) => {
+      handleChangeValues: ({ start, end, isPressed }) => (e, length, interval) => {
         if (isPressed === 1) {
-          let newValue = Math.round(((e.screenX) - 142) / INTERVALE);
+          let newValue = Math.round(((e.screenX) - 142) / interval);
           if (newValue < 0) {
             newValue = 0;
           } else if (newValue >= end) {
@@ -62,7 +70,7 @@ const enhance = compose(
           }
           return ({ start: newValue <= length ? newValue : start });
         } else if (isPressed === 2) {
-          let newValue = Math.round(((e.screenX) - 142) / INTERVALE);
+          let newValue = Math.round(((e.screenX) - 142) / interval);
           if (newValue < 0) {
             newValue = 0;
           } else if (newValue <= start) {
@@ -76,7 +84,7 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      window.addEventListener('mousemove', (e) => this.props.handleChangeValues(e, this.props.length), false);
+      window.addEventListener('mousemove', (e) => this.props.handleChangeValues(e, this.props.length, this.props.interval), false);
       window.addEventListener('mouseup', () => this.props.handleChangePress(false), false);
     },
     componentWillUnmount() {

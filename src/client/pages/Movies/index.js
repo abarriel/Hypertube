@@ -22,8 +22,8 @@ const Movies = ({ movies }) => (
     <ParamsContainer>
       <SearchBar />
       <SlideSelectContainer>
-        <SlideSelect label="Note" length={5} />
-        <SlideSelect label="Year" length={5} />
+        <SlideSelect label="Note" length={5} interval={100} />
+        <SlideSelect label="Year" length={20} interval={30} />
       </SlideSelectContainer>
     </ParamsContainer>
     {movies.length > 0 && (
