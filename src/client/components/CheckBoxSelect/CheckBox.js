@@ -11,7 +11,7 @@ import {
 const CheckBox = ({ label, isChecked, handleChangeChecked }) => (
   <CheckBoxContainer>
     <CheckBoxLabel>{label}</CheckBoxLabel>
-    <CheckBoxContent onClick={() => handleChangeChecked(label)}>
+    <CheckBoxContent onClick={() => handleChangeChecked(label, isChecked)}>
       {isChecked && <CheckedIcon />}
     </CheckBoxContent>
   </CheckBoxContainer>

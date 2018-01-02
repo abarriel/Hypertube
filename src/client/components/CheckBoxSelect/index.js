@@ -1,6 +1,7 @@
 import React from 'react';
 import { withStateHandlers } from 'recompose';
 import { array, func } from 'prop-types';
+import { without } from 'lodash';
 
 import {
   CheckBoxSelectContainer,
@@ -73,11 +74,14 @@ const enhance = withStateHandlers(
     checked: [],
   },
   {
-    handleChangeChecked: ({ checked }) => label => {
+    handleChangeChecked: ({ checked }) => (label, wasChecked) => {
       if (label === 'All') {
         return ({ checked: [label] });
       }
-      return ({ checked: [...checked, label] });
+      if (!wasChecked) {
+        return ({ checked: without([...checked, label], 'All') });
+      }
+      return ({ checked: without(checked, 'All', label) });
     },
   },
 );
