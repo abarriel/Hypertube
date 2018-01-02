@@ -8,7 +8,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
 import SideMenu from '../../components/SideMenu';
 import routes from '../../routes';
-import { AppContainer } from './style';
+import { AppContainer } from './styles';
 
 const Fade = ({ children }) => (
   <CSSTransition

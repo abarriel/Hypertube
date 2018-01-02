@@ -8,17 +8,24 @@ import {
   MoviesContainer,
   MoviePreviewContainer,
   ParamsContainer,
+  SlideSelectContainer,
 } from './styles';
 import MoviePreview from '../../components/MoviePreview';
 import SearchBar from '../../components/SearchBar';
 import Spinner from '../../components/Spinner';
-import { SlideSelect } from '../../components/SlideSelect';
+import SlideSelect from '../../components/SlideSelect';
 
 const Movies = ({ movies }) => (
   <MoviesContainer>
     <ParamsContainer>
       <SearchBar />
-      <SlideSelect />
+      <SlideSelectContainer>
+        <SlideSelect length={10} />
+        <SlideSelect length={20} />
+        <SlideSelect length={40} />
+        <SlideSelect length={30} />
+        <SlideSelect length={30} />
+      </SlideSelectContainer>
     </ParamsContainer>
     {movies.length > 0 && (
       <MoviePreviewContainer>

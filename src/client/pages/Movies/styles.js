@@ -21,6 +21,13 @@ export const MoviePreviewContainer = styled.div`
 
 export const ParamsContainer = styled.div`
   display:flex;
+  flex-direction:column;
   flex-wrap:wrap;
   min-height:100px;
+`;
+
+export const SlideSelectContainer = styled.div`
+  display:flex;
+  flex-direction:column;
+  margin-top:45px;
 `;

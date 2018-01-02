@@ -11,6 +11,9 @@ export const reqMovies = (limit, offset) => axios({
     limit,
     offset,
   },
-}).then(({ data }) => {
+}).then(({ data, status }) => {
+  if (status === 201) {
+    throw data;
+  }
   return data;
 }).catch(err => {});

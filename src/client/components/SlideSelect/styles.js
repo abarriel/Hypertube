@@ -1,39 +1,44 @@
 import styled from 'styled-components';
 
+import { INTERVALE } from './constants';
+
 import {
   MAIN_COLOR,
-  LIGHT_GREY,
 } from '../../colors';
 
 export const SlideSelectContainer = styled.div`
   display:flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   height:30px;
-  width:200px;
   margin:5px;
-  margin-left:15px;
 `;
 
 export const Line = styled.div`
   display:flex;
   justify-content: flex-start;
   align-items: center;
-  width:100%;
+  width:${({ length }) => `${length * INTERVALE}px`};;
   height:5px;
-  background-color:${LIGHT_GREY};
+  background-color:rgba(242,38,19,0.3);
   border-radius:5px;
 `;
 
 export const Circle = styled.div`
   display:flex;
-  width:15px;
-  height:15px;
+  min-width:17px;
+  min-height:17px;
   background-color:${MAIN_COLOR};
   border-radius:100%;
   cursor:pointer;
-  transition: all 0.3s ease;
+  margin-left:${({ value }) => `${value * INTERVALE}px`};
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 0 30px 1px rgba(0,0,0,0.4);
   &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
     opacity:0.9;
+    transform: scale(1);
   }
 `;
