@@ -7,7 +7,6 @@ export const MoviesContainer = styled.div`
   margin-left:85px;
   min-height:calc(100vh - 100px);
   padding:50px;
-  margin-top:100px;
 `;
 
 export const MoviePreviewContainer = styled.div`

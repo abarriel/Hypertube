@@ -14,17 +14,16 @@ import MoviePreview from '../../components/MoviePreview';
 import SearchBar from '../../components/SearchBar';
 import Spinner from '../../components/Spinner';
 import SlideSelect from '../../components/SlideSelect';
+import ProfilMenu from '../../containers/ProfilMenu';
 
 const Movies = ({ movies }) => (
   <MoviesContainer>
+    <ProfilMenu />
     <ParamsContainer>
       <SearchBar />
       <SlideSelectContainer>
-        <SlideSelect length={10} />
-        <SlideSelect length={20} />
-        <SlideSelect length={40} />
-        <SlideSelect length={30} />
-        <SlideSelect length={30} />
+        <SlideSelect label="Note" length={5} />
+        <SlideSelect label="Year" length={5} />
       </SlideSelectContainer>
     </ParamsContainer>
     {movies.length > 0 && (
