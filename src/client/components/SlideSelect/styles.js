@@ -18,7 +18,7 @@ export const Line = styled.div`
   align-items: center;
   width:${({ length, interval }) => `${(length * interval) + 8}px`};
   height:3px;
-  background-color:rgba(242,38,19,0.3);
+  background:linear-gradient( 220deg, rgba(242,38,19,0), rgba(242,38,19,0.6), rgba(242,38,19,0));  30%);
   border-radius:5px;
 `;
 
@@ -27,10 +27,11 @@ export const SelectedLine = styled.div`
   height:3px;
   width:100%;
   background-color:${MAIN_COLOR};
+  background-color: ${MAIN_COLOR};
   width:${({ start, end, interval }) => `${(end - start) * interval}px`};
   margin-left:${({ start, interval }) => `${start * interval}px`};
   transition: all 0.2s ease-in-out;
-  opacity: 0.5;
+  opacity: 0.7;
 `;
 
 export const Circle = styled.div`
@@ -47,7 +48,8 @@ export const Circle = styled.div`
   cursor:pointer;
   margin-left:${({ value, interval }) => `${value * interval}px`};
   transition: all 0.2s ease-in-out;
-  box-shadow: 0 0 30px 1px rgba(0,0,0,0.4);
+  box-shadow: 0 0 30px 1px rgba(0,0,0,1);
+  z-index:100;
 `;
 
 export const Label = styled.p`
@@ -56,6 +58,9 @@ export const Label = styled.p`
   margin-right:20px;
   user-select: none;
   width:60px;
+  background: -webkit-linear-gradient(#eee, rgba(255,255,255,0.6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
 
 export const CircleLabel = styled.p`
@@ -63,6 +68,10 @@ export const CircleLabel = styled.p`
   display:flex;
   color:white;
   margin:0;
-  margin-top:-40px;
+  margin-top:-45px;
   margin-left:-1px;
+  font-size:0.8em;
+  background: -webkit-linear-gradient(#eee, rgba(255,255,255,0.6));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;
