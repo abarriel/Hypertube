@@ -12,7 +12,15 @@ import {
   Circle,
   Label,
   CircleLabel,
+  SelectedLine,
 } from './styles';
+
+const getCircleLabel = (label, value) => {
+  if (label === 'Year') {
+    return (1900 + (value * 10));
+  }
+  return value;
+};
 
 const SlideSelect = ({
   label,
@@ -30,14 +38,19 @@ const SlideSelect = ({
         interval={interval}
         onMouseDown={() => handleChangePress(1)}
       >
-        <CircleLabel>{start}</CircleLabel>
+        <CircleLabel>{getCircleLabel(label, start)}</CircleLabel>
       </Circle>
+      <SelectedLine
+        start={start}
+        end={end}
+        interval={interval}
+      />
       <Circle
         value={end}
         interval={interval}
         onMouseDown={() => handleChangePress(2)}
       >
-        <CircleLabel>{end}</CircleLabel>
+        <CircleLabel>{getCircleLabel(label, end)}</CircleLabel>
       </Circle>
     </Line>
   </SlideSelectContainer>
@@ -65,18 +78,14 @@ const enhance = compose(
           let newValue = Math.round(((e.screenX) - 142) / interval);
           if (newValue < 0) {
             newValue = 0;
-          } else if (newValue >= end) {
-            newValue = end - 1;
           }
-          return ({ start: newValue <= length ? newValue : start });
+          return ({ start: newValue <= length && newValue < end ? newValue : start });
         } else if (isPressed === 2) {
           let newValue = Math.round(((e.screenX) - 142) / interval);
           if (newValue < 0) {
             newValue = 0;
-          } else if (newValue <= start) {
-            newValue = start + 1;
           }
-          return ({ end: newValue <= length ? newValue : end });
+          return ({ end: newValue <= length && newValue > start ? newValue : end });
         }
       },
       handleChangePress: () => value => ({ isPressed: value }),
