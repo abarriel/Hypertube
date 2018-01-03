@@ -37,14 +37,13 @@ const genres = [
   },
 ];
 
-const isChecked = (label, checked) => {
+const ischeck = (label, checked) => {
   let value = false;
   checked.map(elem => {
     if (elem === label) {
       value = true;
     }
-    return elem;
-  })
+  });
   return value;
 };
 
@@ -56,7 +55,7 @@ const CheckBoxSelect = ({ checked, handleChangeChecked }) => (
         <CheckBox
           key={genre.id}
           label={genre.label}
-          isChecked={isChecked(genre.label, checked)}
+          ischeck={ischeck(genre.label, checked)}
           handleChangeChecked={handleChangeChecked}
         />
       ))}

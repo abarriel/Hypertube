@@ -8,18 +8,18 @@ import {
   CheckedIcon,
 } from './styles';
 
-const CheckBox = ({ label, isChecked, handleChangeChecked }) => (
+const CheckBox = ({ label, ischeck, handleChangeChecked }) => (
   <CheckBoxContainer>
     <CheckBoxLabel>{label}</CheckBoxLabel>
-    <CheckBoxContent onClick={() => handleChangeChecked(label, isChecked)}>
-      <CheckedIcon isChecked={isChecked} />
+    <CheckBoxContent onClick={() => handleChangeChecked(label, ischeck)}>
+      <CheckedIcon ischeck={ischeck ? 1 : 0} />
     </CheckBoxContent>
   </CheckBoxContainer>
 );
 
 CheckBox.propTypes = {
   label: string.isRequired,
-  isChecked: bool.isRequired,
+  ischeck: bool.isRequired,
   handleChangeChecked: func.isRequired,
 };
 

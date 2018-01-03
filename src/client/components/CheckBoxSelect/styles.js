@@ -64,5 +64,5 @@ export const CheckBoxContent = styled.div`
 export const CheckedIcon = styled(GoCheck)`
   color:${MAIN_COLOR};
   transition: all 0.2s ease-in-out;
-  transform: scale(${({ isChecked }) => isChecked ? 1 : 0})
+  transform: scale(${({ ischeck }) => ischeck})
 `;

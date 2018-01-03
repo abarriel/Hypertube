@@ -4,7 +4,6 @@ import {
   number,
   func,
   string,
-  bool,
 } from 'prop-types';
 
 import {
@@ -32,7 +31,7 @@ const SlideSelect = ({
   length,
   isPressed,
 }) => (
-  <SlideSelectContainer onMouseUp={() => handleChangePress(0)}>
+  <SlideSelectContainer>
     <Label>{label}</Label>
     <Line length={length} interval={interval}>
       <Circle
@@ -67,7 +66,7 @@ SlideSelect.propTypes = {
   end: number.isRequired,
   handleChangePress: func.isRequired,
   length: number.isRequired,
-  isPressed: bool.isRequired,
+  isPressed: number.isRequired,
 };
 
 const enhance = compose(
@@ -99,11 +98,11 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       window.addEventListener('mousemove', (e) => this.props.handleChangeValues(e, this.props.length, this.props.interval), false);
-      window.addEventListener('mouseup', () => this.props.handleChangePress(false), false);
+      window.addEventListener('mouseup', () => this.props.handleChangePress(0), false);
     },
     componentWillUnmount() {
       window.removeEventListener('mousemove', this.props.handleChangeValues, false);
-      window.removeEventListener('mouseup', () => this.props.handleChangePress(false), false);
+      window.removeEventListener('mouseup', () => this.props.handleChangePress(0), false);
     },
   }),
 );
