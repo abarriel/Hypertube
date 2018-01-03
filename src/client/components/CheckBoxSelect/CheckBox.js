@@ -8,10 +8,18 @@ import {
   CheckedIcon,
 } from './styles';
 
-const CheckBox = ({ label, ischeck, handleChangeChecked }) => (
+const CheckBox = ({
+  label,
+  ischeck,
+  handleChangeChecked,
+  updateFilterMovies,
+}) => (
   <CheckBoxContainer>
     <CheckBoxLabel>{label}</CheckBoxLabel>
-    <CheckBoxContent onClick={() => handleChangeChecked(label, ischeck)}>
+    <CheckBoxContent
+      onMouseUp={() => updateFilterMovies({ by: 'genre', label })}
+      onClick={() => handleChangeChecked(label, ischeck)}
+    >
       <CheckedIcon ischeck={ischeck ? 1 : 0} />
     </CheckBoxContent>
   </CheckBoxContainer>
@@ -21,6 +29,7 @@ CheckBox.propTypes = {
   label: string.isRequired,
   ischeck: bool.isRequired,
   handleChangeChecked: func.isRequired,
+  updateFilterMovies: func.isRequired,
 };
 
 export default CheckBox;

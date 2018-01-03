@@ -1,5 +1,7 @@
 import React from 'react';
 import { withStateHandlers, lifecycle, compose } from 'recompose';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import {
   number,
   func,
@@ -14,6 +16,7 @@ import {
   CircleLabel,
   SelectedLine,
 } from './styles';
+import { updateFilterMovies } from '../../actions/movies';
 
 const getCircleLabel = (label, value) => {
   if (label === 'Year') {
@@ -30,6 +33,7 @@ const SlideSelect = ({
   handleChangePress,
   length,
   isPressed,
+  updateFilterMovies,
 }) => (
   <SlideSelectContainer>
     <Label>{label}</Label>
@@ -67,9 +71,14 @@ SlideSelect.propTypes = {
   handleChangePress: func.isRequired,
   length: number.isRequired,
   isPressed: number.isRequired,
+  updateFilterMovies: func.isRequired,
 };
 
+const actions = { updateFilterMovies };
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
 const enhance = compose(
+  connect(null, mapDispatchToProps),
   withStateHandlers(
     {
       start: 0,
@@ -96,13 +105,18 @@ const enhance = compose(
     },
   ),
   lifecycle({
-    componentDidMount() {
+    componentWillReceiveProps() {
+      if (this.props.isPressed !== 0) {
+        this.props.updateFilterMovies({ by: this.props.label, from: this.props.start, to: this.props.end });
+      }
+    },
+    componentWillMount() {
       window.addEventListener('mousemove', (e) => this.props.handleChangeValues(e, this.props.length, this.props.interval), false);
       window.addEventListener('mouseup', () => this.props.handleChangePress(0), false);
     },
     componentWillUnmount() {
       window.removeEventListener('mousemove', this.props.handleChangeValues, false);
-      window.removeEventListener('mouseup', () => this.props.handleChangePress(0), false);
+      window.addEventListener('mouseup', () => this.props.updateFilterMovies('test'), false);
     },
   }),
 );

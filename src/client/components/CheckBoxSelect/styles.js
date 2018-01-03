@@ -40,6 +40,7 @@ export const CheckBoxLabel = styled.p`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   user-select: none;
+  font-size:0.85em;
 `;
 
 export const CheckBoxContent = styled.div`

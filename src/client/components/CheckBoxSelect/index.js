@@ -1,5 +1,7 @@
 import React from 'react';
-import { withStateHandlers } from 'recompose';
+import { withStateHandlers, compose } from 'recompose';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { array, func } from 'prop-types';
 import { without } from 'lodash';
 
@@ -8,6 +10,7 @@ import {
   CheckBoxElem,
   CheckBoxElemLabel,
 } from './styles';
+import { updateFilterMovies } from '../../actions/movies';
 import CheckBox from './CheckBox';
 
 const genres = [
@@ -47,7 +50,11 @@ const ischeck = (label, checked) => {
   return value;
 };
 
-const CheckBoxSelect = ({ checked, handleChangeChecked }) => (
+const CheckBoxSelect = ({
+  checked,
+  handleChangeChecked,
+  updateFilterMovies,
+}) => (
   <CheckBoxSelectContainer>
     <CheckBoxElem>
       <CheckBoxElemLabel>Genre</CheckBoxElemLabel>
@@ -57,6 +64,7 @@ const CheckBoxSelect = ({ checked, handleChangeChecked }) => (
           label={genre.label}
           ischeck={ischeck(genre.label, checked)}
           handleChangeChecked={handleChangeChecked}
+          updateFilterMovies={updateFilterMovies}
         />
       ))}
     </CheckBoxElem>
@@ -66,23 +74,30 @@ const CheckBoxSelect = ({ checked, handleChangeChecked }) => (
 CheckBoxSelect.propTypes = {
   checked: array.isRequired,
   handleChangeChecked: func.isRequired,
+  updateFilterMovies: func.isRequired,
 };
 
-const enhance = withStateHandlers(
-  {
-    checked: [],
-  },
-  {
-    handleChangeChecked: ({ checked }) => (label, wasChecked) => {
-      if (label === 'All') {
-        return ({ checked: [label] });
-      }
-      if (!wasChecked) {
-        return ({ checked: without([...checked, label], 'All') });
-      }
-      return ({ checked: without(checked, 'All', label) });
+const actions = { updateFilterMovies };
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+const enhance = compose(
+  connect(null, mapDispatchToProps),
+  withStateHandlers(
+    {
+      checked: [],
     },
-  },
+    {
+      handleChangeChecked: ({ checked }) => (label, wasChecked) => {
+        if (label === 'All') {
+          return ({ checked: [label] });
+        }
+        if (!wasChecked) {
+          return ({ checked: without([...checked, label], 'All') });
+        }
+        return ({ checked: without(checked, 'All', label) });
+      },
+    },
+  ),
 );
 
 export default enhance(CheckBoxSelect);
