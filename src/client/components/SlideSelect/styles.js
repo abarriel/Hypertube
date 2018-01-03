@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import {
   MAIN_COLOR,
+  MAIN_COLOR_HOVER,
 } from '../../colors';
 
 export const SlideSelectContainer = styled.div`
@@ -50,6 +51,7 @@ export const Circle = styled.div`
   transition: all 0.2s ease-in-out;
   box-shadow: 0 0 30px 1px rgba(0,0,0,1);
   z-index:100;
+  background-color:${({ isPressed }) => isPressed ? MAIN_COLOR_HOVER : MAIN_COLOR};
 `;
 
 export const Label = styled.p`

@@ -23,6 +23,7 @@ export const ParamsContainer = styled.div`
   flex-direction:column;
   flex-wrap:wrap;
   min-height:100px;
+  margin-top:100px;
 `;
 
 export const SlideSelectContainer = styled.div`

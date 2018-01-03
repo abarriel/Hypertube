@@ -1,6 +1,10 @@
 import styled from 'styled-components';
-import { MAIN_COLOR } from '../../colors';
 import GoCheck from 'react-icons/lib/go/check';
+
+import {
+  MAIN_COLOR,
+  MAIN_COLOR_HOVER,
+} from '../../colors';
 
 export const CheckBoxSelectContainer = styled.div`
   display:flex;
@@ -48,11 +52,17 @@ export const CheckBoxContent = styled.div`
   border-style:solid;
   border-width:2px;
   border-color:${MAIN_COLOR};
+  transition: all 0.2s ease;
   cursor:pointer;
   margin-left:10px;
   margin-right:10px;
+  &:hover {
+    border-color:${MAIN_COLOR_HOVER};
+  }
 `;
 
 export const CheckedIcon = styled(GoCheck)`
   color:${MAIN_COLOR};
+  transition: all 0.2s ease-in-out;
+  transform: scale(${({ isChecked }) => isChecked ? 1 : 0})
 `;

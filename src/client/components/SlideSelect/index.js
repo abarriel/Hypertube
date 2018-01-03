@@ -4,6 +4,7 @@ import {
   number,
   func,
   string,
+  bool,
 } from 'prop-types';
 
 import {
@@ -29,6 +30,7 @@ const SlideSelect = ({
   end,
   handleChangePress,
   length,
+  isPressed,
 }) => (
   <SlideSelectContainer onMouseUp={() => handleChangePress(0)}>
     <Label>{label}</Label>
@@ -36,6 +38,7 @@ const SlideSelect = ({
       <Circle
         value={start}
         interval={interval}
+        isPressed={isPressed === 1}
         onMouseDown={() => handleChangePress(1)}
       >
         <CircleLabel>{getCircleLabel(label, start)}</CircleLabel>
@@ -48,6 +51,7 @@ const SlideSelect = ({
       <Circle
         value={end}
         interval={interval}
+        isPressed={isPressed === 2}
         onMouseDown={() => handleChangePress(2)}
       >
         <CircleLabel>{getCircleLabel(label, end)}</CircleLabel>
@@ -63,6 +67,7 @@ SlideSelect.propTypes = {
   end: number.isRequired,
   handleChangePress: func.isRequired,
   length: number.isRequired,
+  isPressed: bool.isRequired,
 };
 
 const enhance = compose(
