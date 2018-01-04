@@ -8,7 +8,7 @@ const developmentConfig = {
     connection: {
       host: '95.85.22.142',
       port: 5432,
-      database: process.env.DB_NAME || 'postgres',
+      database: 'postgres',
       user: 'postgres',
       },
     postProcessResponse: (res: any) => {

@@ -2,7 +2,6 @@ import { DB, Environment } from './core';
 import { createMoviesTable, deleteMovieTable } from './database/migrations/movies';
 import * as _ from 'lodash';
 import axios from 'axios';
-import { Promise } from 'bluebird';
 
 
 /**
