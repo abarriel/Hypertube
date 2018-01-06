@@ -2,7 +2,10 @@ import React from 'react';
 import { withStateHandlers, compose } from 'recompose';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { array, func } from 'prop-types';
+import {
+  array,
+  func,
+} from 'prop-types';
 import { without } from 'lodash';
 
 import {
