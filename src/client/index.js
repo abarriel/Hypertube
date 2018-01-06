@@ -14,7 +14,7 @@ const initMovies = (number) => reqMovies(number, 0)
   .then(movies => store.dispatch(loadMovies(movies || { movies: [], count: 0 })))
   .catch(err => console.log('error: ', err));
 
-// initMovies(20);
+initMovies(20);
 
 const Root = () => <Provider store={store}><App /></Provider>;
 

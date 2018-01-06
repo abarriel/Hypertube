@@ -11,7 +11,7 @@ export const MoviesContainer = styled.div`
 
 export const MoviePreviewContainer = styled.div`
   display:flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap:wrap;
   width:100%;

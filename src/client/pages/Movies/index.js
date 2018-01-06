@@ -51,7 +51,7 @@ const Movies = ({
     </ParamsContainer>
     {movies.length > 0 && (
       <MoviePreviewContainer>
-        {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} pos={index} movie={movie} />)}
+        {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
       </MoviePreviewContainer>
     )}
     <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount)}>
