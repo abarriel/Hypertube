@@ -12,9 +12,9 @@ const store = configureStore(initialState);
 
 const initMovies = (number) => reqMovies(number, 0)
   .then(movies => store.dispatch(loadMovies(movies || { movies: [], count: 0 })))
-  .catch(console.warn('Warning: Cant Load Movies!'));
+  .catch(err => console.log('error: ', err));
 
-initMovies(100);
+// initMovies(20);
 
 const Root = () => <Provider store={store}><App /></Provider>;
 

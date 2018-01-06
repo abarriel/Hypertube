@@ -1,6 +1,15 @@
 import React from 'react';
-import { object, bool, func } from 'prop-types';
-import { withStateHandlers } from 'recompose';
+import {
+  object,
+  bool,
+  func,
+  number,
+} from 'prop-types';
+import {
+  withStateHandlers,
+  compose,
+  lifecycle,
+} from 'recompose';
 
 import {
   MainContainer,
@@ -11,11 +20,15 @@ import Shadow from './Shadow';
 const MoviePreview = ({
   movie,
   displayShadow,
+  isSmall,
   handleChangeShadowDisplay,
+  pos,
 }) => (
   <MainContainer
     onMouseEnter={() => handleChangeShadowDisplay(true)}
     onMouseLeave={() => handleChangeShadowDisplay(false)}
+    isSmall={isSmall}
+    pos={pos}
   >
     <BackgroundImage
       coverImage={movie.coverImage}
@@ -30,17 +43,31 @@ const MoviePreview = ({
 
 MoviePreview.propTypes = {
   movie: object.isRequired,
+  isSmall: bool.isRequired,
   displayShadow: bool.isRequired,
   handleChangeShadowDisplay: func.isRequired,
+  pos: number.isRequired,
 };
 
-const enhance = withStateHandlers(
-  {
-    displayShadow: false,
-  },
-  {
-    handleChangeShadowDisplay: () => display => ({ displayShadow: display }),
-  },
+const enhance = compose(
+
+  withStateHandlers(
+    {
+      displayShadow: false,
+      isSmall: true,
+    },
+    {
+      handleChangeShadowDisplay: () => display => ({ displayShadow: display }),
+      handleChangeSize: ({ isSmall }) => () => ({ isSmall: !isSmall }),
+    },
+  ),
+  lifecycle({
+    componentWillMount() {
+      setTimeout(() => {
+        this.props.handleChangeSize();
+      }, 1);
+    },
+  }),
 );
 
 export default enhance(MoviePreview);

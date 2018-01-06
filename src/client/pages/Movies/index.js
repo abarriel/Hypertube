@@ -31,8 +31,7 @@ const onChange = (isVisible, addMovies, moviesCount) => {
   if (isVisible) {
     reqMovies(20, moviesCount)
       .then(movies => addMovies(movies))
-      .catch(console.warn('Warning: Cant Load Movies!'));
-    console.log('Le Spinner et visible');
+      .catch(err => console.log('error: ', err));
   }
 };
 
@@ -52,15 +51,12 @@ const Movies = ({
     </ParamsContainer>
     {movies.length > 0 && (
       <MoviePreviewContainer>
-        {map(movies, movie => <MoviePreview key={movie.imdbId} movie={movie} />)}
+        {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} pos={index} movie={movie} />)}
       </MoviePreviewContainer>
     )}
-    {!movies.length && <Spinner />}
-    {movies.length > 0 &&
-      <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount)}>
-        <Spinner />
-      </VisibilitySensor>
-    }
+    <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount)}>
+      <Spinner />
+    </VisibilitySensor>
   </MoviesContainer>
 );
 
