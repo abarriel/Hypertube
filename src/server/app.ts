@@ -3,9 +3,9 @@ import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
-import * as errorHandler from 'errorhandler';
 import * as cors from 'cors';
 import * as _ from 'lodash';
+import errorHandler from './middleware/error';
 import dispatchRoute from './service';
 
 import * as config from '../config';
@@ -31,15 +31,14 @@ const getUrl = (server: any) => `http://${server.address().address}:${server.add
     .use(bodyParser.json())
     .use(bodyParser.urlencoded({ extended: true }))
     .use(cors())
-    .use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-      err.status = 201;
-      next(err);
-    })
-    .use(errorHandler());
+    // .use(errorHandler);
 
     await app
       .get('/', (req, res) => res.json({ ping: 'Hello World' }))
       .use('/api', dispatchRoute);
+
+    await app
+      .use(errorHandler);
 
     const httpServer = await app.listen(port, host, () => {
       console.log(`Server serve: ${getUrl(httpServer)}`);

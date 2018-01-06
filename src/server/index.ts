@@ -4,7 +4,7 @@ import initDb from './database';
 import initScrapper from './scrapper';
 import initServer from './app';
 import axios from 'axios';
-require('longjohn');
+// require('longjohn');
 /**
  * Init chain of the server. DB -> HTTP
  *
@@ -22,7 +22,7 @@ const scrapperJob = new cron.CronJob({
     scrapperJob.start();
     await initServer(Environment.getConfig());
   } catch (err) {
-    console.log(err);
+    // console.log(err);
   }
 }
 
