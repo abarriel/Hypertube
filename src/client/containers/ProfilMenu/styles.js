@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProfilMenuContainer = styled.div`
-  position:absolute;
+  position:fixed;
   display:flex;
   align-items: flex-end;
   flex-direction:column;
@@ -9,6 +9,5 @@ export const ProfilMenuContainer = styled.div`
   top:25px;
   width:500px;
   max-width:500px;
-  top:25px;
   z-index:10000;
 `;

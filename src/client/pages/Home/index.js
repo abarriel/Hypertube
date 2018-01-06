@@ -7,11 +7,9 @@ import MoviePreviewSlider from '../../components/MoviePreviewSlider';
 import Spinner from '../../components/Spinner';
 import { HomeContainer, MainContent } from './styles';
 import Section from '../../containers/Section';
-import ProfilMenu from '../../containers/ProfilMenu';
 
 const Home = ({ movies }) => (
   <HomeContainer>
-    <ProfilMenu />
     <MainContent>
       <MoviePreviewSlider />
       {movies.length > 0 &&

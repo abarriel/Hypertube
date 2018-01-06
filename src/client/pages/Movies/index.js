@@ -15,11 +15,9 @@ import SearchBar from '../../components/SearchBar';
 import Spinner from '../../components/Spinner';
 import SlideSelect from '../../components/SlideSelect';
 import CheckBoxSelect from '../../components/CheckBoxSelect';
-import ProfilMenu from '../../containers/ProfilMenu';
 
 const Movies = ({ movies }) => (
   <MoviesContainer>
-    <ProfilMenu />
     <ParamsContainer>
       <SearchBar />
       <SlideSelectContainer>
