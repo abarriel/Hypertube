@@ -1,10 +1,9 @@
 import React from 'react';
-import { withStateHandlers } from 'recompose';
 import { bool, func } from 'prop-types';
 
 import {
   MiniAvatarContainer,
-  Shadow,
+  MiniAvatarImage,
   ChevDown,
 } from './styles';
 
@@ -16,37 +15,20 @@ const fakeProfil = {
 
 const MiniAvatar = ({
   profil = fakeProfil,
-  displayShadow,
-  handleChangeShadowDisplay,
   displayMenu,
   handleChangeMenuDisplay,
 }) => (
-  <MiniAvatarContainer
-    onMouseEnter={() => handleChangeShadowDisplay(true)}
-    onMouseLeave={() => handleChangeShadowDisplay(false)}
-    onClick={() => handleChangeMenuDisplay(!displayMenu)}
-    avatar={profil.avatar}
-  >
-    <Shadow displayShadow={displayShadow}>
-      <ChevDown />
-    </Shadow>
+  <MiniAvatarContainer onMouseEnter={() => handleChangeMenuDisplay(!displayMenu)}>
+    <MiniAvatarImage
+      avatar={profil.avatar}
+    />
+    <ChevDown />
   </MiniAvatarContainer>
 );
 
 MiniAvatar.propTypes = {
-  displayShadow: bool.isRequired,
-  handleChangeShadowDisplay: func.isRequired,
   displayMenu: bool.isRequired,
   handleChangeMenuDisplay: func.isRequired,
 };
 
-const enhance = withStateHandlers(
-  {
-    displayShadow: false,
-  },
-  {
-    handleChangeShadowDisplay: () => display => ({ displayShadow: display }),
-  },
-);
-
-export default enhance(MiniAvatar);
+export default MiniAvatar;

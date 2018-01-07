@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 
 export const WrapMenuContainer = styled.div`
-  position:relative;
+  position:absolute;
   display:flex;
   flex-direction:column;
   min-width:150px;
-  transition: all 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
   height:${({ displayMenu }) => displayMenu ? '70px' : '0px'};
-  margin-top:15px;
-  margin-right:20px;
   border-radius:3px;
-  background-color:rgb(25,25,25);
-  border-radius:5px;
+  background-color:#000;
+  top:70px;
   overflow:hidden;
 `;
 
@@ -22,7 +20,7 @@ export const WrapMenuElem = styled.div`
   align-items: center;
   width:100%;
   min-height:30px;
-  background-color:rgb(25,25,25);
+  background-color:#000;
   padding-top:2.5px;
   padding-bottom:2.5px;
   &:hover {
