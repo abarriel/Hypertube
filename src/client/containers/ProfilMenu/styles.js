@@ -7,4 +7,5 @@ export const ProfilMenuContainer = styled.div`
   justify-content: flex-end;
   align-items: center;
   height:70px;
+  padding-right:25px;
 `;

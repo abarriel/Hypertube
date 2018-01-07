@@ -18,8 +18,8 @@ export const Shadow = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
-  width:60px;
-  height:60px;
+  width:100%;
+  height:100%;
   background-color:rgba(0,0,0,0.2);
   transition:all 0.3s;
   opacity:${({ displayShadow }) => displayShadow ? 1 : 0};

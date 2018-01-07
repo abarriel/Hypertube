@@ -6,10 +6,6 @@ import ProfilMenu from '../../containers/ProfilMenu';
 import {
   SideMenuStyled,
   Header,
-  HomeIcon,
-  ProfilIcon,
-  UsersIcon,
-  ListIcon,
 } from './styles';
 
 const menu = [

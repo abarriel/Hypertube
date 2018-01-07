@@ -1,8 +1,4 @@
 import styled from 'styled-components';
-import GoFlame from 'react-icons/lib/go/flame';
-import GoPerson from 'react-icons/lib/go/person';
-import GoOrganization from 'react-icons/lib/go/organization';
-import GoListUnordered from 'react-icons/lib/go/list-unordered';
 import { Link } from 'react-router-dom';
 
 import {
@@ -29,7 +25,6 @@ export const MenuElemStyled = styled(Link)`
   flex-direction:column;
   justify-content: center;
   align-items: center;
-  min-width:50px;
   margin-left:18px;
   height:100%;
   cursor:pointer;
@@ -47,21 +42,11 @@ export const MenuElemStyled = styled(Link)`
     outline:none;
   }
 `;
-
-export const HomeIcon = styled(GoFlame)`
-`;
-
-export const ProfilIcon = styled(GoPerson)`
-`;
-
-export const UsersIcon = styled(GoOrganization)`
-`;
-
-export const ListIcon = styled(GoListUnordered)`
-`;
-
 export const Header = styled.div`
-  width:100px;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:200px;
   height:100%;
 `;
 
@@ -70,7 +55,7 @@ export const MenuElemText = styled.p`
   cursor:${({ selected }) => selected ? 'pointer' : 'default'};
   font-weight: ${({ selected }) => selected ? 0 : 0}px;
   margin:0;
-  font-size:1vw;
+  font-size:0.9em;
 `;
 
 export const UnderLine = styled.div`
