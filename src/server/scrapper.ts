@@ -21,7 +21,7 @@ const YTS_DETAIL = 'https://yts.am/api/v2/movie_details.json?movie_id=6941';
  * omdb url with a  API key registered.
  * @param {imdbId}
 **/
-const omdbUrl = (imdbId: string) => `http://www.omdbapi.com/?i=${imdbId}&apikey=${Environment.getConfig().omdb}`;
+const omdbUrl = (imdbId: string) => `http://www.omdbapi.com/?i=${imdbId}&plot=full&apikey=${Environment.getConfig().omdb}`;
 
 /**
  *
@@ -35,13 +35,19 @@ const addMovie = async (movieNub: any, movie: any) => {
     imdb_id: movieNub.imdbID,
     title: movieNub.Title,
     year: parseInt(movieNub.Year),
+    trailer: movie.yt_trailer_code,
+    released: movieNub.Released === 'N/A' ? null : movieNub.Released,
+    country: movieNub.Country,
+    awards: movieNub.Awards === 'N/A' ? null : movieNub.Awards,
+    dvd: movieNub.DVD === 'N/A' ? null : movieNub.DVD,
+    language: movieNub.language,
     imdb_rating: Math.round((Math.round(movieNub.imdbRating) / 2)),
     cover_image: movieNub.Poster,
     background_image: movie.background_image,
-    summary: movie.description_full,
+    summary: movieNub.Plot,
     genres: movie.genres,
     torrents: movie.torrents,
-    pg: movie.mpa_rating,
+    pg: movieNub.Rated,
     runtime: movieNub.Runtime,
     director: movieNub.Director,
     actors: _.split(movieNub.Actors, ','),

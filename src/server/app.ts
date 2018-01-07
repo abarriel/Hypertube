@@ -41,7 +41,7 @@ const getUrl = (server: any) => `http://${server.address().address}:${server.add
       .use(errorHandler);
 
     const httpServer = await app.listen(port, host, () => {
-      console.log(`Server serve: ${getUrl(httpServer)}`);
+      console.log(`Server serve: ${getUrl(httpServer)} \n`);
     });
 };
 

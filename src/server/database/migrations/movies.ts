@@ -6,6 +6,12 @@ const createMoviesTable = (): Promise<any> => Promise.all([
     table.string('imdb_id').primary();
     table.string('title').notNullable();
     table.integer('year').notNullable();
+    table.string('trailer');
+    table.text('released');
+    table.string('country');
+    table.text('awards');
+    table.text('dvd');
+    table.string('language');
     table.integer('imdb_rating').notNullable();
     table.text('cover_image').defaultTo('/uploads/default.png');
     table.text('background_image').defaultTo('/uploads/default.png');

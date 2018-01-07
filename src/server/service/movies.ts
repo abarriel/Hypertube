@@ -1,11 +1,14 @@
 import * as _ from 'lodash';
 import * as express from 'express';
+import * as Knex from 'knex';
+
 import { DB } from '../core';
 import { moviesFormValidate } from './validation/moviesForm';
 
 import { validate, IsOptional, IsIn, Contains, IsInt, Length, IsEmail, IsFQDN, IsDate, Min, Max, ArrayContains} from "class-validator";
 
-const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
+// const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
+const previewMovieInfos = ['released', 'title'];
 
 const service = {
   async post(req: express.Request, res: express.Response) {
@@ -16,19 +19,31 @@ const service = {
   },
   async get(req: express.Request, res: express.Response) {
     const { filters } = req.app.locals;
-    console.log('filters: ', filters);
-    const { limit, offset, genres } = filters;
-    console.log(genres);
-    const movies = await
-      DB.select('genres' || previewMovieInfos)
-        .from('movies')
-        .whereRaw('genres @> ?', [genres])
-        .limit(limit)
+    const { limit, offset, genres, years, ratings, q } = filters;
 
-    //   .limit(limit ? parseInt(limit) : 50)
-    //   .offset(offset ? parseInt(offset) : 0);
-    // const [{ count }] = await DB.from('movies').count();
-    console.log(movies);
+    console.log('filters: ', filters, '\n\n');
+
+    const queryPattern = [`%${_.replace(q, /\s/g, '%')}%`];
+
+    const querySQL = DB.select(previewMovieInfos)
+      .from('movies')
+      // .whereRaw('genres @> ?', [genres])
+      // .whereBetween('year', years)
+      // .whereBetween('imdb_rating', ratings)
+      // .whereRaw('title ILIKE ?', queryPattern)
+      // .orWhereRaw('summary ILIKE ?', queryPattern)
+      // .orWhereRaw('actors @> ?', [queryPattern])
+      // .orWhereRaw('director ILIKE ?', queryPattern)
+      // .orWhereRaw('production ILIKE ?', queryPattern)
+
+
+      .orderByRaw("CASE WHEN ? ='date' THEN to_date(released, 'DD Mon YYYY') END DESC NULLS LAST", 'date')
+      .limit(5)
+      .offset(offset);
+
+      console.log(querySQL.toString());
+    const movies = await querySQL;
+
     res.json({ movies });
   },
 };
