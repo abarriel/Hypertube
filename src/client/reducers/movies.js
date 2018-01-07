@@ -3,6 +3,7 @@ import {
   ADD_MOVIES,
   UPDATE_SEARCH_MOVIES,
   UPDATE_FILTER_MOVIES,
+  RESET_MOVIES,
 } from '../actions/movies';
 
 const initialState = {
@@ -18,6 +19,9 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_MOVIES: {
       return { ...state, data: action.data.movies, count: action.data.movies.length };
+    }
+    case RESET_MOVIES: {
+      return state;
     }
     case ADD_MOVIES: {
       return { ...state, data: [...state.data, ...action.data.movies], count: state.count + action.data.movies.length };

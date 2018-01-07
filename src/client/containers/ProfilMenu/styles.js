@@ -1,13 +1,11 @@
 import styled from 'styled-components';
 
 export const ProfilMenuContainer = styled.div`
-  position:fixed;
+  position:relative;
   display:flex;
-  align-items: flex-end;
-  flex-direction:column;
-  left:calc(100vw - 530px);
-  top:25px;
-  width:500px;
-  max-width:500px;
-  z-index:10000;
+  flex:1;
+  justify-content: flex-end;
+  align-items: center;
+  height:70px;
+  padding-right:25px;
 `;

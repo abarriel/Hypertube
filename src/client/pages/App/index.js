@@ -6,7 +6,7 @@ import {
 import Scrollbar from 'react-smooth-scrollbar';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
-import ProfilMenu from '../../containers/ProfilMenu';
+import './style.css';
 import SideMenu from '../../components/SideMenu';
 import routes from '../../routes';
 import { AppContainer } from './styles';
@@ -28,7 +28,6 @@ const App = () => (
     <Router>
       <div>
         <SideMenu />
-        <ProfilMenu />
         <Scrollbar damping={0.1}>
           <TransitionGroup >
             {routes.map(route => (

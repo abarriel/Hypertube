@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { map } from 'lodash';
 import VisibilitySensor from 'react-visibility-sensor';
+import { compose, lifecycle } from 'recompose';
 
 import {
   getMovies,
@@ -25,7 +26,7 @@ import Spinner from '../../components/Spinner';
 import SlideSelect from '../../components/SlideSelect';
 import CheckBoxSelect from '../../components/CheckBoxSelect';
 import { reqMovies } from '../../request';
-import { addMovies } from '../../actions/movies';
+import { addMovies, resetMovies } from '../../actions/movies';
 
 const onChange = (isVisible, addMovies, moviesCount) => {
   if (isVisible) {
@@ -49,11 +50,9 @@ const Movies = ({
         <CheckBoxSelect />
       </SlideSelectContainer>
     </ParamsContainer>
-    {movies.length > 0 && (
-      <MoviePreviewContainer>
-        {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} pos={index} movie={movie} />)}
-      </MoviePreviewContainer>
-    )}
+    <MoviePreviewContainer>
+      {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
+    </MoviePreviewContainer>
     <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount)}>
       <Spinner />
     </VisibilitySensor>
@@ -66,7 +65,7 @@ Movies.propTypes = {
   addMovies: func.isRequired,
 };
 
-const actions = { addMovies };
+const actions = { addMovies, resetMovies };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const mapStateToProps = state => ({
@@ -74,4 +73,14 @@ const mapStateToProps = state => ({
   moviesCount: getMoviesCount(state),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Movies);
+const enhance = compose(
+
+  connect(mapStateToProps, mapDispatchToProps),
+  lifecycle({
+    componentWillUnmount() {
+      this.props.resetMovies();
+    },
+  }),
+);
+
+export default enhance(Movies);

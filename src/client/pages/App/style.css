@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'), local('OpenSans'),
+       url('/BebasNeue.otf') format('otf'), /* IE6-IE8 */
+}
+body {
+  font-family: 'Open Sans';
+}

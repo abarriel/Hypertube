@@ -9,10 +9,10 @@ export const MainContainer = styled.div`
   position:relative;
   display:flex;
   width:${WIDTH}px;
-  height:${({ isSmall }) => isSmall ? 0 : HEIGHT}px;
+  height:${HEIGHT}px;
   margin: ${MARGIN}px;
   z-index:100;
-  margin-top:20px;
+  opacity:${({ isSmall }) => isSmall ? 0 : 1};
   &:hover {
     transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
     z-index:${({ hidden }) => hidden ? '100' : '110'};
@@ -21,8 +21,13 @@ export const MainContainer = styled.div`
   border-radius:2px;
   overflow:hidden;
   top: 0;
-  transition: all ${TRANSITION}s ease-in-out, height 1s ease-in-out;
-  transition-delay: 0s;
+  transition-delay: 0.05s;
+  transition: all ${TRANSITION}s ease-in-out, opacity 1s ease-in-out ${({ pos, moviesCount }) => {
+    if (moviesCount >= 20) {
+      return ((pos - (moviesCount - 20)) / 10);
+    }
+    return (pos / 10);
+    }}s;
 `;
 
 export const BackgroundImage = styled.div`

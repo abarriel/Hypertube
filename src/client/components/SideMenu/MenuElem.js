@@ -3,25 +3,24 @@ import PropTypes from 'prop-types';
 
 import {
   MenuElemStyled,
-  Separator,
+  MenuElemText,
+  UnderLine,
 } from './styles';
 
 const MenuElem = ({
-  icon,
-  last,
   to,
+  label,
   selected,
 }) => (
   <MenuElemStyled to={to} selected={selected}>
-    {icon}
-    {!last && <Separator />}
+    <MenuElemText selected={selected}>{label}</MenuElemText>
+    {selected && <UnderLine />}
   </MenuElemStyled>
 );
 
 MenuElem.propTypes = {
-  icon: PropTypes.node.isRequired,
-  last: PropTypes.bool.isRequired,
   to: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
   selected: PropTypes.bool.isRequired,
 };
 

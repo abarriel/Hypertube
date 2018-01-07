@@ -24,6 +24,7 @@ const MoviePreview = ({
     onMouseLeave={() => handleChangeShadowDisplay(false)}
     onClick={() => move(getMoveDirection(start, end, index, length))}
     hidden={isMovieHidden(index, start, end)}
+    pos={index}
   >
     <BackgroundImage
       hidden={isMovieHidden(index, start, end)}
