@@ -26,7 +26,7 @@ export const MainContainer = styled.div`
     if (moviesCount >= 20) {
       return ((pos - (moviesCount - 20)) / 10);
     }
-    return (pos / 10); 
+    return (pos / 10);
     }}s;
 `;
 

@@ -3,10 +3,8 @@ import styled from 'styled-components';
 export const MoviesContainer = styled.div`
   display:flex;
   flex-direction:column;
-  width:calc(100vw - 185px);
-  margin-left:85px;
-  min-height:calc(100vh - 100px);
-  padding:50px;
+  width:100%;
+  margin-top:25px;
 `;
 
 export const MoviePreviewContainer = styled.div`
@@ -16,6 +14,7 @@ export const MoviePreviewContainer = styled.div`
   flex-wrap:wrap;
   width:100%;
   margin-top:25px;
+  margin-left:35px;
 `;
 
 export const ParamsContainer = styled.div`
@@ -24,6 +23,7 @@ export const ParamsContainer = styled.div`
   flex-wrap:wrap;
   min-height:100px;
   margin-top:100px;
+  margin-left:35px;
 `;
 
 export const SlideSelectContainer = styled.div`

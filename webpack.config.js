@@ -34,16 +34,18 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-        },
+        test: /\.(js|jsx)$/,
+        loaders: ['babel-loader?cacheDirectory'],
+        exclude: /node_modules/,
       },
       {
         test: /\.css$/,
         exclude: /node_modules/,
         loaders: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        loader: 'file?name=public/[name].[ext]',
       },
     ],
   },

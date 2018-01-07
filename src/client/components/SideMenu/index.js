@@ -2,6 +2,7 @@ import React from 'react';
 
 import Menuelem from './MenuElem';
 import Logo from '../Logo';
+import ProfilMenu from '../../containers/ProfilMenu';
 import {
   SideMenuStyled,
   Header,
@@ -15,22 +16,17 @@ const menu = [
   {
     id: 0,
     to: '/',
-    icon: <HomeIcon />,
+    label: 'Accueil',
   },
   {
     id: 1,
     to: '/movies',
-    icon: <ListIcon />,
-  },
-  {
-    id: 2,
-    to: '/profil',
-    icon: <ProfilIcon />,
+    label: 'Films',
   },
   {
     id: 3,
     to: '/users',
-    icon: <UsersIcon />,
+    label: 'Ma liste',
   },
 ];
 
@@ -44,11 +40,11 @@ const SideMenu = () => (
     {menu.map(item => (
       <Menuelem
         key={item.id}
-        icon={item.icon}
         selected={isSelected(item.to)}
+        label={item.label}
         to={item.to}
-        last={item.id === menu.length - 1}
       />))}
+    <ProfilMenu />
   </SideMenuStyled>
 );
 

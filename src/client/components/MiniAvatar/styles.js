@@ -3,9 +3,9 @@ import GoChevronDown from 'react-icons/lib/go/chevron-down';
 
 export const MiniAvatarContainer = styled.div`
   position:relative;
-  width:60px;
-  height:60px;
-  border-radius:100%;
+  width:40px;
+  height:40px;
+  border-radius:1px;
   background-image:${({ avatar }) => `url(${avatar})`};
   background-size: cover;
   background-position: center;
