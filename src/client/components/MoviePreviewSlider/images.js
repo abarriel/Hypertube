@@ -7,7 +7,7 @@ export const images = [
   {
     id: 1,
     title: 'Game of Thrones',
-    coverImage: 'http://wallsdesk.com/wp-content/uploads/2016/04/Game-of-Thrones-HD-Wallpaper.jpg',
+    coverImage: 'https://occ-0-56-55.1.nflxso.net/art/298df/260da38bfa0d28cc464260f88e9126d3474298df.jpg',
   },
   {
     id: 2,

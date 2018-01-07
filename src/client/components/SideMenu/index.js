@@ -16,8 +16,23 @@ const menu = [
   },
   {
     id: 1,
+    to: '/tvshow',
+    label: 'Séries TV',
+  },
+  {
+    id: 1,
     to: '/movies',
     label: 'Films',
+  },
+  {
+    id: 1,
+    to: '/original',
+    label: 'Programmes originaux',
+  },
+  {
+    id: 1,
+    to: '/recents',
+    label: 'Ajouts récents',
   },
   {
     id: 3,

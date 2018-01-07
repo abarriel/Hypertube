@@ -30,7 +30,7 @@ const MoviePreviewSlider = ({
         </MoviePreviewSliderImageContainer>
       ))}
     </MoviePreviewSliderContainer>
-    <Pager position={position} handleChangePosition={handleChangePosition} />
+    {/* <Pager position={position} handleChangePosition={handleChangePosition} /> */}
   </div>
 );
 
