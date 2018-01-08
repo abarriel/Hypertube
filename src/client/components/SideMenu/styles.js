@@ -41,6 +41,7 @@ export const MenuElemStyled = styled(Link)`
   &:focus {
     outline:none;
   }
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 `;
 export const Header = styled.div`
   display:flex;

@@ -6,7 +6,7 @@ export const MoviePreviewSliderContainer = styled.div`
   position:relative;
   display:flex;
   width:100vw;
-  height:425px;
+  height:56.25vw;
   left:-${({ position }) => 100 * position}vw;
   justify-content: flex-start;
   align-items: flex-start;
@@ -27,7 +27,7 @@ export const MoviePreviewSliderImage = styled.div`
   display:flex;
   width:100%;
   background-image:${({ coverImage }) => `url(${coverImage})`};
-  background-size: cover;
+  background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
 `;

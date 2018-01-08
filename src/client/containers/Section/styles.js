@@ -8,6 +8,7 @@ export const SectionContainer = styled.div`
   flex-direction:column;
   justify-content: flex-start;
   align-items: flex-start;
+  margin: 3vw 0;
 `;
 
 export const TitleContainer = styled.div`
@@ -17,12 +18,14 @@ export const TitleContainer = styled.div`
 `;
 
 export const Title = styled.p`
-  color:white;
-  font-size:1.1em;
-  color:white;
   margin:0;
   margin-left:30px;
   user-select: none;
+  line-height: 1.25vw;
+  font-size: 1.4vw;
+  color: #e5e5e5;
+  font-weight: 700;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 `;
 
 export const RightArrow = styled(GoChevronRight)`
