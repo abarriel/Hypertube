@@ -7,8 +7,8 @@ import { moviesFormValidate } from './validation/moviesForm';
 
 import { validate, IsOptional, IsIn, Contains, IsInt, Length, IsEmail, IsFQDN, IsDate, Min, Max, ArrayContains} from "class-validator";
 
-// const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
-const previewMovieInfos = ['title', 'seeds'];
+const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
+// const previewMovieInfos = ['title', 'seeds'];
 
 const service = {
   async post(req: express.Request, res: express.Response) {

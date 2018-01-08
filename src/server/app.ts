@@ -5,10 +5,13 @@ import * as bodyParser from 'body-parser';
 import * as logger from 'morgan';
 import * as cors from 'cors';
 import * as _ from 'lodash';
+import * as swaggerUi from 'swagger-ui-express';
+
 import errorHandler from './middleware/error';
 import dispatchRoute from './service';
-
+import * as swaggerDocument from './swagger.json';
 import * as config from '../config';
+
 // import { GraphQLRoutes } from './routes';
 
 const getUrl = (server: any) => `http://${server.address().address}:${server.address().port}`;
@@ -20,6 +23,12 @@ const getUrl = (server: any) => `http://${server.address().address}:${server.add
  * @param {Iconfig} config
  */
 
+var options: any = {
+  explorer : true,
+  swaggerOptions: {
+    validatorUrl : null,
+}
+};
  const initServer = async (config: Iconfig) => {
   const app = await express();
   const { server: { host, port } } = config;
@@ -35,6 +44,7 @@ const getUrl = (server: any) => `http://${server.address().address}:${server.add
 
     await app
       .get('/', (req, res) => res.json({ ping: 'Hello World' }))
+      .use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
       .use('/api', dispatchRoute);
 
     await app
