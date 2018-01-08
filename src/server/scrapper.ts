@@ -31,10 +31,11 @@ const omdbUrl = (imdbId: string) => `http://www.omdbapi.com/?i=${imdbId}&plot=fu
 **/
 const addMovie = async (movieNub: any, movie: any) => {
   console.log(movieNub.Title);
-  await DB('movies').insert({
+  const seeds = _.reduce(movie.torrents, (acc, v) => (acc + (v ? v.seeds : 0)), 0);
+  return await DB('movies').insert({
     imdb_id: movieNub.imdbID,
     title: movieNub.Title,
-    year: parseInt(movieNub.Year),
+    year: parseInt(movieNub.Year) ? parseInt(movieNub.Year) : null,
     trailer: movie.yt_trailer_code,
     released: movieNub.Released === 'N/A' ? null : movieNub.Released,
     country: movieNub.Country,
@@ -42,13 +43,15 @@ const addMovie = async (movieNub: any, movie: any) => {
     dvd: movieNub.DVD === 'N/A' ? null : movieNub.DVD,
     language: movieNub.language,
     imdb_rating: Math.round((Math.round(movieNub.imdbRating) / 2)),
+    score: parseInt(movieNub.Metascore) ? parseInt(movieNub.Metascore) : null,
     cover_image: movieNub.Poster,
     background_image: movie.background_image,
     summary: movieNub.Plot,
     genres: movie.genres,
+    seeds: seeds ? seeds : null,
     torrents: movie.torrents,
     pg: movieNub.Rated,
-    runtime: movieNub.Runtime,
+    runtime: parseInt(movie.runtime) ? parseInt(movie.runtime) : null,
     director: movieNub.Director,
     actors: _.split(movieNub.Actors, ','),
     ratings: movieNub.Ratings,
@@ -83,7 +86,7 @@ const scrapYTS = async () => {
         const { data: movieNub } = await axios.get(omdbUrl(movie.imdb_code));
         await addMovie(movieNub, movie);
       } catch (err) {
-        console.log('err');
+        console.log('err', err);
       }
     })
     return Promise.all(promises);

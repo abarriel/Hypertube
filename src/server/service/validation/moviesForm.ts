@@ -29,18 +29,27 @@ const genreMovies = [
   'War',
   'Western'
 ];
+
+const sortOptions = [
+  'date',
+  'score',
+  'seeds',
+  'runtime',
+];
+
 const MoviesFilterSchema = Joi.object({
   limit: Joi.number().integer().min(0).max(50),
   offset: Joi.number().integer().min(0),
   genres: Joi.array().unique().items(Joi.string().valid(genreMovies)),
-  years: Joi.array().items(Joi.number().integer().min(1000).max(new Date().getFullYear())),
+  years: Joi.array().items(Joi.number().integer().min(1900).max(new Date().getFullYear())),
   ratings: Joi.array().items(Joi.number().integer().min(0).max(5)),
-  q: Joi.string().replace(/\s+/g, ' ').trim().max(100).truncate().normalize().regex(/^[a-z0-9 ]+$/i)
+  q: Joi.string().replace(/\s+/g, ' ').trim().max(100).truncate().normalize().regex(/^[a-z0-9 ]+$/i),
+  sort: Joi.array().ordered(Joi.string().valid(sortOptions), Joi.string().insensitive().valid(['asc', 'desc']))
 });
 
 const moviesFormValidate = async (req: express.Request, res: express.Response, next: express.next) => {
   const { query } = req;
-  const { q, limit, offset, genres, years, ratings } = query;
+  const { q, limit, offset, genres, years, ratings, sort } = query;
   const params: any = {};
 
   params.limit = limit ? parseInt(limit) : 50;
@@ -48,8 +57,10 @@ const moviesFormValidate = async (req: express.Request, res: express.Response, n
   params.genres = genres ? _.split(genres, ',') : [];
   params.q = q;
 
+  params.sort = sort ? _.split(sort, ',') : [];
+
   params.years = years ? _.split(years, ',') : [];
-  params.years[0] = params.years[0] ? params.years[0] : 1000;
+  params.years[0] = params.years[0] ? params.years[0] : 1900;
   params.years[1] = params.years[1] ? params.years[1] : new Date().getFullYear();
 
   params.ratings = ratings ? _.split(ratings, ',') : [];

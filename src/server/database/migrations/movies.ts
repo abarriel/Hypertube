@@ -13,13 +13,15 @@ const createMoviesTable = (): Promise<any> => Promise.all([
     table.text('dvd');
     table.string('language');
     table.integer('imdb_rating').notNullable();
+    table.integer('score');
     table.text('cover_image').defaultTo('/uploads/default.png');
     table.text('background_image').defaultTo('/uploads/default.png');
     table.text('summary').notNullable();
     table.specificType('genres', 'TEXT[]').notNullable();
     table.specificType('torrents', 'JSON[]');
+    table.integer('seeds');
     table.string('pg').notNullable();
-    table.string('runtime').notNullable();
+    table.integer('runtime');
     table.text('director').notNullable();
     table.specificType('actors', 'TEXT[]').notNullable();
     table.specificType('ratings', 'JSON[]').notNullable();
