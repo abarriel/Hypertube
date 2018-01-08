@@ -15,6 +15,7 @@ const service = {
 
   async single(req: express.Request, res: express.Response, next: any) {
     const { id } = req.params;
+    if (id === 'genres') return service.genres(req, res);
     if (!/[a-zA-Z0-9]{1,20}/.test(id))
       return next({ type: 'Validation', details: 'Wrong Id provided' });
     const movie = await Movies.single(id);
