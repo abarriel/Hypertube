@@ -18,13 +18,11 @@ import {
   MoviesContainer,
   MoviePreviewContainer,
   ParamsContainer,
-  SlideSelectContainer,
+  Title,
 } from './styles';
 import MoviePreview from '../../components/MoviePreview';
-import SearchBar from '../../components/SearchBar';
 import Spinner from '../../components/Spinner';
-import SlideSelect from '../../components/SlideSelect';
-import CheckBoxSelect from '../../components/CheckBoxSelect';
+import ParamsWrapperButton from '../../components/ParamsWrapperButton';
 import { reqMovies } from '../../request';
 import { addMovies, resetMovies } from '../../actions/movies';
 
@@ -43,12 +41,8 @@ const Movies = ({
 }) => (
   <MoviesContainer>
     <ParamsContainer>
-      <SearchBar />
-      <SlideSelectContainer>
-        <SlideSelect label="Note" length={5} interval={100} />
-        <SlideSelect label="Year" length={12} interval={30} />
-        <CheckBoxSelect />
-      </SlideSelectContainer>
+      <Title>Films</Title>
+      <ParamsWrapperButton />
     </ParamsContainer>
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}

@@ -6,5 +6,5 @@
        url('/BebasNeue.otf') format('otf'), /* IE6-IE8 */
 }
 body {
-  font-family: 'Open Sans';
+  font-family: sans-serif;
 }
