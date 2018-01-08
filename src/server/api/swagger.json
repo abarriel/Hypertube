@@ -5,7 +5,7 @@
     "version": "betta",
     "title": "HyperFlix"
   },
-  "host": "0.0.0.0:8888",
+  "host": "95.85.22.142:8888",
   "basePath": "/api",
   "schemes": [
     "http"
