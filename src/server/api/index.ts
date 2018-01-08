@@ -7,10 +7,11 @@ import * as cors from 'cors';
 import * as _ from 'lodash';
 import * as swaggerUi from 'swagger-ui-express';
 
+import * as colors from 'colors/safe';
 import errorHandler from './middleware/error';
 import dispatchRoute from './service';
 import * as swaggerDocument from './swagger.json';
-import * as config from '../config';
+import * as config from '../../config';
 
 // import { GraphQLRoutes } from './routes';
 
@@ -51,7 +52,8 @@ var options: any = {
       .use(errorHandler);
 
     const httpServer = await app.listen(port, host, () => {
-      console.log(`Server serve: ${getUrl(httpServer)} \n`);
+      console.log(colors.green(`[API] Server running: ${getUrl(httpServer)}`));
+      console.log(colors.yellow(`[API] See documentation: ${getUrl(httpServer)}/api/doc\n`));
     });
 };
 
