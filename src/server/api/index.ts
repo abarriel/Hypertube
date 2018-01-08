@@ -53,7 +53,7 @@ var options: any = {
 
     const httpServer = await app.listen(port, host, () => {
       console.log(colors.green(`[API] Server running: ${getUrl(httpServer)}`));
-      console.log(colors.yellow(`[API] See documentation: ${getUrl(httpServer)}/api/doc\n`));
+      console.log(colors.yellow(`[API] See documentation: ${getUrl(httpServer)}/doc\n`));
     });
 };
 
