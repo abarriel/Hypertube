@@ -39,7 +39,7 @@ const Movies = {
         END
         ${order} NULLS LAST`)
 
-      .limit(5)
+      .limit(limit)
       .offset(offset);
 
     console.log(colors.blue(querySQL.toString()));
