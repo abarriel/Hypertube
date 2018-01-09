@@ -20,22 +20,22 @@ const menu = [
     label: 'Séries TV',
   },
   {
-    id: 1,
+    id: 2,
     to: '/movies',
     label: 'Films',
   },
   {
-    id: 1,
+    id: 3,
     to: '/original',
     label: 'Programmes originaux',
   },
   {
-    id: 1,
+    id: 4,
     to: '/recents',
     label: 'Ajouts récents',
   },
   {
-    id: 3,
+    id: 5,
     to: '/users',
     label: 'Ma liste',
   },
