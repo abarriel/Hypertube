@@ -11,11 +11,12 @@ const developmentConfig = {
       database: 'postgres',
       user: 'postgres',
       },
+    wrapIdentifier: (value: any, origImpl: any) => origImpl(_.snakeCase(value)),
     postProcessResponse: (res: any) => {
       if (Array.isArray(res)) {
         return res.map(row => {
           if(typeof row === 'object')
-            return _.mapKeys(row, (v:any , k:any) => _.camelCase(k));
+            return _.mapKeys(row, (v: any , k: any) => _.camelCase(k));
         });
       }
       return res;

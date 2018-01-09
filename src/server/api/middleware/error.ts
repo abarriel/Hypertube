@@ -3,13 +3,13 @@ import * as express from 'express';
 const errorHandler = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.status(201);
   let errMsg = {};
-  if (err.type === 'validation') {
+  if (err.type === 'validation' || err.type === 'db' || err.type === 'Auth') {
     errMsg = { type: err.type, details: err.details };
   }
-  else if (err.type === 'JoiSchema')
+  else if (err.type === 'JoiSchema' )
     errMsg = { type: err.type, details: err.err.details };
   res.json(errMsg);
   console.log(errMsg);
 };
 
-export default errorHandler;
+export { errorHandler };

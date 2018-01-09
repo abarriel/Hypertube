@@ -3,6 +3,7 @@
   "plugins": [
     "lodash",
     "ramda",
+    "transform-class-properties",
     "@babel/proposal-object-rest-spread"
   ]
 }

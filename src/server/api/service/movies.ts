@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as express from 'express';
 
-import { moviesFormValidate } from '../validation/moviesForm';
+import { moviesFormValidate } from '../validation';
 import Movies from '../queries/movies';
 
 const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];

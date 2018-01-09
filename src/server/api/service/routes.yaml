@@ -9,3 +9,8 @@ paths:
     path: movies/:id
     description: Get full details of film
     parameters: no
+  user.login:
+    verb: post
+    path: user/login
+    description: Get full details of film
+    parameters: no

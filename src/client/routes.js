@@ -2,6 +2,7 @@ import Home from './pages/Home';
 import Profil from './pages/Profil';
 import Movies from './pages/Movies';
 import Users from './pages/Users';
+import Login from './pages/Login';
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: '/users',
     component: Users,
     id: 4,
+  },
+  {
+    path: '/login',
+    component: Login,
+    id: 5,
   },
 ];
 
