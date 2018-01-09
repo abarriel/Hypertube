@@ -54,7 +54,7 @@ export const Header = styled.div`
 export const MenuElemText = styled.p`
   color:${({ selected }) => selected ? 'white' : '#b3b3b3'};
   cursor:${({ selected }) => selected ? 'pointer' : 'default'};
-  font-weight: ${({ selected }) => selected ? 0 : 0}px;
+  font-weight: ${({ selected }) => selected ? 700 : 0};
   margin:0;
   font-size:0.9em;
 `;

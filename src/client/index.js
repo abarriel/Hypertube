@@ -3,18 +3,20 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
 import configureStore from './store';
-import { loadMovies } from './actions/movies';
-import { reqMovies } from './request';
+import { loadGenres } from './actions/movies';
+import { getGenres } from './request';
 import App from './pages/App';
 
 const initialState = {};
 const store = configureStore(initialState);
 
-const initMovies = (number) => reqMovies(number, 0)
-  .then(movies => store.dispatch(loadMovies(movies || { movies: [], count: 0 })))
-  .catch(err => console.log('error: ', err));
+const init = () => {
+  getGenres()
+    .then(data => store.dispatch(loadGenres(data)))
+    .catch(err => console.log('error: ', err));
+};
 
-// initMovies(20);
+init();
 
 const Root = () => <Provider store={store}><App /></Provider>;
 

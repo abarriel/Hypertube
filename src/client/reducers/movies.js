@@ -4,6 +4,7 @@ import {
   UPDATE_SEARCH_MOVIES,
   UPDATE_FILTER_MOVIES,
   RESET_MOVIES,
+  LOAD_GENRES,
 } from '../actions/movies';
 
 const initialState = {
@@ -13,12 +14,13 @@ const initialState = {
   sort: { by: 'name', order: 'ASC' },
   search: '',
   filter: [],
+  genres: [],
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_MOVIES: {
-      return { ...state, data: action.data.movies, count: action.data.movies.length };
+      return { ...state, data: { ...action.data }, count: action.data.movies.length };
     }
     case RESET_MOVIES: {
       return state;
@@ -31,6 +33,9 @@ const reducer = (state = initialState, action) => {
     }
     case UPDATE_FILTER_MOVIES: {
       return { ...state, filter: [...state.filter, action.filter] };
+    }
+    case LOAD_GENRES: {
+      return { ...state, genres: action.genres };
     }
     default:
       return state;
