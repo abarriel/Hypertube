@@ -31,7 +31,17 @@ export const getMoviesById = id => axios({
     id,
   },
 }).then(({ data, status }) => {
-  if (status === 200) {
+  if (status === 201) {
+    throw data;
+  }
+  return data;
+}).catch(err => {});
+
+export const getGenres = () => axios({
+  method: 'get',
+  url: 'movies/genres',
+}).then(({ data, status }) => {
+  if (status === 201) {
     throw data;
   }
   return data;

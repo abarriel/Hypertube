@@ -50,3 +50,20 @@ export const Chev = styled(FaSortDesc)`
   font-weight: 700;
   color: #fff;
 `;
+
+export const ParamsWrapperContainer = styled.div`
+  position:absolute;
+  display:flex;
+  overflow-x: hidden;
+  z-index: 2;
+  padding: 0;
+  margin: 0;
+  top: 2rem;
+  left: 0;
+  font-size: 14px;
+  opacity: 1;
+  transition-duration: 150ms;
+  background-color: rgba(0,0,0,.9);
+  color: #fff;
+  text-align: left;
+`;
