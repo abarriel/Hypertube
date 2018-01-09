@@ -54,16 +54,36 @@ export const Chev = styled(FaSortDesc)`
 export const ParamsWrapperContainer = styled.div`
   position:absolute;
   display:flex;
-  overflow-x: hidden;
-  z-index: 2;
+  flex-wrap:wrap;
+  flex-direction:column;
+  z-index: 2000;
   padding: 0;
   margin: 0;
   top: 2rem;
   left: 0;
-  font-size: 14px;
   opacity: 1;
+  height:147px;
+  width:600px;
   transition-duration: 150ms;
   background-color: rgba(0,0,0,.9);
   color: #fff;
-  text-align: left;
+  border: solid 1px rgba(255,255,255,.15);
+  cursor: default;
+
 `;
+
+export const Genre = styled.div`
+  display:flex;
+  padding: 1px 20px 1px 10px;
+  height:26px;
+  font-size:1.1em;
+  -webkit-font-smoothing:antialiased;
+  &:hover {
+    text-decoration:underline;
+  }
+  font-family:
+  font-size: 10px;
+  font-weight:1;
+  cursor:pointer;
+`;
+

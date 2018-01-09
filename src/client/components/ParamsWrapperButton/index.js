@@ -16,10 +16,10 @@ export const ParamsWrapperButton = ({
   handleChangeWrapped,
   wrapped,
 }) => (
-  <ParamsWrapperButtonContainer onClick={() => handleChangeWrapped()}>
+  <ParamsWrapperButtonContainer onClick={() => handleChangeWrapped()} onMouseLeave={() => handleChangeWrapped()}>
     <Text>Genres</Text>
     <Chev />
-    {!wrapped && <ParamsWrapper />}
+    {!wrapped && <ParamsWrapper handleChangeWrapped={handleChangeWrapped} />}
   </ParamsWrapperButtonContainer>
 );
 
