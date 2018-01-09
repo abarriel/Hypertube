@@ -2,9 +2,10 @@ import { Environment, DB } from './core';
 import * as cron from 'cron';
 import initDb from './database';
 import initScrapper from './scrapper';
-import initServer from './app';
+import initServer from './api';
 import axios from 'axios';
 // require('longjohn');
+
 /**
  * Init chain of the server. DB -> HTTP
  *

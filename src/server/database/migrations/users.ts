@@ -10,7 +10,7 @@ const createUsersTable = (): Promise<any> => {
       table.string('last_name').notNullable();
       table.string('email').notNullable();
       table.enu('lang', ['EN', 'FR']).defaultTo('EN');
-      table.string('profilePicture').defaultTo('/uploads/default.png');
+      table.string('profile_picture');
       table.string('password').notNullable();
     })
 ]);

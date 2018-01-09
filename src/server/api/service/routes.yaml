@@ -1,0 +1,16 @@
+paths:
+  movies.genres:
+    verb: get
+    path: movies/genres
+    description: Get genres
+    parameters: no
+  movies.single:
+    verb: get
+    path: movies/:id
+    description: Get full details of film
+    parameters: no
+  user.login:
+    verb: post
+    path: user/login
+    description: Get full details of film
+    parameters: no

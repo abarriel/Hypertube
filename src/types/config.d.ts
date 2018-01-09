@@ -28,6 +28,7 @@ interface Iconfig {
   omdb: string,
   jwt: {
     expiresIn: string;
+    accessTokenSecret: string;
   };
   browserSync: {
     host: string;
