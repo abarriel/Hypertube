@@ -41,7 +41,7 @@
             "description": "2016 or 2010,2018 = between 2010 and 2018",
             "maximum": 2018,
             "minimum": 1900,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "ratings",
@@ -49,7 +49,7 @@
             "description": "5 or 2,5 = between 2 and 5",
             "maximum": 5,
             "minimum": 0,
-            "type": "integer"
+            "type": "string"
           },
           {
             "name": "q",

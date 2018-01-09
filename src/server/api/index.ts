@@ -10,12 +10,11 @@ import * as colors from 'colors/safe';
 import * as session from 'express-session';
 import * as passport from 'passport';
 
-import { errorHandler } from './middleware';
+import { errorHandler, listenErrorDB } from './middleware';
 import dispatchRoute from './service';
 import * as swaggerDocument from './swagger.json';
 import * as config from '../../config';
 
-// import { GraphQLRoutes } from './routes';
 const LocalStrategy 	= 		require('passport-local').Strategy;
 const BasicStrategy 	= 		require('passport-http').BasicStrategy;
 
@@ -44,10 +43,13 @@ var options: any = {
 //   return done(null, { u: 'user' });
 // }))
 
+
+
+require('../core/Passport')(passport);
+
  const initServer = async (config: Iconfig) => {
   const app = await express();
   const { server: { host, port } } = config;
-
   await app
     .use(cors())
     .use(compression())
@@ -62,10 +64,27 @@ var options: any = {
       }))
     .use(passport.initialize())
     .use(passport.session())
-    // .use(errorHandler);
+    .use(listenErrorDB);
 
     await app
       .get('/', (req, res) => res.json({ ping: 'Hello World' }))
+      app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
+
+      // handle the callback after facebook has authenticated the user
+      app.get('/auth/facebook/cb', passport.authenticate('facebook'), (req, res) => {
+        console.log('cb');
+        res.json({ ok: 'ok' });
+      })
+      app.get('/o', (req, res) => {
+        console.log(req.session);
+        console.log(req.isAuthenticated())
+        console.log('ok');
+      })
+      // .get('/auth/facebook', passport.authenticate('facebook'))
+      // .get('/auth/facebook/cb', passport.authenticate('facebook', {
+      //   successRedirect : '/',
+      //   failureRedirect : '/'
+      // }))
       .use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
       .use('/api', dispatchRoute);
 

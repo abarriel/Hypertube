@@ -6,49 +6,34 @@ import * as YAML from 'js-yaml';
 import * as path from 'path';
 
 import movies from './movies';
-import user from './user';
+import users from './users';
+import auth from './auth';
 
 // _delete because delete is a reserver method
 const REST = ['post', 'put', 'get', '_delete', 'delete'];
 
 const router:any = express.Router();
 
-const allRoutes = { movies, user };
-
+const allRoutes = { movies, users, auth };
 const moviesSchema = YAML.load(fs.readFileSync(path.join(__dirname, 'routes.yaml'), 'utf8'));
 
 export default (() => {
-    const routes:any = _.map(allRoutes, (route) => _.reduce(route.service, (acc, method, key) => {
+    const routes:any = _.map(allRoutes, (route :any) => _.forEach(_.pull(Object.getOwnPropertyNames(route.prototype), 'constructor'), (method, key) => {
+      const mainFunc = _.isArray(route.prototype[method]) ? _.find(route.prototype[method], (v) => v.name === method) : route.prototype[method];
+      let pathName = new route().name;
       let verbName = undefined;
-      if (_.includes(REST, method.name)) {
-        verbName = _.startsWith(method.name,'_') ? _.trimStart(method.name, '_') : method.name;
+      if (_.includes(REST, mainFunc.name)) {
+        verbName = _.startsWith(mainFunc.name,'_') ? _.trimStart(mainFunc.name, '_') : mainFunc.name;
       } else {
         _.find(moviesSchema.paths, (value, key, o) => {
           const pathData = _.split(key, '.');
-          // console.log('WHEN ',method.name, ' = ',route.name);
-          if (pathData[0] === _.split(route.name, '/')[0] && pathData[1] === method.name) {
-            // console.log('OK', method.name, ' verb ', value.verb);
-            route.name = value.path;
+          if (pathData[0] === _.split(pathName, '/')[0] && pathData[1] === mainFunc.name) {
+            pathName = value.path;
             verbName = value.verb;
           }
         });
-      }
-      return ({...acc, [key]: {
-          method,
-          verbName,
-          urlPath: `/${route.name}`,
-          beforeHooks: _.includes(REST, method.name) ? route.before[verbName] : route.before[method.name],
-          afterHook: route.after && (_.includes(REST, method.name) ? route.after[verbName] : route.after[method.name]),
-        }});
-    }, {}));
-    return _.reduce(routes, (acc, values, key) => {
-      _.forEach(values, (route) => {
-        const { beforeHooks, afterHook, method, verbName, urlPath } = route;
-        const middleware = beforeHooks ? _.values(beforeHooks) : [];
-        middleware.push(method);
-        if (afterHook) middleware.push(afterHook);
-        router[verbName](urlPath, middleware);
-      })
-      return router;
-    }, {});
+      };
+      router[verbName](`/${pathName}`, route.prototype[method]);
+    }));
+    return router;
 })();

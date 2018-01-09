@@ -23,7 +23,7 @@ const scrapperJob = new cron.CronJob({
     scrapperJob.start();
     await initServer(Environment.getConfig());
   } catch (err) {
-    // console.log(err);
+    console.log(err);
   }
 }
 

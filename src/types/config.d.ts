@@ -30,6 +30,7 @@ interface Iconfig {
     expiresIn: string;
     accessTokenSecret: string;
   };
+  auth: any,
   browserSync: {
     host: string;
     port: number;

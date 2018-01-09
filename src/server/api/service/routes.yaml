@@ -9,8 +9,17 @@ paths:
     path: movies/:id
     description: Get full details of film
     parameters: no
-  user.login:
+  users.login:
     verb: post
-    path: user/login
+    path: users/login
     description: Get full details of film
     parameters: no
+  users.single:
+    verb: get
+    path: users/:id
+    description: Get user if me get full details
+    parameters: no
+  auth.fortyTwo:
+    verb: get
+    path: auth/42
+    description: Omiauth 42
