@@ -5,6 +5,7 @@ import {
   UPDATE_FILTER_MOVIES,
   RESET_MOVIES,
   LOAD_GENRES,
+  LOAD_PREFERRED_MOVIES,
 } from '../actions/movies';
 
 const initialState = {
@@ -15,6 +16,7 @@ const initialState = {
   search: '',
   filter: [],
   genres: [],
+  preferredMovies: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -36,6 +38,9 @@ const reducer = (state = initialState, action) => {
     }
     case LOAD_GENRES: {
       return { ...state, genres: action.genres };
+    }
+    case LOAD_PREFERRED_MOVIES: {
+      return { ...state, preferredMovies: action.data.movies };
     }
     default:
       return state;
