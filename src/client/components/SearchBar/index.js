@@ -1,46 +1,46 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { withStateHandlers, compose } from 'recompose';
-import { bindActionCreators } from 'redux';
-import { string, func } from 'prop-types';
-
-import { updateSearchMovies } from '../../actions/movies';
+import { withStateHandlers } from 'recompose';
 import {
-  SearchBarStyled,
-  SearchIcon,
-  SearchBarInput,
+  bool,
+  func,
+  string,
+} from 'prop-types';
+
+import {
+  SearchBarContainer,
+  SearchLogo,
+  SearchBox,
+  SearchInput,
 } from './styles';
 
 const SearchBar = ({
+  wrapped,
   value,
-  handleChangeValue,
-  updateSearchMovies,
+  handleChangeWrapped,
+  handleChangevalue,
 }) => (
-  <SearchBarStyled >
-    <SearchBarInput spellcheck="false" onChange={e => handleChangeValue(e.target.value)} />
-    <SearchIcon onClick={() => updateSearchMovies(value)} />
-  </SearchBarStyled>
+  <SearchBarContainer>
+    <SearchBox wrapped={wrapped}>
+      <SearchLogo onClick={() => handleChangeWrapped()} />
+      {!wrapped && <SearchInput />}
+    </SearchBox>
+  </SearchBarContainer>
 );
 
 SearchBar.propTypes = {
+  wrapped: bool.isRequired,
   value: string.isRequired,
-  handleChangeValue: func.isRequired,
-  updateSearchMovies: func.isRequired,
+  handleChangeWrapped: func.isRequired,
+  handleChangevalue: func.isRequired,
 };
 
-const actions = { updateSearchMovies };
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-
-const enhance = compose(
-  connect(null, mapDispatchToProps),
-  withStateHandlers(
-    {
-      value: '',
-    },
-    {
-      handleChangeValue: () => value => ({ value }),
-    },
-  ),
-);
-
-export default enhance(SearchBar);
+export default withStateHandlers(
+  {
+    wrapped: true,
+    value: '',
+  },
+  {
+    handleChangeWrapped: ({ wrapped }) => () => ({ wrapped: !wrapped }),
+    handleChangevalue: () => value => ({ value }),
+  },
+)(SearchBar);

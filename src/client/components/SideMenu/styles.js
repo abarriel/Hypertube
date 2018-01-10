@@ -42,6 +42,7 @@ export const MenuElemStyled = styled(Link)`
     outline:none;
   }
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  cursor:pointer;
 `;
 export const Header = styled.div`
   display:flex;
@@ -57,6 +58,7 @@ export const MenuElemText = styled.p`
   font-weight: ${({ selected }) => selected ? 700 : 0};
   margin:0;
   font-size:0.9em;
+  cursor:pointer;
 `;
 
 export const UnderLine = styled.div`
@@ -67,4 +69,15 @@ export const UnderLine = styled.div`
   background-color:${MAIN_COLOR};
   margin-top:20px;
   margin-bottom:0px;
+`;
+
+export const MenuRight = styled.div`
+  position:absolute;
+  display:flex;
+  right:0;
+`;
+
+export const LinkContainer = styled.div`
+  display:flex;
+  height:100%;
 `;
