@@ -6,6 +6,7 @@ import configureStore from './store';
 import {
   loadGenres,
   loadPreferredMovies,
+  loadRecentMovies,
 } from './actions/movies';
 import {
   getGenres,
@@ -21,7 +22,13 @@ const init = () => {
     .then(data => {
       store.dispatch(loadGenres(data));
       reqMovies(25, 0, [], '', 5)
-        .then(preferredMvoies => store.dispatch(loadPreferredMovies(preferredMvoies)));
+        .then(preferredMvoies => {
+          store.dispatch(loadPreferredMovies(preferredMvoies));
+          reqMovies(25, 0, [], '2017', 4)
+            .then(recentMvoies => {
+              store.dispatch(loadRecentMovies(recentMvoies));
+            });
+        });
     });
 };
 
