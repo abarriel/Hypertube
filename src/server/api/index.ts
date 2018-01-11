@@ -8,9 +8,10 @@ import * as _ from 'lodash';
 import * as swaggerUi from 'swagger-ui-express';
 import * as colors from 'colors/safe';
 import * as session from 'express-session';
-import * as passport from 'passport';
+import * as flash from 'connect-flash';
 
 import { errorHandler, listenErrorDB } from './middleware';
+import { passport } from '../core';
 import dispatchRoute from './service';
 import * as swaggerDocument from './swagger.json';
 import * as config from '../../config';
@@ -22,7 +23,7 @@ const getUrl = (server: any) => `http://${server.address().address}:${server.add
 
 /**
  *  The Server is actually working and functional once the callback of app.listen is called.
- *  Meaning, without the console.log prompt, the server is not actually functional.
+ *  Meaning, without the console.log prompt, you can't tell server is actually functional.
  *
  * @param {Iconfig} config
  */
@@ -43,10 +44,6 @@ var options: any = {
 //   return done(null, { u: 'user' });
 // }))
 
-
-
-require('../core/Passport')(passport);
-
  const initServer = async (config: Iconfig) => {
   const app = await express();
   const { server: { host, port } } = config;
@@ -59,34 +56,36 @@ require('../core/Passport')(passport);
     .use(bodyParser.urlencoded({ extended: true }))
     .use(session({
         secret: 'iloveyou',
-        resave: false,
-        saveUninitialized: false
+        resave: true,
+        saveUninitialized: true
       }))
     .use(passport.initialize())
     .use(passport.session())
+    .use(flash())
     .use(listenErrorDB);
 
     await app
       .get('/', (req, res) => res.json({ ping: 'Hello World' }))
-      app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
+      // app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
 
-      // handle the callback after facebook has authenticated the user
-      app.get('/auth/facebook/cb', passport.authenticate('facebook'), (req, res) => {
-        console.log('cb');
-        res.json({ ok: 'ok' });
-      })
-      app.get('/o', (req, res) => {
-        console.log(req.session);
-        console.log(req.isAuthenticated())
-        console.log('ok');
-      })
+      // // handle the callback after facebook has authenticated the user
+      // app.get('/auth/facebook/cb', passport.authenticate('facebook'), (req, res) => {
+      //   console.log('cb');
+      //   res.json({ ok: 'ok' });
+      // })
+      // app.get('/o', (req, res) => {
+      //   console.log('REQ: ');
+      //   console.log(req.rawHeaders);
+      //   console.log('isAuthenticated: ', req.isAuthenticated())
+      //   res.json({ res: `isAuthenticated: ${req.isAuthenticated()}` })
+      // })
       // .get('/auth/facebook', passport.authenticate('facebook'))
       // .get('/auth/facebook/cb', passport.authenticate('facebook', {
       //   successRedirect : '/',
       //   failureRedirect : '/'
       // }))
       .use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
-      .use('/api', dispatchRoute);
+      .use('/api', dispatchRoute({ passport }));
 
     await app
       .use(errorHandler);
@@ -96,5 +95,6 @@ require('../core/Passport')(passport);
       console.log(colors.yellow(`[API] See documentation: ${getUrl(httpServer)}/doc\n`));
     });
 };
+
 
 export default initServer;

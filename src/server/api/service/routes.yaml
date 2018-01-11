@@ -9,6 +9,7 @@ paths:
     path: movies/:id
     description: Get full details of film
     parameters: no
+
   users.login:
     verb: post
     path: users/login
@@ -19,7 +20,13 @@ paths:
     path: users/:id
     description: Get user if me get full details
     parameters: no
-  auth.fortyTwo:
+
+  auth.facebook:
     verb: get
-    path: auth/42
-    description: Omiauth 42
+    path: auth/facebook
+    description: Omiauth facebook
+
+  auth.facebookCB:
+    verb: get
+    path: auth/facebook/cb
+    description: Omiauth facebook cb
