@@ -1,35 +1,39 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import {
+  array,
+} from 'prop-types';
 
-import { getMovies, getPreferedMovies, getRecentMovies } from '../../selectors/movies';
+import {
+  getPreferredMovies,
+  getrecentMovies,
+} from '../../selectors/movies';
 import MoviePreviewSlider from '../../components/MoviePreviewSlider';
 import Spinner from '../../components/Spinner';
 import { HomeContainer, MainContent } from './styles';
 import Section from '../../containers/Section';
 
-const Home = ({ movies }) => (
+const Home = ({
+  preferredMovies,
+  recentMovies,
+}) => (
   <HomeContainer>
     <MainContent>
       <MoviePreviewSlider />
-      {movies.length > 0 &&
-        <div>
-          <Section movies={getRecentMovies(movies)} title="Nouveautés" />
-          <Section movies={getPreferedMovies(movies)} title="Les plus vus" />
-          <Section movies={movies} title="Tendances actuelles" />
-        </div>
-      }
-      {movies.length <= 0 && <Spinner />}
+      {recentMovies.length > 0 ? <Section movies={recentMovies} title="Nouveautés" /> : <Spinner />}
+      {preferredMovies.length > 0 ? <Section movies={preferredMovies} title="Les plus gros succès sur Hypertix" /> : <Spinner />}
     </MainContent>
   </HomeContainer>
 );
 
 Home.propTypes = {
-  movies: PropTypes.array.isRequired,
+  preferredMovies: array.isRequired,
+  recentMovies: array.isRequired,
 };
 
 const mapStateToProps = state => ({
-  movies: getMovies(state),
+  preferredMovies: getPreferredMovies(state),
+  recentMovies: getrecentMovies(state),
 });
 
 export default connect(mapStateToProps)(Home);

@@ -3,9 +3,12 @@ import React from 'react';
 import Menuelem from './MenuElem';
 import Logo from '../Logo';
 import ProfilMenu from '../../containers/ProfilMenu';
+import SearchBar from '../../components/SearchBar';
 import {
   SideMenuStyled,
   Header,
+  MenuRight,
+  LinkContainer,
 } from './styles';
 
 const menu = [
@@ -48,14 +51,19 @@ const SideMenu = () => (
     <Header>
       <Logo />
     </Header>
-    {menu.map(item => (
-      <Menuelem
-        key={item.id}
-        selected={isSelected(item.to)}
-        label={item.label}
-        to={item.to}
-      />))}
-    <ProfilMenu />
+    <LinkContainer>
+      {menu.map(item => (
+        <Menuelem
+          key={item.id}
+          selected={isSelected(item.to)}
+          label={item.label}
+          to={item.to}
+        />))}
+    </LinkContainer>
+    <MenuRight>
+      <SearchBar />
+      <ProfilMenu />
+    </MenuRight>
   </SideMenuStyled>
 );
 
