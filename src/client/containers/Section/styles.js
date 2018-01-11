@@ -8,7 +8,7 @@ export const SectionContainer = styled.div`
   flex-direction:column;
   justify-content: flex-start;
   align-items: flex-start;
-  margin: 3vw 0;
+  z-index:3000;
 `;
 
 export const TitleContainer = styled.div`
@@ -61,4 +61,11 @@ export const MoviesRowContainer = styled.div`
   flex:1;
   min-width:100%;
   height:405px;
+`;
+
+export const SpinnerContainer = styled.div`
+  display:flex;
+  width:100%;
+  justify-content: center;
+  align-items: center;
 `;

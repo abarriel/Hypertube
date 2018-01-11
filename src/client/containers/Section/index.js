@@ -12,6 +12,7 @@ import {
   RightArrow,
   LeftArrow,
   MoviesRowContainer,
+  SpinnerContainer,
 } from './styles';
 import MovieRow from '../MovieRow';
 import { WIDTH, MARGIN } from '../MovieRow/constants';
@@ -43,7 +44,11 @@ const Section = ({
       <RightArrow onClick={() => move(goRight(start, movies.length, getEnd(width)))} />
     </TitleContainer>
     <MoviesRowContainer>
-      {movies.length === 0 && <Spinner />}
+      {movies.length === 0 && (
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+      )}
       {movies.length > 0 && <MovieRow
         start={start}
         width={width}

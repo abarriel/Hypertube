@@ -5,6 +5,7 @@ import { MAIN_COLOR } from '../../colors';
 import { HEIGHT, WIDTH, TRANSITION, MARGIN } from './constants';
 
 export const MovieRowContent = styled.div`
+  position:relative;
   display:flex;
   flex-direction:column;
 `;
@@ -39,14 +40,14 @@ export const MoviePreviewContainer = styled.div`
 `;
 
 export const ScrollBarContainer = styled.div`
-  position:relative;
-  display:flex;
-  justify-content: ${({ isEnd }) => isEnd ? 'flex-end' : 'flex-start'};
-  align-items: center;
-  width:calc(100vw - 200px);
-  min-height:10px;
-  margin-bottom:15px;
-  margin-left:35px;
+  position:absolute;
+  top:0;
+  left:calc(100vw - 300px);
+  display: ${({ isHover }) => isHover ? 'flex' : 'none'};
+  transition: all 0.3s ease-in-out;
+  width:200px;
+  height:20px;
+  background-color:red;
 `;
 
 export const ScrollBarInner = styled.div`

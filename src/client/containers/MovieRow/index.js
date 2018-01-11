@@ -1,5 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {
+  bool,
+  array,
+  number,
+  func,
+} from 'prop-types';
+import { withStateHandlers } from 'recompose';
 
 import { MovieRowContainer, MovieRowContent } from './styles';
 import MoviePreview from './MoviePreview';
@@ -19,8 +25,20 @@ const MovieRow = ({
   end,
   width,
   move,
+  isHover,
+  handleChangeIsHover,
 }) => (
-  <MovieRowContent>
+  <MovieRowContent
+    onMouseEnter={() => handleChangeIsHover()}
+    onMouseLeave={() => handleChangeIsHover()}
+  >
+    <ScrollBar
+      start={start}
+      length={getMoviesLength(movies)}
+      end={end}
+      width={width}
+      isHover={isHover}
+    />
     <MovieRowContainer
       margin={-start}
     >
@@ -35,21 +53,24 @@ const MovieRow = ({
           index={index}
         />))}
     </MovieRowContainer>
-    <ScrollBar
-      start={start}
-      length={getMoviesLength(movies)}
-      end={end}
-      width={width}
-    />
   </MovieRowContent>
 );
 
 MovieRow.propTypes = {
-  movies: PropTypes.array.isRequired,
-  start: PropTypes.number.isRequired,
-  end: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  move: PropTypes.func.isRequired,
+  movies: array.isRequired,
+  start: number.isRequired,
+  end: number.isRequired,
+  width: number.isRequired,
+  move: func.isRequired,
+  isHover: bool.isRequired,
+  handleChangeIsHover: func.isRequired,
 };
 
-export default MovieRow;
+export default withStateHandlers(
+  {
+    isHover: false,
+  },
+  {
+    handleChangeIsHover: ({ isHover }) => () => ({ isHover: !isHover }),
+  },
+)(MovieRow);

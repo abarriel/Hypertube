@@ -1,11 +1,14 @@
 import React from 'react';
-import { number } from 'prop-types';
+import {
+  number,
+  bool,
+} from 'prop-types';
 
 import { ScrollBarContainer, ScrollBarInner } from './styles';
 import {
   isScrollEnd,
   getScrollBarWidth,
-  getScrollBarMargin
+  getScrollBarMargin,
 } from './utils';
 
 const ScrollBar = ({
@@ -13,13 +16,14 @@ const ScrollBar = ({
   length,
   end,
   width,
+  isHover,
 }) => (
-  <ScrollBarContainer isEnd={isScrollEnd(start, end, length)}>
-    <ScrollBarInner
+  <ScrollBarContainer isHover={isHover}>
+    {/* <ScrollBarInner
       length={length}
       width={getScrollBarWidth(width, length)}
       margin={getScrollBarMargin(width, getScrollBarWidth(width, length), start, length, end)}
-    />
+    /> */}
   </ScrollBarContainer>
 );
 
@@ -28,6 +32,7 @@ ScrollBar.propTypes = {
   end: number.isRequired,
   width: number.isRequired,
   length: number.isRequired,
+  isHover: bool.isRequired,
 };
 
 export default ScrollBar;
