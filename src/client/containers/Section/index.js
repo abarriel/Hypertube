@@ -1,16 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { compose, withStateHandlers, lifecycle } from 'recompose';
 
+import { reqMovies } from '../../request';
 import {
   TitleContainer,
   Title,
   SectionContainer,
   RightArrow,
   LeftArrow,
+  MoviesRowContainer,
 } from './styles';
 import MovieRow from '../MovieRow';
 import { WIDTH, MARGIN } from '../MovieRow/constants';
+import Spinner from '../../components/Spinner';
 
 const goLeft = start => start - 1 >= 0 ? -1 : 0;
 
@@ -25,7 +30,7 @@ const goRight = (start, length, end) => {
 const getEnd = width => Math.round((width - 25) / (WIDTH + (2 * MARGIN)));
 
 const Section = ({
-  movies,
+  movies = [],
   title,
   start,
   width,
@@ -37,40 +42,56 @@ const Section = ({
       <LeftArrow onClick={() => move(goLeft(start))} />
       <RightArrow onClick={() => move(goRight(start, movies.length, getEnd(width)))} />
     </TitleContainer>
-    <MovieRow
-      start={start}
-      width={width}
-      end={getEnd(width)}
-      movies={movies}
-      move={move}
-    />
+    <MoviesRowContainer>
+      {movies.length === 0 && <Spinner />}
+      {movies.length > 0 && <MovieRow
+        start={start}
+        width={width}
+        end={getEnd(width)}
+        movies={movies}
+        move={move}
+      />}
+    </MoviesRowContainer>
   </SectionContainer>
 );
 
 Section.propTypes = {
-  movies: PropTypes.array.isRequired,
+  movies: PropTypes.array,
   width: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   start: PropTypes.number.isRequired,
   move: PropTypes.func.isRequired,
 };
 
+const actions = {
+};
+
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+const mapStateToProps = state => ({
+
+});
+
 const enhance = compose(
+  connect(mapStateToProps, mapDispatchToProps),
   withStateHandlers(
     {
+      movies: [],
       start: 0,
       width: 0,
     },
     {
       move: ({ start }) => direction => ({ start: start + direction }),
+      updateMovies: () => newMovies => ({ movies: newMovies }),
       updateWindowDimensions: () => () => ({ width: window.innerWidth }),
-      handleScroll: () => () => console.log('scroll'),
     },
   ),
   lifecycle({
     componentDidMount() {
       this.props.updateWindowDimensions();
       window.addEventListener('resize', this.props.updateWindowDimensions);
+      reqMovies(this.props.reqParams)
+        .then(data => this.props.updateMovies(data.movies));
     },
     componentWillUnmount() {
       window.removeEventListener('resize', this.props.updateWindowDimensions);

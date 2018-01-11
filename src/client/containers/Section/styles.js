@@ -22,7 +22,7 @@ export const Title = styled.p`
   margin-left:30px;
   user-select: none;
   line-height: 1.25vw;
-  font-size: 1.4vw;
+  font-size: 1.em;
   color: #e5e5e5;
   font-weight: 700;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
@@ -50,4 +50,15 @@ export const LeftArrow = styled(GoChevronLeft)`
     transform: scale(1.5);
     color: ${MAIN_COLOR_HOVER};
   }
+`;
+
+export const MoviesRowContainer = styled.div`
+  display:flex;
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex:1;
+  min-width:100%;
+  height:405px;
 `;

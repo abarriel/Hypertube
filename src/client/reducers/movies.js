@@ -17,8 +17,11 @@ const initialState = {
   search: '',
   filter: [],
   genres: [],
+  trendsMovies: [],
   preferredMovies: [],
   recentMovies: [],
+  actionAndAdventureMovies: [],
+  thillersMovies: [],
 };
 
 const reducer = (state = initialState, action) => {
