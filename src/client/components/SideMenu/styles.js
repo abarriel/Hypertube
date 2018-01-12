@@ -12,7 +12,7 @@ export const SideMenuStyled = styled.div`
   align-items: flex-start;
   top:0;
   left:0px;
-  width:100%;
+  width:calc(100% - 120px);
   background:#000;
   height:70px;
   z-index:2000;
