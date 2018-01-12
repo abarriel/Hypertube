@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as _ from 'lodash';
 import * as jwt from 'jsonwebtoken';
 
-import Users from '../queries/users';
+import Users from '../../database/queries/users';
 import { Environment } from '../../core';
 import { number } from 'joi';
 
