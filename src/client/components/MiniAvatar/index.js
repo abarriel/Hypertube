@@ -10,7 +10,7 @@ import {
 const fakeProfil = {
   firstName: 'Lucas',
   lastName: 'Charvolin',
-  avatar: 'https://cdn.intra.42.fr/users/medium_lcharvol.jpg',
+  avatar: 'https://secure.netflix.com/ffe/profiles/avatars_v2/32x32/PICON_026.png',
 };
 
 const MiniAvatar = ({

@@ -17,6 +17,7 @@ export const SideMenuStyled = styled.div`
   height:70px;
   z-index:2000;
   box-shadow: 0 0 30px 1px rgba(0,0,0,0.4);
+  padding: 0 60px;
 `;
 
 export const MenuElemStyled = styled(Link)`
@@ -48,7 +49,6 @@ export const Header = styled.div`
   display:flex;
   justify-content: center;
   align-items: center;
-  width:200px;
   height:100%;
 `;
 
@@ -79,5 +79,20 @@ export const MenuRight = styled.div`
 
 export const LinkContainer = styled.div`
   display:flex;
+  @media (max-width: 900px) {
+    display:none;
+  }
   height:100%;
+`;
+
+export const MiniLinkContainer = styled.div`
+  display:flex;
+  -webkit-box-align: center;
+  align-items: center;
+  font-weight: 700;
+  height: 100%;
+  text-decoration: none;
+  cursor: pointer;
+  color: #fff;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 `;

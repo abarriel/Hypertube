@@ -9,6 +9,7 @@ export const SearchBarContainer = styled.div`
   align-items: center;
   height:70px;
   min-width:20px;
+  background-color:black;
 `;
 
 export const SearchLogo = styled(GoSearch)`

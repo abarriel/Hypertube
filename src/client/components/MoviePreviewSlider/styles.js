@@ -120,6 +120,9 @@ export const Button = styled.div`
   color: #fff;
   cursor:pointer;
   width:6vw;
+  font-size: 1.1vw;
+  font-weight: 200;
+  color: #fff;
   &:hover {
     background-color: rgba(250,250,250,.7);
   }
