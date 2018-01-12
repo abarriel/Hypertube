@@ -43,7 +43,7 @@ export const ScrollBarContainer = styled.div`
   position:absolute;
   top:0;
   left:calc(100vw - 300px);
-  display: ${({ isHover }) => isHover ? 'flex' : 'none'};
+  display: ${({ isHover }) => isHover ? 'none' : 'none'};
   transition: all 0.3s ease-in-out;
   width:200px;
   height:20px;

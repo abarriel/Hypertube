@@ -14,7 +14,7 @@ import {
   Description,
 } from './styles';
 
-const getRandomMovie = () => 4;
+const getRandomMovie = () => 1;
 
 const randomMovie = () => getRandomMovie();
 

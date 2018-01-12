@@ -8,10 +8,10 @@ export const images = [
   },
   {
     id: 1,
-    title: 'Game of Thrones',
-    coverImage: 'https://occ-0-56-55.1.nflxso.net/art/298df/260da38bfa0d28cc464260f88e9126d3474298df.jpg',
-    logo: 'https://occ-0-55-768.1.nflxso.net/art/ff42a/9e02e9a30b57e1d8b0dbf136dc454cbce4bff42a.webp',
-    description: 'Pourquoi Hannah Baker s\'est-elle suicidée ? La vérité déchirante se fait jour, cassette après cassette.',
+    title: 'Orange is the new black',
+    coverImage: 'https://occ-0-55-768.1.nflxso.net/art/68a34/fa2c052c0c0c09efc9068f84a7bae06df8f68a34.webp',
+    logo: 'https://occ-0-55-768.1.nflxso.net/art/c137e/648fc00983c7bc2bb7b90a6c38ce44f2de4c137e.webp',
+    description: 'Elle est à l\'ombre pour avoir transporté de la drogue. Elle va devoir tout donner pour survivre. Y compris des clopes.',
   },
   {
     id: 2,
