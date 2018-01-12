@@ -4,7 +4,7 @@ import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 
 import middlewaresBinding from '../middleware';
-import Users from '../queries/users';
+import Users from '../../database/queries/users';
 import { createUsersTable, deleteUsersTable } from '../../database/migrations/users';
 import { Environment } from '../../core';
 
@@ -14,14 +14,14 @@ class UsersController {
   @middlewaresBinding(['uploadImg', 'userFormValidate'])
   async post(req: express.Request, res: express.Response, next: any) {
     const { user } = req.app.locals;
-    // await deleteUsersTable();
-    // await createUsersTable();
+    await deleteUsersTable();
+    await createUsersTable();
 
-    if (await Users.isRegistered({ login: user.login })) return next({ type: 'db', details: 'User already register under a similar login' });
-    if (_.some(user, _.isEmpty)) return next({ type: 'Validation', details: 'One value is required but is undefined' });
+    if (await Users.isRegistered({ username: user.username, omniauth: false })) return next({ type: 'db', details: 'User already register under a similar login' });
+    if (_.some(user, _.isNil)) return next({ type: 'Validation', details: 'One value is equired but is undefined' });
 
     const hashedPassword = await bcrypt.hash(user.password, 10);
-    const [userInDb] = await Users.post({ ...user, password: hashedPassword });
+    const [userInDb] = await Users.post({ ...user, password: hashedPassword, omniauth: false });
     res.json({ user: userInDb });
   };
 
@@ -39,8 +39,8 @@ class UsersController {
   @middlewaresBinding('userFormValidate')
   async login(req: express.Request, res: express.Response, next: any) {
     const { user } = req.app.locals;
-    if (!await Users.isRegistered({ login: user.login })) return next({ type: 'db', details: 'User not found' });
-    const { password, id } = await Users.getByLogin(user.login, ['password', 'id']);
+    if (!await Users.isRegistered({ username: user.username, omniauth: false })) return next({ type: 'db', details: 'User not found' });
+    const { password, id } = await Users.getByUsername(user.username, ['password', 'id']);
     if (!await bcrypt.compare(user.password, password)) return next({ type: 'Auth', details: 'Failed to authenticate' });
     const jwtConfig = Environment.getConfig().jwt;
     res.json({ hyperFlixToken: jwt.sign({ sub: id }, jwtConfig.accessTokenSecret, { expiresIn: jwtConfig.expiresIn }) });

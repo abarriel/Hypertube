@@ -21,12 +21,24 @@ paths:
     description: Get user if me get full details
     parameters: no
 
+
+  auth.local:
+    verb: post
+    path: auth/login
+    description: Omiauth login
   auth.facebook:
     verb: get
     path: auth/facebook
     description: Omiauth facebook
+  auth.fortyTwo:
+    verb: get
+    path: auth/42
+    description: Omiauth 42
 
   auth.facebookCB:
     verb: get
     path: auth/facebook/cb
     description: Omiauth facebook cb
+  auth.fortyTwoCB:
+    verb: get
+    path: auth/42/cb

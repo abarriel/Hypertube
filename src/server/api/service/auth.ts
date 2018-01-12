@@ -4,9 +4,8 @@ import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 
 import middlewaresBinding from '../middleware';
-import Users from '../queries/users';
+import Users from '../../database/queries/users';
 import { Environment } from '../../core';
-
 
 class UsersController {
   passport: any;
@@ -16,27 +15,29 @@ class UsersController {
   constructor(args: any) {
     const { passport }:any = args || {};
     this.passport = passport;
-    // console.log(passport);
   };
 
-  facebook = (req: any, res:any) => this.passport.authenticate('facebook')(req, res)
+  facebook = (req: any, res:any, next:any) => this.passport.authenticate('facebook')(req, res, next)
+  fortyTwo = (req: any, res:any, next:any) => this.passport.authenticate('42')(req, res, next)
 
-  async facebookCB(req: express.Request, res: express.Response) {
-    console.log('fortyTwo', req.session)
-    res.json( {o: 'ok'});
+  @middlewaresBinding(['userFormValidate'])
+  async local(req: express.Request, res: express.Response, next: any) {
+    this.passport.authenticate('local', {
+      successRedirect : '/', // redirect to the secure profile section
+    })(req, res, next);
   };
+
+  async fortyTwoCB(req: express.Request, res: express.Response, next: any) {
+    this.passport.authenticate('42', {
+      successRedirect: '/',
+    })(req, res, next)};
+
+  async facebookCB(req: express.Request, res: express.Response, next: any) {
+    this.passport.authenticate('facebook', {
+      successRedirect: '/',
+    })(req, res, next)};
+
+
 };
 
-
 export default UsersController;
-// app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['public_profile', 'email'] }));
-
-// // handle the callback after facebook has authenticated the user
-// app.get('/auth/facebook/cb', passport.authenticate('facebook'), (req, res) => {
-//   console.log('cb');
-//   res.json({ ok: 'ok' });
-// })
-
-
-
-// app.get('auth/facebook',passport.authenticate('42'), facebook)

@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as express from 'express';
 
 import middlewaresBinding from '../middleware';
-import Movies from '../queries/movies';
+import Movies from '../../database/queries/movies';
 
 const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
 
@@ -11,6 +11,7 @@ class MoviesController {
 
   @middlewaresBinding('moviesFormValidate')
   async get(req: express.Request, res: express.Response) {
+    console.log('isAuthorized: ', req.isAuthenticated());
     const { filters } = req.app.locals;
     const movies = await Movies.get(filters);
     res.json({ movies });
