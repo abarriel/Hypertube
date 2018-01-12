@@ -1,6 +1,7 @@
 # Projet Hypertube
 
 <img src="https://user-images.githubusercontent.com/23408500/34878792-3c880720-f7ab-11e7-80ff-ece04cf240b7.png"/>
+<img src="https://user-images.githubusercontent.com/23408500/34895690-254dec96-f7e7-11e7-832a-50373b4117e0.png"/>
 
 ## Table des matières
 
