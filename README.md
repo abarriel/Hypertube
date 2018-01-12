@@ -1,5 +1,7 @@
 # Projet Hypertube
 
+<img src="https://user-images.githubusercontent.com/23408500/34878792-3c880720-f7ab-11e7-80ff-ece04cf240b7.png"/>
+
 ## Table des matières
 
 - [Introduction](#introduction)
