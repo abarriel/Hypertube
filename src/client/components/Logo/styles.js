@@ -10,6 +10,7 @@ export const LogoContainer = styled.div`
   transition: all 0.3s ease-in-out;
   @media (max-width: 900px) {
     width:90px;
+    margin-right: 25px;
   }
   padding: 18px 0;
   cursor:pointer;

@@ -9,6 +9,7 @@ import {
   Header,
   MenuRight,
   LinkContainer,
+  MiniLinkContainer,
 } from './styles';
 
 const menu = [
@@ -60,6 +61,9 @@ const SideMenu = () => (
           to={item.to}
         />))}
     </LinkContainer>
+    <MiniLinkContainer>
+      Parcourir
+    </MiniLinkContainer>
     <MenuRight>
       <SearchBar />
       <ProfilMenu />

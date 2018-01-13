@@ -18,6 +18,10 @@ export const SideMenuStyled = styled.div`
   z-index:2000;
   box-shadow: 0 0 30px 1px rgba(0,0,0,0.4);
   padding: 0 60px;
+  @media (max-width: 900px) {
+    padding: 0 4%;
+    width:92%;
+  }
 `;
 
 export const MenuElemStyled = styled(Link)`
@@ -91,8 +95,14 @@ export const MiniLinkContainer = styled.div`
   align-items: center;
   font-weight: 700;
   height: 100%;
+  font-weight:10;
+  font-size: 0.789rem;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  @media (min-width: 900px) {
+    display:none;
+  }
 `;

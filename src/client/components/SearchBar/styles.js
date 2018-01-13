@@ -10,6 +10,9 @@ export const SearchBarContainer = styled.div`
   height:70px;
   min-width:20px;
   background-color:black;
+  @media (max-width: 450px) {
+    display:none;
+  }
 `;
 
 export const SearchLogo = styled(GoSearch)`

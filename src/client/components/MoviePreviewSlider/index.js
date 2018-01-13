@@ -10,8 +10,11 @@ import {
   MoviePreviewSlideInfoInner,
   MovieLogo,
   ButtonContainer,
-  Button,
+  BlackButton,
+  RedButton,
   Description,
+  PlayLogo,
+  PlusLogo,
 } from './styles';
 
 const getRandomMovie = () => 4;
@@ -27,12 +30,14 @@ const MoviePreviewSlider = () => (
             <MoviePreviewSlideInfoInner>
               <MovieLogo movieLogo={images[randomMovie()].logo} />
               <ButtonContainer>
-                <Button>
+                <RedButton>
+                  <PlayLogo />
                   Lecture
-                </Button>
-                <Button>
+                </RedButton>
+                <BlackButton>
+                  <PlusLogo />
                   Ma Liste
-                </Button>
+                </BlackButton>
               </ButtonContainer>
               <Description>{images[randomMovie()].description}</Description>
             </MoviePreviewSlideInfoInner>
