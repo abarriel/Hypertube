@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import GoTriangleDown from 'react-icons/lib/go/triangle-down';
 
 import {
   MAIN_COLOR,
@@ -12,11 +13,11 @@ export const SideMenuStyled = styled.div`
   align-items: flex-start;
   top:0;
   left:0px;
-  width:calc(100% - 120px);
   background:#000;
   height:70px;
   z-index:2000;
   box-shadow: 0 0 30px 1px rgba(0,0,0,0.4);
+  width:calc(100% - 120px);
   padding: 0 60px;
   @media (max-width: 900px) {
     padding: 0 4%;
@@ -105,4 +106,21 @@ export const MiniLinkContainer = styled.div`
   @media (min-width: 900px) {
     display:none;
   }
+`;
+
+export const Chev = styled(GoTriangleDown)`
+  margin-left:5px;
+`;
+
+export const MiniLinkWrapperContainer = styled.div`
+  display:flex;
+  flex-direction:column;
+  width:260px;
+  background-color:rgba(0,0,0,0.7);
+`;
+
+export const MiniLinkWrapperElem = styled.div`
+  display:flex;
+  width:100%;
+  height:50px;
 `;
