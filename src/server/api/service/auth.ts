@@ -6,19 +6,25 @@ import * as jwt from 'jsonwebtoken';
 import middlewaresBinding from '../middleware';
 import Users from '../../database/queries/users';
 import { Environment } from '../../core';
+import { Strategy } from 'passport-strategy';
+import { label } from 'joi';
 
 class UsersController {
   passport: any;
+  cb: any;
+  funcAuth: any;
 
   name = 'auth';
-
-  constructor(args: any) {
-    const { passport }:any = args || {};
-    this.passport = passport;
+  opt = {
+    successRedirect: '/',
   };
 
-  facebook = (req: any, res:any, next:any) => this.passport.authenticate('facebook')(req, res, next)
-  fortyTwo = (req: any, res:any, next:any) => this.passport.authenticate('42')(req, res, next)
+  constructor(args: any) {
+    const { passport }: any = args || {};
+    this.passport = passport;
+    this.funcAuth = (strategy: string) => (req: any, res: any, next: any) => this.passport.authenticate(strategy)(req, res, next);
+    this.cb = (strategy: string, opt: any) => (req: any, res: any, next: any) => this.passport.authenticate(strategy, opt)(req, res, next);
+  };
 
   @middlewaresBinding(['userFormValidate'])
   async local(req: express.Request, res: express.Response, next: any) {
@@ -27,17 +33,18 @@ class UsersController {
     })(req, res, next);
   };
 
-  async fortyTwoCB(req: express.Request, res: express.Response, next: any) {
-    this.passport.authenticate('42', {
-      successRedirect: '/',
-    })(req, res, next)};
+  facebook =  (...args: any[]) => this.funcAuth('facebook')(...args)
+  fortyTwo = (...args: any[]) => this.funcAuth('42')(...args)
+  twitter = (...args: any[]) => this.funcAuth('twitter')(...args)
+  github = (...args: any[]) => this.funcAuth('github')(...args)
+  google = (...args: any[]) => this.funcAuth('google')(...args)
+  // spotify = (...args: any[]) => this.funcAuth('spotify')(...args)
 
-  async facebookCB(req: express.Request, res: express.Response, next: any) {
-    this.passport.authenticate('facebook', {
-      successRedirect: '/',
-    })(req, res, next)};
-
-
+  fortyTwoCB = (...args: any[]) => this.cb('42', this.opt)(...args);
+  facebookCB = (...args: any[]) => this.cb('facebook', this.opt)(...args);
+  twitterCB = (...args: any[]) => this.cb('twitter', this.opt)(...args);
+  githubCB = (...args: any[]) => this.cb('github', this.opt)(...args);
+  // spotifyCB = (...args: any[]) => this.cb('spotify', this.opt)(...args);
 };
 
 export default UsersController;

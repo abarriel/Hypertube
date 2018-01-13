@@ -15,7 +15,7 @@ const REST = ['post', 'put', 'get', '_delete', 'delete'];
 const router:any = express.Router();
 
 const allRoutes = { movies, users, auth };
-// const allRoutes = { auth };
+
 const routeDefinitions = YAML.load(fs.readFileSync(path.join(__dirname, 'routes.yaml'), 'utf8'));
 const routeSchema = _.map(routeDefinitions.paths, (v, k: string, o) => {
   const pathData = _.split(k , '.');

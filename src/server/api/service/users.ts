@@ -25,28 +25,18 @@ class UsersController {
     res.json({ user: userInDb });
   };
 
-  @middlewaresBinding(['getToken', 'isAuthorize', 'userFormValidate'])
+  @middlewaresBinding(['isAuthorize', 'userFormValidate'])
   async put(req: express.Request, res: express.Response) {
   };
 
-  @middlewaresBinding(['getToken', 'isAuthorize', 'userFormValidate'])
+  @middlewaresBinding(['isAuthorize', 'userFormValidate'])
   async get(req: express.Request, res: express.Response) {
     const { limit, offset } = req.app.locals;
     const users = await Users.gets(limit, offset);
      res.json({ users });
   };
 
-  @middlewaresBinding('userFormValidate')
-  async login(req: express.Request, res: express.Response, next: any) {
-    const { user } = req.app.locals;
-    if (!await Users.isRegistered({ username: user.username, omniauth: false })) return next({ type: 'db', details: 'User not found' });
-    const { password, id } = await Users.getByUsername(user.username, ['password', 'id']);
-    if (!await bcrypt.compare(user.password, password)) return next({ type: 'Auth', details: 'Failed to authenticate' });
-    const jwtConfig = Environment.getConfig().jwt;
-    res.json({ hyperFlixToken: jwt.sign({ sub: id }, jwtConfig.accessTokenSecret, { expiresIn: jwtConfig.expiresIn }) });
-  };
-
-  @middlewaresBinding(['getToken', 'isAuthorize'])
+  @middlewaresBinding(['isAuthorize'])
   async single(req: express.Request, res: express.Response, next: any) {
     const { id } = req.params;
     const { decodedToken: { sub } } = req.app.locals;
@@ -63,3 +53,4 @@ class UsersController {
 };
 
 export default UsersController;
+

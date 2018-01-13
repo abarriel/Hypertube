@@ -1,4 +1,5 @@
 paths:
+# Movies
   movies.genres:
     verb: get
     path: movies/genres
@@ -10,18 +11,14 @@ paths:
     description: Get full details of film
     parameters: no
 
-  users.login:
-    verb: post
-    path: users/login
-    description: Get full details of film
-    parameters: no
+# Users
   users.single:
     verb: get
     path: users/:id
     description: Get user if me get full details
     parameters: no
 
-
+# Auth CB
   auth.local:
     verb: post
     path: auth/login
@@ -34,11 +31,38 @@ paths:
     verb: get
     path: auth/42
     description: Omiauth 42
-
+  auth.twitter:
+    verb: get
+    path: auth/twitter
+    description: Omiauth Twitter
+  auth.github:
+    verb: get
+    path: auth/github
+    description: Omiauth Github
+  auth.google:
+    verb: get
+    path: auth/google
+    description: Omiauth Google
+  # auth.spotify:
+  #   verb: get
+  #   path: auth/spotify
+  #   description: Omiauth Spotify
+# Auth CB
   auth.facebookCB:
     verb: get
     path: auth/facebook/cb
-    description: Omiauth facebook cb
+  auth.twitterCB:
+    verb: get
+    path: auth/twitter/cb
   auth.fortyTwoCB:
     verb: get
     path: auth/42/cb
+  auth.githubCB:
+    verb: get
+    path: auth/github/cb
+  auth.googleCB:
+    verb: get
+    path: auth/google/cb
+  # auth.spotifyCB:
+  #   verb: get
+  #   path: auth/spotify/cb
