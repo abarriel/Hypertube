@@ -12,29 +12,26 @@ const TwitterStrategy 	= 		require('passport-twitter').Strategy;
 const GithubStrategy	=		require('passport-github').Strategy;
 const SpotifyStrategy	=		require('passport-spotify').Strategy;
 const GoogleStrategy	=		require('passport-google-oauth').OAuth2Strategy;
-// const LinkedinStrategy 	= 		require('passport-linkedin-oauth2').Strategy;
 
 const configAuth = Environment.getConfig().auth;
 
-passport.serializeUser((profile, done) => {
-  console.log('serializeUser: ', profile);
-  done(null, profile)
+passport.serializeUser((user, done) => {
+  done(null, user)
 });
 
-passport.deserializeUser((profile, done) => {
-  console.log('deseriealseUser: ', profile)
-  done(null, profile)
+passport.deserializeUser((user, done) => {
+  done(null, user)
 });
 
 passport.use('local', new LocalStrategy({
-  callbackURL     : 'http://localhost:8888/',
+  callbackURL     : 'http://localhost:8888/api/auth/local/cb',
   passReqToCallback: true
 }, async (req: any, username: string , password: string, done: any) => {
   const { user } = req.app.locals;
-  if (!await Users.isRegistered({ username: user.username, omniauth: false })) return done({ type: 'db', details: 'User not found' });
-  const { password: passU, id } = await Users.getByUsername(user.username, ['password', 'id']);
+  if (!await Users.isRegistered({ username: user.username, omniauth: 'false' })) return done({ type: 'db', details: 'User not found' });
+  const { password: passU, id, profilePicture } = await Users.getByUsername(user.username, ['password', 'id', 'profilePicture']);
   if (!await bcrypt.compare(user.password, passU)) return done({ type: 'Auth', details: 'Failed to authenticate' });
-  return done(null, { id });
+  return done(null, { id, username, omniauth: false, profilePicture });
 }));
 
 passport.use('42', new FortyTwoStrategy({
@@ -42,11 +39,15 @@ passport.use('42', new FortyTwoStrategy({
   clientSecret    : configAuth.Auth42.clientSecret,
   callbackURL: 'http://localhost:8888/api/auth/42/cb'
 }, async (token: any, refreshToken: any, profile: any, done: any) => {
-  console.log('profile', profile);
-  const { login: username, email, image_url: profilePicture, first_name, last_name} = profile._json;
-  if (await Users.isRegistered({ username })) return done({ type: 'db', details: 'User already register under a similar login' });
-  const user = await Users.post({ username, email, profilePicture, first_name, last_name});
-  return done(null, { username });
+  try {
+    const { login: username, email, image_url: profilePicture, first_name, last_name} = profile._json;
+
+    let user = await Users.isRegistered({ username });
+    if (!user) user = await Users.post({ username, email, profilePicture, first_name, last_name});
+    return done(null, user);
+  } catch (err) {
+    return done({ type: 'Auth', details: 'Failed', err });
+  }
 }));
 
 passport.use('facebook', new FacebookStrategy({
@@ -55,11 +56,16 @@ passport.use('facebook', new FacebookStrategy({
   callbackURL: 'http://localhost:8888/api/auth/facebook/cb',
   profileFields: ['email', 'first_name', 'last_name', 'picture.type(large)'],
 }, async (token: any, refreshToken: any, profile: any, done: any) => {
-  const { email, picture: { data: { url: profilePicture } }, first_name, last_name} = profile._json;
-  const username = `${first_name}-${last_name}`;
-  if (await Users.isRegistered({ username })) return done({ type: 'db', details: 'User already register under a similar login' });
-  const user = await Users.post({ username, email, profilePicture, first_name, last_name});
-  return done(null, profile);
+  try {
+    const { email, picture: { data: { url: profilePicture } }, first_name, last_name} = profile._json;
+    const username = `${first_name}-${last_name}`;
+
+    let user = await Users.isRegistered({ username });
+    if (!user) user = await Users.post({ username, email, profilePicture, first_name, last_name});
+    return done(null, user);
+  } catch (err) {
+    return done({ type: 'Auth', details: 'Failed', err });
+  }
 }));
 
 passport.use('twitter', new TwitterStrategy({
@@ -68,13 +74,16 @@ passport.use('twitter', new TwitterStrategy({
   callbackURL: 'http://localhost:8888/api/auth/twitter/cb',
   includeEmail: true,
 }, async (token: any, refreshToken: any, profile: any, done: any) => {
-  console.log(profile);
-  const { username, emails, photos } = profile;
-  const email = emails[0].value;
-  const profilePicture = _.replace(photos[0].value || '', '_normal', '');
-  if (await Users.isRegistered({ username })) return done({ type: 'db', details: 'User already register under a similar login' });
-  const user = await Users.post({ username, email, profilePicture });
-  return done(null, profile);
+  try {
+    const { username, emails, photos } = profile;
+    const email = emails[0].value;
+    const profilePicture = _.replace(photos[0].value || '', '_normal', '');
+    let user = await Users.isRegistered({ username });
+    if (!user) user = await Users.post({ username, email, profilePicture });
+    return done(null, user);
+  } catch (err) {
+    return done({ type: 'Auth', details: 'Failed', err });
+  }
 }));
 
 passport.use('github', new GithubStrategy({
@@ -83,12 +92,16 @@ passport.use('github', new GithubStrategy({
   callbackURL: 'http://localhost:8888/api/auth/github/cb',
   scope: ['user:email'],
 }, async (token: any, refreshToken: any, profile: any, done: any) => {
-  const { username, emails, photos } = profile;
-  const email = emails[0].value;
-  const profilePicture = photos[0].value;
-  if (await Users.isRegistered({ username })) return done({ type: 'db', details: 'User already register under a similar login' });
-  const user = await Users.post({ username, email, profilePicture });
-  return done(null, profile);
+  try {
+    const { username, emails, photos } = profile;
+    const email = emails[0].value;
+    const profilePicture = photos[0].value;
+    let user = await Users.isRegistered({ username });
+    if (!user) user = await Users.post({ username, email, profilePicture });
+    return done(null, user);
+  } catch (err) {
+    return done({ type: 'Auth', details: 'Failed', err });
+  }
 }));
 
 passport.use('google', new GoogleStrategy({
@@ -97,14 +110,18 @@ passport.use('google', new GoogleStrategy({
   callbackURL: 'http://localhost:8888/api/auth/google/cb',
   scope: ['profile', 'email']
 }, async (token: any, refreshToken: any, profile: any, done: any) => {
-  const { emails, photos, name } = profile;
-  const email = emails[0].value;
-  const profilePicture = _.replace(photos[0].value || '', '?sz=50', '');
-  const { familyName: lastName, givenName: firstName } = name;
-  const username = `${firstName}-${lastName}`;
-  // if (await Users.isRegistered({ username })) return done({ type: 'db', details: 'User already register under a similar login' });
-  const user = await Users.post({ username, email, firstName, lastName, profilePicture });
-  return done(null, profile);
+  try {
+    const { emails, photos, name } = profile;
+    const email = emails[0].value;
+    const profilePicture = _.replace(photos[0].value || '', '?sz=50', '');
+    const { familyName: lastName, givenName: firstName } = name;
+    const username = `${firstName}-${lastName}`;
+    let user = await Users.isRegistered({ username });
+    if (!user) user = await Users.post({ username, email, firstName, lastName, profilePicture });
+    return done(null, user);
+  } catch (err) {
+    return done({ type: 'Auth', details: 'Failed', err });
+  }
 }));
 
 // passport.use('spotify', new SpotifyStrategy({

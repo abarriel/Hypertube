@@ -25,6 +25,10 @@ interface Iconfig {
     host: string;
     port: number;
   };
+  email: {
+    address: string,
+    password: string,
+  },
   omdb: string,
   jwt: {
     expiresIn: string;

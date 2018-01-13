@@ -3,10 +3,10 @@ import * as _ from 'lodash';
 
 import { errorHandler }  from './error';
 import { uploadImg } from './upload';
-import { getToken, isAuthorize } from './auth';
-import { moviesFormValidate, userFormValidate } from './validation';
+import { isAuthorize } from './auth';
+import { moviesFormValidate, userFormValidate, commentsValidate } from './validation';
 
-const middlewaresFunc:any = { errorHandler, uploadImg, getToken, isAuthorize, moviesFormValidate, userFormValidate } ;
+const middlewaresFunc:any = { errorHandler, uploadImg, isAuthorize, commentsValidate, moviesFormValidate, userFormValidate } ;
 
 const middlewaresBinding = (middlewaresNames: any) => (target: any, targetKey: string, descriptor: TypedPropertyDescriptor<any>) => {
   let mainFunc = descriptor.value;
@@ -19,6 +19,6 @@ const middlewaresBinding = (middlewaresNames: any) => (target: any, targetKey: s
 
 export { errorHandler, listenErrorDB }  from './error';
 export { uploadImg } from './upload';
-export { getToken, isAuthorize } from './auth';
+export { isAuthorize } from './auth';
 export { moviesFormValidate, userFormValidate } from './validation';
 export default  middlewaresBinding;

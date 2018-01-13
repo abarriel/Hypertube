@@ -8,7 +8,6 @@ import * as _ from 'lodash';
 import * as swaggerUi from 'swagger-ui-express';
 import * as colors from 'colors/safe';
 import * as session from 'express-session';
-import * as flash from 'connect-flash';
 
 import { errorHandler, listenErrorDB } from './middleware';
 import { passport } from '../core';
@@ -46,12 +45,11 @@ var options: any = {
     .use(bodyParser.urlencoded({ extended: true }))
     .use(session({
         secret: 'iloveyou',
-        resave: true,
+        resave: false,
         saveUninitialized: true
       }))
     .use(passport.initialize())
     .use(passport.session())
-    .use(flash())
     .use(listenErrorDB);
 
     await app

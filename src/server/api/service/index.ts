@@ -8,13 +8,15 @@ import * as path from 'path';
 import movies from './movies';
 import users from './users';
 import auth from './auth';
+import comments from './comments';
+import password from './password';
 
 // _delete because delete is a reserver method
 const REST = ['post', 'put', 'get', '_delete', 'delete'];
 
 const router:any = express.Router();
 
-const allRoutes = { movies, users, auth };
+const allRoutes = { movies, users, auth, comments, password };
 
 const routeDefinitions = YAML.load(fs.readFileSync(path.join(__dirname, 'routes.yaml'), 'utf8'));
 const routeSchema = _.map(routeDefinitions.paths, (v, k: string, o) => {
@@ -32,11 +34,12 @@ export default ((args: any) => {
     const instanciedController = new Controller(args);
     let pathName = instanciedController.name;
     const getAllMethodsAndAttribut = _.concat(Object.getOwnPropertyNames(instanciedController.__proto__), Object.keys(instanciedController));
-    const methods = strictRoutes('auth');
+    const methods = strictRoutes(pathName);
     _.forEach(methods, (method, key) => {
       let verbName = undefined;
       if (_.includes(REST, method)) {
         verbName = _.startsWith(method,'_') ? _.trimStart(method, '_') : method;
+        pathName = instanciedController.name;
       } else {
         _.find(routeDefinitions.paths, (value, key, o) => {
           const pathData = _.split(key, '.');
@@ -56,7 +59,9 @@ export default ((args: any) => {
         instanciedController.__proto__[method] = mainFunc;
         funcs[indexMainFunc] =  (...args: any[]) => instanciedController[method](...args);
       }
-      router[verbName](`/${pathName}`, funcs );
+      // console.log(verbName, `/${pathName}`, funcs);
+      router[verbName](`/${pathName}`, funcs);
+
     })
     });
     return router;

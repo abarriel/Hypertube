@@ -55,6 +55,7 @@ const Movies = {
   },
 
   async single(id: string) {
+    console.log('single', id);
     return DB.select().from('movies').where('imdb_id', id).first();
   }
 };

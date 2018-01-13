@@ -26,6 +26,11 @@ class UsersController {
     this.cb = (strategy: string, opt: any) => (req: any, res: any, next: any) => this.passport.authenticate(strategy, opt)(req, res, next);
   };
 
+  @middlewaresBinding(['isAuthorize'])
+  async get(req: any, res: any, next: any) {
+    res.json({ status: 'Authorized' });
+  };
+
   @middlewaresBinding(['userFormValidate'])
   async local(req: express.Request, res: express.Response, next: any) {
     this.passport.authenticate('local', {
@@ -44,6 +49,7 @@ class UsersController {
   facebookCB = (...args: any[]) => this.cb('facebook', this.opt)(...args);
   twitterCB = (...args: any[]) => this.cb('twitter', this.opt)(...args);
   githubCB = (...args: any[]) => this.cb('github', this.opt)(...args);
+  localCB = (...args: any[]) => this.cb('local', this.opt)(...args);
   // spotifyCB = (...args: any[]) => this.cb('spotify', this.opt)(...args);
 };
 

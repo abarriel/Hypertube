@@ -4,19 +4,27 @@ paths:
     verb: get
     path: movies/genres
     description: Get genres
-    parameters: no
   movies.single:
     verb: get
     path: movies/:id
     description: Get full details of film
-    parameters: no
 
 # Users
   users.single:
     verb: get
     path: users/:id
     description: Get user if me get full details
-    parameters: no
+
+# Comments
+  comments.gets:
+    verb: get
+    path: comments/:imdbId
+    description: Get comments by movie
+  comments.add:
+    verb: post
+    path: comments/:imdbId
+    description: Get comments by movie
+
 
 # Auth CB
   auth.local:
@@ -48,6 +56,10 @@ paths:
   #   path: auth/spotify
   #   description: Omiauth Spotify
 # Auth CB
+  auth.localCB:
+    verb: get
+    path: auth/local/cb
+    description: Omiauth login
   auth.facebookCB:
     verb: get
     path: auth/facebook/cb
