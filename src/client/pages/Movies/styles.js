@@ -22,7 +22,12 @@ export const ParamsContainer = styled.div`
   align-items: center;
   flex-wrap:wrap;
   margin-top:30px;
-  margin-left:35px;
+  width:calc(100% - 120px);
+  padding: 0 60px;
+  @media (max-width: 900px) {
+    padding: 0 4%;
+    width:92%;
+  }
 `;
 
 export const SlideSelectContainer = styled.div`

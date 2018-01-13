@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
+import GoPlus from 'react-icons/lib/go/plus';
 
 import { MAIN_COLOR } from '../../colors';
 
@@ -108,21 +110,47 @@ export const ButtonContainer = styled.div`
   font-size: 1vw;
 `;
 
-export const Button = styled.div`
-  background-color: rgba(51,51,51,.4);
-  border-width: 0;
-  padding: .75em 2.3em;
-  height: 1.2vw;
-  border-radius: .2vw;
+export const BlackButton = styled.div`
+  position:relative;
+  height: 1.4vw;
+  width:7vw;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  background-color: black;
+  border-color: #ff0a16;
+  font-size: 1vw;
   font-weight: 700;
   text-transform: uppercase;
   margin-right: .75em;
+  padding: .57em 1.35em;
   color: #fff;
-  cursor:pointer;
-  width:6vw;
+  box-shadow: 0 1px 2px rgba(0,0,0,.3);
+  border: 1px solid rgba(255,255,255,.4);
+  transition:all 0.2s ease-in-out;
   &:hover {
-    background-color: rgba(250,250,250,.7);
+    background-color:rgb(20,20,20);
   }
+`;
+
+export const RedButton = styled.div`
+  position:relative;
+  height: 1.4vw;
+  width:7vw;
+  display:flex;
+  justify-content: flex-start;
+  align-items: center;
+  cursor: pointer;
+  background-color: #e50914;
+  border-color: #ff0a16;
+  font-size: 1vw;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-right: .75em;
+  padding: .57em 1.35em;
+  color: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,.3);
 `;
 
 export const Description = styled.p`
@@ -134,4 +162,14 @@ export const Description = styled.p`
   font-size: 1.4vw;
   user-select: none;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+`;
+
+export const PlayLogo = styled(GoPlaybackPlay)`
+  font-size:1.8em;
+  margin-right:5px;
+`;
+
+export const PlusLogo = styled(GoPlus)`
+  font-size:1.5em;
+  margin-right:5px;
 `;
