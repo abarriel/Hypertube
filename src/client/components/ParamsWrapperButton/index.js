@@ -3,6 +3,7 @@ import { withStateHandlers } from 'recompose';
 import {
   func,
   bool,
+  string,
 } from 'prop-types';
 
 import {
@@ -15,9 +16,11 @@ import ParamsWrapper from './ParamsWrapper';
 export const ParamsWrapperButton = ({
   handleChangeWrapped,
   wrapped,
+  selectedGenre,
 }) => (
   <ParamsWrapperButtonContainer onClick={() => handleChangeWrapped()} onMouseLeave={() => !wrapped && handleChangeWrapped()}>
-    <Text>Genres</Text>
+    {console.log('selectedGenre: ', selectedGenre)}
+    <Text>{selectedGenre || 'Genres'}</Text>
     <Chev />
     {!wrapped && <ParamsWrapper handleChangeWrapped={handleChangeWrapped} />}
   </ParamsWrapperButtonContainer>
@@ -26,6 +29,7 @@ export const ParamsWrapperButton = ({
 ParamsWrapperButton.propTypes = {
   handleChangeWrapped: func.isRequired,
   wrapped: bool.isRequired,
+  selectedGenre: string.isRequired,
 };
 
 export default withStateHandlers(

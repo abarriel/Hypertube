@@ -4,11 +4,17 @@ const axios = Axios.create({
   baseURL: 'http://95.85.22.142:8888/api/',
 });
 
-export const reqMovies = args => axios({
+export const reqMovies = (
+  limit = 25,
+  offset = 0,
+  genres = '',
+) => axios({
   method: 'get',
   url: 'movies',
   params: {
-    ...args,
+    limit,
+    offset,
+    genres,
   },
 }).then(({ data, status }) => {
   if (status === 201) {

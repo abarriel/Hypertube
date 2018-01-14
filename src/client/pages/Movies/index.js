@@ -3,6 +3,7 @@ import {
   array,
   func,
   number,
+  string,
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,6 +14,7 @@ import { compose, lifecycle } from 'recompose';
 import {
   getMovies,
   getMoviesCount,
+  getSelectedGenre,
 } from '../../selectors/movies';
 import {
   MoviesContainer,
@@ -28,7 +30,7 @@ import { addMovies, resetMovies } from '../../actions/movies';
 
 const onChange = (isVisible, addMovies, moviesCount) => {
   if (isVisible) {
-    reqMovies(20, moviesCount)
+    reqMovies(25, moviesCount)
       .then(movies => addMovies(movies))
       .catch(err => console.log('error: ', err));
   }
@@ -38,11 +40,12 @@ const Movies = ({
   movies,
   moviesCount,
   addMovies,
+  selectedGenre,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
       <Title>Films</Title>
-      <ParamsWrapperButton />
+      <ParamsWrapperButton selectedGenre={selectedGenre} />
     </ParamsContainer>
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
@@ -57,6 +60,7 @@ Movies.propTypes = {
   movies: array.isRequired,
   moviesCount: number.isRequired,
   addMovies: func.isRequired,
+  selectedGenre: string.isRequired,
 };
 
 const actions = { addMovies, resetMovies };
@@ -65,6 +69,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 const mapStateToProps = state => ({
   movies: getMovies(state),
   moviesCount: getMoviesCount(state),
+  selectedGenre: getSelectedGenre(state),
 });
 
 const enhance = compose(

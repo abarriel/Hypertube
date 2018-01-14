@@ -15,3 +15,5 @@ export const getGenres = state => state.movies.genres;
 export const getPreferredMovies = state => state.movies.preferredMovies;
 
 export const getrecentMovies = state => state.movies.recentMovies;
+
+export const getSelectedGenre = state => state.movies.selectedGenre;
