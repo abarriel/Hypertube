@@ -12,8 +12,12 @@ export const MoviePreviewContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap:wrap;
-  margin-top:25px;
-  margin-left:35px;
+  width:calc(100% - 120px);
+  padding: 0 60px;
+  @media (max-width: 900px) {
+    padding: 0 4%;
+    width:92%;
+  }
 `;
 
 export const ParamsContainer = styled.div`

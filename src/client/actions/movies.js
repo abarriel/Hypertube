@@ -18,7 +18,3 @@ export const loadGenres = data => ({
   type: LOAD_GENRES,
   genres: data.genres,
 });
-
-export const loadPreferredMovies = data => ({ type: LOAD_PREFERRED_MOVIES, data });
-
-export const loadRecentMovies = data => ({ type: LOAD_RECENT_MOVIES, data });

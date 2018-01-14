@@ -30,7 +30,7 @@ import { addMovies, resetMovies } from '../../actions/movies';
 
 const onChange = (isVisible, addMovies, moviesCount) => {
   if (isVisible) {
-    reqMovies(25, moviesCount)
+    reqMovies({ limit: 25, offset: moviesCount })
       .then(movies => addMovies(movies))
       .catch(err => console.log('error: ', err));
   }

@@ -22,10 +22,10 @@ export const images = [
   },
   {
     id: 3,
-    title: 'Star wars 8',
-    coverImage: 'https://images.wallpapersden.com/image/download/star-wars-8-cast-poster_60517_1920x1080.jpg',
-    logo: 'https://occ-0-55-768.1.nflxso.net/art/ff42a/9e02e9a30b57e1d8b0dbf136dc454cbce4bff42a.webp',
-    description: 'Pourquoi Hannah Baker s\'est-elle suicidée ? La vérité déchirante se fait jour, cassette après cassette.',
+    title: 'Dark',
+    coverImage: 'https://occ-0-55-768.1.nflxso.net/art/63856/96278a5ad7a048bb82901cf1ee7d8986b0a63856.webp',
+    logo: 'https://occ-0-55-768.1.nflxso.net/art/8de3c/0f7c51d2e7295e09628531d5d7d7c87addb8de3c.webp',
+    description: 'Dans une petite ville où secrets et péchés abondent, l\'histoire se répète de façon terrifiante et lancinante.',
   },
   {
     id: 4,

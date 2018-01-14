@@ -19,7 +19,6 @@ export const ParamsWrapperButton = ({
   selectedGenre,
 }) => (
   <ParamsWrapperButtonContainer onClick={() => handleChangeWrapped()} onMouseLeave={() => !wrapped && handleChangeWrapped()}>
-    {console.log('selectedGenre: ', selectedGenre)}
     <Text>{selectedGenre || 'Genres'}</Text>
     <Chev />
     {!wrapped && <ParamsWrapper handleChangeWrapped={handleChangeWrapped} />}
