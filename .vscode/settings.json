@@ -15,7 +15,7 @@
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "search.useIgnoreFilesByDefault":true,
-  "window.zoomLevel": 1,
+  "window.zoomLevel": -1,
   "files.exclude": {
     ".github": true,
     "**/node_modules": true,

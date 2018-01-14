@@ -19,13 +19,14 @@ const Users = {
   },
 
   async isRegistered({ username, id, omniauth }:any) {
-    if(!omniauth) omniauth = true;
+    let user;
+    if (!omniauth) omniauth = true;
     if (username)
-      return await DB.select(['id', 'username', 'omniauth']).from('users').where('username', username).andWhere('omniauth', omniauth).first();
+      user = await DB.select(['id', 'username', 'omniauth']).from('users').where('username', username).andWhere('omniauth', omniauth).first();
     if (id)
-      return await DB.select(['id', 'username', 'omniauth']).from('users').where('id', id).andWhere('omniauth', omniauth).first();
-    // return (await DB.select(DB.raw(`exists(select * from users WHERE username = '${username}' AND omniauth = '${omniauth}')`)).first()).exists;
-    // return (await DB.select(DB.raw(`exists(select * from users WHERE id = '${id}' AND omniauth = '${omniauth}')`)).first()).exists;
+      user = await DB.select(['id', 'username', 'omniauth']).from('users').where('id', id).andWhere('omniauth', omniauth).first();
+    if (_.isEmpty(user)) return false;
+    return user;
   },
 
   async update(newUser: any, id: any) {
@@ -46,6 +47,7 @@ const Users = {
   async single({ id, columns }:any) {
     if (columns === 'all') return DB.select().from('users').where('id', id).first();
     if (!columns) return DB.select(singleDataUser).from('users').where('id', id).first();
+    return DB.select(columns).from('users').where('id', id).first();
   },
 
   async gets(limit: number, offset: number) {
@@ -57,4 +59,4 @@ const Users = {
   }
 };
 
-export default Users;
+export { Users };

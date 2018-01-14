@@ -13,7 +13,7 @@ const Movies = {
     const [type, order = 'asc'] = sort; // escaped and checked before
     console.log(colors.green('filters: '), filters, '\n');
     const queryPattern = [`%${_.replace(q, /\s/g, '%')}%`];
-
+    console.log(queryPattern);
     const querySQL = DB.select(previewMovieInfos)
       .from('movies')
 
@@ -57,7 +57,11 @@ const Movies = {
   async single(id: string) {
     console.log('single', id);
     return DB.select().from('movies').where('imdb_id', id).first();
+  },
+
+  async ids(ids: string[]) {
+    return DB.select(previewMovieInfos).from('movies').whereIn('imdb_id', ids);
   }
 };
 
-export default Movies;
+export { Movies };

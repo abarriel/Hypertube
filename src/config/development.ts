@@ -16,7 +16,7 @@ function keysToCamelCase(object) {
       if (_.isPlainObject(value)) {
         return keysToCamelCase(value);
       } else if (_.isArray(value)) {
-        return _.map(value, keysToCamelCase);
+        return value; // return _.map(value, keysToCamelCase);
       } else {
         return value;
       }

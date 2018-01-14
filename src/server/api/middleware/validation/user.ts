@@ -21,6 +21,7 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
   const { limit, offset } = req.query;
   let { path: pp }:any = req.file || {};
   const params: any = {};
+
   if (pp)
   {
     pp = _.split(pp, '/');
@@ -38,7 +39,7 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
   params.lang = lang;
   try {
     const data: any = await Joi.validate(params, UserSchema);
-    if(data.password) {
+    if (data.password && req.originalUrl !== '/api/auth/login') {
       data.password = await bcrypt.hash(data.password, 10);
     }
     req.app.locals = { user: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };

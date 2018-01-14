@@ -2,8 +2,7 @@ import * as _ from 'lodash';
 import * as express from 'express';
 
 import middlewaresBinding from '../middleware';
-import Comments from '../../database/queries/comments';
-import Movies from '../../database/queries/movies';
+import { Comments, Movies } from '../../database/queries';
 
 class CommentsController {
   name = 'comments';

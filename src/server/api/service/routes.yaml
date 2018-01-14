@@ -25,6 +25,19 @@ paths:
     path: comments/:imdbId
     description: Get comments by movie
 
+# List
+  list.add:
+    verb: post
+    path: list/:list/:imdbId
+    description: Add Movie to my list
+  list.getList:
+    verb: get
+    path: list/:list
+    description: Get list
+  list.deleteMovie:
+    verb: delete
+    path: list/:list/:imdbId
+    description: Delete Movie from my list
 
 # Auth CB
   auth.local:

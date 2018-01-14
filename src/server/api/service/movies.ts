@@ -2,7 +2,7 @@ import * as _ from 'lodash';
 import * as express from 'express';
 
 import middlewaresBinding from '../middleware';
-import Movies from '../../database/queries/movies';
+import { Movies } from '../../database/queries';
 
 const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
 

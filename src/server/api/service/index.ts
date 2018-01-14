@@ -10,13 +10,14 @@ import users from './users';
 import auth from './auth';
 import comments from './comments';
 import password from './password';
+import list from './list';
 
 // _delete because delete is a reserver method
 const REST = ['post', 'put', 'get', '_delete', 'delete'];
 
 const router:any = express.Router();
 
-const allRoutes = { movies, users, auth, comments, password };
+const allRoutes = { movies, users, auth, comments, password, list };
 
 const routeDefinitions = YAML.load(fs.readFileSync(path.join(__dirname, 'routes.yaml'), 'utf8'));
 const routeSchema = _.map(routeDefinitions.paths, (v, k: string, o) => {

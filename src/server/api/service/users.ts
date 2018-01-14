@@ -7,7 +7,7 @@ import * as path from 'path';
 
 import middlewaresBinding from '../middleware';
 import mailer from '../middleware/mail';
-import Users from '../../database/queries/users';
+import { Users } from '../../database/queries';
 import { Environment } from '../../core';
 
 class UsersController {
@@ -16,7 +16,7 @@ class UsersController {
   @middlewaresBinding(['uploadImg', 'userFormValidate'])
   async post(req: express.Request, res: express.Response, next: any) {
     const { user } = req.app.locals;
-    if (await Users.isRegistered({ username: user.username, omniauth: false })) return next({ type: 'db', details: 'User already register under a similar login' });
+    if (await Users.isRegistered({ username: user.username, omniauth: 'false' })) return next({ type: 'db', details: 'User already register under a similar login' });
     if (_.some(user, _.isNil)) return next({ type: 'Validation', details: 'One value is equired but is undefined' });
 
     const userInDb = await Users.post({ ...user, omniauth: false });

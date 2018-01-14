@@ -3,7 +3,7 @@ import * as bcrypt from 'bcrypt';
 import * as _ from 'lodash';
 
 import { Environment } from './Environment';
-import Users from '../database/queries/users';
+import { Users } from '../database/queries';
 
 const FacebookStrategy = require('passport-facebook').Strategy;
 const LocalStrategy   = require('passport-local').Strategy;
@@ -27,11 +27,15 @@ passport.use('local', new LocalStrategy({
   callbackURL     : 'http://localhost:8888/api/auth/local/cb',
   passReqToCallback: true
 }, async (req: any, username: string , password: string, done: any) => {
-  const { user } = req.app.locals;
-  if (!await Users.isRegistered({ username: user.username, omniauth: 'false' })) return done({ type: 'db', details: 'User not found' });
-  const { password: passU, id, profilePicture } = await Users.getByUsername(user.username, ['password', 'id', 'profilePicture']);
-  if (!await bcrypt.compare(user.password, passU)) return done({ type: 'Auth', details: 'Failed to authenticate' });
-  return done(null, { id, username, omniauth: false, profilePicture });
+  try {
+    const { user } = req.app.locals;
+    if (!await Users.isRegistered({ username: user.username, omniauth: 'false' })) return done({ type: 'db', details: 'User not found' });
+    const { password: passU, id, profilePicture } = await Users.getByUsername(user.username, ['password', 'id', 'profilePicture']);
+    if (!await bcrypt.compare(user.password, passU)) return done({ type: 'Auth', details: 'Failed to authenticate' });
+    return done(null, { id, username, omniauth: false, profilePicture });
+  } catch (err) {
+    return done({ type: 'Auth', details: 'Failed', err });
+  }
 }));
 
 passport.use('42', new FortyTwoStrategy({

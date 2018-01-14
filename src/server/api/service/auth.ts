@@ -4,10 +4,8 @@ import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
 
 import middlewaresBinding from '../middleware';
-import Users from '../../database/queries/users';
+import { Users } from '../../database/queries';
 import { Environment } from '../../core';
-import { Strategy } from 'passport-strategy';
-import { label } from 'joi';
 
 class UsersController {
   passport: any;

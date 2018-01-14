@@ -4,7 +4,7 @@ import { createCommentsTable, deleteCommentsTable } from './migrations/comments'
 
 const initDb = async () => {
   await createUsersTable();
-  // await deleteCommentsTable();
+  // await deleteUsersTable();
   await createCommentsTable();
   // await createUsersTable();
   // init Movies in scrapper.ts

@@ -5,7 +5,7 @@ import * as colors from 'colors/safe';
 import { stripIndent } from 'common-tags';
 import { DB } from '../../core';
 
-const Users = {
+const Comments = {
   async post(comment: any) {
     console.log(colors.green('comment: '), comment, '\n');
     const querySQL = DB.insert(comment)
@@ -25,4 +25,4 @@ const Users = {
   }
 };
 
-export default Users;
+export { Comments };

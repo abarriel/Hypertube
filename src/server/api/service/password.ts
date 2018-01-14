@@ -4,7 +4,7 @@ import * as jwt from 'jsonwebtoken';
 
 import middlewaresBinding from '../middleware';
 import mailer from '../middleware/mail';
-import Users from '../../database/queries/users';
+import { Users } from '../../database/queries';
 
 const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
 

@@ -1,7 +1,6 @@
 import * as express from 'express';
 import * as _ from 'lodash';
 
-import Users from '../../database/queries/users';
 import { Environment } from '../../core';
 import { number } from 'joi';
 
