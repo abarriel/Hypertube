@@ -3,7 +3,6 @@ import { createMoviesTable, deleteMovieTable } from './database/migrations/movie
 import * as _ from 'lodash';
 import axios from 'axios';
 
-
 /**
  *
  * query-string made home
@@ -100,7 +99,9 @@ const scrapYTS = async () => {
  */
 
 const initScrapper = async () => {
-  await scrapYTS();
+  // const { OpenSubtitles } = Utils;
+
+  // await scrapYTS();
   console.log('Done scrapping');
 };
 

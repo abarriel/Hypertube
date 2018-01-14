@@ -29,6 +29,10 @@ interface Iconfig {
     address: string,
     password: string,
   },
+  openSubApi: {
+    username: string,
+    password: string,
+  }
   omdb: string,
   jwt: {
     expiresIn: string;

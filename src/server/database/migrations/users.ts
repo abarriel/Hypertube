@@ -9,7 +9,7 @@ const createUsersTable = (): Promise<any> => {
       table.string('first_name');
       table.string('last_name');
       table.string('email');
-      table.enu('lang', ['EN', 'FR']).defaultTo('EN');
+      table.string('lang').defaultTo('eng');
       table.string('profile_picture').defaultTo('upload/default.jpg');
       table.string('password');
       table.specificType('my_list', 'TEXT[]');

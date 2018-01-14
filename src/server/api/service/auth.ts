@@ -29,6 +29,13 @@ class UsersController {
     res.json({ status: 'Authorized' });
   };
 
+  @middlewaresBinding(['isAuthorize'])
+  async post(req: any, res: any, next: any) {
+    req.logout();
+    // res.redirect('/');
+    res.json({ status: 'Ok' });
+  };
+
   @middlewaresBinding(['userFormValidate'])
   async local(req: express.Request, res: express.Response, next: any) {
     this.passport.authenticate('local', {

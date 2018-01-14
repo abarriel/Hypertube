@@ -3,6 +3,7 @@ import * as express from 'express';
 import * as Joi from 'joi';
 import * as path from 'path';
 import * as bcrypt from 'bcrypt';
+import * as CountryLanguage from 'country-language';
 
 const UserSchema = Joi.object({
   username: Joi.string().min(5).max(25).alphanum(),
@@ -11,7 +12,7 @@ const UserSchema = Joi.object({
   firstName: Joi.string().min(2).max(30).regex(/^[A-Za-z ]+$/),
   lastName: Joi.string().min(2).max(30).regex(/^[A-Za-z ]+$/),
   profilePicture: Joi.string().optional(),
-  lang: Joi.string(),
+  lang: Joi.string().alphanum().min(2).max(3),
   limit: Joi.number().integer().min(0).max(50).optional(),
   offset: Joi.number().integer().min(0).optional(),
 });
@@ -42,6 +43,7 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
     if (data.password && req.originalUrl !== '/api/auth/login') {
       data.password = await bcrypt.hash(data.password, 10);
     }
+    if (data.lang && !CountryLanguage.languageCodeExists(data.lang)) throw ({ type: 'lang', details: 'lang incorrect'});
     req.app.locals = { user: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };
     next();
   } catch (err) {

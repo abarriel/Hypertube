@@ -34,7 +34,6 @@ var options: any = {
  const initServer = async (config: Iconfig) => {
   const app = await express();
   const { server: { host, port } } = config;
-  console.log('initServer');
 
   await app
     .use(cors())
