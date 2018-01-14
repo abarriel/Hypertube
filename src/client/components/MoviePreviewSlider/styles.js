@@ -15,6 +15,7 @@ export const MoviePreviewSliderContainer = styled.div`
   flex-wrap:no-wrap;
   transition: left 0.3s ease-in-out;
   background-color: rgb(20,20,20);
+  margin-bottom:-10vw;
 `;
 
 export const MoviePreviewSliderImageContainer = styled.div`

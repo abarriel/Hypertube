@@ -5,6 +5,9 @@ export const HomeContainer = styled.div`
   display:flex;
   min-width:100%;
   margin-top:70px;
+  @media (max-width: 900px) {
+    margin-top:40px;
+  }
 `;
 
 export const MainContent = styled.div`

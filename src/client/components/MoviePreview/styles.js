@@ -23,8 +23,8 @@ export const MainContainer = styled.div`
   top: 0;
   transition-delay: 0.05s;
   transition: all ${TRANSITION}s ease-in-out, opacity 1s ease-in-out ${({ pos, moviesCount }) => {
-    if (moviesCount >= 20) {
-      return ((pos - (moviesCount - 20)) / 10);
+    if (moviesCount >= 25) {
+      return ((pos - (moviesCount - 25)) / 10);
     }
     return (pos / 10);
     }}s;

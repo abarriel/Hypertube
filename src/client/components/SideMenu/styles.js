@@ -22,6 +22,7 @@ export const SideMenuStyled = styled.div`
   @media (max-width: 900px) {
     padding: 0 4%;
     width:92%;
+    height:40px;
   }
 `;
 
@@ -80,6 +81,10 @@ export const MenuRight = styled.div`
   position:absolute;
   display:flex;
   right:0;
+  height:70px;
+  @media (max-width: 900px) {
+    height:40px;
+  }
 `;
 
 export const LinkContainer = styled.div`
