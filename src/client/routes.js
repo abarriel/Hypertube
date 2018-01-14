@@ -2,7 +2,7 @@ import Home from './pages/Home';
 import Profil from './pages/Profil';
 import Movies from './pages/Movies';
 import Users from './pages/Users';
-import Login from './pages/Login';
+import Video from './pages/Video';
 
 const routes = [
   {
@@ -27,8 +27,8 @@ const routes = [
     id: 4,
   },
   {
-    path: '/login',
-    component: Login,
+    path: '/video',
+    component: Video,
     id: 5,
   },
 ];

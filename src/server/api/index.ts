@@ -9,7 +9,7 @@ import * as swaggerUi from 'swagger-ui-express';
 import * as colors from 'colors/safe';
 import * as session from 'express-session';
 
-import { errorHandler, listenErrorDB } from './middleware';
+import { errorHandler, listenErrorDB, notFoundErr } from './middleware';
 import { passport } from '../core';
 import dispatchRoute from './service';
 import * as swaggerDocument from './swagger.json';
@@ -51,13 +51,14 @@ var options: any = {
     .use(passport.session())
     .use(listenErrorDB);
 
-    await app
-      .get('/', (req, res) => res.json({ ping: 'Hello World' }))
-      .use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
-      .use('/api', dispatchRoute({ passport }));
+  await app
+    .get('/', (req, res) => res.json({ ping: 'Hello World' }))
+    .use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
+    .use('/api', dispatchRoute({ passport }));
 
-      await app
-      .use(errorHandler);
+  await app
+    .use(notFoundErr)
+    .use(errorHandler);
 
     const httpServer = await app.listen(port, host, () => {
       console.log(colors.green(`[API] Server running: ${getUrl(httpServer)}`));
