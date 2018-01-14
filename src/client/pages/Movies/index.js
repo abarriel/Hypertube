@@ -28,9 +28,9 @@ import ParamsWrapperButton from '../../components/ParamsWrapperButton';
 import { reqMovies } from '../../request';
 import { addMovies, resetMovies } from '../../actions/movies';
 
-const onChange = (isVisible, addMovies, moviesCount) => {
+const onChange = (isVisible, addMovies, moviesCount, selectedGenre) => {
   if (isVisible) {
-    reqMovies({ limit: 25, offset: moviesCount })
+    reqMovies({ limit: 25, offset: moviesCount, genres: selectedGenre })
       .then(movies => addMovies(movies))
       .catch(err => console.log('error: ', err));
   }
@@ -50,7 +50,7 @@ const Movies = ({
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
     </MoviePreviewContainer>
-    <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount)}>
+    <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount, selectedGenre)}>
       <Spinner />
     </VisibilitySensor>
   </MoviesContainer>

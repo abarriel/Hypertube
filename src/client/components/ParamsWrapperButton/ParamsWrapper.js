@@ -11,6 +11,7 @@ import { updateMovies } from '../../actions/movies';
 import { getGenres } from '../../selectors/movies';
 import {
   ParamsWrapperContainer,
+  ParamsWrapperOverlay,
   Genre,
 } from './styles';
 
@@ -19,16 +20,18 @@ const ParamsWrapper = ({
   handleChangeWrapped,
   updateMovies,
 }) => (
-  <ParamsWrapperContainer>
-    {genres.map(genre => (
-      <Genre onClick={() => {
-        reqMovies(25, 0, genre)
-          .then(data => updateMovies(data, genre));
-      }}>
-        {genre.toLowerCase()}
-      </Genre>
-    ))}
-  </ParamsWrapperContainer>
+  <ParamsWrapperOverlay>
+    <ParamsWrapperContainer>
+      {genres.map(genre => (
+        <Genre onClick={() => {
+          reqMovies({limit: 25, offset: 0, genres: genre })
+            .then(data => updateMovies(data, genre));
+        }}>
+          {genre.toLowerCase()}
+        </Genre>
+      ))}
+    </ParamsWrapperContainer>
+  </ParamsWrapperOverlay>
 );
 
 ParamsWrapper.propTypes = {

@@ -4,8 +4,8 @@ const Sections = [
     label: 'Les plus gros succès sur Hypertix',
     reqParams: {
       limit: 25,
-      offset: 0,
-      ratings: 5,
+      ratings: 4,
+      years: 2017,
     },
   },
   {
@@ -22,7 +22,7 @@ const Sections = [
     label: 'Action et aventure',
     reqParams: {
       limit: 25,
-      offset: 0,
+      offset: 10,
       genres: 'Action',
       years: 2017,
     },
