@@ -144,6 +144,7 @@ export const MiniLinkWrapperElem = styled(Link)`
   color:${({ isSelected }) => isSelected ? 'white' : '#b3b3b3'};
   cursor:${({ isSelected }) => isSelected ? 'pointer' : 'default'};
   font-weight: ${({ isSelected }) => isSelected ? 700 : 0};
+  cursor:pointer;
 `;
 
 export const SideLine = styled.div`
