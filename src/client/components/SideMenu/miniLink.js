@@ -16,12 +16,11 @@ const MiniLink = ({
   handleChangeWrapped,
 }) => (
   <MiniLinkContainer
-    onMouseEnter={() => handleChangeWrapped()}
-    onMouseLeave={() => handleChangeWrapped()}
+    onMouseEnter={() => wrapped && handleChangeWrapped()}
   >
     Parcourir
     <Chev />
-    {!wrapped && <MiniLinkWrapper />}
+    {!wrapped && <MiniLinkWrapper handleChangeWrapped={handleChangeWrapped} />}
   </MiniLinkContainer>
 );
 

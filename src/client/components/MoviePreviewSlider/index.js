@@ -17,7 +17,7 @@ import {
   PlusLogo,
 } from './styles';
 
-const getRandomMovie = () => 4;
+const getRandomMovie = () => 3;
 
 const randomMovie = () => getRandomMovie();
 

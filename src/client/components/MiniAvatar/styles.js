@@ -12,13 +12,16 @@ export const MiniAvatarImage = styled.div`
   position:relative;
   width:35px;
   height:35px;
-  border-radius:1px;
   background-image:${({ avatar }) => `url(${avatar})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   cursor:pointer;
   overflow:hidden;
+  @media (max-width: 900px) {
+    width:40px;
+    height:40px;
+  }
 `;
 
 export const MiniAvatarPopOver = styled.div`

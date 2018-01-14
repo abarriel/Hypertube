@@ -21,14 +21,6 @@ const init = () => {
   getGenres()
     .then(data => {
       store.dispatch(loadGenres(data));
-      reqMovies(25, 0, [], '', 5)
-        .then(preferredMvoies => {
-          store.dispatch(loadPreferredMovies(preferredMvoies));
-          reqMovies(25, 0, [], '2017', 4)
-            .then(recentMvoies => {
-              store.dispatch(loadRecentMovies(recentMvoies));
-            });
-        });
     });
 };
 

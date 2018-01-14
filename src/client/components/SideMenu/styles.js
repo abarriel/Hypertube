@@ -22,6 +22,7 @@ export const SideMenuStyled = styled.div`
   @media (max-width: 900px) {
     padding: 0 4%;
     width:92%;
+    height:40px;
   }
 `;
 
@@ -80,6 +81,10 @@ export const MenuRight = styled.div`
   position:absolute;
   display:flex;
   right:0;
+  height:70px;
+  @media (max-width: 900px) {
+    height:40px;
+  }
 `;
 
 export const LinkContainer = styled.div`
@@ -91,6 +96,7 @@ export const LinkContainer = styled.div`
 `;
 
 export const MiniLinkContainer = styled.div`
+  position:relative;
   display:flex;
   -webkit-box-align: center;
   align-items: center;
@@ -114,13 +120,39 @@ export const Chev = styled(GoTriangleDown)`
 
 export const MiniLinkWrapperContainer = styled.div`
   display:flex;
+  position:absolute;
+  top:40px;
+  left:0;
   flex-direction:column;
   width:260px;
-  background-color:rgba(0,0,0,0.7);
+  background-color:rgba(0,0,0,0.9);
 `;
 
-export const MiniLinkWrapperElem = styled.div`
+export const MiniLinkWrapperElem = styled(Link)`
+  position:relative;
   display:flex;
+  justify-content: center;
+  align-items: center;
   width:100%;
   height:50px;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    background-color:rgba(250,250,250,0.1);
+  }
+  text-decoration:none;
+  color:white;
+  color:${({ isSelected }) => isSelected ? 'white' : '#b3b3b3'};
+  cursor:${({ isSelected }) => isSelected ? 'pointer' : 'default'};
+  font-weight: ${({ isSelected }) => isSelected ? 700 : 0};
+  cursor:pointer;
+`;
+
+export const SideLine = styled.div`
+  position:absolute;
+  display:flex;
+  height:50px;
+  top:0;
+  left:0;
+  width:5px;
+  background-color:${MAIN_COLOR};
 `;
