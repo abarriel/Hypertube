@@ -101,7 +101,7 @@ const scrapYTS = async () => {
 const initScrapper = async () => {
   // const { OpenSubtitles } = Utils;
 
-  // await scrapYTS();
+  await scrapYTS();
   console.log('Done scrapping');
 };
 
