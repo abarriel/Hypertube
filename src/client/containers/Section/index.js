@@ -12,8 +12,9 @@ import {
   RightArrow,
   LeftArrow,
   MoviesRowContainer,
+  FakeRow,
 } from './styles';
-import MovieRow, { FakeRow } from '../MovieRow';
+import MovieRow from '../MovieRow';
 import { WIDTH, MARGIN } from '../MovieRow/constants';
 
 const goLeft = start => start - 1 >= 0 ? -1 : 0;

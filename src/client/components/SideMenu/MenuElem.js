@@ -14,7 +14,7 @@ const MenuElem = ({
 }) => (
   <MenuElemStyled to={to} selected={selected}>
     <MenuElemText selected={selected}>{label}</MenuElemText>
-    {selected && <UnderLine />}
+    <UnderLine selected={selected} />
   </MenuElemStyled>
 );
 

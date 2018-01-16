@@ -68,3 +68,6 @@ export const SpinnerContainer = styled.div`
   justify-content: center;
   align-items: center;
 `;
+
+export const FakeRow = styled.div`
+`;

@@ -71,10 +71,11 @@ export const UnderLine = styled.div`
   position:absolute;
   bottom:0;
   width:100%;
-  height:6px;
   background-color:${MAIN_COLOR};
   margin-top:20px;
   margin-bottom:0px;
+  height: ${({ selected }) => !selected ? 0 : 6}px;
+  transition:all 0.1s ease;
 `;
 
 export const MenuRight = styled.div`
