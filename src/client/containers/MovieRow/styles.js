@@ -29,7 +29,7 @@ export const MoviePreviewContainer = styled.div`
   margin:${MARGIN}px;
   margin-top:25px;
   &:hover {
-    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
+    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.3)'};
     z-index:${({ hidden }) => hidden ? '100' : '110'};
     box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
   };

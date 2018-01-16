@@ -12,11 +12,9 @@ import {
   RightArrow,
   LeftArrow,
   MoviesRowContainer,
-  SpinnerContainer,
 } from './styles';
-import MovieRow from '../MovieRow';
+import MovieRow, { FakeRow } from '../MovieRow';
 import { WIDTH, MARGIN } from '../MovieRow/constants';
-import Spinner from '../../components/Spinner';
 
 const goLeft = start => start - 1 >= 0 ? -1 : 0;
 
@@ -45,9 +43,7 @@ const Section = ({
     </TitleContainer>
     <MoviesRowContainer>
       {movies.length === 0 && (
-        <SpinnerContainer>
-          <Spinner />
-        </SpinnerContainer>
+        <FakeRow />
       )}
       {movies.length > 0 && <MovieRow
         start={start}
