@@ -43,7 +43,9 @@ paths:
   video.getSub:
     verb: get
     path: video/:imdbId/sub
-
+  video.getVideo:
+    verb: get
+    path: video/:imdbId
 # Auth CB
   auth.local:
     verb: post

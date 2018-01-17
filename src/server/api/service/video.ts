@@ -4,6 +4,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 // import * as str2vtt from 'srt2vtt';
 import * as str2vtt from 'srt-to-vtt';
+import * as torrentStream from 'torrent-stream';
 import axios from 'axios';
 
 import middlewaresBinding from '../middleware';
@@ -56,6 +57,60 @@ class VideoController {
       });
       //  If there was an error while opening a stream we stop the request and display it.
       stream.on('error', (err) => next({type: 'Stream', details: 'Stream Error', err }));
+    });
+  };
+
+  async getVideo(req: express.Request, res: express.Response, next: any) {
+    const { imdbId } = req.params;
+    const { isVideo } = Utils;
+    if (!/\w{5,20}/.test(imdbId)) return next({ type: 'validation', details: 'Wrong ImdbId provided' });
+    const { torrents } = await Movies.single(imdbId);
+    const torrent = torrents[0];
+    const { hash, size_bytes } = torrent;
+    const file:any = {};
+    const engine = torrentStream(hash, {
+      connections: 1000,     // Max amount of peers to be connected to.
+      uploads: 0,          // Number of upload slots.
+      tmp: 'public/upload',          // Root folder for the files storage.
+      path: `public/upload/${imdbId}/torrent`, // Where to save the files. Overrides `tmp`.
+      trackers: [
+        'udp://tracker.openbittorrent.com:80',
+        'udp://tracker.ccc.de:80',
+        'udp://track.two:80',
+        'udp://open.demonii.com:1337/announce',
+        'udp://tracker.coppersurfer.tk:6969',
+        'udp://glotorrents.pw:6969/announce',
+        'udp://tracker.opentrackr.org:1337/announce',
+        'udp://torrent.gresille.org:80/announce',
+        'udp://p4p.arenabg.com:1337',
+        'udp://tracker.leechers-paradise.org:6969',
+        'udp://tracker.internetwarriors.net:1337',
+      ],
+    });
+    // engine.files.forEach((file) => {
+    //   console.log('filename:', file.name, isVideo(file.name));
+    //   if (!isVideo(file.name)) file.deselect();
+    //   else {
+    //     file.select();
+    //   }
+    // });
+    // engine.destroy(() => {});
+    engine.on('ready', () => {
+      engine.files.forEach((file) => {
+        console.log('filename:', file.name, isVideo(file.name));
+        if (isVideo(file.name)) {
+          file.createReadStream();
+          file = file;
+        }
+      });
+    });
+
+    engine.on('download', (pieceIndex) => {
+      console.log(`Index= ${pieceIndex} - `, Math.floor((engine.swarm.downloaded / size_bytes) * 100), ' %');
+    });
+    engine.on('idle', () => {
+      // file.createReadStream();
+      console.log('idle DONE', file);
     });
   };
 
