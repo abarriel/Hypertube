@@ -57,7 +57,7 @@ var options: any = {
     .use('/api', dispatchRoute({ passport }));
 
   await app
-    .use(notFoundErr)
+    // .use(notFoundErr)
     .use(errorHandler);
 
     const httpServer = await app.listen(port, host, () => {

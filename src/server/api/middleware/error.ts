@@ -18,9 +18,9 @@ const errorHandler = (err: any, req: express.Request, res: express.Response, nex
   console.log(colors.red('ERROR: \n'), errMsg, colors.red('\nEND ERROR'));
 };
 
-const notFoundErr = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  next({ type: 'Auth', details: 'endpoint api not found', err: req.originalUrl});
-};
+// const notFoundErr = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+//   next({ type: 'Auth', details: 'endpoint api not found', err: req.originalUrl});
+// };
 
 const listenErrorDB = (req: express.Request, res: express.Response, next: express.NextFunction) => {
   DB.on('query-error', (err: any, obj: any) => {
@@ -28,4 +28,4 @@ const listenErrorDB = (req: express.Request, res: express.Response, next: expres
   });
   next();
 }
-export { errorHandler, listenErrorDB, notFoundErr };
+export { errorHandler, listenErrorDB };

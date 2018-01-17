@@ -10,7 +10,7 @@ const createUsersTable = (): Promise<any> => {
       table.string('last_name');
       table.string('email');
       table.string('lang').defaultTo('eng');
-      table.string('profile_picture').defaultTo('upload/default.jpg');
+      table.string('profile_picture').defaultTo('default_picture.jpg');
       table.string('password');
       table.specificType('my_list', 'TEXT[]');
       table.specificType('history', 'TEXT[]');

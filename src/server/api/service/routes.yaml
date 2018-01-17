@@ -39,6 +39,11 @@ paths:
     path: list/:list/:imdbId
     description: Delete Movie from my list
 
+# Video
+  video.getSub:
+    verb: get
+    path: video/:imdbId/sub
+
 # Auth CB
   auth.local:
     verb: post
