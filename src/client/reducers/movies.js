@@ -34,7 +34,7 @@ const reducer = (state = initialState, action) => {
       };
     }
     case RESET_MOVIES: {
-      return {...initialState, genres: state.genres };
+      return { ...initialState, genres: state.genres };
     }
     case ADD_MOVIES: {
       return { ...state, data: [...state.data, ...action.data.movies], count: state.count + action.data.movies.length };

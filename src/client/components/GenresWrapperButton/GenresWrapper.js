@@ -7,43 +7,51 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { reqMovies } from '../../request';
-import { updateMovies } from '../../actions/movies';
+import {
+  updateMovies,
+  resetMovies,
+} from '../../actions/movies';
 import { getGenres } from '../../selectors/movies';
 import {
-  ParamsWrapperContainer,
-  ParamsWrapperOverlay,
+  GenresWrapperContainer,
+  GenresWrapperOverlay,
   Genre,
 } from './styles';
 
-const ParamsWrapper = ({
+const GenresWrapper = ({
   genres,
   handleChangeWrapped,
   updateMovies,
+  resetMovies,
 }) => (
-  <ParamsWrapperOverlay>
-    <ParamsWrapperContainer>
+  <GenresWrapperOverlay>
+    <GenresWrapperContainer>
       {genres.map(genre => (
         <Genre onClick={() => {
           reqMovies({limit: 25, offset: 0, genres: genre })
-            .then(data => updateMovies(data, genre));
+            .then(data => {
+              resetMovies();
+              updateMovies(data, genre);
+            });
         }}>
           {genre.toLowerCase()}
         </Genre>
       ))}
-    </ParamsWrapperContainer>
-  </ParamsWrapperOverlay>
+    </GenresWrapperContainer>
+  </GenresWrapperOverlay>
 );
 
-ParamsWrapper.propTypes = {
+GenresWrapper.propTypes = {
   genres: array.isRequired,
   handleChangeWrapped: func.isRequired,
+  resetMovies: func.isRequired,
 };
 
 const mapStateToProps = state => ({
   genres: getGenres(state),
 });
 
-const actions = { updateMovies };
+const actions = { updateMovies, resetMovies };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(ParamsWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(GenresWrapper);

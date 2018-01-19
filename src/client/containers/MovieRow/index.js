@@ -10,6 +10,8 @@ import { withStateHandlers } from 'recompose';
 import { MovieRowContainer, MovieRowContent } from './styles';
 import MoviePreview from './MoviePreview';
 import ScrollBar from './ScrollBar';
+import FakePreview from './FakePreview';
+import Arrows from './Arrows';
 
 const getMoviesLength = movies => {
   const { length } = movies;
@@ -42,7 +44,8 @@ const MovieRow = ({
     <MovieRowContainer
       margin={-start}
     >
-      {movies.map((movie, index) =>
+      {start !== 0 && <Arrows direction="left" move={move} />}
+      {movies.length > 0 ? movies.map((movie, index) =>
         (<MoviePreview
           key={movie.imdbId}
           movie={movie}
@@ -51,7 +54,9 @@ const MovieRow = ({
           move={move}
           length={getMoviesLength(movies)}
           index={index}
-        />))}
+        />)) :
+      <FakePreview />}
+      <Arrows direction="right" move={move} />
     </MovieRowContainer>
   </MovieRowContent>
 );
