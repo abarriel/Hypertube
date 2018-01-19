@@ -54,6 +54,15 @@ const videoExtensions = [
 	".yuv"
 ];
 
+const formatBytes = (a: any, b?: any) => {
+  if (0 == a) return "0 Bytes";
+  var c = 1024,
+      d = b || 2,
+      e = ["Bytes", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"],
+      f = Math.floor(Math.log(a) / Math.log(c));
+  return parseFloat((a / Math.pow(c, f)).toFixed(d)) + " " + e[f]
+};
+
 const Utils = {
 
   OpenSubtitles: new OS({
@@ -76,7 +85,7 @@ const Utils = {
 
   getStreamTorrent: (hash: string, imdbId: string) => new Promise((resolve, reject) => {
     let movie: any = '';
-    const Engine = torrentStream(hash, {
+    const Engine: any = torrentStream(hash, {
       connections: 1000,                  // Max amount of peers to be connected to.
       uploads: 0,                         // Number of upload slots.
       tmp: 'public/upload/tmp',           // Root folder for the files storage.
@@ -98,20 +107,19 @@ const Utils = {
 
     Engine.on('ready', () => {
       Engine.files.forEach(file => {
-        console.log('file: ', file.name, file.length, Utils.isVideo(file.name));
+        console.log('file:  ', formatBytes(file.length).padStart(10),  Utils.isVideo(file.name), file.name);
         if (Utils.isVideo(file.name) && file.length > movie.length) {
-          console.log(colors.green(`video: ${file.name} ${file.length}`));
+          console.log('video: ', formatBytes(file.length).padStart(10), '     ', file.name);
           const ext = path.extname(file.name);
           movie = file;
           movie.size = file.length;
-          movie.path = (ext) => `public/upload/${imdbId}/${Engine.torrent.name}/${file.name.replace(ext, '')}${ext}`;
+          movie.path = (ext: string) => `public/upload/${imdbId}/${Engine.torrent.name}/${file.name.replace(ext, '')}${ext}`;
           resolve(movie);
         }
       });
     });
 
-    Engine.on('download', (pieceIndex) => {
-      function formatBytes(a,b){if(0==a)return"0 Bytes";var c=1024,d=b||2,e=["Bytes","KB","MB","GB","TB","PB","EB","ZB","YB"],f=Math.floor(Math.log(a)/Math.log(c));return parseFloat((a/Math.pow(c,f)).toFixed(d))+" "+e[f]};
+    Engine.on('download', (pieceIndex: number) => {
       console.log(`piece ${pieceIndex.toString().padStart(3)} - Downloaded: ${formatBytes(Engine.swarm.downloaded).padStart(10)} - Length Movie: ${formatBytes(movie.size).padStart(10)}`, colors.green(`${Math.floor((Engine.swarm.downloaded / movie.length) * 100)} %`));
     });
 

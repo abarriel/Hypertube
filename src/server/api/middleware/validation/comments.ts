@@ -22,7 +22,7 @@ const commentsValidate = async (req: express.Request, res: express.Response, nex
   params.offset = offset ? parseInt(offset) : 0;
   try {
     const data: any = await Joi.validate(params, CommentSchema);
-    req.app.locals = { comment: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };
+    req.app.locals = {  ...req.app.locals, comment: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };
     next();
   } catch (err) {
     next({ type: 'JoiSchema', err });

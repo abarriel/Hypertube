@@ -44,7 +44,7 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
       data.password = await bcrypt.hash(data.password, 10);
     }
     if (data.lang && !CountryLanguage.languageCodeExists(data.lang)) throw ({ type: 'lang', details: 'lang incorrect'});
-    req.app.locals = { user: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };
+    req.app.locals = { ...req.app.locals, user: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };
     next();
   } catch (err) {
     next({ type: 'JoiSchema', err });
