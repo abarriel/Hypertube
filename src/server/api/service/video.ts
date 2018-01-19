@@ -16,7 +16,7 @@ class VideoController {
 
   // @middlewaresBinding(['isAuthorize'])
   async get(req: express.Request, res: express.Response, next: any) {
-    const file = './public/upload/tt0110912/tt0110912.mp4';
+    const file = './public/upload/tt0110912/torrent/Pulp Fiction (1994)/Pulp.Fiction.1994.720p.BrRip.x264.YIFY.mp4';
     fs.stat(file, (err, stats) => {
       if (err)
       {
@@ -62,56 +62,31 @@ class VideoController {
 
   async getVideo(req: express.Request, res: express.Response, next: any) {
     const { imdbId } = req.params;
-    const { isVideo } = Utils;
     if (!/\w{5,20}/.test(imdbId)) return next({ type: 'validation', details: 'Wrong ImdbId provided' });
+    const { getStreamTorrent } = Utils;
     const { torrents } = await Movies.single(imdbId);
-    const torrent = torrents[0];
-    const { hash, size_bytes } = torrent;
-    const file:any = {};
-    const engine = torrentStream(hash, {
-      connections: 1000,     // Max amount of peers to be connected to.
-      uploads: 0,          // Number of upload slots.
-      tmp: 'public/upload',          // Root folder for the files storage.
-      path: `public/upload/${imdbId}/torrent`, // Where to save the files. Overrides `tmp`.
-      trackers: [
-        'udp://tracker.openbittorrent.com:80',
-        'udp://tracker.ccc.de:80',
-        'udp://track.two:80',
-        'udp://open.demonii.com:1337/announce',
-        'udp://tracker.coppersurfer.tk:6969',
-        'udp://glotorrents.pw:6969/announce',
-        'udp://tracker.opentrackr.org:1337/announce',
-        'udp://torrent.gresille.org:80/announce',
-        'udp://p4p.arenabg.com:1337',
-        'udp://tracker.leechers-paradise.org:6969',
-        'udp://tracker.internetwarriors.net:1337',
-      ],
-    });
-    // engine.files.forEach((file) => {
-    //   console.log('filename:', file.name, isVideo(file.name));
-    //   if (!isVideo(file.name)) file.deselect();
-    //   else {
-    //     file.select();
-    //   }
-    // });
-    // engine.destroy(() => {});
-    engine.on('ready', () => {
-      engine.files.forEach((file) => {
-        console.log('filename:', file.name, isVideo(file.name));
-        if (isVideo(file.name)) {
-          file.createReadStream();
-          file = file;
-        }
-      });
-    });
+    const { hash, size_bytes } = torrents[0];
+    const movieStream: any = await getStreamTorrent(hash, imdbId);
 
-    engine.on('download', (pieceIndex) => {
-      console.log(`Index= ${pieceIndex} - `, Math.floor((engine.swarm.downloaded / size_bytes) * 100), ' %');
-    });
-    engine.on('idle', () => {
-      // file.createReadStream();
-      console.log('idle DONE', file);
-    });
+    const range: any = req.headers.range;
+    console.log('range ', range);
+    if (!range) return next({ type: 'Torrent', details: 'Range not provided' });
+    const positions = range.replace(/bytes=/, '').split('-');
+    const start = parseInt(positions[0], 10);
+    const file_size = movieStream.size;
+    const end = positions[1] ? parseInt(positions[1], 10) : file_size - 1;
+    const chunksize = (end - start) + 1;
+    const head = {
+      'Content-Range': 'bytes ' + start + '-' + end + '/' + file_size,
+      'Accept-Ranges': 'bytes',
+      'Content-Length': chunksize,
+      'Content-Type': 'video/mp4'
+    };
+    res.writeHead(206, head);
+    //  Create the createReadStream option object so createReadStream knows how much data it should be read from the file.
+    const stream_position = { start, end };
+    console.log('stream position ', stream_position);
+    movieStream.createReadStream(stream_position).pipe(res);
   };
 
   // @middlewaresBinding(['isAuthorize'])
@@ -133,28 +108,18 @@ class VideoController {
       });
       const pathSubs = buildPath(imdbId);
       data.pipe(fs.createWriteStream(`${pathSubs}.srt`))
-          .on('finish', () => {
-            fs.createReadStream(`${pathSubs}.srt`)
-              .pipe(str2vtt())
-              .pipe(fs.createWriteStream(`${pathSubs}.vtt`))
-              .on('finish', () => {
-                fs.unlink(`${pathSubs}.srt`, () => {});
-                res.json({ path: `${pathSubs}.vtt` });
-              });
-            });
+      .on('finish', () => {
+        fs.createReadStream(`${pathSubs}.srt`)
+        .pipe(str2vtt())
+        .pipe(fs.createWriteStream(`${pathSubs}.vtt`))
+        .on('finish', () => {
+          fs.unlink(`${pathSubs}.srt`, () => {});
+          res.json({ path: `${pathSubs}.vtt` });
+        });
+      });
     } catch(err) {
       next({ type: 'Torrent', details: 'failed to get sub', err });
     }
   };
 }
 export default VideoController;
-
-// function mkdirp(filepath) {
-//   var dirname = path.dirname(filepath);
-
-//   if (!fs.existsSync(dirname)) {
-//       mkdirp(dirname);
-//   }
-
-//   fs.mkdirSync(filepath);
-// }

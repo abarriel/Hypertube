@@ -3,8 +3,6 @@ import * as cron from 'cron';
 import initDb from './database';
 import initScrapper from './scrapper';
 import initServer from './api';
-import axios from 'axios';
-// require('longjohn');
 
 /**
  * Init chain of the server. DB -> HTTP
@@ -22,7 +20,6 @@ const scrapperJob = new cron.CronJob({
     await initDb();
     scrapperJob.start();
     await initServer(Environment.getConfig());
-    axios.get('http://localhost:8888/api/video/tt0110912');
   } catch (err) {
     console.log(err);
   }

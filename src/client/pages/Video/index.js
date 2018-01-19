@@ -12,7 +12,7 @@ class Video extends Component {
     return (
       <div>
         <video controls>
-          <source src="http://localhost:8888/api/video" type="video/mp4" />
+          <source src="http://localhost:8888/api/video/tt0110912" type="video/mp4" />
           <track kind="captions" src="/upload/tt0110912/tt0110912.vtt" srcLang="eng" label="English" />
         </video>
       </div>
