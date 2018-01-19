@@ -24,7 +24,8 @@ import {
 } from './styles';
 import MoviePreview from '../../components/MoviePreview';
 import Spinner from '../../components/Spinner';
-import ParamsWrapperButton from '../../components/ParamsWrapperButton';
+import GenresWrapperButton from '../../components/GenresWrapperButton';
+import RatingWrapperButton from '../../components/RatingWrapperButton';
 import { reqMovies } from '../../request';
 import { addMovies, resetMovies } from '../../actions/movies';
 
@@ -45,7 +46,8 @@ const Movies = ({
   <MoviesContainer>
     <ParamsContainer>
       <Title>Films</Title>
-      <ParamsWrapperButton selectedGenre={selectedGenre} />
+      <GenresWrapperButton selectedGenre={selectedGenre} />
+      <RatingWrapperButton />
     </ParamsContainer>
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}

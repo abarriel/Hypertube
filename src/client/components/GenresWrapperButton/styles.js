@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import FaSortDesc from 'react-icons/lib/fa/sort-desc';
 
-export const ParamsWrapperButtonContainer = styled.div`
+export const GenresButtonContainer = styled.div`
   position:absolute;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   height: 2rem;
@@ -51,7 +51,7 @@ export const Chev = styled(FaSortDesc)`
   color: #fff;
 `;
 
-export const ParamsWrapperContainer = styled.div`
+export const GenresWrapperContainer = styled.div`
   position:absolute;
   display:flex;
   flex-wrap:wrap;
@@ -71,7 +71,7 @@ export const ParamsWrapperContainer = styled.div`
   cursor: default;
 `;
 
-export const ParamsWrapperOverlay = styled.div`
+export const GenresWrapperOverlay = styled.div`
   position:absolute;
   display:flex;
   z-index: 1999;
