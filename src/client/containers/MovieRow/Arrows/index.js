@@ -25,6 +25,9 @@ const getArrow = direction => {
 const getMoveDirection = (direction, length, size, width, start) => {
   const maxStart = Math.round(length - (width / (WIDTH + (2 * MARGIN))));
   if (direction === 'left') {
+    if (start - size < 0) {
+      return -start;
+    }
     return -size;
   }
   if ((start + size) > maxStart) {

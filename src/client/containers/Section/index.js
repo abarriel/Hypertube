@@ -40,7 +40,7 @@ const onChange = (isVisible, reqParams, updateMovies) => {
   }
 };
 
-const getEnd = width => Math.round((width - 25) / (WIDTH + (2 * MARGIN)));
+const getEnd = width => Math.round((width) / (WIDTH + (2 * MARGIN)));
 
 const Section = ({
   movies = [],

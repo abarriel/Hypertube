@@ -45,7 +45,7 @@ const MovieRow = ({
     <MovieRowContainer
       margin={-start}
     >
-      {start !== 0 &&
+      {start > 0 &&
         <Arrows
           start={start}
           direction="left"
@@ -65,14 +65,14 @@ const MovieRow = ({
           index={index}
         />)) :
       <FakePreview />}
-      <Arrows
+      {start <  (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
         start={start}
         direction="right"
         move={move}
         length={getMoviesLength(movies)}
         size={getMoveLength(width)}
         width={width}
-      />
+      />}
     </MovieRowContainer>
   </MovieRowContent>
 );
