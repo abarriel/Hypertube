@@ -26,13 +26,14 @@ const GenresWrapper = ({
 }) => (
   <GenresWrapperOverlay>
     <GenresWrapperContainer>
-      {genres.map(genre => (
-        <Genre onClick={() => {
-          req.Movies({limit: 25, offset: 0, genres: genre })
-            .then(data => {
-              resetMovies();
-              updateMovies(data, genre);
-            });
+      {genres.map((genre, i) => (
+        <Genre
+          onClick={() => {
+            req.movies({ ålimit: 25, offset: 0, genres: genre })
+              .then(data => {
+                resetMovies();
+                updateMovies(data, genre);
+              });
         }}>
           {genre.toLowerCase()}
         </Genre>

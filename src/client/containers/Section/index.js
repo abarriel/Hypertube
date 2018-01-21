@@ -35,7 +35,7 @@ const goRight = (start, length, end) => {
 
 const onChange = (isVisible, reqParams, updateMovies) => {
   if (isVisible) {
-    reqMovies(reqParams)
+    req.movies(reqParams)
       .then(data => updateMovies(data.movies));
   }
 };
