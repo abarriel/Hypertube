@@ -7,15 +7,16 @@ export const ArrowContainer = styled.div`
   justify-content: center;
   align-items: center;
   position:absolute;
+  top:0;
   ${({ direction }) => direction === 'left' && 'left: 0'};
   ${({ direction }) => direction === 'right' && 'left: calc(100vw - 8vw)'};
-  height:340px;
+  height:100%;
   width:8vw;
-  background-color:rgba(0,0,0,0.3);
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3), rgba(0,0,0,0));
   z-index:105;
   cursor:pointer;
   &:hover {
-    background-color:rgba(0,0,0,0.2);
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.2), rgba(0,0,0,0));
   }
 `;
 

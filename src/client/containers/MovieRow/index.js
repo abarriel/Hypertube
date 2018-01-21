@@ -7,6 +7,7 @@ import {
 } from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
+import { getMoveLength } from './utils';
 import { MovieRowContainer, MovieRowContent } from './styles';
 import MoviePreview from './MoviePreview';
 import ScrollBar from './ScrollBar';
@@ -44,7 +45,15 @@ const MovieRow = ({
     <MovieRowContainer
       margin={-start}
     >
-      {start !== 0 && <Arrows direction="left" move={move} />}
+      {start > 0 &&
+        <Arrows
+          start={start}
+          direction="left"
+          move={move}
+          length={getMoviesLength(movies)}
+          size={getMoveLength(width)}
+          width={width}
+        />}
       {movies.length > 0 ? movies.map((movie, index) =>
         (<MoviePreview
           key={movie.imdbId}
@@ -56,7 +65,14 @@ const MovieRow = ({
           index={index}
         />)) :
       <FakePreview />}
-      <Arrows direction="right" move={move} />
+      {start <  (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
+        start={start}
+        direction="right"
+        move={move}
+        length={getMoviesLength(movies)}
+        size={getMoveLength(width)}
+        width={width}
+      />}
     </MovieRowContainer>
   </MovieRowContent>
 );

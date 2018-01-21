@@ -2,8 +2,13 @@ import React from 'react';
 import {
   string,
   func,
+  number,
 } from 'prop-types';
 
+import {
+  WIDTH,
+  MARGIN,
+} from '../constants';
 import {
   ArrowContainer,
   LeftArrow,
@@ -17,18 +22,29 @@ const getArrow = direction => {
   return <RightArrow />;
 };
 
-const getMoveDirection = direction => {
+const getMoveDirection = (direction, length, size, width, start) => {
+  const maxStart = Math.round(length - (width / (WIDTH + (2 * MARGIN))));
   if (direction === 'left') {
-    return -1;
+    if (start - size < 0) {
+      return -start;
+    }
+    return -size;
   }
-  return 1;
+  if ((start + size) > maxStart) {
+    return (maxStart - start) + 1;
+  }
+  return size;
 };
 
 const Arrows = ({
   direction,
   move,
+  length,
+  size,
+  width,
+  start,
 }) => (
-  <ArrowContainer direction={direction} onClick={() => move(getMoveDirection(direction))}>
+  <ArrowContainer direction={direction} onClick={() => move(getMoveDirection(direction, length, size, width, start))}>
     {getArrow(direction)}
   </ArrowContainer>
 );
@@ -36,6 +52,10 @@ const Arrows = ({
 Arrows.propTypes = {
   direction: string.isRequired,
   move: func.isRequired,
+  length: number.isRequired,
+  width: number.isRequired,
+  size: number.isRequired,
+  start: number.isRequired,
 };
 
 export default Arrows;

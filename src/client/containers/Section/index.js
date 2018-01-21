@@ -1,7 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {
+  number,
+  string,
+  func,
+  object,
+  array,
+} from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import VisibilitySensor from 'react-visibility-sensor';
 import { compose, withStateHandlers, lifecycle } from 'recompose';
 
 import req from '../../request';
@@ -26,7 +33,14 @@ const goRight = (start, length, end) => {
   return 1;
 };
 
-const getEnd = width => Math.round((width - 25) / (WIDTH + (2 * MARGIN)));
+const onChange = (isVisible, reqParams, updateMovies) => {
+  if (isVisible) {
+    reqMovies(reqParams)
+      .then(data => updateMovies(data.movies));
+  }
+};
+
+const getEnd = width => Math.round((width) / (WIDTH + (2 * MARGIN)));
 
 const Section = ({
   movies = [],
@@ -34,10 +48,14 @@ const Section = ({
   start,
   width,
   move,
+  reqParams,
+  updateMovies,
 }) => (
   <SectionContainer>
     <TitleContainer>
-      <Title>{title}</Title>
+      <VisibilitySensor onChange={isVisible => onChange(isVisible, reqParams, updateMovies)}>
+        <Title>{title}</Title>
+      </VisibilitySensor>
       <LeftArrow onClick={() => move(goLeft(start))} />
       <RightArrow onClick={() => move(goRight(start, movies.length, getEnd(width)))} />
     </TitleContainer>
@@ -54,11 +72,13 @@ const Section = ({
 );
 
 Section.propTypes = {
-  movies: PropTypes.array,
-  width: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  start: PropTypes.number.isRequired,
-  move: PropTypes.func.isRequired,
+  movies: array,
+  width: number.isRequired,
+  title: string.isRequired,
+  start: number.isRequired,
+  move: func.isRequired,
+  reqParams: object.isRequired,
+  updateMovies: func.isRequired,
 };
 
 const actions = {
@@ -66,12 +86,8 @@ const actions = {
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-const mapStateToProps = state => ({
-
-});
-
 const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
   withStateHandlers(
     {
       movies: [],
@@ -88,8 +104,6 @@ const enhance = compose(
     componentDidMount() {
       this.props.updateWindowDimensions();
       window.addEventListener('resize', this.props.updateWindowDimensions);
-      req.movies(this.props.reqParams)
-        .then(data => this.props.updateMovies(data.movies));
     },
     componentWillUnmount() {
       window.removeEventListener('resize', this.props.updateWindowDimensions);
