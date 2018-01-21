@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { compose, withStateHandlers, lifecycle } from 'recompose';
 
-import { reqMovies } from '../../request';
+import req from '../../request';
 import {
   TitleContainer,
   Title,
@@ -88,7 +88,7 @@ const enhance = compose(
     componentDidMount() {
       this.props.updateWindowDimensions();
       window.addEventListener('resize', this.props.updateWindowDimensions);
-      reqMovies(this.props.reqParams)
+      req.movies(this.props.reqParams)
         .then(data => this.props.updateMovies(data.movies));
     },
     componentWillUnmount() {

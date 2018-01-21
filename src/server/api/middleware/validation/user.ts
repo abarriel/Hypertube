@@ -22,7 +22,7 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
   const { limit, offset } = req.query;
   let { path: pp }:any = req.file || {};
   const params: any = {};
-
+  console.log(req);
   if (pp)
   {
     pp = _.split(pp, '/');

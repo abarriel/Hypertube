@@ -6,7 +6,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { reqMovies } from '../../request';
+import req from '../../request';
 import {
   updateMovies,
   resetMovies,
@@ -53,7 +53,7 @@ const GenresWrapper = ({
     <RatingWrapperContainer>
       {ratingTab.map(rating => (
         <Genre onClick={() => {
-          reqMovies({limit: 25, offset: 0, rating: rating.value })
+          req.movies({limit: 25, offset: 0, rating: rating.value })
             .then(data => {
               resetMovies();
               updateMovies(data);

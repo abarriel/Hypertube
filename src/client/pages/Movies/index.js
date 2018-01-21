@@ -26,12 +26,12 @@ import MoviePreview from '../../components/MoviePreview';
 import Spinner from '../../components/Spinner';
 import GenresWrapperButton from '../../components/GenresWrapperButton';
 import RatingWrapperButton from '../../components/RatingWrapperButton';
-import { reqMovies } from '../../request';
+import req from '../../request';
 import { addMovies, resetMovies } from '../../actions/movies';
 
 const onChange = (isVisible, addMovies, moviesCount, selectedGenre) => {
   if (isVisible) {
-    reqMovies({ limit: 25, offset: moviesCount, genres: selectedGenre })
+    req.movies({ limit: 25, offset: moviesCount, genres: selectedGenre })
       .then(movies => addMovies(movies))
       .catch(err => console.log('error: ', err));
   }

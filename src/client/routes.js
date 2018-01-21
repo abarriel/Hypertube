@@ -3,6 +3,8 @@ import Profil from './pages/Profil';
 import Movies from './pages/Movies';
 import Users from './pages/Users';
 import Video from './pages/Video';
+import Login from './pages/Login';
+import Register from './pages/Register';
 
 const routes = [
   {
@@ -30,6 +32,16 @@ const routes = [
     path: '/video',
     component: Video,
     id: 5,
+  },
+  {
+    path: '/login',
+    component: Login,
+    id: 6,
+  },
+  {
+    path: '/register',
+    component: Register,
+    id: 7,
   },
 ];
 

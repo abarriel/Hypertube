@@ -2,6 +2,7 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "commonjs",
+    "allowJs": true,
     "outDir": "dist",
     "experimentalDecorators": true,
     "rootDir": ".",

@@ -38,8 +38,12 @@ class UsersController {
 
   @middlewaresBinding(['userFormValidate'])
   async local(req: express.Request, res: express.Response, next: any) {
-    this.passport.authenticate('local', {
-      successRedirect : '/', // redirect to the secure profile section
+    this.passport.authenticate('local', (err, user, info) => {
+      if (err) next({ type: 'validation', details: 'bad request' });
+      req.logIn(user, err => {
+        if (err) next({ type: 'validation', details: 'bad request' });
+        else res.redirect('/')
+      })
     })(req, res, next);
   };
 

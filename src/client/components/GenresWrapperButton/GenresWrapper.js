@@ -6,7 +6,7 @@ import {
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { reqMovies } from '../../request';
+import req from '../../request';
 import {
   updateMovies,
   resetMovies,
@@ -28,7 +28,7 @@ const GenresWrapper = ({
     <GenresWrapperContainer>
       {genres.map(genre => (
         <Genre onClick={() => {
-          reqMovies({limit: 25, offset: 0, genres: genre })
+          req.Movies({limit: 25, offset: 0, genres: genre })
             .then(data => {
               resetMovies();
               updateMovies(data, genre);

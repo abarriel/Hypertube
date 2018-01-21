@@ -35,8 +35,13 @@ var options: any = {
   const app = await express();
   const { server: { host, port } } = config;
 
+  const corsOptions = {
+    origin: 'http://localhost:8080',
+    credentials: true,
+  };
+
   await app
-    .use(cors())
+    .use(cors(corsOptions))
     .use(compression())
     .use(logger('dev'))
     .use(cookieParser())
@@ -49,10 +54,10 @@ var options: any = {
       }))
     .use(passport.initialize())
     .use(passport.session())
-    .use(listenErrorDB);
+    .use(listenErrorDB)
 
   await app
-    .get('/', (req, res) => res.json({ ping: 'Hello World' }))
+    .get('/', (req, res) => {res.json({ redirect: '/' }) ;})
     .use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
     .use('/api', dispatchRoute({ passport }));
 

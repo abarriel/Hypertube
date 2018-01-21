@@ -8,17 +8,15 @@ import {
   loadPreferredMovies,
   loadRecentMovies,
 } from './actions/movies';
-import {
-  getGenres,
-  reqMovies,
-} from './request';
+import req from './request';
 import App from './pages/App';
+import Auth from './auth';
 
 const initialState = {};
 const store = configureStore(initialState);
 
 const init = () => {
-  getGenres()
+  req.genres()
     .then(data => {
       store.dispatch(loadGenres(data));
     });
@@ -26,6 +24,11 @@ const init = () => {
 
 init();
 
-const Root = () => <Provider store={store}><App /></Provider>;
+const Root = () => (
+  <Provider store={store}>
+    {/* <Auth> */}
+      <App />
+    {/* </Auth> */}
+  </Provider>);
 
 ReactDOM.render(<Root />, document.getElementById('__HYPERTUBE__'));
