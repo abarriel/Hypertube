@@ -41,7 +41,7 @@ class PasswordController {
         await Users.update({ password }, sub);
         res.json({ status: 'ok' });
       } catch (err) {
-        next({ type: 'db', details: 'failed to update password' });
+        next({ type: 'db', details: 'failed to update password', err});
       }
   };
 };

@@ -2,7 +2,7 @@ import { DB, Environment } from './core';
 import { createMoviesTable, deleteMovieTable } from './database/migrations/movies';
 import * as _ from 'lodash';
 import axios from 'axios';
-
+import * as https from 'https';
 /**
  *
  * query-string made home
@@ -73,13 +73,15 @@ const scrapYTS = async () => {
     page: 1,
     sort_by: 'download_count',
   };
-
-  const { data: { data: { movies, movie_count } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`);
+  const agent = new https.Agent({
+    rejectUnauthorized: false
+  });
+  const { data: { data: { movies, movie_count } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`, { httpsAgent: agent } );
   const pageNumber = Math.round(movie_count / params.limit) + 1;
   const promisesT = _.times(pageNumber, async (num) => {
     if (num < 1) return ;
     params.page = num;
-    const { data: { data: { movies } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`);
+    const { data: { data: { movies } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`, { httpsAgent: agent });
     const promises = _.map(movies, async (movie: any) => {
       try {
         const { data: movieNub } = await axios.get(omdbUrl(movie.imdb_code));

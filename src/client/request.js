@@ -6,6 +6,7 @@ const tryCatcher = (shouldNotCatchedErr) => (target, key, descriptor) => {
     try {
       const req = await method.apply(this, arguments);
       const { data, status, headers } = req;
+      console.log(data);
       if (status === 201) throw data;
       return data;
     } catch (err) {
@@ -23,18 +24,13 @@ class Req {
       withCredentials: true,
     });
 
-    this.axios = (method, url, data) => {
-      axiosApi.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-      if (method === 'get') return axiosApi({ method, url, params: data });
-      return axiosApi({ method, url, data });
+    this.axios = (method, url, data, opt) => {
+      if (method === 'get') return axiosApi({ method, url, params: data, ...opt });
+      return axiosApi({ method, url, data, ...opt });
     };
   }
 
-  @tryCatcher(true)
-  async login(user) {
-    return this.axios('post', 'auth/login', user);
-  }
-
+  // Movies
   @tryCatcher()
   async movies(params) {
     return this.axios('get', 'movies', params);
@@ -48,6 +44,77 @@ class Req {
   @tryCatcher()
   async genres() {
     return this.axios('get', 'movies/genres');
+  }
+
+  // Comments
+  @tryCatcher()
+  async getComments(imdbId) {
+    return this.axios('get', `comments/${imdbId}`);
+  }
+
+  @tryCatcher()
+  async addComment(imdbId) {
+    return this.axios('post', `comments/${imdbId}`);
+  }
+
+
+  // my list
+  @tryCatcher()
+  async getMylist() {
+    return this.axios('get', 'list/my_list');
+  }
+
+  @tryCatcher()
+  async addMovieMylist(imdbId) {
+    return this.axios('post', `list/my_list${imdbId}`);
+  }
+
+  @tryCatcher()
+  async deleteMovieMylist(imdbId) {
+    return this.axios('post', `list/my_list/${imdbId}`);
+  }
+
+
+  // historic list
+  @tryCatcher()
+  async getHistory(imdbId) {
+    return this.axios('get', `list/history/${imdbId}`);
+  }
+
+  // Users
+  @tryCatcher(true)
+  async getMyInfos() {
+    return this.axios('get', 'users/me');
+  }
+
+  @tryCatcher(true)
+  async getUserById(id) {
+    return this.axios('get', `users/${id}`);
+  }
+
+  @tryCatcher(true)
+  async login(user) {
+    return this.axios('post', 'auth/login', user);
+  }
+
+  @tryCatcher(true)
+  async lostPassword(email) {
+    return this.axios('get', 'password', email);
+  }
+
+  @tryCatcher(true)
+  async resetPassword(token, password) {
+    return this.axios('put', 'password', password, { params: { token } });
+  }
+
+  @tryCatcher(true)
+  async register(user) {
+    return this.axios('post', 'users', user, { 'content-type': 'multipart/form-data' });
+  }
+
+  @tryCatcher(true)
+  async editUser(user) {
+    return this.axios('put', 'users', user, { 'content-type': 'multipart/form-data' });
   }
 
   @tryCatcher(true)
