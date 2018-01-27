@@ -16,6 +16,7 @@ import { noAuthneeded } from '../../auth';
 
 const isSelected = pathName => window.location.pathname === pathName;
 
+const isOnMovies = () => window.location.pathname === '/movies';
 
 const SideMenu = () => {
   const { pathname } = window.location;
@@ -37,7 +38,7 @@ const SideMenu = () => {
       </LinkContainer>
       <MiniLink />
       <MenuRight>
-        <SearchBar />
+        {isOnMovies() && <SearchBar />}
         <ProfilMenu />
       </MenuRight>
     </SideMenuStyled>

@@ -30,7 +30,7 @@ const reducer = (state = initialState, action) => {
         data: [...action.data.movies],
         count: action.data.movies.length,
         start: 0,
-        selectedGenre: action.selectedGenre,
+        selectedGenre: action.selectedGenre || state.selectedGenre,
       };
     }
     case RESET_MOVIES: {
