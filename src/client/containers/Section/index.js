@@ -33,8 +33,8 @@ const goRight = (start, length, end) => {
   return 1;
 };
 
-const onChange = (isVisible, reqParams, updateMovies) => {
-  if (isVisible) {
+const onChange = (isVisible, reqParams, updateMovies, movies) => {
+  if (isVisible && movies.length === 0) {
     req.movies(reqParams)
       .then(data => updateMovies(data.movies));
   }
@@ -53,7 +53,7 @@ const Section = ({
 }) => (
   <SectionContainer>
     <TitleContainer>
-      <VisibilitySensor onChange={isVisible => onChange(isVisible, reqParams, updateMovies)}>
+      <VisibilitySensor onChange={isVisible => onChange(isVisible, reqParams, updateMovies, movies)}>
         <Title>{title}</Title>
       </VisibilitySensor>
       <LeftArrow onClick={() => move(goLeft(start))} />
