@@ -8,12 +8,12 @@ export const getMoviesCount = state => state.movies.count;
 
 export const getPreferedMovies = movies => filter(movies, (movie) => movie.imdbRating > 3);
 
-export const getRecentMovies = movies => filter(movies, (movie) => movie.year > 2015);
-
 export const getGenres = state => state.movies.genres;
 
 export const getPreferredMovies = state => state.movies.preferredMovies;
 
-export const getrecentMovies = state => state.movies.recentMovies;
+export const getRecentMovies = state => state.movies.recentMovies;
 
 export const getSelectedGenre = state => state.movies.selectedGenre;
+
+export const getQ = state => state.movies.q;

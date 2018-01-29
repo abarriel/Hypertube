@@ -15,6 +15,7 @@ import {
   getMovies,
   getMoviesCount,
   getSelectedGenre,
+  getQ,
 } from '../../selectors/movies';
 import {
   MoviesContainer,
@@ -27,13 +28,15 @@ import Spinner from '../../components/Spinner';
 import GenresWrapperButton from '../../components/GenresWrapperButton';
 import RatingWrapperButton from '../../components/RatingWrapperButton';
 import req from '../../request';
-import { addMovies, resetMovies } from '../../actions/movies';
+import {
+  addMovies,
+  resetMovies,
+} from '../../actions/movies';
 
 const onChange = (isVisible, addMovies, moviesCount, selectedGenre) => {
   if (isVisible) {
     req.movies({ limit: 25, offset: moviesCount, genres: selectedGenre })
-      .then(movies => addMovies(movies))
-      .catch(err => console.log('error: ', err));
+      .then(movies => addMovies(movies));
   }
 };
 
@@ -42,6 +45,7 @@ const Movies = ({
   moviesCount,
   addMovies,
   selectedGenre,
+  q,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
@@ -52,9 +56,11 @@ const Movies = ({
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
     </MoviePreviewContainer>
-    <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount, selectedGenre)}>
-      <Spinner />
-    </VisibilitySensor>
+    {q.length === 0 &&
+      <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount, selectedGenre)}>
+        <Spinner />
+      </VisibilitySensor>
+    }
   </MoviesContainer>
 );
 
@@ -63,6 +69,7 @@ Movies.propTypes = {
   moviesCount: number.isRequired,
   addMovies: func.isRequired,
   selectedGenre: string.isRequired,
+  q: string.isRequired,
 };
 
 const actions = { addMovies, resetMovies };
@@ -72,13 +79,14 @@ const mapStateToProps = state => ({
   movies: getMovies(state),
   moviesCount: getMoviesCount(state),
   selectedGenre: getSelectedGenre(state),
+  q: getQ(state),
 });
 
 const enhance = compose(
 
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
-    componentWillUnmount() {
+    componentWillMount() {
       this.props.resetMovies();
     },
   }),

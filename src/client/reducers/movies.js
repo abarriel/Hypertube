@@ -5,6 +5,7 @@ import {
   LOAD_GENRES,
   UPDATE_MOVIES,
   LOAD_RECENT_MOVIES,
+  CHANGE_PARAMS,
 } from '../actions/movies';
 
 const initialState = {
@@ -12,6 +13,7 @@ const initialState = {
   start: 0,
   count: 0,
   genres: [],
+  q: '',
   selectedGenre: '',
   trendsMovies: [],
   preferredMovies: [],
@@ -44,7 +46,11 @@ const reducer = (state = initialState, action) => {
       return { ...state, genres: action.genres };
     }
     case LOAD_RECENT_MOVIES: {
-      return { ...state, recentsMovies: action.data };
+      return { ...state, recentMovies: action.data.movies };
+    }
+    case CHANGE_PARAMS: {
+      const q = action.data.q || '';
+      return { ...state, q };
     }
     default:
       return state;

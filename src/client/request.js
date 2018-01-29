@@ -33,6 +33,7 @@ class Req {
   // Movies
   @tryCatcher()
   async movies(params) {
+    console.log(params);
     return this.axios('get', 'movies', params);
   }
 
