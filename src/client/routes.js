@@ -5,6 +5,7 @@ import Users from './pages/Users';
 import Video from './pages/Video';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Recents from './pages/Recents';
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/register',
     component: Register,
     id: 7,
+  },
+  {
+    path: '/recents',
+    component: Recents,
+    id: 8,
   },
 ];
 

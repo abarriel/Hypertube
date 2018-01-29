@@ -14,6 +14,7 @@ export const addMovies = data => ({ type: ADD_MOVIES, data });
 
 export const resetMovies = () => ({ type: RESET_MOVIES });
 
+export const loadRecentMovies = () => ({ types: LOAD_RECENT_MOVIES });
 export const loadGenres = data => ({
   type: LOAD_GENRES,
   genres: data.genres,

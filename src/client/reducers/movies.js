@@ -4,6 +4,7 @@ import {
   RESET_MOVIES,
   LOAD_GENRES,
   UPDATE_MOVIES,
+  LOAD_RECENT_MOVIES,
 } from '../actions/movies';
 
 const initialState = {
@@ -41,6 +42,9 @@ const reducer = (state = initialState, action) => {
     }
     case LOAD_GENRES: {
       return { ...state, genres: action.genres };
+    }
+    case LOAD_RECENT_MOVIES: {
+      return { ...state, recentsMovies: action.data };
     }
     default:
       return state;
