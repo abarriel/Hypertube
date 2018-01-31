@@ -21,11 +21,6 @@ const initialState = {
     start: 0,
     count: 0,
   },
-  trendsMovies: [],
-  preferredMovies: [],
-  recentMovies: [],
-  actionAndAdventureMovies: [],
-  thillersMovies: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,7 +38,11 @@ const reducer = (state = initialState, action) => {
       };
     }
     case RESET_MOVIES: {
-      return { ...initialState, genres: state.genres };
+      return {
+        ...initialState,
+        genres: state.genres,
+        reqParams: state.reqParams,
+      };
     }
     case ADD_MOVIES: {
       return {
@@ -62,12 +61,13 @@ const reducer = (state = initialState, action) => {
       return { ...state, recentMovies: action.data.movies };
     }
     case CHANGE_PARAMS: {
-      const q = action.data.q || state.q;
-      const rating = action.rating || state.rating;
-      const selectedGenre = action.selectedGenre || state.selectedGenre;
+      const q = action.data.q || state.reqParams.q;
+      const rating = action.data.rating || state.reqParams.rating;
+      const selectedGenre = action.data.selectedGenre || state.reqParams.selectedGenre;
       return {
         ...state,
         reqParams: {
+          ...state.reqParams,
           q,
           rating,
           selectedGenre,

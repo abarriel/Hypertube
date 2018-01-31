@@ -10,6 +10,7 @@ import req from '../../request';
 import {
   updateMovies,
   resetMovies,
+  changeParams,
 } from '../../actions/movies';
 import { getGenres } from '../../selectors/movies';
 import {
@@ -23,18 +24,21 @@ const GenresWrapper = ({
   handleChangeWrapped,
   updateMovies,
   resetMovies,
+  changeParams,
 }) => (
   <GenresWrapperOverlay>
     <GenresWrapperContainer>
       {genres.map((genre, i) => (
         <Genre
           onClick={() => {
-            req.movies({ ålimit: 25, offset: 0, genres: genre })
+            changeParams({ selectedGenre: genre });
+            req.movies({ limit: 25, offset: 0, genres: genre })
               .then(data => {
                 resetMovies();
                 updateMovies(data, genre);
               });
-        }}>
+          }}
+        >
           {genre.toLowerCase()}
         </Genre>
       ))}
@@ -46,13 +50,14 @@ GenresWrapper.propTypes = {
   genres: array.isRequired,
   handleChangeWrapped: func.isRequired,
   resetMovies: func.isRequired,
+  changeParams:func.isRequired,
 };
 
 const mapStateToProps = state => ({
   genres: getGenres(state),
 });
 
-const actions = { updateMovies, resetMovies };
+const actions = { changeParams, updateMovies, resetMovies };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(GenresWrapper);

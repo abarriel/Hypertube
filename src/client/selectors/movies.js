@@ -10,10 +10,8 @@ export const getPreferedMovies = movies => filter(movies, (movie) => movie.imdbR
 
 export const getGenres = state => state.movies.genres;
 
-export const getPreferredMovies = state => state.movies.preferredMovies;
-
-export const getRecentMovies = state => state.movies.recentMovies;
-
 export const getSelectedGenre = state => state.movies.reqParams.selectedGenre;
 
 export const getQ = state => state.movies.reqParams.q;
+
+export const getReqParams = state => state.movies.reqParams;

@@ -4,6 +4,7 @@ import {
   func,
   number,
   string,
+  object,
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,9 +14,7 @@ import { compose, lifecycle } from 'recompose';
 
 import {
   getMovies,
-  getMoviesCount,
-  getSelectedGenre,
-  getQ,
+  getReqParams,
 } from '../../selectors/movies';
 import {
   MoviesContainer,
@@ -33,31 +32,29 @@ import {
   resetMovies,
 } from '../../actions/movies';
 
-const onChange = (isVisible, addMovies, moviesCount, selectedGenre) => {
+const onChange = (isVisible, addMovies, reqParams) => {
   if (isVisible) {
-    req.movies({ limit: 25, offset: moviesCount, genres: selectedGenre })
+    req.movies({ limit: 25, offset: reqParams.count, genres: reqParams.selectedGenre, rating: '' })
       .then(movies => addMovies(movies));
   }
 };
 
 const Movies = ({
   movies,
-  moviesCount,
   addMovies,
-  selectedGenre,
-  q,
+  reqParams,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
       <Title>Films</Title>
-      <GenresWrapperButton selectedGenre={selectedGenre} />
+      <GenresWrapperButton selectedGenre={reqParams.selectedGenre} />
       <RatingWrapperButton />
     </ParamsContainer>
     <MoviePreviewContainer>
-      {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
+      {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
     </MoviePreviewContainer>
-    {q.length === 0 &&
-      <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount, selectedGenre)}>
+    {reqParams.q.length === 0 &&
+      <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, reqParams)}>
         <Spinner />
       </VisibilitySensor>
     }
@@ -66,10 +63,8 @@ const Movies = ({
 
 Movies.propTypes = {
   movies: array.isRequired,
-  moviesCount: number.isRequired,
   addMovies: func.isRequired,
-  selectedGenre: string.isRequired,
-  q: string.isRequired,
+  reqParams: object.isRequired,
 };
 
 const actions = { addMovies, resetMovies };
@@ -77,9 +72,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const mapStateToProps = state => ({
   movies: getMovies(state),
-  moviesCount: getMoviesCount(state),
-  selectedGenre: getSelectedGenre(state),
-  q: getQ(state),
+  reqParams: getReqParams(state),
 });
 
 const enhance = compose(
