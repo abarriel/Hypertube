@@ -156,7 +156,6 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(1px)' : ' blur(0px)'};
   -webkit-backface-visibility: hidden;
   -ms-transform: translateZ(0);
   -webkit-transform: translateZ(0);

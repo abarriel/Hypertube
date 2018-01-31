@@ -32,14 +32,14 @@ const MoviePreview = ({
     pos={pos}
     moviesCount={moviesCount}
   >
-    <BackgroundImage
-      coverImage={movie.coverImage}
-      displayShadow={displayShadow}
-    />
     {
       displayShadow &&
       <Shadow movie={movie} displayShadow={displayShadow} />
     }
+    <BackgroundImage
+      coverImage={movie.coverImage}
+      displayShadow={displayShadow}
+    />
   </MainContainer>
 );
 

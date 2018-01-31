@@ -13,21 +13,16 @@ export const MainContainer = styled.div`
   margin: ${MARGIN}px;
   z-index:100;
   opacity:${({ isSmall }) => isSmall ? 0 : 1};
-  &:hover {
-    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
-    z-index:${({ hidden }) => hidden ? '100' : '110'};
-    box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
-  };
   border-radius:2px;
   overflow:hidden;
   top: 0;
   transition-delay: 0.05s;
-  transition: all ${TRANSITION}s ease-in-out, opacity 1s ease-in-out ${({ pos, moviesCount }) => {
-    if (moviesCount >= 25) {
-      return ((pos - (moviesCount - 25)) / 20);
-    }
-    return (pos / 20);
-    }}s;
+  transition: all ${TRANSITION}s ease, opacity 1s ease-in-out ${({ pos, moviesCount }) => {
+  if (moviesCount >= 25) {
+    return ((pos - (moviesCount - 25)) / 20);
+  }
+  return (pos / 20);
+}}s;
 `;
 
 export const BackgroundImage = styled.div`
@@ -39,7 +34,6 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(2px)' : ' blur(0px)'};
   -webkit-backface-visibility: hidden;
   -ms-transform: translateZ(0);
   -webkit-transform: translateZ(0);
@@ -52,12 +46,13 @@ export const ShadowContainer = styled.div`
   flex-direction:column;
   justify-content: space-between;
   align-items: center;
-  width:100%;
+  max-width:100%;
+  overflow:hidden;
   height:calc(100% - 20px);
   opacity: ${({ opacity }) => opacity};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
-  transition: all ${TRANSITION + 0.5}s;
-  transition-delay:1s;
+  transition: all ${TRANSITION + 0.3}s;
+  transition-delay:0.2s;
   padding:20px;
   padding-bottom:0;
   z-index:120;

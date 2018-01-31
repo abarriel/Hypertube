@@ -2,6 +2,7 @@ import React from 'react';
 import {
   array,
   func,
+  object,
 } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -14,7 +15,8 @@ import {
 import {
   RatingWrapperContainer,
   RatingWrapperOverlay,
-  Genre,
+  Value,
+  Title,
 } from './styles';
 
 const ratingTab = [
@@ -44,36 +46,41 @@ const ratingTab = [
   },
 ];
 
-const GenresWrapper = ({
+const RatingWrapper = ({
   handleChangeWrapped,
   updateMovies,
   resetMovies,
+  rating,
 }) => (
   <RatingWrapperOverlay>
     <RatingWrapperContainer>
+      <Title>From</Title>
       {ratingTab.map(rating => (
-        <Genre
+        <Value
           key={rating.id}
-          onClick={() => {
-            req.movies({limit: 25, offset: 0, rating: rating.value })
-              .then(data => {
-                resetMovies();
-                updateMovies(data);
-              });
-        }}>
+        >
           {rating.value}
-        </Genre>
+        </Value>
+      ))}
+      <Title>To</Title>
+      {ratingTab.map(rating => (
+        <Value
+          key={rating.id}
+        >
+          {rating.value}
+        </Value>
       ))}
     </RatingWrapperContainer>
   </RatingWrapperOverlay>
 );
 
-GenresWrapper.propTypes = {
+RatingWrapper.propTypes = {
   handleChangeWrapped: func.isRequired,
   resetMovies: func.isRequired,
+  rating: object.isRequired,
 };
 
 const actions = { updateMovies, resetMovies };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-export default connect(null, mapDispatchToProps)(GenresWrapper);
+export default connect(null, mapDispatchToProps)(RatingWrapper);

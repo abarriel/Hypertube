@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
         data: [...state.data, ...action.data.movies],
         reqParams: {
           ...state.reqParams,
-          count: state.count + action.data.movies.length,
+          count: state.reqParams.count + action.data.movies.length,
         },
       };
     }

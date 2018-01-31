@@ -7,7 +7,6 @@ import {
   bool,
   func,
   string,
-  number,
   array,
 } from 'prop-types';
 
@@ -29,7 +28,7 @@ import {
   changeParams,
 } from '../../actions/movies';
 
-const search = (value, addMovies, resetMovies, changeParams,  movies, moviesCount, selectedGenre) =>
+const search = (value, addMovies, resetMovies, changeParams,  movies, selectedGenre) =>
   req.movies({ q: value })
     .then(data => {
       resetMovies();
@@ -44,7 +43,6 @@ const SearchBar = ({
   handleChangevalue,
   addMovies,
   movies,
-  moviesCount,
   selectedGenre,
   resetMovies,
   changeParams,
@@ -54,7 +52,7 @@ const SearchBar = ({
       <SearchLogo onClick={() => handleChangeWrapped()} />
       {!wrapped &&
         <Debounce time="400" handler="onChange">
-          <SearchInput onChange={e => search(e.target.value, addMovies, resetMovies, changeParams, movies, moviesCount, selectedGenre)} />
+          <SearchInput onChange={e => search(e.target.value, addMovies, resetMovies, changeParams, movies, selectedGenre)} />
         </Debounce>
       }
     </SearchBox>
@@ -68,7 +66,6 @@ SearchBar.propTypes = {
   handleChangevalue: func.isRequired,
   addMovies: func.isRequired,
   movies: array.isRequired,
-  moviesCount: number.isRequired,
   selectedGenre: string.isRequired,
   resetMovies: func.isRequired,
   changeParams: func.isRequired,
@@ -79,7 +76,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const mapStateToProps = state => ({
   movies: getMovies(state),
-  moviesCount: getMoviesCount(state),
   selectedGenre: getSelectedGenre(state),
 });
 

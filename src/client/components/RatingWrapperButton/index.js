@@ -3,7 +3,6 @@ import { withStateHandlers } from 'recompose';
 import {
   func,
   bool,
-  string,
   object,
 } from 'prop-types';
 
@@ -11,34 +10,36 @@ import {
   RatingButtonContainer,
   Text,
   Chev,
+  Rate,
 } from './styles';
 import RatingWrapper from './RatingWrapper';
 
-export const RatingButton = ({
+const RatingButton = ({
   handleChangeWrapped,
   wrapped,
-  rating = {
-    from: 0,
-    to: 5,
-  },
+  rate,
 }) => (
   <RatingButtonContainer onClick={() => handleChangeWrapped()}>
     <Text>Rating</Text>
+    <Rate>{`${rate.from} - ${rate.to}`}</Rate>
     <Chev />
-    {!wrapped && <RatingWrapper handleChangeWrapped={handleChangeWrapped} />}
+    {!wrapped && <RatingWrapper handleChangeWrapped={handleChangeWrapped} rating={rate} />}
   </RatingButtonContainer>
 );
 
 RatingButton.propTypes = {
   handleChangeWrapped: func.isRequired,
   wrapped: bool.isRequired,
-  selectedGenre: string,
-  rating: object,
+  rate: object,
 };
 
 export default withStateHandlers(
   {
     wrapped: true,
+    rate: {
+      from: 0,
+      to: 5,
+    },
   },
   {
     handleChangeWrapped: ({ wrapped }) => () => ({ wrapped: !wrapped }),

@@ -35,7 +35,12 @@ export const RatingButtonContainer = styled.div`
 `;
 
 export const Text = styled.p`
-  margin:0;
+  margin-right:3px;
+  font-size:1em;
+`;
+
+export const Rate = styled.p`
+  margin-left:3px;
   font-size:1em;
 `;
 
@@ -62,8 +67,8 @@ export const RatingWrapperContainer = styled.div`
   top: calc(2rem + 90px);
   left: 180px;
   opacity: 1;
-  height:147px;
-  width:600px;
+  height:240px;
+  width:300px;
   transition-duration: 150ms;
   background-color: rgba(0,0,0,.9);
   color: #fff;
@@ -76,12 +81,11 @@ export const RatingWrapperOverlay = styled.div`
   display:flex;
   z-index: 1999;
   width:100vw;
-  height:100vh;
   top:-90px;
   left:-180px;
 `;
 
-export const Genre = styled.div`
+export const Value = styled.div`
   display:flex;
   padding: 1px 20px 1px 10px;
   height:26px;
@@ -94,5 +98,12 @@ export const Genre = styled.div`
   font-size: 10px;
   font-weight:1;
   cursor:pointer;
+`;
+
+export const Title = styled.p`
+  display:flex;
+  margin-left:10px;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
