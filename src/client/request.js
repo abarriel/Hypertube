@@ -6,7 +6,6 @@ const tryCatcher = (shouldNotCatchedErr) => (target, key, descriptor) => {
     try {
       const req = await method.apply(this, arguments);
       const { data, status, headers } = req;
-      console.log(data);
       if (status === 201) throw data;
       return data;
     } catch (err) {

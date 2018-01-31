@@ -4,6 +4,7 @@ import {
   func,
   bool,
   string,
+  object,
 } from 'prop-types';
 
 import {
@@ -16,10 +17,13 @@ import RatingWrapper from './RatingWrapper';
 export const RatingButton = ({
   handleChangeWrapped,
   wrapped,
-  selectedRate = 0,
+  rating = {
+    from: 0,
+    to: 5,
+  },
 }) => (
   <RatingButtonContainer onClick={() => handleChangeWrapped()}>
-    <Text>{selectedRate || 'Rating'}</Text>
+    <Text>Rating</Text>
     <Chev />
     {!wrapped && <RatingWrapper handleChangeWrapped={handleChangeWrapped} />}
   </RatingButtonContainer>
@@ -29,6 +33,7 @@ RatingButton.propTypes = {
   handleChangeWrapped: func.isRequired,
   wrapped: bool.isRequired,
   selectedGenre: string,
+  rating: object,
 };
 
 export default withStateHandlers(

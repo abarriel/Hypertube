@@ -22,7 +22,6 @@ class Register extends Component {
       const file = files[0];
       if (!file) return false;
       const img = new Image();
-      console.log(img);
       img.onload = () => this.setState({ profilePicture: file });
       img.onerror = () => this.setState({ errors: { ...errors, profilePicture: 'Not an image' } });
       const _URL = window.URL || window.webkitURL;

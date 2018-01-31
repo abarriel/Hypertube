@@ -10,11 +10,17 @@ import {
 
 const initialState = {
   data: [],
-  start: 0,
-  count: 0,
   genres: [],
-  q: '',
-  selectedGenre: '',
+  reqParams: {
+    q: '',
+    rating: {
+      from: 0,
+      to: 5,
+    },
+    selectedGenre: '',
+    start: 0,
+    count: 0,
+  },
   trendsMovies: [],
   preferredMovies: [],
   recentMovies: [],
@@ -40,7 +46,14 @@ const reducer = (state = initialState, action) => {
       return { ...initialState, genres: state.genres };
     }
     case ADD_MOVIES: {
-      return { ...state, data: [...state.data, ...action.data.movies], count: state.count + action.data.movies.length };
+      return {
+        ...state,
+        data: [...state.data, ...action.data.movies],
+        reqParams: {
+          ...state.reqParams,
+          count: state.count + action.data.movies.length,
+        },
+      };
     }
     case LOAD_GENRES: {
       return { ...state, genres: action.genres };
@@ -49,8 +62,17 @@ const reducer = (state = initialState, action) => {
       return { ...state, recentMovies: action.data.movies };
     }
     case CHANGE_PARAMS: {
-      const q = action.data.q || '';
-      return { ...state, q };
+      const q = action.data.q || state.q;
+      const rating = action.rating || state.rating;
+      const selectedGenre = action.selectedGenre || state.selectedGenre;
+      return {
+        ...state,
+        reqParams: {
+          q,
+          rating,
+          selectedGenre,
+        },
+      };
     }
     default:
       return state;

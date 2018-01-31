@@ -27,7 +27,6 @@ const Recents = ({
   moviesCount,
 }) => (
   <RecentsContainer>
-    {console.log('recentMovies: ', recentMovies)}
     <MoviePreviewContainer>
       {map(recentMovies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
     </MoviePreviewContainer>

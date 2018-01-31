@@ -52,12 +52,14 @@ const GenresWrapper = ({
   <RatingWrapperOverlay>
     <RatingWrapperContainer>
       {ratingTab.map(rating => (
-        <Genre onClick={() => {
-          req.movies({limit: 25, offset: 0, rating: rating.value })
-            .then(data => {
-              resetMovies();
-              updateMovies(data);
-            });
+        <Genre
+          key={rating.id}
+          onClick={() => {
+            req.movies({limit: 25, offset: 0, rating: rating.value })
+              .then(data => {
+                resetMovies();
+                updateMovies(data);
+              });
         }}>
           {rating.value}
         </Genre>

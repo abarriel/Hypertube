@@ -28,7 +28,7 @@ export const ParamsContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   flex-wrap:wrap;
-  margin-top:30px;
+  margin-top:40px;
   width:calc(100% - 120px);
   padding: 0 60px;
   @media (max-width: 900px) {
