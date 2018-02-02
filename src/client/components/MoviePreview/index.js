@@ -65,7 +65,7 @@ const enhance = compose(
     },
   ),
   lifecycle({
-    componentWillMount() {
+    componentDidMount() {
       setTimeout(() => {
         this.props.handleChangeSize();
       }, 1);

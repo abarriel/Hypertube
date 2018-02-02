@@ -4,7 +4,7 @@ const Sections = [
     label: 'Les plus gros succès sur Hypertix',
     reqParams: {
       limit: 25,
-      ratings: 4,
+      ratings: '4,5',
       years: 2017,
     },
   },

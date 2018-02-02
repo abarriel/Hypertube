@@ -13,14 +13,12 @@ const initialState = {
   genres: [],
   reqParams: {
     q: '',
-    rating: {
-      from: 0,
-      to: 5,
-    },
+    ratings: '',
     selectedGenre: '',
     start: 0,
     count: 0,
   },
+  recentMovies: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -34,7 +32,6 @@ const reducer = (state = initialState, action) => {
         data: [...action.data.movies],
         count: action.data.movies.length,
         start: 0,
-        selectedGenre: action.selectedGenre || state.selectedGenre,
       };
     }
     case RESET_MOVIES: {
@@ -62,14 +59,14 @@ const reducer = (state = initialState, action) => {
     }
     case CHANGE_PARAMS: {
       const q = action.data.q || state.reqParams.q;
-      const rating = action.data.rating || state.reqParams.rating;
+      const ratings = action.data.ratings ? `${action.data.ratings.from},${action.data.ratings.to}` : state.reqParams.ratings;
       const selectedGenre = action.data.selectedGenre || state.reqParams.selectedGenre;
       return {
         ...state,
         reqParams: {
           ...state.reqParams,
           q,
-          rating,
+          ratings,
           selectedGenre,
         },
       };

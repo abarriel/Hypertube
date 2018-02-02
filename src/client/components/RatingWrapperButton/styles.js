@@ -81,6 +81,7 @@ export const RatingWrapperOverlay = styled.div`
   display:flex;
   z-index: 1999;
   width:100vw;
+  height:100vh;
   top:-90px;
   left:-180px;
 `;

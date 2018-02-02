@@ -5,6 +5,7 @@ import {
 } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { uniqueId, omit } from 'lodash';
 
 import req from '../../request';
 import {
@@ -12,7 +13,10 @@ import {
   resetMovies,
   changeParams,
 } from '../../actions/movies';
-import { getGenres } from '../../selectors/movies';
+import {
+  getGenres,
+  getReqParams,
+} from '../../selectors/movies';
 import {
   GenresWrapperContainer,
   GenresWrapperOverlay,
@@ -25,15 +29,18 @@ const GenresWrapper = ({
   updateMovies,
   resetMovies,
   changeParams,
+  reqParams,
 }) => (
   <GenresWrapperOverlay>
     <GenresWrapperContainer>
-      {genres.map((genre, i) => (
+      {genres.map(genre => (
         <Genre
+          key={uniqueId(genre)}
           onClick={() => {
             changeParams({ selectedGenre: genre });
-            req.movies({ limit: 25, offset: 0, genres: genre })
+            req.movies(omit({ ...reqParams, selectedGenre: genre, limit: 0, offset: 25 }, 'start', 'count', 'q'))
               .then(data => {
+                console.log('data: ', data);
                 resetMovies();
                 updateMovies(data, genre);
               });
@@ -55,6 +62,7 @@ GenresWrapper.propTypes = {
 
 const mapStateToProps = state => ({
   genres: getGenres(state),
+  reqParams: getReqParams(state),
 });
 
 const actions = { changeParams, updateMovies, resetMovies };

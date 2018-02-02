@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import {
+  VideoContainer,
+  VideoContent,
+} from './styles';
+
 class Video extends Component {
   state = {
     status: 'ok',
@@ -8,14 +13,13 @@ class Video extends Component {
 
   render() {
     const { status } = this.state;
-    console.log(status);
     return (
-      <div>
-        <video controls>
-          <source src="http://localhost:8888/api/video/tt0110912" type="video/mp4" />
+      <VideoContainer>
+        <VideoContent controls>
+          <source src={`http://localhost:8888/api${window.location.pathname}`} type="video/mp4" />
           <track kind="captions" src="/upload/tt0110912/tt0110912.vtt" srcLang="eng" label="English" />
-        </video>
-      </div>
+        </VideoContent>
+      </VideoContainer>
     );
   }
 }

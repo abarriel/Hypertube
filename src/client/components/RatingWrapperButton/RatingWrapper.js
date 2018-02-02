@@ -11,7 +11,9 @@ import req from '../../request';
 import {
   updateMovies,
   resetMovies,
+  changeParams,
 } from '../../actions/movies';
+import { getReqParams } from '../../selectors/movies';
 import {
   RatingWrapperContainer,
   RatingWrapperOverlay,
@@ -48,26 +50,47 @@ const ratingTab = [
 
 const RatingWrapper = ({
   handleChangeWrapped,
+  handleChangeRate,
   updateMovies,
   resetMovies,
+  changeParams,
   rating,
+  reqParams,
 }) => (
   <RatingWrapperOverlay>
     <RatingWrapperContainer>
       <Title>From</Title>
-      {ratingTab.map(rating => (
+      {ratingTab.map(from => (
         <Value
-          key={rating.id}
+          key={from.id}
+          onClick={() => {
+            handleChangeRate({ from: from.id });
+            changeParams({ ratings: rating });
+            req.movies({ ...reqParams, ratings: `${rating.from},${rating.to}` })
+              .then(data => {
+                resetMovies();
+                updateMovies(data);
+              });
+          }}
         >
-          {rating.value}
+          {from.value}
         </Value>
       ))}
       <Title>To</Title>
-      {ratingTab.map(rating => (
+      {ratingTab.map(to => (
         <Value
-          key={rating.id}
+          key={to.id}
+          onClick={() => {
+            handleChangeRate({ to: to.id });
+            changeParams({ ratings: rating });
+            req.movies({ ...reqParams, ratings: `${rating.from},${rating.to}` })
+              .then(data => {
+                resetMovies();
+                updateMovies(data);
+              });
+          }}
         >
-          {rating.value}
+          {to.value}
         </Value>
       ))}
     </RatingWrapperContainer>
@@ -76,11 +99,17 @@ const RatingWrapper = ({
 
 RatingWrapper.propTypes = {
   handleChangeWrapped: func.isRequired,
+  handleChangeRate: func.isRequired,
   resetMovies: func.isRequired,
   rating: object.isRequired,
+  reqParams: object.isRequired,
 };
 
-const actions = { updateMovies, resetMovies };
+const mapStateToProps = state => ({
+  reqParams: getReqParams(state),
+});
+
+const actions = { changeParams, updateMovies, resetMovies };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-export default connect(null, mapDispatchToProps)(RatingWrapper);
+export default connect(mapStateToProps, mapDispatchToProps)(RatingWrapper);

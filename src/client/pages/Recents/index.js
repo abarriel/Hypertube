@@ -51,7 +51,7 @@ const enhance = compose(
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
     componentDidMount() {
-      req.movies({ limit: 25, offset: 10 })
+      req.movies({ limit: 50, offset: 0, years: 2017 })
         .then(movies => this.props.loadRecentMovies(movies));
     },
     componentWillUnmount() {
