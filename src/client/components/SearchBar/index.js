@@ -34,6 +34,7 @@ const search = (value, addMovies, resetMovies, changeParams,  movies, selectedGe
       .then(data => {
         resetMovies();
         addMovies(data);
+        changeParams({ q: value });
       });
   } else {
     req.movies({ q: value })

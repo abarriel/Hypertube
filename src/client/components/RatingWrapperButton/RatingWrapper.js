@@ -65,16 +65,16 @@ const RatingWrapper = ({
         <Value
           key={from.id}
           onClick={() => {
+            resetMovies();
             handleChangeRate({ from: from.id });
-            changeParams({ ratings: {
-              from: from.id,
-              to: rating.to,
-            } });
-            req.movies(omit({ ...reqParams, ratings: `${from.id},${rating.to}`, limit: 25, offset: 0 }, 'q', 'start', 'count'))
-              .then(data => {
-                resetMovies();
-                updateMovies(data);
-              });
+            changeParams({
+              ratings: {
+                from: from.id,
+                to: rating.to,
+              },
+              count: 0,
+              start: 0,
+            });
           }}
         >
           {from.value}
@@ -85,16 +85,16 @@ const RatingWrapper = ({
         <Value
           key={to.id}
           onClick={() => {
+            resetMovies();
             handleChangeRate({ to: to.id });
-            changeParams({ ratings: {
-              from: rating.from,
-              to: to.id,
-            } });
-            req.movies(omit({ ...reqParams, ratings: `${rating.from},${to.id}`, limit: 25, offset: 0 }, 'q', 'start', 'count'))
-              .then(data => {
-                resetMovies();
-                updateMovies(data);
-              });
+            changeParams({
+              ratings: {
+                from: rating.from,
+                to: to.id,
+              },
+              start: 0,
+              count: 0,
+            });
           }}
         >
           {to.value}
