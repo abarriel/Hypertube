@@ -38,9 +38,8 @@ const GenresWrapper = ({
           key={uniqueId(genre)}
           onClick={() => {
             changeParams({ selectedGenre: genre });
-            req.movies(omit({ ...reqParams, selectedGenre: genre, limit: 0, offset: 25 }, 'start', 'count', 'q'))
+            req.movies(omit({ ...reqParams, genres: genre, limit: 25, offset: 0 }, 'start', 'count', 'q'))
               .then(data => {
-                console.log('data: ', data);
                 resetMovies();
                 updateMovies(data, genre);
               });

@@ -2,8 +2,6 @@ import React from 'react';
 import {
   array,
   func,
-  number,
-  string,
   object,
 } from 'prop-types';
 import { connect } from 'react-redux';
@@ -30,11 +28,12 @@ import req from '../../request';
 import {
   addMovies,
   resetMovies,
+  resetMoviesParams,
 } from '../../actions/movies';
 
 const onChange = (isVisible, addMovies, reqParams) => {
   if (isVisible) {
-    req.movies({ limit: 25, offset: reqParams.count, genres: reqParams.selectedGenre, rating: '' })
+    req.movies({ limit: 25, offset: reqParams.count, genres: reqParams.genres, rating: '' })
       .then(movies => addMovies(movies));
   }
 };
@@ -47,7 +46,7 @@ const Movies = ({
   <MoviesContainer>
     <ParamsContainer>
       <Title>Films</Title>
-      <GenresWrapperButton selectedGenre={reqParams.selectedGenre} />
+      <GenresWrapperButton selectedGenre={reqParams.genres} />
       <RatingWrapperButton />
     </ParamsContainer>
     <MoviePreviewContainer>
@@ -67,7 +66,7 @@ Movies.propTypes = {
   reqParams: object.isRequired,
 };
 
-const actions = { addMovies, resetMovies };
+const actions = { addMovies, resetMovies, resetMoviesParams };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const mapStateToProps = state => ({
@@ -79,8 +78,9 @@ const enhance = compose(
 
   connect(mapStateToProps, mapDispatchToProps),
   lifecycle({
-    componentWillMount() {
+    componentWillUnmount() {
       this.props.resetMovies();
+      this.props.resetMoviesParams();
     },
   }),
 );

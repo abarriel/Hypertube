@@ -6,26 +6,16 @@ export const menu = [
   },
   {
     id: 1,
-    to: '/tvshow',
-    label: 'Séries TV',
-  },
-  {
-    id: 2,
     to: '/movies',
     label: 'Films',
   },
   {
-    id: 3,
-    to: '/original',
-    label: 'Programmes originaux',
-  },
-  {
-    id: 4,
+    id: 2,
     to: '/recents',
     label: 'Ajouts récents',
   },
   {
-    id: 5,
+    id: 3,
     to: '/users',
     label: 'Ma liste',
   },

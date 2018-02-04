@@ -28,13 +28,22 @@ import {
   changeParams,
 } from '../../actions/movies';
 
-const search = (value, addMovies, resetMovies, changeParams,  movies, selectedGenre) =>
-  req.movies({ q: value })
-    .then(data => {
-      resetMovies();
-      addMovies(data);
-      changeParams({ q: value });
-    });
+const search = (value, addMovies, resetMovies, changeParams,  movies, selectedGenre) => {
+  if (value.length === 0) {
+    req.movies({})
+      .then(data => {
+        resetMovies();
+        addMovies(data);
+      });
+  } else {
+    req.movies({ q: value })
+      .then(data => {
+        resetMovies();
+        addMovies(data);
+        changeParams({ q: value });
+      });
+  }
+};
 
 const SearchBar = ({
   wrapped,

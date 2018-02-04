@@ -6,6 +6,7 @@ import {
   UPDATE_MOVIES,
   LOAD_RECENT_MOVIES,
   CHANGE_PARAMS,
+  RESET_MOVIES_PARAMS,
 } from '../actions/movies';
 
 const initialState = {
@@ -14,7 +15,7 @@ const initialState = {
   reqParams: {
     q: '',
     ratings: '',
-    selectedGenre: '',
+    genres: '',
     start: 0,
     count: 0,
   },
@@ -41,6 +42,12 @@ const reducer = (state = initialState, action) => {
         reqParams: state.reqParams,
       };
     }
+    case RESET_MOVIES_PARAMS: {
+      return {
+        ...state,
+        reqParams: initialState.reqParams,
+      };
+    }
     case ADD_MOVIES: {
       return {
         ...state,
@@ -60,14 +67,14 @@ const reducer = (state = initialState, action) => {
     case CHANGE_PARAMS: {
       const q = action.data.q || state.reqParams.q;
       const ratings = action.data.ratings ? `${action.data.ratings.from},${action.data.ratings.to}` : state.reqParams.ratings;
-      const selectedGenre = action.data.selectedGenre || state.reqParams.selectedGenre;
+      const genres = action.data.selectedGenre || state.reqParams.selectedGenre;
       return {
         ...state,
         reqParams: {
           ...state.reqParams,
           q,
           ratings,
-          selectedGenre,
+          genres,
         },
       };
     }
