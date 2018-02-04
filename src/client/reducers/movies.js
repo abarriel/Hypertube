@@ -20,6 +20,7 @@ const initialState = {
     count: 0,
   },
   recentMovies: [],
+  isFetchPossible: true,
 };
 
 const reducer = (state = initialState, action) => {
@@ -28,6 +29,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, data: { ...action.data }, count: action.data.movies.length + state.count };
     }
     case UPDATE_MOVIES: {
+      console.log('update movies length: ', action.data.movies.length);
       return {
         ...state,
         data: [...action.data.movies],
@@ -36,6 +38,7 @@ const reducer = (state = initialState, action) => {
           count: action.data.movies.length,
           start: 0,
         },
+        isFetchPossible: action.data.movies.length === 25,
       };
     }
     case RESET_MOVIES: {
@@ -74,7 +77,7 @@ const reducer = (state = initialState, action) => {
     case CHANGE_PARAMS: {
       const q = action.data.q || state.reqParams.q;
       const ratings = action.data.ratings ? `${action.data.ratings.from},${action.data.ratings.to}` : state.reqParams.ratings;
-      const genres = action.data.selectedGenre || state.reqParams.selectedGenre;
+      const genres = action.data.selectedGenre || state.reqParams.genres;
       return {
         ...state,
         reqParams: {

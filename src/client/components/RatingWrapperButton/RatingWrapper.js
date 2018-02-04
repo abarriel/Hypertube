@@ -6,6 +6,7 @@ import {
 } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { omit } from 'lodash';
 
 import req from '../../request';
 import {
@@ -65,8 +66,11 @@ const RatingWrapper = ({
           key={from.id}
           onClick={() => {
             handleChangeRate({ from: from.id });
-            changeParams({ ratings: rating });
-            req.movies({ ...reqParams, ratings: `${rating.from},${rating.to}` })
+            changeParams({ ratings: {
+              from: from.id,
+              to: rating.to,
+            } });
+            req.movies(omit({ ...reqParams, ratings: `${from.id},${rating.to}`, limit: 25, offset: 0 }, 'q', 'start', 'count'))
               .then(data => {
                 resetMovies();
                 updateMovies(data);
@@ -82,8 +86,11 @@ const RatingWrapper = ({
           key={to.id}
           onClick={() => {
             handleChangeRate({ to: to.id });
-            changeParams({ ratings: rating });
-            req.movies({ ...reqParams, ratings: `${rating.from},${rating.to}` })
+            changeParams({ ratings: {
+              from: rating.from,
+              to: to.id,
+            } });
+            req.movies(omit({ ...reqParams, ratings: `${rating.from},${to.id}`, limit: 25, offset: 0 }, 'q', 'start', 'count'))
               .then(data => {
                 resetMovies();
                 updateMovies(data);

@@ -17,3 +17,5 @@ export const getQ = state => state.movies.reqParams.q;
 export const getReqParams = state => state.movies.reqParams;
 
 export const getRecentMovies = state => state.movies.recentMovies;
+
+export const getIsFetchPossible = state => state.movies.isFetchPossible;

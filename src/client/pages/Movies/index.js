@@ -3,6 +3,7 @@ import {
   array,
   func,
   object,
+  bool,
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,6 +14,7 @@ import { compose, lifecycle } from 'recompose';
 import {
   getMovies,
   getReqParams,
+  getIsFetchPossible,
 } from '../../selectors/movies';
 import {
   MoviesContainer,
@@ -33,7 +35,11 @@ import {
 
 const onChange = (isVisible, addMovies, reqParams) => {
   if (isVisible) {
-    req.movies({ limit: 25, offset: reqParams.count, genres: reqParams.genres, rating: '' })
+    req.movies({
+      limit: 25,
+      offset: reqParams.count,
+      genres: reqParams.genres,
+      ratings: reqParams.ratings })
       .then(movies => addMovies(movies));
   }
 };
@@ -42,6 +48,7 @@ const Movies = ({
   movies,
   addMovies,
   reqParams,
+  isFetchPossible,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
@@ -52,7 +59,7 @@ const Movies = ({
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
     </MoviePreviewContainer>
-    {reqParams.q.length === 0 &&
+    {reqParams.q.length === 0 && isFetchPossible &&
       <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, reqParams)}>
         <Spinner />
       </VisibilitySensor>
@@ -64,6 +71,7 @@ Movies.propTypes = {
   movies: array.isRequired,
   addMovies: func.isRequired,
   reqParams: object.isRequired,
+  isFetchPossible: bool.isRequired,
 };
 
 const actions = { addMovies, resetMovies, resetMoviesParams };
@@ -72,6 +80,7 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 const mapStateToProps = state => ({
   movies: getMovies(state),
   reqParams: getReqParams(state),
+  isFetchPossible: getIsFetchPossible(state),
 });
 
 const enhance = compose(

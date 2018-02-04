@@ -40,6 +40,7 @@ const GenresWrapper = ({
             changeParams({ selectedGenre: genre });
             req.movies(omit({ ...reqParams, genres: genre, limit: 25, offset: 0 }, 'start', 'count', 'q'))
               .then(data => {
+                console.log('data:   ', data);
                 resetMovies();
                 updateMovies(data, genre);
               });
