@@ -31,15 +31,22 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         data: [...action.data.movies],
-        count: action.data.movies.length,
-        start: 0,
+        reqParams: {
+          ...state.reqParams,
+          count: action.data.movies.length,
+          start: 0,
+        },
       };
     }
     case RESET_MOVIES: {
       return {
         ...initialState,
         genres: state.genres,
-        reqParams: state.reqParams,
+        reqParams: {
+          ...state.reqParams,
+          start: 0,
+          count: 0,
+        },
       };
     }
     case RESET_MOVIES_PARAMS: {
