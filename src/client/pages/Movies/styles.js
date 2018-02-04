@@ -4,7 +4,9 @@ export const MoviesContainer = styled.div`
   display:flex;
   flex-direction:column;
   width:100vw;
+  min-height:calc(100vh - 85px);
   margin-top:25px;
+  margin-bottom:50px;
 `;
 
 export const MoviePreviewContainer = styled.div`

@@ -109,7 +109,8 @@ RatingWrapper.propTypes = {
   handleChangeRate: func.isRequired,
   resetMovies: func.isRequired,
   rating: object.isRequired,
-  reqParams: object.isRequired,
+  changeParams: func.isRequired,
+  updateMovies: func.isRequired,
 };
 
 const mapStateToProps = state => ({
