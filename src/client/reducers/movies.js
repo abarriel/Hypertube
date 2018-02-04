@@ -1,4 +1,6 @@
-import { isNil } from 'lodash';
+import {
+  isNil,
+} from 'lodash';
 
 import {
   LOAD_MOVIES,
@@ -23,6 +25,7 @@ const initialState = {
   },
   recentMovies: [],
   isFetchPossible: true,
+  isSearchEmpty: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -31,15 +34,17 @@ const reducer = (state = initialState, action) => {
       return { ...state, data: { ...action.data }, count: action.data.movies.length + state.count };
     }
     case UPDATE_MOVIES: {
+      const movies = action.data.movies || [];
       return {
         ...state,
-        data: [...action.data.movies],
+        data: movies,
         reqParams: {
           ...state.reqParams,
-          count: action.data.movies.length,
+          count: movies.length,
           start: 0,
         },
-        isFetchPossible: action.data.movies.length >= 25,
+        isFetchPossible: movies.length >= 25,
+        isSearchEmpty: movies.length === 0,
       };
     }
     case RESET_MOVIES: {
@@ -68,6 +73,7 @@ const reducer = (state = initialState, action) => {
           count: state.reqParams.count + action.data.movies.length,
         },
         isFetchPossible: action.data.movies.length === 25,
+        isSearchEmpty: action.data.movies.length === 0,
       };
     }
     case LOAD_GENRES: {

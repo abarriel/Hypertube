@@ -15,6 +15,7 @@ import {
   getMovies,
   getReqParams,
   getIsFetchPossible,
+  getIsSearchEmpty,
 } from '../../selectors/movies';
 import {
   MoviesContainer,
@@ -26,6 +27,7 @@ import MoviePreview from '../../components/MoviePreview';
 import Spinner from '../../components/Spinner';
 import GenresWrapperButton from '../../components/GenresWrapperButton';
 import RatingWrapperButton from '../../components/RatingWrapperButton';
+import EmptySearch from '../../components/EmptySearch';
 import req from '../../request';
 import {
   addMovies,
@@ -49,6 +51,7 @@ const Movies = ({
   addMovies,
   reqParams,
   isFetchPossible,
+  isEmptySearch,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
@@ -58,6 +61,7 @@ const Movies = ({
     </ParamsContainer>
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
+      {isEmptySearch && <EmptySearch value={reqParams.q} />}
     </MoviePreviewContainer>
     {reqParams.q.length === 0 && isFetchPossible &&
       <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, reqParams)}>
@@ -72,6 +76,7 @@ Movies.propTypes = {
   addMovies: func.isRequired,
   reqParams: object.isRequired,
   isFetchPossible: bool.isRequired,
+  isEmptySearch: bool.isRequired,
 };
 
 const actions = { addMovies, resetMovies, resetMoviesParams };
@@ -81,6 +86,7 @@ const mapStateToProps = state => ({
   movies: getMovies(state),
   reqParams: getReqParams(state),
   isFetchPossible: getIsFetchPossible(state),
+  isEmptySearch: getIsSearchEmpty(state),
 });
 
 const enhance = compose(
