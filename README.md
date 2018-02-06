@@ -10,7 +10,7 @@
 
 <img src="https://user-images.githubusercontent.com/23408500/35879571-d6637f12-0b7b-11e8-827e-6d40cd1f850c.png"/>
 
-<img src="https://user-images.githubusercontent.com/23408500/35879607-f30008d4-0b7b-11e8-9702-ab33540e265b.png"/>
+<img src="https://user-images.githubusercontent.com/23408500/35884036-937db114-0b89-11e8-82e9-666631daa9d7.png"/>
 
 ## Table des matières
 
