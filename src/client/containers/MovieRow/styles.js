@@ -13,9 +13,9 @@ export const MovieRowContainer = styled.div`
   display:flex;
   justify-content: flex-start;
   align-items: center;
-  transition: all ${TRANSITION}s ease-out;
+  transition: all ${TRANSITION}s ease-in-out;
   margin-bottom:20px;
-  margin-left:${({ margin }) => `${(margin * (WIDTH + 15)) + 45}px`};
+  margin-left:${({ margin }) => `${(margin * (WIDTH + (2 * MARGIN))) + 45}px`};
 `;
 
 export const MoviePreviewContainer = styled.div`
@@ -25,15 +25,14 @@ export const MoviePreviewContainer = styled.div`
   width:${WIDTH}px;
   opacity:${({ hidden }) => hidden ? 0.5 : 1};
   z-index:100;
-  transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1)'};
+  transform:${({ hidden }) => hidden ? 'scale(0.9)' : 'scale(1)'};
   margin:${MARGIN}px;
   margin-top:25px;
   &:hover {
-    transform:${({ hidden }) => hidden ? 'scale(0.8)' : 'scale(1.1)'};
+    transform:${({ hidden }) => hidden ? 'scale(0.9)' : 'scale(1.3)'};
     z-index:${({ hidden }) => hidden ? '100' : '110'};
-    box-shadow: 0 0 50px 1px rgba(0,0,0,0.7);
+    box-shadow:${({ hidden }) => hidden ? '' : '0 0 50px 1px rgba(0,0,0,0.7)'};
   };
-  border-radius:2px;
   overflow:hidden;
   transition: all ${TRANSITION}s ease-in-out;
   transition-delay: 0.05s;
@@ -43,7 +42,7 @@ export const ScrollBarContainer = styled.div`
   position:absolute;
   top:0;
   left:calc(100vw - 300px);
-  display: ${({ isHover }) => isHover ? 'flex' : 'none'};
+  display: ${({ isHover }) => isHover ? 'none' : 'none'};
   transition: all 0.3s ease-in-out;
   width:200px;
   height:20px;
@@ -72,7 +71,6 @@ export const ShadowContainer = styled.div`
   opacity: ${({ opacity }) => opacity};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.6));  30%);
   transition: all ${TRANSITION}s;
-  transition-delay:0.3s;
   padding:20px;
   padding-bottom:0;
   z-index:120;
@@ -83,11 +81,13 @@ export const Title = styled.div`
   margin:0;
   opacity: ${({ opacity }) => opacity};
   transition: all ${TRANSITION}s;
-  transition-delay:0.8s;
+  transition-delay:0.1s;
   font-size:1em;
   font-weight:900;
   align-self:flex-start;
   user-select: none;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:1;
 `;
 
 export const PlayLogo = styled(GoPlaybackPlay)`
@@ -95,7 +95,6 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   font-size:2.8em;
   cursor: pointer;
   transition: all 0.2s;
-  transition-delay:0.1s;
   &:hover {
     color:${MAIN_COLOR};
   }
@@ -121,7 +120,7 @@ export const LinkStyed = styled(Link)`
   }
   transition: all ${TRANSITION + 1}s;
   opacity: ${({ opacity }) => opacity};
-  transition-delay: 1.2s;
+  transition-delay: 0.3s;
   &:hover {
     color:${MAIN_COLOR};
   }
@@ -157,7 +156,6 @@ export const BackgroundImage = styled.div`
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter:${({ displayShadow, hidden }) => displayShadow && !hidden ? 'blur(1px)' : ' blur(0px)'};
   -webkit-backface-visibility: hidden;
   -ms-transform: translateZ(0);
   -webkit-transform: translateZ(0);

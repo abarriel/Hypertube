@@ -1,70 +1,48 @@
 import React from 'react';
-
+import _ from 'lodash';
 import Menuelem from './MenuElem';
 import Logo from '../Logo';
 import ProfilMenu from '../../containers/ProfilMenu';
 import SearchBar from '../../components/SearchBar';
+import MiniLink from './miniLink';
+import { menu } from './menu';
 import {
   SideMenuStyled,
   Header,
   MenuRight,
   LinkContainer,
 } from './styles';
-
-const menu = [
-  {
-    id: 0,
-    to: '/',
-    label: 'Accueil',
-  },
-  {
-    id: 1,
-    to: '/tvshow',
-    label: 'Séries TV',
-  },
-  {
-    id: 2,
-    to: '/movies',
-    label: 'Films',
-  },
-  {
-    id: 3,
-    to: '/original',
-    label: 'Programmes originaux',
-  },
-  {
-    id: 4,
-    to: '/recents',
-    label: 'Ajouts récents',
-  },
-  {
-    id: 5,
-    to: '/users',
-    label: 'Ma liste',
-  },
-];
+import { noAuthneeded } from '../../auth';
 
 const isSelected = pathName => window.location.pathname === pathName;
 
-const SideMenu = () => (
-  <SideMenuStyled>
-    <Header>
-      <Logo />
-    </Header>
-    <LinkContainer>
-      {menu.map(item => (
-        <Menuelem
-          key={item.id}
-          selected={isSelected(item.to)}
-          label={item.label}
-          to={item.to}
-        />))}
-    </LinkContainer>
-    <MenuRight>
-      <SearchBar />
-      <ProfilMenu />
-    </MenuRight>
-  </SideMenuStyled>
-);
+const isOnMovies = () => window.location.pathname === '/movies';
+
+const SideMenu = () => {
+  const { pathname } = window.location;
+  const [route] = _.split(pathname.slice(1), '/');
+  if (_.includes(noAuthneeded, route)) return null;
+  return (
+    <SideMenuStyled>
+      <Header>
+        <Logo />
+      </Header>
+      <LinkContainer>
+        {menu.map(item => (
+          <Menuelem
+            key={item.id}
+            selected={isSelected(item.to)}
+            label={item.label}
+            to={item.to}
+          />))}
+      </LinkContainer>
+      <MiniLink />
+      <MenuRight>
+        {isOnMovies() && <SearchBar />}
+        <ProfilMenu />
+      </MenuRight>
+    </SideMenuStyled>
+  );
+};
 
 export default SideMenu;

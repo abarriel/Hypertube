@@ -1,6 +1,28 @@
 const _ = require('lodash');
 const path = require('path');
 
+function keysToCamelCase(object) {
+  let camelCaseObject = _.cloneDeep(object);
+
+  if (_.isArray(camelCaseObject)) {
+    return _.map(camelCaseObject, keysToCamelCase);
+  } else {
+    camelCaseObject = _.mapKeys(camelCaseObject, (value, key) => {
+      return _.camelCase(key);
+    });
+
+    // Recursively apply throughout object
+    return _.mapValues(camelCaseObject, (value) => {
+      if (_.isPlainObject(value)) {
+        return keysToCamelCase(value);
+      } else if (_.isArray(value)) {
+        return value; // return _.map(value, keysToCamelCase);
+      } else {
+        return value;
+      }
+    });
+  }
+}
 
 const developmentConfig = {
   db: {
@@ -12,15 +34,7 @@ const developmentConfig = {
       user: 'postgres',
       },
     wrapIdentifier: (value: any, origImpl: any) => origImpl(_.snakeCase(value)),
-    postProcessResponse: (res: any) => {
-      if (Array.isArray(res)) {
-        return res.map(row => {
-          if(typeof row === 'object')
-            return _.mapKeys(row, (v: any , k: any) => _.camelCase(k));
-        });
-      }
-      return res;
-    },
+    postProcessResponse: (res: any) => keysToCamelCase(res),
     migrations: {
       directory: './src/server/database/migrations',
       tableName: 'version'

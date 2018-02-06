@@ -69,7 +69,7 @@ const moviesFormValidate = async (req: express.Request, res: express.Response, n
 
   try {
     const filters: any= await Joi.validate(params, MoviesFilterSchema);
-    req.app.locals = { filters };
+    req.app.locals = {  ...req.app.locals, filters };
     next();
   } catch (err) {
     next({ type: 'JoiSchema', err });

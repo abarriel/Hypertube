@@ -14,8 +14,8 @@ const createMoviesTable = (): Promise<any> => Promise.all([
     table.string('language');
     table.integer('imdb_rating').notNullable();
     table.integer('score');
-    table.text('cover_image').defaultTo('/uploads/default.png');
-    table.text('background_image').defaultTo('/uploads/default.png');
+    table.text('cover_image').defaultTo('/default_cover.png');
+    table.text('background_image').defaultTo('/default_cover.png');
     table.text('summary').notNullable();
     table.specificType('genres', 'TEXT[]').notNullable();
     table.specificType('torrents', 'JSON[]');

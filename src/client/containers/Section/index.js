@@ -1,10 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import {
+  number,
+  string,
+  func,
+  object,
+  array,
+} from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import VisibilitySensor from 'react-visibility-sensor';
 import { compose, withStateHandlers, lifecycle } from 'recompose';
 
-import { reqMovies } from '../../request';
+import req from '../../request';
 import {
   TitleContainer,
   Title,
@@ -12,11 +19,9 @@ import {
   RightArrow,
   LeftArrow,
   MoviesRowContainer,
-  SpinnerContainer,
 } from './styles';
 import MovieRow from '../MovieRow';
 import { WIDTH, MARGIN } from '../MovieRow/constants';
-import Spinner from '../../components/Spinner';
 
 const goLeft = start => start - 1 >= 0 ? -1 : 0;
 
@@ -28,7 +33,14 @@ const goRight = (start, length, end) => {
   return 1;
 };
 
-const getEnd = width => Math.round((width - 25) / (WIDTH + (2 * MARGIN)));
+const onChange = (isVisible, reqParams, updateMovies, movies) => {
+  if (isVisible && movies.length === 0) {
+    req.movies(reqParams)
+      .then(data => updateMovies(data.movies));
+  }
+};
+
+const getEnd = width => Math.round((width) / (WIDTH + (2 * MARGIN)));
 
 const Section = ({
   movies = [],
@@ -36,36 +48,37 @@ const Section = ({
   start,
   width,
   move,
+  reqParams,
+  updateMovies,
 }) => (
   <SectionContainer>
     <TitleContainer>
-      <Title>{title}</Title>
+      <VisibilitySensor onChange={isVisible => onChange(isVisible, reqParams, updateMovies, movies)}>
+        <Title>{title}</Title>
+      </VisibilitySensor>
       <LeftArrow onClick={() => move(goLeft(start))} />
       <RightArrow onClick={() => move(goRight(start, movies.length, getEnd(width)))} />
     </TitleContainer>
     <MoviesRowContainer>
-      {movies.length === 0 && (
-        <SpinnerContainer>
-          <Spinner />
-        </SpinnerContainer>
-      )}
-      {movies.length > 0 && <MovieRow
+      <MovieRow
         start={start}
         width={width}
         end={getEnd(width)}
         movies={movies}
         move={move}
-      />}
+      />
     </MoviesRowContainer>
   </SectionContainer>
 );
 
 Section.propTypes = {
-  movies: PropTypes.array,
-  width: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  start: PropTypes.number.isRequired,
-  move: PropTypes.func.isRequired,
+  movies: array,
+  width: number.isRequired,
+  title: string.isRequired,
+  start: number.isRequired,
+  move: func.isRequired,
+  reqParams: object.isRequired,
+  updateMovies: func.isRequired,
 };
 
 const actions = {
@@ -73,12 +86,8 @@ const actions = {
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-const mapStateToProps = state => ({
-
-});
-
 const enhance = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(null, mapDispatchToProps),
   withStateHandlers(
     {
       movies: [],
@@ -95,8 +104,6 @@ const enhance = compose(
     componentDidMount() {
       this.props.updateWindowDimensions();
       window.addEventListener('resize', this.props.updateWindowDimensions);
-      reqMovies(this.props.reqParams)
-        .then(data => this.props.updateMovies(data.movies));
     },
     componentWillUnmount() {
       window.removeEventListener('resize', this.props.updateWindowDimensions);

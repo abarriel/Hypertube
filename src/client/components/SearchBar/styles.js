@@ -3,12 +3,17 @@ import styled from 'styled-components';
 import GoSearch from 'react-icons/lib/go/search';
 
 export const SearchBarContainer = styled.div`
+  position:relative;
   display:flex;
   color:white;
   justify-content: flex-end;
   align-items: center;
-  height:70px;
+  height:100%;
   min-width:20px;
+  background-color:black;
+  @media (max-width: 450px) {
+    display:none;
+  }
 `;
 
 export const SearchLogo = styled(GoSearch)`

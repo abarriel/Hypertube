@@ -1,10 +1,11 @@
 const Sections = [
   {
     id: 0,
-    label: 'Nouveautés',
+    label: 'Les plus gros succès sur Hypertix',
     reqParams: {
       limit: 25,
-      offset: 10,
+      ratings: '4,5',
+      years: 2017,
     },
   },
   {
@@ -13,14 +14,67 @@ const Sections = [
     reqParams: {
       limit: 25,
       offset: 100,
+      years: 2017,
     },
   },
   {
     id: 2,
-    label: 'Nouveautés',
+    label: 'Action et aventure',
     reqParams: {
       limit: 25,
-      offset: 200,
+      offset: 10,
+      genres: 'Action',
+      years: 2017,
+    },
+  },
+  {
+    id: 3,
+    label: 'Comédie',
+    reqParams: {
+      limit: 25,
+      offset: 0,
+      genres: 'Comedy',
+      years: 2017,
+    },
+  },
+  {
+    id: 4,
+    label: 'Thrillers',
+    reqParams: {
+      limit: 25,
+      offset: 0,
+      genres: 'Thriller',
+      years: 2017,
+    },
+  },
+  {
+    id: 5,
+    label: 'Sport',
+    reqParams: {
+      limit: 25,
+      offset: 0,
+      genres: 'Sport',
+      years: 2017,
+    },
+  },
+  {
+    id: 6,
+    label: 'Fantaisie',
+    reqParams: {
+      limit: 25,
+      offset: 0,
+      genres: 'Fantasy',
+      years: 2017,
+    },
+  },
+  {
+    id: 7,
+    label: 'Films d\'animation',
+    reqParams: {
+      limit: 25,
+      offset: 0,
+      genres: 'Animation',
+      years: 2017,
     },
   },
 ];

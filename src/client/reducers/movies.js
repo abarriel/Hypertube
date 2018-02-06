@@ -1,54 +1,100 @@
 import {
+  isNil,
+} from 'lodash';
+
+import {
   LOAD_MOVIES,
   ADD_MOVIES,
-  UPDATE_SEARCH_MOVIES,
-  UPDATE_FILTER_MOVIES,
   RESET_MOVIES,
   LOAD_GENRES,
-  LOAD_PREFERRED_MOVIES,
+  UPDATE_MOVIES,
   LOAD_RECENT_MOVIES,
+  CHANGE_PARAMS,
+  RESET_MOVIES_PARAMS,
 } from '../actions/movies';
 
 const initialState = {
   data: [],
-  start: 0,
-  count: 0,
-  sort: { by: 'name', order: 'ASC' },
-  search: '',
-  filter: [],
   genres: [],
-  trendsMovies: [],
-  preferredMovies: [],
+  reqParams: {
+    q: '',
+    ratings: '',
+    genres: '',
+    start: 0,
+    count: 0,
+  },
   recentMovies: [],
-  actionAndAdventureMovies: [],
-  thillersMovies: [],
+  isFetchPossible: true,
+  isSearchEmpty: false,
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_MOVIES: {
-      return { ...state, data: { ...action.data }, count: action.data.movies.length };
+      return { ...state, data: { ...action.data }, count: action.data.movies.length + state.count };
+    }
+    case UPDATE_MOVIES: {
+      const movies = action.data.movies || [];
+      return {
+        ...state,
+        data: movies,
+        reqParams: {
+          ...state.reqParams,
+          count: movies.length,
+          start: 0,
+        },
+        isFetchPossible: movies.length >= 25,
+        isSearchEmpty: movies.length === 0,
+      };
     }
     case RESET_MOVIES: {
-      return state;
+      return {
+        ...initialState,
+        genres: state.genres,
+        reqParams: {
+          ...state.reqParams,
+          start: 0,
+          count: 0,
+        },
+      };
+    }
+    case RESET_MOVIES_PARAMS: {
+      return {
+        ...state,
+        reqParams: initialState.reqParams,
+      };
     }
     case ADD_MOVIES: {
-      return { ...state, data: [...state.data, ...action.data.movies], count: state.count + action.data.movies.length };
-    }
-    case UPDATE_SEARCH_MOVIES: {
-      return { ...state, search: action.value };
-    }
-    case UPDATE_FILTER_MOVIES: {
-      return { ...state, filter: [...state.filter, action.filter] };
+      return {
+        ...state,
+        data: [...state.data, ...action.data.movies],
+        reqParams: {
+          ...state.reqParams,
+          count: state.reqParams.count + action.data.movies.length,
+        },
+        isFetchPossible: action.data.movies.length === 25,
+        isSearchEmpty: action.data.movies.length === 0,
+      };
     }
     case LOAD_GENRES: {
       return { ...state, genres: action.genres };
     }
-    case LOAD_PREFERRED_MOVIES: {
-      return { ...state, preferredMovies: action.data.movies };
-    }
     case LOAD_RECENT_MOVIES: {
       return { ...state, recentMovies: action.data.movies };
+    }
+    case CHANGE_PARAMS: {
+      const q = !isNil(action.data.q) ? action.data.q : state.reqParams.q;
+      const ratings = action.data.ratings ? `${action.data.ratings.from},${action.data.ratings.to}` : state.reqParams.ratings;
+      const genres = action.data.selectedGenre || state.reqParams.genres;
+      return {
+        ...state,
+        reqParams: {
+          ...state.reqParams,
+          q,
+          ratings,
+          genres,
+        },
+      };
     }
     default:
       return state;

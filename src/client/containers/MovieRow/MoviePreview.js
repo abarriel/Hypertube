@@ -13,16 +13,13 @@ const MoviePreview = ({
   movie,
   start,
   end,
-  length,
   displayShadow,
   handleChangeShadowDisplay,
-  move,
   index,
 }) => (
   <MoviePreviewContainer
     onMouseEnter={() => handleChangeShadowDisplay(true)}
     onMouseLeave={() => handleChangeShadowDisplay(false)}
-    onClick={() => move(getMoveDirection(start, end, index, length))}
     hidden={isMovieHidden(index, start, end)}
     pos={index}
   >
@@ -42,10 +39,8 @@ MoviePreview.propTypes = {
   movie: object.isRequired,
   start: number.isRequired,
   end: number.isRequired,
-  length: number.isRequired,
   displayShadow: bool.isRequired,
   handleChangeShadowDisplay: func.isRequired,
-  move: func.isRequired,
   index: number.isRequired,
 };
 

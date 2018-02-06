@@ -12,9 +12,9 @@ const MenuElem = ({
   label,
   selected,
 }) => (
-  <MenuElemStyled to={to} selected={selected}>
+  <MenuElemStyled to={to} selected={selected} onClick={() => window.scrollTo(0, 0)}>
     <MenuElemText selected={selected}>{label}</MenuElemText>
-    {selected && <UnderLine />}
+    <UnderLine selected={selected} />
   </MenuElemStyled>
 );
 

@@ -2,10 +2,12 @@ import * as _ from 'lodash';
 import * as bcrypt from 'bcrypt';
 import * as express from 'express';
 import * as jwt from 'jsonwebtoken';
+import * as del from 'del';
+import * as path from 'path';
 
 import middlewaresBinding from '../middleware';
-import Users from '../queries/users';
-import { createUsersTable, deleteUsersTable } from '../../database/migrations/users';
+import mailer from '../middleware/mail';
+import { Users } from '../../database/queries';
 import { Environment } from '../../core';
 
 class UsersController {
@@ -14,45 +16,44 @@ class UsersController {
   @middlewaresBinding(['uploadImg', 'userFormValidate'])
   async post(req: express.Request, res: express.Response, next: any) {
     const { user } = req.app.locals;
-    // await deleteUsersTable();
-    // await createUsersTable();
+    if (await Users.isRegistered({ username: user.username, omniauth: 'false' })) return next({ type: 'db', details: 'User already register under a similar login' });
+    if (_.some(user, _.isNil)) return next({ type: 'Validation', details: 'One value is equired but is undefined' });
 
-    if (await Users.isRegistered({ login: user.login })) return next({ type: 'db', details: 'User already register under a similar login' });
-    if (_.some(user, _.isEmpty)) return next({ type: 'Validation', details: 'One value is required but is undefined' });
-
-    const hashedPassword = await bcrypt.hash(user.password, 10);
-    const [userInDb] = await Users.post({ ...user, password: hashedPassword });
+    const userInDb = await Users.post({ ...user, omniauth: false });
     res.json({ user: userInDb });
   };
 
-  @middlewaresBinding(['getToken', 'isAuthorize', 'userFormValidate'])
-  async put(req: express.Request, res: express.Response) {
+  @middlewaresBinding(['isAuthorize', 'uploadImg', 'userFormValidate'])
+  async put(req: express.Request, res: express.Response, next: any) {
+    const { user: { omniauth, id, profilePicture } } = req;
+    if (omniauth || omniauth === 'true') return next({ type: 'Auth', details: 'Cannot update your info bc you user is update by your provider'});
+    const { user: dataToUpdate } = req.app.locals;
+    if (dataToUpdate.username) return next({ type: 'Auth', details: 'Cannot update your login'});
+    try {
+      await Users.update(dataToUpdate, id);
+      res.json({ status: 'user updated'});
+      // if (dataToUpdate.profilePicture && profilePicture !== 'upload/default.jpg') {
+      //  const ok =  del.sync(path.join('../../../../public', profilePicture));
+      // }
+    } catch (err) {
+      next({ type: 'db', details: 'err while updating info', err });
+    }
   };
 
-  @middlewaresBinding(['getToken', 'isAuthorize', 'userFormValidate'])
+  @middlewaresBinding(['isAuthorize', 'userFormValidate'])
   async get(req: express.Request, res: express.Response) {
     const { limit, offset } = req.app.locals;
     const users = await Users.gets(limit, offset);
      res.json({ users });
   };
 
-  @middlewaresBinding('userFormValidate')
-  async login(req: express.Request, res: express.Response, next: any) {
-    const { user } = req.app.locals;
-    if (!await Users.isRegistered({ login: user.login })) return next({ type: 'db', details: 'User not found' });
-    const { password, id } = await Users.getByLogin(user.login, ['password', 'id']);
-    if (!await bcrypt.compare(user.password, password)) return next({ type: 'Auth', details: 'Failed to authenticate' });
-    const jwtConfig = Environment.getConfig().jwt;
-    res.json({ hyperFlixToken: jwt.sign({ sub: id }, jwtConfig.accessTokenSecret, { expiresIn: jwtConfig.expiresIn }) });
-  };
-
-  @middlewaresBinding(['getToken', 'isAuthorize'])
+  @middlewaresBinding(['isAuthorize'])
   async single(req: express.Request, res: express.Response, next: any) {
     const { id } = req.params;
-    const { decodedToken: { sub } } = req.app.locals;
+    const { id: myId } = req.user;
     const params: any = { id };
     if (id === 'me') {
-      params.id = sub;
+      params.id = myId;
       params.columns = 'all';
     };
     if (!/[0-9]{1,5}/.test(params.id)) return next({ type: 'validation', details: 'Wrong Id provided' });
@@ -63,3 +64,4 @@ class UsersController {
 };
 
 export default UsersController;
+

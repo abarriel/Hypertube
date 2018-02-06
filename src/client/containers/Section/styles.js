@@ -60,7 +60,6 @@ export const MoviesRowContainer = styled.div`
   align-items: flex-start;
   flex:1;
   min-width:100%;
-  height:405px;
 `;
 
 export const SpinnerContainer = styled.div`

@@ -4,14 +4,20 @@ import {
 
 export const getMovies = state => state.movies.data;
 
-export const getMoviesCount = state => state.movies.count;
+export const getMoviesCount = state => state.movies.reqParams.count;
 
 export const getPreferedMovies = movies => filter(movies, (movie) => movie.imdbRating > 3);
 
-export const getRecentMovies = movies => filter(movies, (movie) => movie.year > 2015);
-
 export const getGenres = state => state.movies.genres;
 
-export const getPreferredMovies = state => state.movies.preferredMovies;
+export const getSelectedGenre = state => state.movies.reqParams.genres;
 
-export const getrecentMovies = state => state.movies.recentMovies;
+export const getQ = state => state.movies.reqParams.q;
+
+export const getReqParams = state => state.movies.reqParams;
+
+export const getRecentMovies = state => state.movies.recentMovies;
+
+export const getIsFetchPossible = state => state.movies.isFetchPossible;
+
+export const getIsSearchEmpty = state => state.movies.isSearchEmpty;

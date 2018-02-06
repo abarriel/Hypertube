@@ -1,32 +1,100 @@
 paths:
+# Movies
   movies.genres:
     verb: get
     path: movies/genres
     description: Get genres
-    parameters: no
   movies.single:
     verb: get
     path: movies/:id
     description: Get full details of film
-    parameters: no
 
-  users.login:
-    verb: post
-    path: users/login
-    description: Get full details of film
-    parameters: no
+# Users
   users.single:
     verb: get
     path: users/:id
     description: Get user if me get full details
-    parameters: no
 
+# Comments
+  comments.gets:
+    verb: get
+    path: comments/:imdbId
+    description: Get comments by movie
+  comments.add:
+    verb: post
+    path: comments/:imdbId
+    description: Get comments by movie
+
+# List
+  list.add:
+    verb: post
+    path: list/:list/:imdbId
+    description: Add Movie to my list
+  list.getList:
+    verb: get
+    path: list/:list
+    description: Get list
+  list.deleteMovie:
+    verb: delete
+    path: list/:list/:imdbId
+    description: Delete Movie from my list
+
+# Video
+  video.getSub:
+    verb: get
+    path: video/:imdbId/sub
+  video.getVideo:
+    verb: get
+    path: video/:imdbId
+# Auth CB
+  auth.local:
+    verb: post
+    path: auth/login
+    description: Omiauth login
   auth.facebook:
     verb: get
     path: auth/facebook
     description: Omiauth facebook
-
+  auth.fortyTwo:
+    verb: get
+    path: auth/42
+    description: Omiauth 42
+  auth.twitter:
+    verb: get
+    path: auth/twitter
+    description: Omiauth Twitter
+  auth.github:
+    verb: get
+    path: auth/github
+    description: Omiauth Github
+  auth.google:
+    verb: get
+    path: auth/google
+    description: Omiauth Google
+  # auth.spotify:
+  #   verb: get
+  #   path: auth/spotify
+  #   description: Omiauth Spotify
+# Auth CB
+  auth.localCB:
+    verb: get
+    path: auth/local/cb
+    description: Omiauth login
   auth.facebookCB:
     verb: get
     path: auth/facebook/cb
-    description: Omiauth facebook cb
+  auth.twitterCB:
+    verb: get
+    path: auth/twitter/cb
+  auth.fortyTwoCB:
+    verb: get
+    path: auth/42/cb
+  auth.githubCB:
+    verb: get
+    path: auth/github/cb
+  auth.googleCB:
+    verb: get
+    path: auth/google/cb
+  # auth.spotifyCB:
+  #   verb: get
+  #   path: auth/spotify/cb

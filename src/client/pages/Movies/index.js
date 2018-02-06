@@ -2,7 +2,8 @@ import React from 'react';
 import {
   array,
   func,
-  number,
+  object,
+  bool,
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,7 +13,9 @@ import { compose, lifecycle } from 'recompose';
 
 import {
   getMovies,
-  getMoviesCount,
+  getReqParams,
+  getIsFetchPossible,
+  getIsSearchEmpty,
 } from '../../selectors/movies';
 import {
   MoviesContainer,
@@ -22,49 +25,68 @@ import {
 } from './styles';
 import MoviePreview from '../../components/MoviePreview';
 import Spinner from '../../components/Spinner';
-import ParamsWrapperButton from '../../components/ParamsWrapperButton';
-import { reqMovies } from '../../request';
-import { addMovies, resetMovies } from '../../actions/movies';
+import GenresWrapperButton from '../../components/GenresWrapperButton';
+import RatingWrapperButton from '../../components/RatingWrapperButton';
+import EmptySearch from '../../components/EmptySearch';
+import req from '../../request';
+import {
+  addMovies,
+  resetMovies,
+  resetMoviesParams,
+} from '../../actions/movies';
 
-const onChange = (isVisible, addMovies, moviesCount) => {
+const onChange = (isVisible, addMovies, reqParams) => {
   if (isVisible) {
-    reqMovies(20, moviesCount)
-      .then(movies => addMovies(movies))
-      .catch(err => console.log('error: ', err));
+    req.movies({
+      limit: 25,
+      offset: reqParams.count,
+      genres: reqParams.genres,
+      ratings: reqParams.ratings })
+      .then(movies => addMovies(movies));
   }
 };
 
 const Movies = ({
   movies,
-  moviesCount,
   addMovies,
+  reqParams,
+  isFetchPossible,
+  isEmptySearch,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
       <Title>Films</Title>
-      <ParamsWrapperButton />
+      <GenresWrapperButton selectedGenre={reqParams.genres} />
+      <RatingWrapperButton />
     </ParamsContainer>
     <MoviePreviewContainer>
-      {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
+      {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
+      {isEmptySearch && <EmptySearch value={reqParams.q} />}
     </MoviePreviewContainer>
-    <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, moviesCount)}>
-      <Spinner />
-    </VisibilitySensor>
+    {reqParams.q.length === 0 && isFetchPossible &&
+      <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, reqParams)}>
+        <Spinner />
+      </VisibilitySensor>
+    }
   </MoviesContainer>
 );
 
 Movies.propTypes = {
   movies: array.isRequired,
-  moviesCount: number.isRequired,
   addMovies: func.isRequired,
+  reqParams: object.isRequired,
+  isFetchPossible: bool.isRequired,
+  isEmptySearch: bool.isRequired,
 };
 
-const actions = { addMovies, resetMovies };
+const actions = { addMovies, resetMovies, resetMoviesParams };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const mapStateToProps = state => ({
   movies: getMovies(state),
-  moviesCount: getMoviesCount(state),
+  reqParams: getReqParams(state),
+  isFetchPossible: getIsFetchPossible(state),
+  isEmptySearch: getIsSearchEmpty(state),
 });
 
 const enhance = compose(
@@ -73,6 +95,7 @@ const enhance = compose(
   lifecycle({
     componentWillUnmount() {
       this.props.resetMovies();
+      this.props.resetMoviesParams();
     },
   }),
 );

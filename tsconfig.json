@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "esnext",
     "module": "commonjs",
+    "allowJs": true,
     "outDir": "dist",
     "experimentalDecorators": true,
     "rootDir": ".",

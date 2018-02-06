@@ -23,7 +23,7 @@ const Shadow = ({
     onMouseLeave={() => handleChangeOpacity(0)}
   >
     <Title opacity={opacity}>{`${movie.title} (${movie.year})`}</Title>
-    <LinkStyed opacity={opacity} to={`/movie/${movie.imdbId}`}>
+    <LinkStyed opacity={opacity} to={`/video/${movie.imdbId}`}>
       <PlayLogo />
     </LinkStyed>
     <Rating rating={movie.imdbRating} opacity={opacity}/>

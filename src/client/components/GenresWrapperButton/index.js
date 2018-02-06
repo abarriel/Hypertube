@@ -3,29 +3,32 @@ import { withStateHandlers } from 'recompose';
 import {
   func,
   bool,
+  string,
 } from 'prop-types';
 
 import {
-  ParamsWrapperButtonContainer,
+  GenresButtonContainer,
   Text,
   Chev,
 } from './styles';
-import ParamsWrapper from './ParamsWrapper';
+import GenresWrapper from './GenresWrapper';
 
-export const ParamsWrapperButton = ({
+export const GenresButton = ({
   handleChangeWrapped,
   wrapped,
+  selectedGenre,
 }) => (
-  <ParamsWrapperButtonContainer onClick={() => handleChangeWrapped()} onMouseLeave={() => !wrapped && handleChangeWrapped()}>
-    <Text>Genres</Text>
+  <GenresButtonContainer onClick={() => handleChangeWrapped()}>
+    <Text>{selectedGenre || 'Genres'}</Text>
     <Chev />
-    {!wrapped && <ParamsWrapper handleChangeWrapped={handleChangeWrapped} />}
-  </ParamsWrapperButtonContainer>
+    {!wrapped && <GenresWrapper handleChangeWrapped={handleChangeWrapped} />}
+  </GenresButtonContainer>
 );
 
-ParamsWrapperButton.propTypes = {
+GenresButton.propTypes = {
   handleChangeWrapped: func.isRequired,
   wrapped: bool.isRequired,
+  selectedGenre: string.isRequired,
 };
 
 export default withStateHandlers(
@@ -35,4 +38,4 @@ export default withStateHandlers(
   {
     handleChangeWrapped: ({ wrapped }) => () => ({ wrapped: !wrapped }),
   },
-)(ParamsWrapperButton);
+)(GenresButton);

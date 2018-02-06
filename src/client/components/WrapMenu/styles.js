@@ -7,9 +7,11 @@ export const WrapMenuContainer = styled.div`
   min-width:150px;
   transition: background-color 0.3s ease-in-out;
   height:${({ displayMenu }) => displayMenu ? '70px' : '0px'};
-  border-radius:3px;
   background-color:#000;
   top:70px;
+  @media (max-width: 900px) {
+    top:40px;
+  }
   overflow:hidden;
 `;
 

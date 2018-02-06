@@ -35,7 +35,7 @@ une fois le téléchargement complété, mais sera capable de streamer directeme
 Tous les framework, micro-framework, librairies etc... sont autorisés dans la limite où
 ils ne servent pas à créer un flux vidéo à partir d’un torrent.
 
-:warning:  Par exemple, des librairies commewebtorrent, pulsaroupeerflix sont interdites.
+:warning:  Par exemple, des librairies commewebtorrent, pulsar ou peerflix sont interdites.
 
 :iphone:  Votre site devra être présentable sur mobile, et garder une mise en page acceptable
 sur de petites résolutions.
