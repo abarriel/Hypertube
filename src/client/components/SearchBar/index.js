@@ -13,7 +13,6 @@ import {
 import req from '../../request';
 import {
   getMovies,
-  getMoviesCount,
   getSelectedGenre,
 } from '../../selectors/movies';
 import {
@@ -48,9 +47,7 @@ const search = (value, addMovies, resetMovies, changeParams,  movies, selectedGe
 
 const SearchBar = ({
   wrapped,
-  value,
   handleChangeWrapped,
-  handleChangevalue,
   addMovies,
   movies,
   selectedGenre,
@@ -61,8 +58,8 @@ const SearchBar = ({
     <SearchBox wrapped={wrapped}>
       <SearchLogo onClick={() => handleChangeWrapped()} />
       {!wrapped &&
-        <Debounce time="400" handler="onChange">
-          <SearchInput onChange={e => search(e.target.value, addMovies, resetMovies, changeParams, movies, selectedGenre)} />
+        <Debounce time="400" handler="onKeyDown">
+          <SearchInput onKeyDown={e => search(e.target.value, addMovies, resetMovies, changeParams, movies, selectedGenre)} />
         </Debounce>
       }
     </SearchBox>
@@ -71,9 +68,7 @@ const SearchBar = ({
 
 SearchBar.propTypes = {
   wrapped: bool.isRequired,
-  value: string.isRequired,
   handleChangeWrapped: func.isRequired,
-  handleChangevalue: func.isRequired,
   addMovies: func.isRequired,
   movies: array.isRequired,
   selectedGenre: string.isRequired,
@@ -94,11 +89,9 @@ export default compose(
   withStateHandlers(
     {
       wrapped: true,
-      value: '',
     },
     {
       handleChangeWrapped: ({ wrapped }) => () => ({ wrapped: !wrapped }),
-      handleChangevalue: () => value => ({ value }),
     },
   ),
 )(SearchBar);

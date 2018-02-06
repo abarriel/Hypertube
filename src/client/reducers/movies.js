@@ -83,7 +83,7 @@ const reducer = (state = initialState, action) => {
       return { ...state, recentMovies: action.data.movies };
     }
     case CHANGE_PARAMS: {
-      const q = !isNil(action.data.q) ? action.data.q : state.reqParams.q;
+      const q = action.data.q && !isNil(action.data.q) ? action.data.q : state.reqParams.q;
       const ratings = action.data.ratings ? `${action.data.ratings.from},${action.data.ratings.to}` : state.reqParams.ratings;
       const genres = action.data.selectedGenre || state.reqParams.genres;
       return {
