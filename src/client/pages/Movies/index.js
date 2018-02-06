@@ -27,6 +27,7 @@ import MoviePreview from '../../components/MoviePreview';
 import Spinner from '../../components/Spinner';
 import GenresWrapperButton from '../../components/GenresWrapperButton';
 import RatingWrapperButton from '../../components/RatingWrapperButton';
+import YearsWrapperButton from '../../components/YearsWrapperButton';
 import EmptySearch from '../../components/EmptySearch';
 import req from '../../request';
 import {
@@ -41,7 +42,9 @@ const onChange = (isVisible, addMovies, reqParams) => {
       limit: 25,
       offset: reqParams.count,
       genres: reqParams.genres,
-      ratings: reqParams.ratings })
+      ratings: reqParams.ratings,
+      years: reqParams.years,
+    })
       .then(movies => addMovies(movies));
   }
 };
@@ -58,6 +61,7 @@ const Movies = ({
       <Title>Films</Title>
       <GenresWrapperButton selectedGenre={reqParams.genres} />
       <RatingWrapperButton />
+      <YearsWrapperButton />
     </ParamsContainer>
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
