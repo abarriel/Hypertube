@@ -45,9 +45,9 @@ export default withStateHandlers(
   },
   {
     handleChangeWrapped: ({ wrapped }) => () => ({ wrapped: !wrapped }),
-    handleChangeRate: ({ rate }) => newRate => {
-      let newFrom = newRate.from || rate.from;
-      let newTo = newRate.to || rate.to;
+    handleChangeRate: () => newRate => {
+      let newFrom = newRate.from;
+      let newTo = newRate.to;
       if (newFrom > newTo) {
         newFrom = newTo;
       }

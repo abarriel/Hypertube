@@ -99,6 +99,7 @@ export const Value = styled.div`
   font-size: 10px;
   font-weight:1;
   cursor:pointer;
+  color: ${({ isAble }) => isAble ? 'white' : 'rgb(80,80,80)'};
 `;
 
 export const Title = styled.p`

@@ -15,6 +15,7 @@ import {
   changeParams,
 } from '../../actions/movies';
 import { getReqParams } from '../../selectors/movies';
+import { isAble } from './utils';
 import {
   RatingWrapperContainer,
   RatingWrapperOverlay,
@@ -64,12 +65,14 @@ const RatingWrapper = ({
       {ratingTab.map(from => (
         <Value
           key={from.id}
+          isAble={isAble(rating.from, rating.to, from.value, 'from')}
           onClick={() => {
+            if (!isAble(rating.from, rating.to, from.value, 'from')) return;
             resetMovies();
-            handleChangeRate({ from: from.id });
+            handleChangeRate({ from: from.value, to: rating.to });
             changeParams({
               ratings: {
-                from: from.id,
+                from: from.value,
                 to: rating.to,
               },
               count: 0,
@@ -84,13 +87,15 @@ const RatingWrapper = ({
       {ratingTab.map(to => (
         <Value
           key={to.id}
+          isAble={isAble(rating.from, rating.to, to.value, 'to')}
           onClick={() => {
+            if (!isAble(rating.from, rating.to, to.value, 'to')) return;
             resetMovies();
-            handleChangeRate({ to: to.id });
+            handleChangeRate({ from: rating.from, to: to.value });
             changeParams({
               ratings: {
                 from: rating.from,
-                to: to.id,
+                to: to.value,
               },
               start: 0,
               count: 0,
