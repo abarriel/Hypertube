@@ -3,64 +3,21 @@ import {
   func,
   object,
 } from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-import {
-  updateMovies,
-  resetMovies,
-  changeParams,
-} from '../../actions/movies';
-import { getReqParams } from '../../selectors/movies';
 import {
   YearsWrapperContainer,
   YearsWrapperOverlay,
   Value,
   Title,
 } from './styles';
-
-const yearsTab = [
-  {
-    id: 0,
-    value: 1950,
-  },
-  {
-    id: 1,
-    value: 1960,
-  },
-  {
-    id: 2,
-    value: 1970,
-  },
-  {
-    id: 3,
-    value: 1980,
-  },
-  {
-    id: 4,
-    value: 1990,
-  },
-  {
-    id: 5,
-    value: 2000,
-  },
-  {
-    id: 6,
-    value: 2010,
-  },
-  {
-    id: 8,
-    value: 2018,
-  },
-];
+import { isAble } from './utils';
+import { yearsTab } from './yearsTab';
 
 const YearsWrapper = ({
-  handleChangeWrapped,
   handleChangeValues,
   resetMovies,
   changeParams,
   years,
-  reqParams,
 }) => (
   <YearsWrapperOverlay>
     <YearsWrapperContainer>
@@ -68,7 +25,9 @@ const YearsWrapper = ({
       {yearsTab.map(from => (
         <Value
           key={from.id}
+          isAble={isAble(years.from, years.to, from.value, 'from')}
           onClick={() => {
+            if (!isAble(years.from, years.to, from.value, 'from')) return;
             resetMovies();
             handleChangeValues({ from: from.value });
             changeParams({
@@ -88,7 +47,9 @@ const YearsWrapper = ({
       {yearsTab.map(to => (
         <Value
           key={to.id}
+          isAble={isAble(years.from, years.to, to.value, 'to')}
           onClick={() => {
+            if (!isAble(years.from, years.to, to.value, 'to')) return;
             resetMovies();
             handleChangeValues({ to: to.value });
             changeParams({
@@ -109,19 +70,11 @@ const YearsWrapper = ({
 );
 
 YearsWrapper.propTypes = {
-  handleChangeWrapped: func.isRequired,
   handleChangeValues: func.isRequired,
-  resetMovies: func.isRequired,
   years: object.isRequired,
   changeParams: func.isRequired,
   updateMovies: func.isRequired,
+  resetMovies: func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  reqParams: getReqParams(state),
-});
-
-const actions = { changeParams, updateMovies, resetMovies };
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(YearsWrapper);
+export default YearsWrapper;
