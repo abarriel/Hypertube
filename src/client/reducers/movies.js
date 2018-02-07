@@ -1,5 +1,6 @@
 import {
   isNil,
+  isString,
 } from 'lodash';
 
 import {
@@ -88,7 +89,7 @@ const reducer = (state = initialState, action) => {
       const q = action.data.q && !isNil(action.data.q) ? action.data.q : state.reqParams.q;
       const ratings = action.data.ratings ? `${action.data.ratings.from},${action.data.ratings.to}` : state.reqParams.ratings;
       const years = action.data.years ? `${action.data.years.from},${action.data.years.to}` : state.reqParams.years;
-      const genres = action.data.selectedGenre || state.reqParams.genres;
+      const genres = isString(action.data.selectedGenre) ? action.data.selectedGenre : state.reqParams.genres;
       return {
         ...state,
         reqParams: {

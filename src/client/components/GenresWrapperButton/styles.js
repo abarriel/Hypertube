@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import FaSortDesc from 'react-icons/lib/fa/sort-desc';
+import MdClear from 'react-icons/lib/md/clear';
 
 export const GenresButtonContainer = styled.div`
   position:absolute;
@@ -96,3 +97,10 @@ export const Genre = styled.div`
   cursor:pointer;
 `;
 
+export const Cross = styled(MdClear)`
+  color:white;
+  font-size:1.2em;
+  margin-left:10px;
+  margin-right:10px;
+  color: ${({ canreset }) => canreset !== 'false' ? 'white' : 'black'};
+`;

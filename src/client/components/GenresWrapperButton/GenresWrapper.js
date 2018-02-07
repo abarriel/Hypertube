@@ -3,17 +3,8 @@ import {
   array,
   func,
 } from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import { uniqueId } from 'lodash';
 
-import {
-  resetMovies,
-  changeParams,
-} from '../../actions/movies';
-import {
-  getGenres,
-} from '../../selectors/movies';
 import {
   GenresWrapperContainer,
   GenresWrapperOverlay,
@@ -48,11 +39,4 @@ GenresWrapper.propTypes = {
   changeParams: func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  genres: getGenres(state),
-});
-
-const actions = { changeParams, resetMovies };
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(GenresWrapper);
+export default GenresWrapper;
