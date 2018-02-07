@@ -1,20 +1,15 @@
 import React from 'react';
 import {
-  array,
   func,
   object,
 } from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { omit } from 'lodash';
 
-import req from '../../request';
 import {
-  updateMovies,
   resetMovies,
   changeParams,
 } from '../../actions/movies';
-import { getReqParams } from '../../selectors/movies';
 import { isAble } from './utils';
 import {
   RatingWrapperContainer,
@@ -51,13 +46,10 @@ const ratingTab = [
 ];
 
 const RatingWrapper = ({
-  handleChangeWrapped,
   handleChangeRate,
-  updateMovies,
   resetMovies,
   changeParams,
   rating,
-  reqParams,
 }) => (
   <RatingWrapperOverlay>
     <RatingWrapperContainer>
@@ -110,19 +102,13 @@ const RatingWrapper = ({
 );
 
 RatingWrapper.propTypes = {
-  handleChangeWrapped: func.isRequired,
   handleChangeRate: func.isRequired,
   resetMovies: func.isRequired,
   rating: object.isRequired,
   changeParams: func.isRequired,
-  updateMovies: func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  reqParams: getReqParams(state),
-});
-
-const actions = { changeParams, updateMovies, resetMovies };
+const actions = { changeParams, resetMovies };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(RatingWrapper);
+export default connect(null, mapDispatchToProps)(RatingWrapper);

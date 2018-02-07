@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import FaSortDesc from 'react-icons/lib/fa/sort-desc';
+import MdClear from 'react-icons/lib/md/clear';
 
 export const RatingButtonContainer = styled.div`
   position:absolute;
@@ -20,7 +21,7 @@ export const RatingButtonContainer = styled.div`
   -webkit-appearance: none;
   border-radius: 0;
   position: relative;
-  padding-right: 50px;
+  padding-right: 20px;
   text-align: left;
   user-select: none;
   cursor: pointer;
@@ -93,12 +94,12 @@ export const Value = styled.div`
   font-size:1.1em;
   -webkit-font-smoothing:antialiased;
   &:hover {
-    text-decoration:underline;
+    text-decoration:${({ isAble }) => isAble ? 'underline' : 'none'};
   }
   font-family:
   font-size: 10px;
   font-weight:1;
-  cursor:pointer;
+  cursor:${({ isAble }) => isAble ? 'pointer' : 'default'};
   color: ${({ isAble }) => isAble ? 'white' : 'rgb(80,80,80)'};
 `;
 
@@ -109,3 +110,10 @@ export const Title = styled.p`
   align-items: center;
 `;
 
+export const Cross = styled(MdClear)`
+  color:white;
+  font-size:1.2em;
+  margin-left:10px;
+  margin-right:10px;
+  color: ${({ canreset }) => canreset !== 'false' ? 'white' : 'black'};
+`;

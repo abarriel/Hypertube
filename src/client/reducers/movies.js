@@ -51,6 +51,7 @@ const reducer = (state = initialState, action) => {
     case RESET_MOVIES: {
       return {
         ...initialState,
+        data: initialState.data,
         genres: state.genres,
         reqParams: {
           ...state.reqParams,
