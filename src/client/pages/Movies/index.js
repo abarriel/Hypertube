@@ -65,7 +65,7 @@ const Movies = ({
     </ParamsContainer>
     <MoviePreviewContainer>
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
-      {isEmptySearch && <EmptySearch value={reqParams.q} />}
+      {isEmptySearch && movies.length === 0 && <EmptySearch value={reqParams.q} />}
     </MoviePreviewContainer>
     {reqParams.q.length === 0 && isFetchPossible &&
       <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, reqParams)}>

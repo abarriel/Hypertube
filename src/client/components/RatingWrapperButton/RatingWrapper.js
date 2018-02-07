@@ -3,13 +3,8 @@ import {
   func,
   object,
 } from 'prop-types';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 
-import {
-  resetMovies,
-  changeParams,
-} from '../../actions/movies';
+import { ratingTab } from './ratingTab';
 import { isAble } from './utils';
 import {
   RatingWrapperContainer,
@@ -17,33 +12,6 @@ import {
   Value,
   Title,
 } from './styles';
-
-const ratingTab = [
-  {
-    id: 0,
-    value: 0,
-  },
-  {
-    id: 1,
-    value: 1,
-  },
-  {
-    id: 2,
-    value: 2,
-  },
-  {
-    id: 3,
-    value: 3,
-  },
-  {
-    id: 4,
-    value: 4,
-  },
-  {
-    id: 5,
-    value: 5,
-  },
-];
 
 const RatingWrapper = ({
   handleChangeRate,
@@ -108,7 +76,4 @@ RatingWrapper.propTypes = {
   changeParams: func.isRequired,
 };
 
-const actions = { changeParams, resetMovies };
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
-
-export default connect(null, mapDispatchToProps)(RatingWrapper);
+export default (RatingWrapper);
