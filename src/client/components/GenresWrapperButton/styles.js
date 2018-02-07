@@ -32,7 +32,8 @@ export const GenresButtonContainer = styled.div`
   flex-wrap:no-wrap;
   &:hover {
     background-color:rgb(40,40,40);
-  }
+  };
+  margin-bottom:25px;
 `;
 
 export const Text = styled.p`
