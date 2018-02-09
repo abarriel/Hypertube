@@ -1,24 +1,61 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+export const LoginContainer = styled.div`
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width:100vw;
+  min-height:100vh;
+`;
+
+export const LogoContainer = styled.div`
+  position:absolute;
+  top:0;
+  left:0;
+`;
+
 export const FormContainer = styled.form`
   position: relative;
-  display: grid;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
   width: 350px;
   color: red;
   height: 350px;
-  // background-color: red;
-  margin: auto;
+  background-color: red;
   justify-content: center;
   align-items: center;
+
+  margin-bottom: 10px;
+  min-width: 380px;
+  background-color: #f3f3f3;
+  color: #333;
+  padding:40px;
+  height:487px;
+  -webkit-font-smoothing:antialiased;
 `;
 
 export const Input = styled.input`
   width: 100%;
-  heigh: 100%;
-
-  margin: auto;
-  margin-bottom: 0px;
+  max-width: 100%;
+  margin-top: 3px;
+  padding: 10px 11px;
+  height: 44px;
+  color: rgb(0, 0, 0);
+  cursor: text;
+  text-rendering: auto;
+  letter-spacing: normal;
+  word-spacing: normal;
+  text-transform: none;
+  text-indent: 0px;
+  text-shadow: none;
+  border-radius: 2px;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 30;
+  background-color:rgb(250, 255, 189);
 `;
 export const ButtonContainer = styled.div`
   position:relative;

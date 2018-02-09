@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import GoSearch from 'react-icons/lib/go/search';
+import MdClear from 'react-icons/lib/md/clear';
 
 export const SearchBarContainer = styled.div`
   position:relative;
@@ -46,4 +47,11 @@ export const SearchInput = styled.input`
   &:focus {
     outline:none;
   }
+`;
+
+export const Cross = styled(MdClear)`
+  position:absolute;
+  right:10px;
+  color:white;
+  cursor:pointer;
 `;

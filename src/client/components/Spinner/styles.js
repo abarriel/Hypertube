@@ -5,10 +5,12 @@ import { MAIN_COLOR } from '../../colors';
 export const SpinnerContainer = styled.div`
   position:relative;
   display:flex;
-  margin-top:100px;
+  margin-top:50px;
+  margin-bottom:100px;
   justify-content: center;
   align-items: center;
   font-size: 10px;
+  z-index:1000;
 `;
 
 export const SpinnerElem = styled.div`

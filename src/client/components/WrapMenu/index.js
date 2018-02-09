@@ -14,11 +14,11 @@ const WrapMenu = ({
   <WrapMenuContainer displayMenu={displayMenu}>
     <WrapMenuElem>
       <Icon />
-      <WrapMenuElemText>Mon Compte</WrapMenuElemText>
+      <WrapMenuElemText to="/">Mon Compte</WrapMenuElemText>
     </WrapMenuElem>
     <WrapMenuElem>
       <Icon />
-      <WrapMenuElemText>Deconnexion</WrapMenuElemText>
+      <WrapMenuElemText to="/login">Deconnexion</WrapMenuElemText>
     </WrapMenuElem>
   </WrapMenuContainer>
 );

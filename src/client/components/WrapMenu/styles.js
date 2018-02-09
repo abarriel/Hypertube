@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const WrapMenuContainer = styled.div`
   position:absolute;
@@ -30,11 +31,12 @@ export const WrapMenuElem = styled.div`
   }
 `;
 
-export const WrapMenuElemText = styled.p`
+export const WrapMenuElemText = styled(Link)`
   color:white;
   user-select: none;
   margin-right:15px;
   font-size:0.9em;
+  text-decoration: none;
 `;
 
 export const Icon = styled.div`

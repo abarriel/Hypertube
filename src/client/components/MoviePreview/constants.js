@@ -1,4 +1,4 @@
-export const HEIGHT = 330;
-export const WIDTH = 220;
+export const HEIGHT = 350;
+export const WIDTH = 240;
 export const TRANSITION = 0.3;
-export const MARGIN = 4.5;
+export const MARGIN = '20px  0';

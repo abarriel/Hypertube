@@ -20,35 +20,21 @@ import {
   SearchLogo,
   SearchBox,
   SearchInput,
+  Cross,
 } from './styles';
 import {
-  addMovies,
   resetMovies,
   changeParams,
 } from '../../actions/movies';
 
-const search = (value, addMovies, resetMovies, changeParams,  movies, selectedGenre) => {
-  if (value.length === 0) {
-    req.movies({})
-      .then(data => {
-        resetMovies();
-        addMovies(data);
-        changeParams({ q: value });
-      });
-  } else {
-    req.movies({ q: value })
-      .then(data => {
-        resetMovies();
-        addMovies(data);
-        changeParams({ q: value });
-      });
-  }
+const search = (value, resetMovies, changeParams) => {
+  changeParams({ q: value });
+  resetMovies();
 };
 
 const SearchBar = ({
   wrapped,
   handleChangeWrapped,
-  addMovies,
   movies,
   selectedGenre,
   resetMovies,
@@ -59,9 +45,10 @@ const SearchBar = ({
       <SearchLogo onClick={() => handleChangeWrapped()} />
       {!wrapped &&
         <Debounce time="400" handler="onKeyDown">
-          <SearchInput onKeyDown={e => search(e.target.value, addMovies, resetMovies, changeParams, movies, selectedGenre)} />
+          <SearchInput onKeyDown={e => search(e.target.value, resetMovies, changeParams)} />
         </Debounce>
       }
+      {!wrapped && <Cross />}
     </SearchBox>
   </SearchBarContainer>
 );
@@ -69,14 +56,13 @@ const SearchBar = ({
 SearchBar.propTypes = {
   wrapped: bool.isRequired,
   handleChangeWrapped: func.isRequired,
-  addMovies: func.isRequired,
   movies: array.isRequired,
   selectedGenre: string.isRequired,
   resetMovies: func.isRequired,
   changeParams: func.isRequired,
 };
 
-const actions = { addMovies, resetMovies, changeParams };
+const actions = { resetMovies, changeParams };
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const mapStateToProps = state => ({

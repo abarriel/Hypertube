@@ -38,12 +38,21 @@ import {
 
 const onChange = (isVisible, addMovies, reqParams) => {
   if (isVisible) {
-    req.movies({
+    let body = {
       limit: 25,
       offset: reqParams.count,
       genres: reqParams.genres,
       ratings: reqParams.ratings,
       years: reqParams.years,
+    };
+    if (reqParams.q.length > 0) {
+      body = {
+        ...body,
+        q: reqParams.q,
+      };
+    }
+    req.movies({
+      ...body,
     })
       .then(movies => addMovies(movies));
   }
@@ -67,7 +76,7 @@ const Movies = ({
       {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
       {isEmptySearch && movies.length === 0 && <EmptySearch value={reqParams.q} />}
     </MoviePreviewContainer>
-    {reqParams.q.length === 0 && isFetchPossible &&
+    {isFetchPossible &&
       <VisibilitySensor onChange={isVisible => onChange(isVisible, addMovies, reqParams)}>
         <Spinner />
       </VisibilitySensor>

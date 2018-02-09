@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
 export const LogoContainer = styled.div`
-  position:relative;
+  position:${({ position }) => position}%;
   display:flex;
   justify-content: center;
   align-items: center;
-  height:100%;
-  width:130px;
+  height:${({ height }) => height}%;
+  width:${({ width }) => width}px;
   transition: all 0.3s ease-in-out;
   @media (max-width: 900px) {
-    width:90px;
+    width:${({ width }) => width - 40}px;
     margin-right: 25px;
-  }
+  };
   padding: 18px 0;
   cursor:pointer;
   margin-right: 5px;

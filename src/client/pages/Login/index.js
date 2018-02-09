@@ -1,13 +1,23 @@
 import React from 'react';
 import { withFormik } from 'formik';
 
-import { FormContainer, Input, ButtonContainer, LinkStyled, InputButton, LostLink } from './styles';
+import {
+  FormContainer,
+  Input,
+  ButtonContainer,
+  LinkStyled,
+  InputButton,
+  LostLink,
+  LoginContainer,
+  LogoContainer,
+} from './styles';
+import Logo from '../../components/Logo';
 import req from '../../request';
 import { UserSchema } from '../../validation';
 // Higher Order Component
 
 // Our inner form component which receives our form's state and updater methods as props
-const InnerForm = ({
+const Login = ({
   values,
   errors,
   touched,
@@ -16,31 +26,36 @@ const InnerForm = ({
   handleSubmit,
   isSubmitting,
 }) => (
-  <FormContainer onSubmit={handleSubmit}>
-    <Input
-      type="text"
-      name="username"
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={values.username}
-    />
-    {touched.username && errors.username && <div>{errors.username}</div>}
-    <Input
-      type="password"
-      name="password"
-      onChange={handleChange}
-      onBlur={handleBlur}
-      value={values.password}
-    />
-    {touched.password && errors.password && <div>{errors.password}</div>}
-    <ButtonContainer>
-      {/* <LinkStyled to={`/register`}>
-        Register
-      </LinkStyled> */}
-      <InputButton type="submit" value="Login" />
-      {/* <LostLink to={`/lost`}>Forgot my password</LostLink> */}
-    </ButtonContainer>
-  </FormContainer>
+  <LoginContainer>
+    <LogoContainer>
+      <Logo height={45} width={167}/>
+    </LogoContainer>
+    <FormContainer onSubmit={handleSubmit}>
+      <Input
+        type="text"
+        name="username"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={values.username}
+      />
+      {touched.username && errors.username && <div>{errors.username}</div>}
+      <Input
+        type="password"
+        name="password"
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={values.password}
+      />
+      {touched.password && errors.password && <div>{errors.password}</div>}
+      <ButtonContainer>
+        {/* <LinkStyled to={`/register`}>
+          Register
+        </LinkStyled> */}
+        <InputButton type="submit" value="Login" />
+        {/* <LostLink to={`/lost`}>Forgot my password</LostLink> */}
+      </ButtonContainer>
+    </FormContainer>
+  </LoginContainer>
 );
 
 // Wrap our form with the using withFormik HoC
@@ -78,6 +93,6 @@ const MyForm = withFormik({
     //   }
     // );
   },
-})(InnerForm);
+})(Login);
 
 export default MyForm;

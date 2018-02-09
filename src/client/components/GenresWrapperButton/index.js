@@ -35,6 +35,7 @@ const GenresButton = ({
     <Cross
       canreset={(selectedGenre.length > 0).toString()}
       onClick={() => {
+        if (!(selectedGenre.length > 0)) return;
         resetMovies();
         handleChangeWrapped();
         changeParams({
