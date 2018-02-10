@@ -14,7 +14,8 @@ export const SearchBarContainer = styled.div`
   background-color:black;
   @media (max-width: 450px) {
     display:none;
-  }
+  };
+  z-index:1100;overflow:hidden;
 `;
 
 export const SearchLogo = styled(GoSearch)`
@@ -23,6 +24,7 @@ export const SearchLogo = styled(GoSearch)`
   cursor:pointer;
   margin:0;
   margin-left:5px;
+  z-index:1100;
 `;
 
 export const SearchBox = styled.div`
@@ -33,6 +35,7 @@ export const SearchBox = styled.div`
   border: solid ${({ wrapped }) => wrapped ? 0 : 1}px rgba(255,255,255,1);
   transition: width 0.2s ease-in-out;
   height:32px;
+  z-index:1100;
 `;
 
 export const SearchInput = styled.input`
@@ -47,6 +50,7 @@ export const SearchInput = styled.input`
   &:focus {
     outline:none;
   }
+  z-index:1100;
 `;
 
 export const Cross = styled(MdClear)`
@@ -54,4 +58,14 @@ export const Cross = styled(MdClear)`
   right:10px;
   color:white;
   cursor:pointer;
+  z-index:1100;
+`;
+
+export const Closer = styled.div`
+  position:fixed;
+  top:0;
+  right:0;
+  width:100vw;
+  height:100vh;
+  z-index:1000;
 `;

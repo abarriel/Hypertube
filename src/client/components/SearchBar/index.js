@@ -21,6 +21,7 @@ import {
   SearchBox,
   SearchInput,
   Cross,
+  Closer,
 } from './styles';
 import {
   resetMovies,
@@ -43,8 +44,14 @@ const SearchBar = ({
   changeParams,
 }) => (
   <SearchBarContainer>
+    {!wrapped && <Closer onClick={() => handleChangeWrapped()} />}
     <SearchBox wrapped={wrapped}>
-      <SearchLogo onClick={() => handleChangeWrapped()} />
+      <SearchLogo
+        onClick={() => {
+          if (wrapped) handleChangeWrapped();
+          else search(value, resetMovies, changeParams);
+        }}
+      />
       {!wrapped &&
         <SearchInput
           value={value}
