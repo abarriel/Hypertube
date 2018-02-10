@@ -13,7 +13,6 @@ export const MainContainer = styled.div`
   margin: ${MARGIN}px;
   z-index:100;
   opacity:${({ isSmall }) => isSmall ? 0 : 1};
-  border-radius:2px;
   overflow:hidden;
   top: 0;
   transition-delay: 0.05s;
@@ -23,6 +22,11 @@ export const MainContainer = styled.div`
   }
   return (pos / 20);
 }}s;
+  @media (max-width: 400px) {
+    width:100%;
+    height:150vw;
+    margin:0;
+  };
 `;
 
 export const BackgroundImage = styled.div`
@@ -30,6 +34,10 @@ export const BackgroundImage = styled.div`
   display:flex;
   height:${HEIGHT}px;
   width:${WIDTH}px;
+  @media (max-width: 400px) {
+    width:100%;
+    height:150vw;
+  }
   background-image:${({ coverImage }) => `url(${coverImage})`};
   background-size: cover;
   background-position: center;

@@ -17,6 +17,10 @@ export const MoviePreviewContainer = styled.div`
   width:92%;
   padding-left:4%;
   padding-right:4%;
+  @media (max-width: 400px) {
+    padding:0;
+    width:100%;
+  };
 `;
 
 export const ParamsContainer = styled.div`
@@ -26,8 +30,10 @@ export const ParamsContainer = styled.div`
   flex-wrap:wrap;
   margin-top:60px;
   padding: 0 60px;
-  @media (max-width: 900px) {
+  @media (max-width: 400px) {
     padding: 0 4%;
+    flex-direction:column;
+    align-items: flex-start;
     width:92%;
   }
 `;

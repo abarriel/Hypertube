@@ -5,7 +5,7 @@ import { MAIN_COLOR } from '../../colors';
 export const SpinnerContainer = styled.div`
   position:relative;
   display:flex;
-  margin-top:50px;
+  margin-top:5w0px;
   margin-bottom:100px;
   justify-content: center;
   align-items: center;

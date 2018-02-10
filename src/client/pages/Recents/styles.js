@@ -6,6 +6,7 @@ export const RecentsContainer = styled.div`
   width:100vw;
   margin-top:75px;
   min-height:calc(100vh - 75px);
+
 `;
 
 export const MoviePreviewContainer = styled.div`
@@ -16,10 +17,10 @@ export const MoviePreviewContainer = styled.div`
     justify-content: center;
   }
   flex-wrap:wrap;
-  width:calc(100% - 120px);
+  width:100%;
   padding: 0 60px;
-  @media (max-width: 900px) {
+  @media (max-width: 400px) {
     padding: 0 4%;
-    width:88%;
+    padding:0;
   }
 `;
