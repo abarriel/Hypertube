@@ -34,7 +34,9 @@ const search = (value, resetMovies, changeParams) => {
 
 const SearchBar = ({
   wrapped,
+  value,
   handleChangeWrapped,
+  handleChangeValue,
   movies,
   selectedGenre,
   resetMovies,
@@ -44,17 +46,32 @@ const SearchBar = ({
     <SearchBox wrapped={wrapped}>
       <SearchLogo onClick={() => handleChangeWrapped()} />
       {!wrapped &&
-        <Debounce time="400" handler="onKeyDown">
-          <SearchInput onKeyDown={e => search(e.target.value, resetMovies, changeParams)} />
-        </Debounce>
+        <SearchInput
+          value={value}
+          onChange={e => {
+              handleChangeValue(e.target.value);
+            }
+          }
+          onKeyPress={e => { if (e.key === 'Enter') search(value, resetMovies, changeParams); }}
+        />
       }
-      {!wrapped && <Cross />}
+      {!wrapped &&
+        <Cross
+          onClick={() => {
+          changeParams({ q: '' });
+          resetMovies();
+          handleChangeValue('');
+          }}
+        />
+        }
     </SearchBox>
   </SearchBarContainer>
 );
 
 SearchBar.propTypes = {
   wrapped: bool.isRequired,
+  value: string.isRequired,
+  handleChangeValue: func.isRequired,
   handleChangeWrapped: func.isRequired,
   movies: array.isRequired,
   selectedGenre: string.isRequired,
@@ -75,9 +92,11 @@ export default compose(
   withStateHandlers(
     {
       wrapped: true,
+      value: '',
     },
     {
       handleChangeWrapped: ({ wrapped }) => () => ({ wrapped: !wrapped }),
+      handleChangeValue: () => newValue => ({ value: newValue }),
     },
   ),
 )(SearchBar);
