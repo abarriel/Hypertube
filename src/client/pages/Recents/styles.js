@@ -6,7 +6,7 @@ export const RecentsContainer = styled.div`
   width:100vw;
   margin-top:75px;
   min-height:calc(100vh - 75px);
-
+  padding-bottom:100px;
 `;
 
 export const MoviePreviewContainer = styled.div`
