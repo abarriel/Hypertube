@@ -55,7 +55,6 @@ MoviePreview.propTypes = {
   handleChangeShadowDisplay: func.isRequired,
   pos: number.isRequired,
   moviesCount: number.isRequired,
-  handleChangeIsPreviewOpen: func.isRequired,
 };
 
 const enhance = compose(

@@ -28,7 +28,19 @@ export const yearsTab = [
     value: 2010,
   },
   {
+    id: 7,
+    value: 2012,
+  },
+  {
     id: 8,
+    value: 2014,
+  },
+  {
+    id: 9,
+    value: 2016,
+  },
+  {
+    id: 10,
     value: 2018,
   },
 ];

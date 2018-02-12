@@ -10,6 +10,8 @@ import {
   LostLink,
   LoginContainer,
   LogoContainer,
+  InputContainer,
+  Label,
 } from './styles';
 import Logo from '../../components/Logo';
 import req from '../../request';
@@ -31,21 +33,27 @@ const Login = ({
       <Logo height={45} width={167}/>
     </LogoContainer>
     <FormContainer onSubmit={handleSubmit}>
-      <Input
-        type="text"
-        name="username"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={values.username}
-      />
+      <InputContainer>
+        <Label>E-mail</Label>
+        <Input
+          type="text"
+          name="username"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.username}
+        />
+      </InputContainer>
       {touched.username && errors.username && <div>{errors.username}</div>}
-      <Input
-        type="password"
-        name="password"
-        onChange={handleChange}
-        onBlur={handleBlur}
-        value={values.password}
-      />
+      <InputContainer>
+        <Label>Mot de passe</Label>
+        <Input
+          type="password"
+          name="password"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.password}
+        />
+      </InputContainer>
       {touched.password && errors.password && <div>{errors.password}</div>}
       <ButtonContainer>
         {/* <LinkStyled to={`/register`}>

@@ -37,6 +37,17 @@ export const FormContainer = styled.form`
   -webkit-font-smoothing:antialiased;
 `;
 
+export const InputContainer = styled.div`
+  position: relative;
+  width:100%;
+  padding-bottom: 24px;
+  margin-bottom: 6px;
+`;
+
+export const Label = styled.div`
+
+`;
+
 export const Input = styled.input`
   width: 100%;
   max-width: 100%;
@@ -57,6 +68,7 @@ export const Input = styled.input`
   z-index: 30;
   background-color:rgb(250, 255, 189);
 `;
+
 export const ButtonContainer = styled.div`
   position:relative;
   display:grid;

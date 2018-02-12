@@ -69,7 +69,7 @@ export const YearsWrapperContainer = styled.div`
   top: calc(2rem + 90px);
   left: 180px;
   opacity: 1;
-  height:300px;
+  height:370px;
   width:300px;
   transition-duration: 150ms;
   background-color: rgba(0,0,0,.9);
