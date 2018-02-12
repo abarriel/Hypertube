@@ -4,12 +4,13 @@ import {
   func,
   object,
   bool,
+  string,
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { map } from 'lodash';
+import { map, isNull } from 'lodash';
 import VisibilitySensor from 'react-visibility-sensor';
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, withStateHandlers } from 'recompose';
 
 import {
   getMovies,
@@ -22,6 +23,7 @@ import {
   MoviePreviewContainer,
   ParamsContainer,
   Title,
+  MoviePreviewContent,
 } from './styles';
 import MoviePreview from '../../components/MoviePreview';
 import Spinner from '../../components/Spinner';
@@ -29,6 +31,7 @@ import GenresWrapperButton from '../../components/GenresWrapperButton';
 import RatingWrapperButton from '../../components/RatingWrapperButton';
 import YearsWrapperButton from '../../components/YearsWrapperButton';
 import EmptySearch from '../../components/EmptySearch';
+import MovieDetails from '../../containers/MovieDetails';
 import req from '../../request';
 import {
   addMovies,
@@ -64,6 +67,8 @@ const Movies = ({
   reqParams,
   isFetchPossible,
   isEmptySearch,
+  previewOpen,
+  handleChangeIsPreviewOpen,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
@@ -73,7 +78,22 @@ const Movies = ({
       <YearsWrapperButton />
     </ParamsContainer>
     <MoviePreviewContainer>
-      {map(movies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={reqParams.count} pos={index} movie={movie} />)}
+      {map(movies, (movie, index) => (
+        <MoviePreviewContent key={movie.imdbId}>
+          <MoviePreview
+            moviesCount={reqParams.count}
+            pos={index}
+            movie={movie}
+            handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+          />
+          {!isNull(previewOpen) && movie.imdbId === previewOpen &&
+            <MovieDetails
+              handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+            />
+          }
+        </MoviePreviewContent>
+      ))
+    }
       {isEmptySearch && movies.length === 0 && <EmptySearch value={reqParams.q} />}
     </MoviePreviewContainer>
     {isFetchPossible &&
@@ -90,6 +110,8 @@ Movies.propTypes = {
   reqParams: object.isRequired,
   isFetchPossible: bool.isRequired,
   isEmptySearch: bool.isRequired,
+  previewOpen: string,
+  handleChangeIsPreviewOpen: func.isRequired,
 };
 
 const actions = { addMovies, resetMovies, resetMoviesParams };
@@ -111,6 +133,14 @@ const enhance = compose(
       this.props.resetMoviesParams();
     },
   }),
+  withStateHandlers(
+    {
+      previewOpen: null,
+    },
+    {
+      handleChangeIsPreviewOpen: ({ previewOpen }) => openedPreview => ({ previewOpen: openedPreview }),
+    },
+  ),
 );
 
 export default enhance(Movies);

@@ -1,6 +1,10 @@
 import React from 'react';
 import { withStateHandlers } from 'recompose';
-import { number, object, func } from 'prop-types';
+import {
+  number,
+  object,
+  func,
+} from 'prop-types';
 
 import {
   ShadowContainer,
@@ -9,6 +13,7 @@ import {
   DescriptionContainer,
   PlayLogo,
   DesciptionText,
+  MoreButton,
 } from './styles';
 import Rating from '../Rating';
 
@@ -16,6 +21,7 @@ const Shadow = ({
   movie,
   handleChangeOpacity,
   opacity,
+  handleChangeIsPreviewOpen,
 }) => (
   <ShadowContainer
     opacity={opacity}
@@ -31,6 +37,9 @@ const Shadow = ({
       <DesciptionText>
         {movie.summary}
       </DesciptionText>
+      <MoreButton
+        onClick={() => handleChangeIsPreviewOpen(movie.imdbId)}
+      />
     </DescriptionContainer>
   </ShadowContainer>
 );
@@ -39,6 +48,7 @@ Shadow.propTypes = {
   handleChangeOpacity: func.isRequired,
   movie: object.isRequired,
   opacity: number.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
 };
 
 const enhance = withStateHandlers(

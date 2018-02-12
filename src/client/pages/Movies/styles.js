@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const MoviesContainer = styled.div`
   display:flex;
   flex-direction:column;
-  width:99vw;
+  width:100vw;
   min-height:calc(100vh - 85px);
   margin-top:25px;
   margin-bottom:50px;
@@ -23,12 +23,21 @@ export const MoviePreviewContainer = styled.div`
   };
 `;
 
+export const MoviePreviewContent = styled.div`
+postion:relative;
+  @media (max-width: 400px) {
+    width:100%;
+    height:150vw;
+    margin:0;
+  };
+`;
+
 export const ParamsContainer = styled.div`
   display:flex;
   justify-content: flex-start;
   align-items: center;
   flex-wrap:wrap;
-  margin-top:60px;
+  margin-top:65px;
   padding: 0 60px;
   @media (max-width: 400px) {
     padding: 0 4%;

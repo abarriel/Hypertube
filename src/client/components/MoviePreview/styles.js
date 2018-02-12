@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import FaChevronDown from 'react-icons/lib/fa/chevron-down';
 import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
 import { Link } from 'react-router-dom';
 import { MAIN_COLOR } from '../../colors';
@@ -10,7 +11,7 @@ export const MainContainer = styled.div`
   display:flex;
   width:${WIDTH}px;
   height:${HEIGHT}px;
-  margin: ${MARGIN}px;
+  margin: ${MARGIN};
   z-index:100;
   opacity:${({ isSmall }) => isSmall ? 0 : 1};
   overflow:hidden;
@@ -59,7 +60,7 @@ export const ShadowContainer = styled.div`
   height:calc(100% - 20px);
   opacity: ${({ opacity }) => opacity};
   background:linear-gradient( 220deg, rgba(0,0,0,0), rgba(0,0,0,0.8));  30%);
-  transition: all ${TRANSITION + 0.3}s;
+  transition: all ${0.3}s;
   transition-delay:0.2s;
   padding:20px;
   padding-bottom:0;
@@ -132,4 +133,12 @@ export const DesciptionText = styled.p`
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-text-align: justify;
+`;
+
+export const MoreButton = styled(FaChevronDown)`
+  position:absolute;
+  bottom:10%;
+  color:white;
+  font-size:1.7em;
+  left:calc(50% - 12px);
 `;

@@ -24,6 +24,7 @@ const MoviePreview = ({
   moviesCount,
   handleChangeShadowDisplay,
   pos,
+  handleChangeIsPreviewOpen,
 }) => (
   <MainContainer
     onMouseEnter={() => handleChangeShadowDisplay(true)}
@@ -34,7 +35,11 @@ const MoviePreview = ({
   >
     {
       displayShadow &&
-      <Shadow movie={movie} displayShadow={displayShadow} />
+      <Shadow
+        handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+        movie={movie}
+        displayShadow={displayShadow}
+      />
     }
     <BackgroundImage
       coverImage={movie.coverImage}
@@ -50,6 +55,7 @@ MoviePreview.propTypes = {
   handleChangeShadowDisplay: func.isRequired,
   pos: number.isRequired,
   moviesCount: number.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
 };
 
 const enhance = compose(
