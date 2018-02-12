@@ -44,7 +44,7 @@ const SearchBar = ({
   changeParams,
 }) => (
   <SearchBarContainer>
-    {!wrapped && <Closer onClick={() => handleChangeWrapped()} />}
+    {!wrapped && value.length === 0 && <Closer onClick={() => handleChangeWrapped()} />}
     <SearchBox wrapped={wrapped}>
       <SearchLogo
         onClick={() => {
