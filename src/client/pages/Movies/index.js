@@ -68,7 +68,9 @@ const Movies = ({
   isFetchPossible,
   isEmptySearch,
   previewOpen,
+  detailsData,
   handleChangeIsPreviewOpen,
+  loadDetailsData,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
@@ -85,12 +87,13 @@ const Movies = ({
             pos={index}
             movie={movie}
             handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+            loadDetailsData={loadDetailsData}
           />
-          {!isNull(previewOpen) && movie.imdbId === previewOpen &&
-            <MovieDetails
-              handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
-            />
-          }
+          <MovieDetails
+            handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+            height={previewOpen === movie.imdbId ? 400 : 0}
+            detailsData={detailsData}
+          />
         </MoviePreviewContent>
       ))
     }
@@ -111,7 +114,9 @@ Movies.propTypes = {
   isFetchPossible: bool.isRequired,
   isEmptySearch: bool.isRequired,
   previewOpen: string,
+  detailsData: object,
   handleChangeIsPreviewOpen: func.isRequired,
+  loadDetailsData: func.isRequired,
 };
 
 const actions = { addMovies, resetMovies, resetMoviesParams };
@@ -136,9 +141,11 @@ const enhance = compose(
   withStateHandlers(
     {
       previewOpen: null,
+      detailsData: null,
     },
     {
       handleChangeIsPreviewOpen: ({ previewOpen }) => openedPreview => ({ previewOpen: openedPreview }),
+      loadDetailsData: () => data => ({ detailsData: data }),
     },
   ),
 );

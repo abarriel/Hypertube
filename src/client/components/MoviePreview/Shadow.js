@@ -22,6 +22,7 @@ const Shadow = ({
   handleChangeOpacity,
   opacity,
   handleChangeIsPreviewOpen,
+  loadDetailsData,
 }) => (
   <ShadowContainer
     opacity={opacity}
@@ -38,7 +39,11 @@ const Shadow = ({
         {movie.summary}
       </DesciptionText>
       <MoreButton
-        onClick={() => handleChangeIsPreviewOpen(movie.imdbId)}
+        onClick={() => {
+          handleChangeIsPreviewOpen(movie.imdbId);
+          console.log('coucou');
+          loadDetailsData();
+        }}
       />
     </DescriptionContainer>
   </ShadowContainer>
@@ -49,6 +54,7 @@ Shadow.propTypes = {
   movie: object.isRequired,
   opacity: number.isRequired,
   handleChangeIsPreviewOpen: func.isRequired,
+  loadDetailsData: func.isRequired,
 };
 
 const enhance = withStateHandlers(
