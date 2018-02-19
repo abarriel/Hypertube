@@ -21,6 +21,7 @@ export const MoviePreviewContainer = styled.div`
     padding:0;
     width:100%;
   };
+  overflow:hidden;
 `;
 
 export const MoviePreviewContent = styled.div`

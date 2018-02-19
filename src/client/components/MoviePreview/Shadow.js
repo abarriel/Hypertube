@@ -5,6 +5,7 @@ import {
   object,
   func,
 } from 'prop-types';
+import req from '../../request';
 
 import {
   ShadowContainer,
@@ -41,8 +42,8 @@ const Shadow = ({
       <MoreButton
         onClick={() => {
           handleChangeIsPreviewOpen(movie.imdbId);
-          console.log('coucou');
-          loadDetailsData();
+          req.movieDetail(movie.imdbId)
+            .then(data => loadDetailsData(data));
         }}
       />
     </DescriptionContainer>

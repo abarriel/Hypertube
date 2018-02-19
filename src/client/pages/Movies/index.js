@@ -71,6 +71,7 @@ const Movies = ({
   detailsData,
   handleChangeIsPreviewOpen,
   loadDetailsData,
+  resetDetailsData,
 }) => (
   <MoviesContainer>
     <ParamsContainer>
@@ -91,8 +92,10 @@ const Movies = ({
           />
           <MovieDetails
             handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
-            height={previewOpen === movie.imdbId ? 400 : 0}
+            height={previewOpen === movie.imdbId ? 50 : 0}
             detailsData={detailsData}
+            imdbId={movie.imdbId}
+            resetDetailsData={resetDetailsData}
           />
         </MoviePreviewContent>
       ))
@@ -117,6 +120,7 @@ Movies.propTypes = {
   detailsData: object,
   handleChangeIsPreviewOpen: func.isRequired,
   loadDetailsData: func.isRequired,
+  resetDetailsData: func.isRequired,
 };
 
 const actions = { addMovies, resetMovies, resetMoviesParams };
@@ -146,6 +150,7 @@ const enhance = compose(
     {
       handleChangeIsPreviewOpen: ({ previewOpen }) => openedPreview => ({ previewOpen: openedPreview }),
       loadDetailsData: () => data => ({ detailsData: data }),
+      resetDetailsData: () => () => ({ detailsData: null }),
     },
   ),
 );
