@@ -7,7 +7,6 @@ export const MovieDetailsContainer = styled.div`
   left:0;
   min-height: ${({ height }) => height}vh;
   transition:1s;
-  background-color:black;
   z-index:4000;
 `;
 
@@ -31,13 +30,29 @@ export const Closer = styled.div`
 `;
 
 export const CoverImage = styled.div`
+  position:relative;
   display:flex;
   width:100%;
   left:0;
-  min-height: ${({ height }) => height}vh;
   background-image:url('${({ image }) => image}');
-  background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  z-index:7000;
+  @media (max-width: 400px) {
+    min-height: ${({ height }) => height}vh;
+  };
+  background-size: auto 100%;
+  @media (min-width: 1650px) {
+    background-size: 100% auto;
+  };
+`;
+
+export const Title = styled.p`
+  margin:0;
+  margin-left:30px;
+  margin-top:30px;
+  user-select: none;
+  font-size: 3vw;
+  color: white;
+  font-weight: 0;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 `;

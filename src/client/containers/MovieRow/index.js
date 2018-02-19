@@ -13,6 +13,7 @@ import MoviePreview from './MoviePreview';
 import ScrollBar from './ScrollBar';
 import FakePreview from './FakePreview';
 import Arrows from './Arrows';
+import MovieDetails from '../../containers/MovieDetails';
 
 const getMoviesLength = movies => {
   const { length } = movies;
@@ -30,6 +31,10 @@ const MovieRow = ({
   move,
   isHover,
   handleChangeIsHover,
+  handleChangeIsPreviewOpen,
+  previewOpen,
+  detailsData,
+  resetDetailsData,
 }) => (
   <MovieRowContent
     onMouseEnter={() => handleChangeIsHover()}
@@ -55,15 +60,26 @@ const MovieRow = ({
           width={width}
         />}
       {movies.length > 0 ? movies.map((movie, index) =>
-        (<MoviePreview
-          key={movie.imdbId}
-          movie={movie}
-          start={start}
-          end={end}
-          move={move}
-          length={getMoviesLength(movies)}
-          index={index}
-        />)) :
+        (
+          <div>
+            <MoviePreview
+              key={movie.imdbId}
+              movie={movie}
+              start={start}
+              end={end}
+              move={move}
+              length={getMoviesLength(movies)}
+              index={index}
+            />
+            <MovieDetails
+              handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+              height={previewOpen === movie.imdbId ? 50 : 0}
+              detailsData={detailsData}
+              imdbId={movie.imdbId}
+              resetDetailsData={resetDetailsData}
+            />
+          </div>
+        )) :
       <FakePreview />}
       {start <  (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
         start={start}

@@ -8,7 +8,7 @@ import {
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { map, isNull } from 'lodash';
+import { map } from 'lodash';
 import VisibilitySensor from 'react-visibility-sensor';
 import { compose, lifecycle, withStateHandlers } from 'recompose';
 

@@ -11,6 +11,7 @@ import {
   FakeMovieDetailsContainer,
   Closer,
   CoverImage,
+  Title,
 } from './styles';
 import MiniPlayer from '../../components/MiniPlayer';
 
@@ -25,6 +26,7 @@ const MovieDetails = ({
     {(detailsData && imdbId === detailsData.movie.imdbId) &&
       <MovieDetailsContainer height={height}>
         <CoverImage image={detailsData.movie.backgroundImage}>
+          <Title>{detailsData.movie.title}</Title>
           <MiniPlayer />
         </CoverImage>
       </MovieDetailsContainer>
