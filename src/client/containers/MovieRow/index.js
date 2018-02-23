@@ -4,11 +4,17 @@ import {
   array,
   number,
   func,
+  string,
+  object,
 } from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
 import { getMoveLength } from './utils';
-import { MovieRowContainer, MovieRowContent } from './styles';
+import {
+  MovieRowContainer,
+  MovieRowContent,
+  MoviePreviewContent,
+} from './styles';
 import MoviePreview from './MoviePreview';
 import ScrollBar from './ScrollBar';
 import FakePreview from './FakePreview';
@@ -35,6 +41,7 @@ const MovieRow = ({
   previewOpen,
   detailsData,
   resetDetailsData,
+  loadDetailsData,
 }) => (
   <MovieRowContent
     onMouseEnter={() => handleChangeIsHover()}
@@ -61,15 +68,16 @@ const MovieRow = ({
         />}
       {movies.length > 0 ? movies.map((movie, index) =>
         (
-          <div>
+          <MoviePreviewContent key={movie.imdbId}>
             <MoviePreview
-              key={movie.imdbId}
               movie={movie}
               start={start}
               end={end}
               move={move}
               length={getMoviesLength(movies)}
               index={index}
+              handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+              loadDetailsData={loadDetailsData}
             />
             <MovieDetails
               handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
@@ -78,7 +86,7 @@ const MovieRow = ({
               imdbId={movie.imdbId}
               resetDetailsData={resetDetailsData}
             />
-          </div>
+          </MoviePreviewContent>
         )) :
       <FakePreview />}
       {start <  (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
@@ -101,13 +109,23 @@ MovieRow.propTypes = {
   move: func.isRequired,
   isHover: bool.isRequired,
   handleChangeIsHover: func.isRequired,
+  loadDetailsData: func.isRequired,
+  resetDetailsData: func.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
+  previewOpen: string,
+  detailsData: object,
 };
 
 export default withStateHandlers(
   {
     isHover: false,
+    previewOpen: null,
+    detailsData: null,
   },
   {
+    handleChangeIsPreviewOpen: () => openedPreview => ({ previewOpen: openedPreview }),
+    loadDetailsData: () => data => ({ detailsData: data }),
+    resetDetailsData: () => () => ({ detailsData: null }),
     handleChangeIsHover: ({ isHover }) => () => ({ isHover: !isHover }),
   },
 )(MovieRow);

@@ -15,8 +15,9 @@ import {
   Title,
   Shadow,
   GradientShadow,
+  ButtonsContainer,
 } from './styles';
-import PlayButton from './PlayButton';
+import PlayButton from '../../components/PlayButton';
 
 const MovieDetails = ({
   handleChangeIsPreviewOpen,
@@ -43,7 +44,9 @@ const MovieDetails = ({
         <MovieDetailsContainer height={height}>
           <Shadow>
             <Title>{detailsData.movie.title}</Title>
-            <PlayButton />
+            <ButtonsContainer>
+              <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
+            </ButtonsContainer>
           </Shadow>
           <GradientShadow />
           <CoverImage height={height}>

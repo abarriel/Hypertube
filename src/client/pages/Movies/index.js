@@ -148,7 +148,7 @@ const enhance = compose(
       detailsData: null,
     },
     {
-      handleChangeIsPreviewOpen: ({ previewOpen }) => openedPreview => ({ previewOpen: openedPreview }),
+      handleChangeIsPreviewOpen: () => openedPreview => ({ previewOpen: openedPreview }),
       loadDetailsData: () => data => ({ detailsData: data }),
       resetDetailsData: () => () => ({ detailsData: null }),
     },

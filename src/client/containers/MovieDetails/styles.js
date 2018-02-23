@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 export const MovieDetailsContainer = styled.div`
   position:absolute;
@@ -67,7 +66,7 @@ export const Shadow = styled.div`
   align-items: space-around;
   bottom:0;
   top:0;
-  width: 50%;
+  width: 80%;
   background-image: linear-gradient(to right,#000,transparent);
   z-index:5000;
 `;
@@ -81,20 +80,10 @@ export const GradientShadow = styled.div`
   z-index:5000;
 `;
 
-export const PlayButtonContainer = styled(Link)`
+export const ButtonsContainer = styled.div`
   display:flex;
+  width:100%;
   justify-content: center;
   align-items: center;
-  background-color: #e50914;
-  border-color: #ff0a16;
-  font-size: 1vw;
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-right: .75em;
-  padding: .57em 1.35em;
-  color: #fff;
-  border: 1px solid rgba(255,255,255,.4);
-  width:150px;
-  height:30px;
-  text-decoration:none;
+  margin-top:25px;
 `;

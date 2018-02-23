@@ -16,6 +16,8 @@ const MoviePreview = ({
   displayShadow,
   handleChangeShadowDisplay,
   index,
+  handleChangeIsPreviewOpen,
+  loadDetailsData,
 }) => (
   <MoviePreviewContainer
     onMouseEnter={() => handleChangeShadowDisplay(true)}
@@ -30,7 +32,13 @@ const MoviePreview = ({
     />
     {
       displayShadow && !isMovieHidden(index, start, end) &&
-      <Shadow index={index} movie={movie} displayShadow={displayShadow} />
+      <Shadow
+        index={index}
+        movie={movie}
+        displayShadow={displayShadow}
+        handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+        loadDetailsData={loadDetailsData}
+      />
     }
   </MoviePreviewContainer>
 );
@@ -42,6 +50,8 @@ MoviePreview.propTypes = {
   displayShadow: bool.isRequired,
   handleChangeShadowDisplay: func.isRequired,
   index: number.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
+  loadDetailsData: func.isRequired,
 };
 
 const enhance = withStateHandlers(

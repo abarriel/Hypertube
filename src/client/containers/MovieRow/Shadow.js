@@ -1,6 +1,11 @@
 import React from 'react';
 import { withStateHandlers } from 'recompose';
-import PropTypes from 'prop-types';
+import {
+  number,
+  func,
+  object,
+} from 'prop-types';
+import req from '../../request';
 
 import {
   ShadowContainer,
@@ -9,6 +14,7 @@ import {
   DescriptionContainer,
   PlayLogo,
   DesciptionText,
+  MoreButton,
 } from './styles';
 import Rating from '../../components/Rating';
 
@@ -16,6 +22,8 @@ const Shadow = ({
   movie,
   opacity,
   handleChangeOpacity,
+  handleChangeIsPreviewOpen,
+  loadDetailsData,
 }) => (
   <ShadowContainer
     opacity={opacity}
@@ -27,18 +35,27 @@ const Shadow = ({
       <PlayLogo />
     </LinkStyed>
     <Rating rating={movie.imdbRating} opacity={opacity}/>
-    <DescriptionContainer opacity={opacity}>
+    <DescriptionContainer>
       <DesciptionText>
         {movie.summary}
       </DesciptionText>
+      <MoreButton
+        onClick={() => {
+          handleChangeIsPreviewOpen(movie.imdbId);
+          req.movieDetail(movie.imdbId)
+            .then(data => loadDetailsData(data));
+        }}
+      />
     </DescriptionContainer>
   </ShadowContainer>
 );
 
 Shadow.propTypes = {
-  opacity: PropTypes.number.isRequired,
-  handleChangeOpacity: PropTypes.func.isRequired,
-  movie: PropTypes.object.isRequired,
+  opacity: number.isRequired,
+  handleChangeOpacity: func.isRequired,
+  movie: object.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
+  loadDetailsData: func.isRequired,
 };
 
 const enhance = withStateHandlers(

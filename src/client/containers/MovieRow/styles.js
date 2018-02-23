@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import FaChevronDown from 'react-icons/lib/fa/chevron-down';
 import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
 import { Link } from 'react-router-dom';
 import { MAIN_COLOR } from '../../colors';
@@ -12,7 +13,7 @@ export const MovieRowContent = styled.div`
 export const MovieRowContainer = styled.div`
   display:flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   transition: all ${TRANSITION}s ease-in-out;
   margin-bottom:20px;
   margin-left:${({ margin }) => `${(margin * (WIDTH + (2 * MARGIN))) + 45}px`};
@@ -161,4 +162,15 @@ export const BackgroundImage = styled.div`
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   transition: all 0.4s ease;
+`;
+
+export const MoreButton = styled(FaChevronDown)`
+  position:absolute;
+  bottom:10%;
+  color:white;
+  font-size:1.7em;
+  left:calc(50% - 12px);
+`;
+
+export const MoviePreviewContent = styled.div`
 `;
