@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import GoPlus from 'react-icons/lib/go/plus';
 
 export const AddListButtonContainer = styled.div`
   display:flex;
@@ -16,4 +17,10 @@ export const AddListButtonContainer = styled.div`
   width:150px;
   height:30px;
   text-decoration:none;
+  cursor:pointer;
+`;
+
+export const AddLogo = styled(GoPlus)`
+  font-size:1.8em;
+  margin-right:5px;
 `;

@@ -144,13 +144,14 @@ export const Synopsis = styled.p`
 export const MetaDataContainer = styled.div`
   display:flex;
   width:100%;
+  justify-content: flex-start;
+  align-items: center;
 `;
 
 export const MetaDataRating = styled.p`
   font-weight: 700;
   margin-right: .5em;
   color: #46d369;
-  display: inline-block;
   white-space: nowrap;
   max-width: 300px;
 `;
