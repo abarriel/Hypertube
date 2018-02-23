@@ -26,7 +26,7 @@ const MetaList = ({
     </MetaListRow>
     <MetaListRow>
       <MetaListTitle>Genres: </MetaListTitle>
-      <MetaListElem>{genres.toString()}</MetaListElem>)
+      <MetaListElem>{genres.toString()}</MetaListElem>
     </MetaListRow>
     <MetaListRow>
       <MetaListTitle>Production: </MetaListTitle>

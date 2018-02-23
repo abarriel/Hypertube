@@ -128,6 +128,7 @@ export const MetaListElem = styled.p`
   margin:0;
   color: #828282;
   font-weight: 0;
+  font-size: .9em;
 `;
 
 export const Synopsis = styled.p`
@@ -138,4 +139,25 @@ export const Synopsis = styled.p`
   line-height: 1.3;
   user-select: none;
   cursor: default;
+`;
+
+export const MetaDataContainer = styled.div`
+  display:flex;
+  width:100%;
+`;
+
+export const MetaDataRating = styled.p`
+  font-weight: 700;
+  margin-right: .5em;
+  color: #46d369;
+  display: inline-block;
+  white-space: nowrap;
+  max-width: 300px;
+`;
+
+export const MetaDataYears = styled.p`
+  margin-right: .5em;
+  font-weight: 700;
+  color: #666;
+  font-size: 1.1vw;
 `;

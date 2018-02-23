@@ -21,6 +21,7 @@ import {
 } from './styles';
 import PlayButton from '../../components/PlayButton';
 import MetaList from './MetaList';
+import MetaData from './MetaData';
 import AddListButton from '../../components/AddListButton';
 
 const MovieDetails = ({
@@ -49,6 +50,11 @@ const MovieDetails = ({
           <Shadow>
             <Title>{detailsData.movie.title}</Title>
             <DetailsContent>
+              <MetaData
+                rating={detailsData.movie.score}
+                years={detailsData.movie.released}
+                duration={detailsData.movie.runtime}
+              />
               <Synopsis>{detailsData.movie.summary}</Synopsis>
               <ButtonsContainer>
                 <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
