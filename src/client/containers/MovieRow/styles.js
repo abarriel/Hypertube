@@ -9,6 +9,7 @@ export const MovieRowContent = styled.div`
   position:relative;
   display:flex;
   flex-direction:column;
+  z-index:1000;
 `;
 export const MovieRowContainer = styled.div`
   display:flex;

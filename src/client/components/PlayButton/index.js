@@ -5,10 +5,12 @@ import {
 
 import {
   PlayButtonContainer,
+  PlayLogo,
 } from './styles';
 
 const PlayButton = ({ to }) => (
   <PlayButtonContainer to={to}>
+    <PlayLogo />
     Lecture
   </PlayButtonContainer>
 );

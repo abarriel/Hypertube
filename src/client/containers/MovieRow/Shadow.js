@@ -40,10 +40,13 @@ const Shadow = ({
         {movie.summary}
       </DesciptionText>
       <MoreButton
-        onClick={() => {
+        onClick={event => {
+          event.persist();
           handleChangeIsPreviewOpen(movie.imdbId);
           req.movieDetail(movie.imdbId)
-            .then(data => loadDetailsData(data));
+            .then(data => {
+              loadDetailsData(data);
+            });
         }}
       />
     </DescriptionContainer>

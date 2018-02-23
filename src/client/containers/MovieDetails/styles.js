@@ -21,7 +21,7 @@ export const FakeMovieDetailsContainer = styled.div`
 `;
 
 export const Closer = styled.div`
-  position:absolute;
+  position: fixed;
   top:0;
   left:0;
   bottom:0;
@@ -83,7 +83,59 @@ export const GradientShadow = styled.div`
 export const ButtonsContainer = styled.div`
   display:flex;
   width:100%;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   margin-top:25px;
+  margin-bottom:25px;
+`;
+
+export const DetailsContent = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin-left:25px;
+  width:calc(100% - 25px);
+`;
+
+export const MetaListContainer = styled.div`
+  margin: 20px 0 0 0;
+  font-size: 1.275vw;
+  color: #999;
+  line-height: 1.3;
+  user-select: none;
+  cursor: default;
+`;
+
+export const MetaListRow = styled.div`
+  position:relative;
+  display:flex;
+  flex-direction:raw;
+  width:100%;
+  margin-top:2px;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+`;
+
+export const MetaListTitle = styled.p`
+  margin:0;
+  color: #828282;
+  font-weight: 700;
+  margin-right: 5px;
+  font-size: .9em;
+`;
+
+export const MetaListElem = styled.p`
+  margin:0;
+  color: #828282;
+  font-weight: 0;
+`;
+
+export const Synopsis = styled.p`
+  margin:0;
+  margin-top:25px;
+  font-size: 1.125vw;
+  color: #999;
+  line-height: 1.3;
+  user-select: none;
+  cursor: default;
 `;

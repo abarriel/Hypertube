@@ -3,18 +3,16 @@ const Sections = [
     id: 0,
     label: 'Les plus gros succès sur Hypertix',
     reqParams: {
+      sort: 'seeds.DESC',
       limit: 25,
-      ratings: '4,5',
-      years: 2017,
     },
   },
   {
     id: 1,
-    label: 'Nouveautés',
+    label: 'Les mieux notées',
     reqParams: {
       limit: 25,
-      offset: 100,
-      years: 2017,
+      sort: 'score.DESC',
     },
   },
   {
@@ -22,9 +20,8 @@ const Sections = [
     label: 'Action et aventure',
     reqParams: {
       limit: 25,
-      offset: 10,
+      sort: 'seeds.DESC',
       genres: 'Action',
-      years: 2017,
     },
   },
   {
@@ -32,9 +29,9 @@ const Sections = [
     label: 'Comédie',
     reqParams: {
       limit: 25,
-      offset: 0,
+      sort: 'seeds.DESC',
       genres: 'Comedy',
-      years: 2017,
+
     },
   },
   {
@@ -42,9 +39,8 @@ const Sections = [
     label: 'Thrillers',
     reqParams: {
       limit: 25,
-      offset: 0,
+      sort: 'seeds.DESC',
       genres: 'Thriller',
-      years: 2017,
     },
   },
   {
@@ -62,9 +58,8 @@ const Sections = [
     label: 'Fantaisie',
     reqParams: {
       limit: 25,
-      offset: 0,
+      sort: 'seeds.DESC',
       genres: 'Fantasy',
-      years: 2017,
     },
   },
   {
@@ -72,9 +67,8 @@ const Sections = [
     label: 'Films d\'animation',
     reqParams: {
       limit: 25,
-      offset: 0,
+      sort: 'seeds.DESC',
       genres: 'Animation',
-      years: 2017,
     },
   },
 ];

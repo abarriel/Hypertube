@@ -16,8 +16,12 @@ import {
   Shadow,
   GradientShadow,
   ButtonsContainer,
+  DetailsContent,
+  Synopsis,
 } from './styles';
 import PlayButton from '../../components/PlayButton';
+import MetaList from './MetaList';
+import AddListButton from '../../components/AddListButton';
 
 const MovieDetails = ({
   handleChangeIsPreviewOpen,
@@ -29,7 +33,7 @@ const MovieDetails = ({
   const opts = {
     height: '170%',
     width: '100%',
-    playerVars: { // https://developers.google.com/youtube/player_parameters
+    playerVars: {
       showinfo: 0,
       controls: 0,
       loop: 1,
@@ -44,9 +48,19 @@ const MovieDetails = ({
         <MovieDetailsContainer height={height}>
           <Shadow>
             <Title>{detailsData.movie.title}</Title>
-            <ButtonsContainer>
-              <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
-            </ButtonsContainer>
+            <DetailsContent>
+              <Synopsis>{detailsData.movie.summary}</Synopsis>
+              <ButtonsContainer>
+                <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
+                <AddListButton />
+              </ButtonsContainer>
+              {console.log(detailsData.movie)}
+              <MetaList
+                cast={detailsData.movie.actors}
+                genres={detailsData.movie.genres}
+                production={detailsData.movie.production}
+              />
+            </DetailsContent>
           </Shadow>
           <GradientShadow />
           <CoverImage height={height}>
