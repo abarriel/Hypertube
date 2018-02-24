@@ -3,9 +3,6 @@ import {
   string,
   array,
 } from 'prop-types';
-import {
-  map,
-} from 'lodash';
 
 import {
   MetaListContainer,

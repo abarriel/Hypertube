@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import YouTube from 'react-youtube';
+import MdClose from 'react-icons/lib/md/close';
 
 export const MovieDetailsContainer = styled.div`
   position:absolute;
@@ -7,7 +8,7 @@ export const MovieDetailsContainer = styled.div`
   width:100vw;
   left:0;
   min-height: ${({ height }) => height}vh;
-  transition:0.3s ease-in-out;
+  transition:0.5s ease-in-out;
   z-index:4000;
   overflow:hidden;
 `;
@@ -16,7 +17,7 @@ export const FakeMovieDetailsContainer = styled.div`
   display:flex;
   width:100%;
   min-height:${({ height }) => height}vh;
-  transition:1s;
+  transition:0.5s ease-in-out;
   margin-top:25px;
   margin-bottom:50px;
 `;
@@ -203,4 +204,14 @@ export const FakeShadowRight = styled.div`
 export const YouTubeContainer = styled(YouTube)`
   position:absolute;
   right:0;
+`;
+
+export const Cross = styled(MdClose)`
+  position:absolute;
+  right:40px;
+  top:20px;
+  color:white;
+  font-size:2em;
+  z-index:6000;
+  cursor:pointer;
 `;

@@ -10,7 +10,12 @@ import {
 } from './styles';
 
 const Logo = ({ width = 130, height = 100, position = 'relative' }) => (
-  <LogoContainer width={width} height={height} position={position}>
+  <LogoContainer
+    width={width}
+    height={height}
+    position={position}
+    to="/"
+  >
     <LogoImage />
   </LogoContainer>
 );

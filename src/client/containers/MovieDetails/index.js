@@ -18,6 +18,7 @@ import {
   DetailsContent,
   Synopsis,
   YouTubeContainer,
+  Cross,
 } from './styles';
 import PlayButton from '../../components/PlayButton';
 import MetaList from './MetaList';
@@ -34,7 +35,7 @@ const MovieDetails = ({
 }) => {
   const opts = {
     height: '170%',
-    width: '70%',
+    width: '80%',
     playerVars: {
       showinfo: 0,
       controls: 0,
@@ -77,6 +78,12 @@ const MovieDetails = ({
               opts={opts}
             />
           </CoverImage>
+          <Cross
+            onClick={() => {
+              handleChangeIsPreviewOpen();
+              resetDetailsData();
+            }}
+          />
         </MovieDetailsContainer>
       }
       {height !== 0 &&
@@ -87,7 +94,7 @@ const MovieDetails = ({
         />
       }
     </FakeMovieDetailsContainer>
-  )
+  );
 };
 
 MovieDetails.propTypes = {
