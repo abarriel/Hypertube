@@ -27,4 +27,11 @@ export const images = [
     logo: 'https://occ-0-55-768.1.nflxso.net/art/107fb/487cfff8102b23910276dd54082cb3c19c1107fb.webp',
     description: 'Dans le futur, les riches sont immortels, les pauvres, des pions, et un rebelle ressuscité entame une dure mission.',
   },
+  {
+    id: 5,
+    title: 'Mute',
+    coverImage: 'https://occ-0-55-768.1.nflxso.net/art/0cf90/fd6860c74f124b16523bff9c9275c25ffe10cf90.webp',
+    logo: 'https://occ-0-55-768.1.nflxso.net/art/22536/302daead30005f8e594cb5dce92c86178a822536.webp',
+    description: 'Pour la retrouver, cet homme muet est prêt à tout, quitte à s\'aventurer dans un monde sans pitié.',
+  },
 ];

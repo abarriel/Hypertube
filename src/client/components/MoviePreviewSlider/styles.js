@@ -100,7 +100,7 @@ export const MovieLogo = styled.div`
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  min-height: 14vw;
+  min-height: 15vw;
 `;
 
 export const ButtonContainer = styled.div`

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import FaAngleLeft from 'react-icons/lib/fa/angle-left';
 import FaAngleRight from 'react-icons/lib/fa/angle-right';
+import { HEIGHT } from '../constants';
 
 export const ArrowContainer = styled.div`
   display:flex;
@@ -10,7 +11,7 @@ export const ArrowContainer = styled.div`
   top:0;
   ${({ direction }) => direction === 'left' && 'left: 0'};
   ${({ direction }) => direction === 'right' && 'left: calc(100vw - 8vw)'};
-  height:100%;
+  height:${HEIGHT + 50}px;
   width:8vw;
   background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.3), rgba(0,0,0,0));
   z-index:105;

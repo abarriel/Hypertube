@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import YouTube from 'react-youtube';
 
 export const MovieDetailsContainer = styled.div`
   position:absolute;
@@ -26,7 +27,6 @@ export const Closer = styled.div`
   left:0;
   bottom:0;
   right:0;
-  display:flex;
   width:100vw;
   height:100%;
   z-index:3000;
@@ -50,12 +50,15 @@ export const CoverImage = styled.div`
 export const Title = styled.p`
   margin:0;
   margin-left:30px;
-  margin-top:30px;
+  margin-top:70px;
   user-select: none;
-  font-size: 3vw;
   color: white;
-  font-weight: 0;
+  font-size: 2vw;
+  @media (max-width: 1399px) {
+    font-size: 3vw;
+  };
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:0;
 `;
 
 export const Shadow = styled.div`
@@ -66,9 +69,9 @@ export const Shadow = styled.div`
   align-items: space-around;
   bottom:0;
   top:0;
-  width: 80%;
-  background-image: linear-gradient(to right,#000,transparent);
+  width: 100%;
   z-index:5000;
+  padding: 18px 0 12px 4%;
 `;
 
 export const GradientShadow = styled.div`
@@ -100,7 +103,6 @@ export const DetailsContent = styled.div`
 
 export const MetaListContainer = styled.div`
   margin: 20px 0 0 0;
-  font-size: 1.275vw;
   color: #999;
   line-height: 1.3;
   user-select: none;
@@ -121,24 +123,37 @@ export const MetaListTitle = styled.p`
   color: #828282;
   font-weight: 700;
   margin-right: 5px;
-  font-size: .9em;
+  font-size: 1.125vw;
+  @media (max-width: 1399px) {
+    font-size: 1.275vw;
+  };
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 `;
 
 export const MetaListElem = styled.p`
   margin:0;
   color: #828282;
-  font-weight: 0;
-  font-size: .9em;
+  font-size: 1.125vw;
+  @media (max-width: 1399px) {
+    font-size: 1.275vw;
+  };
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:0;
 `;
 
 export const Synopsis = styled.p`
   margin:0;
   margin-top:25px;
-  font-size: 1.125vw;
   color: #999;
   line-height: 1.3;
   user-select: none;
   cursor: default;
+  font-size: 1.125vw;
+  @media (max-width: 1399px) {
+    font-size: 1.275vw;
+  };
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:0;
 `;
 
 export const MetaDataContainer = styled.div`
@@ -161,4 +176,31 @@ export const MetaDataYears = styled.p`
   font-weight: 700;
   color: #666;
   font-size: 1.1vw;
+`;
+
+export const FakeShadowContainer = styled.div`
+  position:absolute;
+  bottom:0;
+  top:0;
+  right:0;
+  left:0;
+  display:flex;
+  z-index:5000;
+`;
+
+export const FakeShadowLeft = styled.div`
+  position:relative;
+  background-color:black;
+  width:30%
+`;
+
+export const FakeShadowRight = styled.div`
+  position:relative;
+  background-image: linear-gradient(to right,#000,transparent);
+  width:70%;
+`;
+
+export const YouTubeContainer = styled(YouTube)`
+  position:absolute;
+  right:0;
 `;

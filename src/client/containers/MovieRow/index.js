@@ -8,6 +8,7 @@ import {
   object,
 } from 'prop-types';
 import { withStateHandlers } from 'recompose';
+import { isNil } from 'lodash';
 
 import { getMoveLength } from './utils';
 import {
@@ -57,7 +58,7 @@ const MovieRow = ({
     <MovieRowContainer
       margin={-start}
     >
-      {start > 0 &&
+      {start > 0 && isNil(detailsData) &&
         <Arrows
           start={start}
           direction="left"

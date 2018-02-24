@@ -11,7 +11,7 @@ export const SearchBarContainer = styled.div`
   align-items: center;
   height:100%;
   min-width:20px;
-  background-color:black;
+  background: rgb(20, 20, 20);
   @media (max-width: 450px) {
     display:none;
   };
@@ -44,7 +44,7 @@ export const SearchInput = styled.input`
   height:28px;
   margin-left:5px;
   margin-right:5px;
-  background-color:black;
+  background: rgb(20, 20, 20);
   border: none;
   color:white;
   &:focus {

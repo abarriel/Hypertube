@@ -1,5 +1,4 @@
 import React from 'react';
-import YouTube from 'react-youtube';
 import {
   func,
   number,
@@ -18,10 +17,12 @@ import {
   ButtonsContainer,
   DetailsContent,
   Synopsis,
+  YouTubeContainer,
 } from './styles';
 import PlayButton from '../../components/PlayButton';
 import MetaList from './MetaList';
 import MetaData from './MetaData';
+import FakeShadow  from './FakeShadow';
 import AddListButton from '../../components/AddListButton';
 
 const MovieDetails = ({
@@ -33,7 +34,7 @@ const MovieDetails = ({
 }) => {
   const opts = {
     height: '170%',
-    width: '100%',
+    width: '70%',
     playerVars: {
       showinfo: 0,
       controls: 0,
@@ -47,6 +48,7 @@ const MovieDetails = ({
     <FakeMovieDetailsContainer height={height}>
       {(detailsData && imdbId === detailsData.movie.imdbId) &&
         <MovieDetailsContainer height={height}>
+          <FakeShadow />
           <Shadow>
             <Title>{detailsData.movie.title}</Title>
             <DetailsContent>
@@ -60,7 +62,6 @@ const MovieDetails = ({
                 <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
                 <AddListButton />
               </ButtonsContainer>
-              {console.log(detailsData.movie)}
               <MetaList
                 cast={detailsData.movie.actors}
                 genres={detailsData.movie.genres}
@@ -70,7 +71,7 @@ const MovieDetails = ({
           </Shadow>
           <GradientShadow />
           <CoverImage height={height}>
-            <YouTube
+            <YouTubeContainer
               videoId={detailsData.movie.trailer}
               onReady={event => event.target.playVideo()}
               opts={opts}

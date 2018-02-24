@@ -21,6 +21,11 @@ export const AddListButtonContainer = styled.div`
 `;
 
 export const AddLogo = styled(GoPlus)`
-  font-size:1.8em;
+  font-size:40px;
   margin-right:5px;
+  @media (max-width: 1399px) {
+    font-size: 1.8vw;
+  };
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-weight:0;
 `;
