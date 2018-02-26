@@ -31,3 +31,4 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;
 `;
+

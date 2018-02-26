@@ -10,13 +10,16 @@ import req from '../../request';
 import {
   ShadowContainer,
   Title,
-  LinkStyed,
+  PlayLogoContainer,
   DescriptionContainer,
   PlayLogo,
   DesciptionText,
   MoreButton,
+  Rating,
+  TopSide,
+  BotSide,
 } from './styles';
-import Rating from '../../components/Rating';
+
 
 const Shadow = ({
   movie,
@@ -24,32 +27,41 @@ const Shadow = ({
   handleChangeOpacity,
   handleChangeIsPreviewOpen,
   loadDetailsData,
+  wichHover,
+  handleChangeWichHover,
 }) => (
   <ShadowContainer
     opacity={opacity}
     onMouseEnter={() => handleChangeOpacity(1)}
     onMouseLeave={() => handleChangeOpacity(0)}
   >
-    <Title opacity={opacity}>{`${movie.title} (${movie.year})`}</Title>
-    <LinkStyed opacity={opacity} to={`/video/${movie.imdbId}`}>
-      <PlayLogo />
-    </LinkStyed>
-    <Rating rating={movie.imdbRating} opacity={opacity}/>
-    <DescriptionContainer>
-      <DesciptionText>
-        {movie.summary}
-      </DesciptionText>
-      <MoreButton
-        onClick={event => {
-          event.persist();
-          handleChangeIsPreviewOpen(movie.imdbId);
-          req.movieDetail(movie.imdbId)
-            .then(data => {
-              loadDetailsData(data);
-            });
-        }}
-      />
-    </DescriptionContainer>
+    <TopSide onMouseEnter={() => handleChangeWichHover(1)}>
+      <Title opacity={opacity}>{`${movie.title} (${movie.year})`}</Title>
+      <PlayLogoContainer opacity={opacity} to={`/watch/${movie.imdbId}`}>
+        <PlayLogo color={wichHover === 1 ? '#e50914' : 'white'} />
+      </PlayLogoContainer>
+    </TopSide>
+    <BotSide
+      onMouseEnter={() => handleChangeWichHover(2)}
+      onClick={event => {
+        event.persist();
+        handleChangeIsPreviewOpen(movie.imdbId);
+        req.movieDetail(movie.imdbId)
+          .then(data => {
+            loadDetailsData(data);
+          });
+      }}
+    >
+      <DescriptionContainer>
+        <Rating>{`${movie.imdbRating}/5`}</Rating>
+        <DesciptionText>
+          {movie.summary.substring(1, 200)}
+        </DesciptionText>
+        <MoreButton
+          color={wichHover === 2 ? '#e50914' : 'white'}
+        />
+      </DescriptionContainer>
+    </BotSide>
   </ShadowContainer>
 );
 
@@ -59,14 +71,18 @@ Shadow.propTypes = {
   movie: object.isRequired,
   handleChangeIsPreviewOpen: func.isRequired,
   loadDetailsData: func.isRequired,
+  wichHover: number.isRequired,
+  handleChangeWichHover: func.isRequired,
 };
 
 const enhance = withStateHandlers(
   {
     opacity: 0,
+    wichHover: -1,
   },
   {
     handleChangeOpacity: () => opacity => ({ opacity }),
+    handleChangeWichHover: () => hoveredPart => ({ wichHover: hoveredPart }),
   },
 );
 

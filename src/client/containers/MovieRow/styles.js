@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import FaChevronDown from 'react-icons/lib/fa/chevron-down';
+import MdKeyboardArrowDown from 'react-icons/lib/md/keyboard-arrow-down';
 import GoPlaybackPlay from 'react-icons/lib/go/playback-play';
 import { Link } from 'react-router-dom';
 import { MAIN_COLOR } from '../../colors';
@@ -97,18 +97,17 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   font-size:2.8em;
   cursor: pointer;
   transition: all 0.2s;
-  &:hover {
-    color:${MAIN_COLOR};
-  }
   margin-left:5px;
+  color: ${({ color }) => color};
 `;
 
-export const LinkStyed = styled(Link)`
+export const PlayLogoContainer = styled(Link)`
   display:flex;
+  align-self:center;
   justify-content: center;
   align-items: center;
   text-decoration:none;
-  border-width:3px;
+  border-width:1px;
   border-style: solid;
   border-color:white;
   border-radius:100%;
@@ -120,16 +119,16 @@ export const LinkStyed = styled(Link)`
   &:focus {
     outline:none;
   }
-  transition: all ${TRANSITION + 1}s;
+  transition: all 0.2s;
   opacity: ${({ opacity }) => opacity};
-  transition-delay: 0.3s;
   &:hover {
     color:${MAIN_COLOR};
-  }
+  };
 `;
 
 export const DescriptionContainer = styled.div`
   display:flex;
+  flex-direction:column;
   height: ${HEIGHT / 2}px;
   opacity: ${({ opacity }) => opacity};
   transition: all ${TRANSITION + 5}s;
@@ -143,10 +142,12 @@ export const DescriptionContainer = styled.div`
 export const DesciptionText = styled.p`
   color:white;
   user-select: none;
+  -webkit-text-align: justify;
+  user-select: none;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   background: linear-gradient(white, rgba(0,0,0,0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-align: justify;
 `;
 
 export const BackgroundImage = styled.div`
@@ -165,13 +166,34 @@ export const BackgroundImage = styled.div`
   transition: all 0.4s ease;
 `;
 
-export const MoreButton = styled(FaChevronDown)`
+export const MoreButton = styled(MdKeyboardArrowDown)`
   position:absolute;
-  bottom:10%;
-  color:white;
-  font-size:1.7em;
+  bottom:3%;
+  color: ${({ color }) => color};
+  font-size:2.7em;
   left:calc(50% - 12px);
 `;
 
 export const MoviePreviewContent = styled.div`
+`;
+
+export const Rating = styled.p`
+  color:white;
+  font-weight:100;
+  align-self:flex-start;
+`;
+
+export const TopSide = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  width:100%;
+`;
+
+export const BotSide = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  width:100%;
+  cursor:pointer;
 `;
