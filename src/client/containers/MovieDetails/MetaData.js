@@ -3,12 +3,14 @@ import {
   number,
   string,
 } from 'prop-types';
+import { isNil } from 'lodash';
 
 import {
   MetaDataContainer,
   MetaDataRating,
   MetaDataYears,
 } from './styles';
+import { getColor } from '../../utils';
 
 const MetaData = ({
   rating,
@@ -16,7 +18,9 @@ const MetaData = ({
   duration,
 }) => (
   <MetaDataContainer>
-    <MetaDataRating>{`Recommandé à  ${rating}%`}</MetaDataRating>
+    <MetaDataRating color={getColor(rating, 0, 100)}>
+      {!isNil(rating) ? `Recommandé à  ${rating}%` : 'Pas encore recommandé'}
+    </MetaDataRating>
     <MetaDataYears>{years}</MetaDataYears>
     <MetaDataYears>{`${duration} min`}</MetaDataYears>
   </MetaDataContainer>

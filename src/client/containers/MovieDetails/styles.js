@@ -7,10 +7,11 @@ export const MovieDetailsContainer = styled.div`
   display:flex;
   width:100vw;
   left:0;
-  min-height: ${({ height }) => height}vh;
+  max-height: ${({ height }) => height}vh;
   transition:0.5s ease-in-out;
   z-index:4000;
   overflow:hidden;
+  padding-bottom:100px;
 `;
 
 export const FakeMovieDetailsContainer = styled.div`
@@ -35,7 +36,6 @@ export const Closer = styled.div`
 
 export const CoverImage = styled.div`
   position:absolute;
-  margin-top:-${({ height }) => height / 3}vh;
   width:100vw;
   bottom:0;
   top:0;
@@ -167,7 +167,7 @@ export const MetaDataContainer = styled.div`
 export const MetaDataRating = styled.p`
   font-weight: 700;
   margin-right: .5em;
-  color: #46d369;
+  color: ${({ color }) => color};
   white-space: nowrap;
   max-width: 300px;
 `;
@@ -214,4 +214,14 @@ export const Cross = styled(MdClose)`
   font-size:2em;
   z-index:6000;
   cursor:pointer;
+`;
+
+export const FooterContainer = styled.div`
+  postion:absolute;
+  display:flex;
+  height:200px;
+  background-color:red;
+  right:0;
+  left:0;
+  z-index:10000;
 `;

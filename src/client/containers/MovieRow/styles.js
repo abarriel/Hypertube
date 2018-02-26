@@ -178,7 +178,7 @@ export const MoviePreviewContent = styled.div`
 `;
 
 export const Rating = styled.p`
-  color:white;
+  color:${({ color }) => color};
   font-weight:100;
   align-self:flex-start;
 `;

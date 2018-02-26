@@ -19,6 +19,7 @@ import {
   TopSide,
   BotSide,
 } from './styles';
+import { getColor } from '../../utils';
 
 
 const Shadow = ({
@@ -53,7 +54,7 @@ const Shadow = ({
       }}
     >
       <DescriptionContainer>
-        <Rating>{`${movie.imdbRating}/5`}</Rating>
+        <Rating color={getColor(movie.imdbRating, 0, 5)} >{`${movie.imdbRating}/5`}</Rating>
         <DesciptionText>
           {movie.summary.substring(1, 200)}
         </DesciptionText>

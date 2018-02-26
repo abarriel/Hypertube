@@ -24,6 +24,7 @@ import PlayButton from '../../components/PlayButton';
 import MetaList from './MetaList';
 import MetaData from './MetaData';
 import FakeShadow  from './FakeShadow';
+import Footer from './Footer';
 import AddListButton from '../../components/AddListButton';
 
 const MovieDetails = ({
@@ -34,7 +35,7 @@ const MovieDetails = ({
   resetDetailsData,
 }) => {
   const opts = {
-    height: '170%',
+    height: '100%',
     width: '80%',
     playerVars: {
       showinfo: 0,
@@ -84,6 +85,7 @@ const MovieDetails = ({
               resetDetailsData();
             }}
           />
+          <Footer />
         </MovieDetailsContainer>
       }
       {height !== 0 &&
