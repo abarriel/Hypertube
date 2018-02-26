@@ -5,6 +5,7 @@ import {
   object,
   string,
 } from 'prop-types';
+import { withStateHandlers } from 'recompose';
 
 import {
   MovieDetailsContainer,
@@ -23,8 +24,8 @@ import {
 import PlayButton from '../../components/PlayButton';
 import MetaList from './MetaList';
 import MetaData from './MetaData';
-import FakeShadow  from './FakeShadow';
-import Footer from './Footer';
+import FakeShadow from './FakeShadow';
+import Footer from './Footer/index';
 import AddListButton from '../../components/AddListButton';
 
 const MovieDetails = ({
@@ -33,6 +34,8 @@ const MovieDetails = ({
   detailsData,
   imdbId,
   resetDetailsData,
+  selectedSlide,
+  handleChangeSelectedSlide,
 }) => {
   const opts = {
     height: '100%',
@@ -51,26 +54,27 @@ const MovieDetails = ({
       {(detailsData && imdbId === detailsData.movie.imdbId) &&
         <MovieDetailsContainer height={height}>
           <FakeShadow />
-          <Shadow>
-            <Title>{detailsData.movie.title}</Title>
-            <DetailsContent>
-              <MetaData
-                rating={detailsData.movie.score}
-                years={detailsData.movie.released}
-                duration={detailsData.movie.runtime}
-              />
-              <Synopsis>{detailsData.movie.summary}</Synopsis>
-              <ButtonsContainer>
-                <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
-                <AddListButton />
-              </ButtonsContainer>
-              <MetaList
-                cast={detailsData.movie.actors}
-                genres={detailsData.movie.genres}
-                production={detailsData.movie.production}
-              />
-            </DetailsContent>
-          </Shadow>
+          {selectedSlide === 0 &&
+            <Shadow>
+              <Title>{detailsData.movie.title}</Title>
+              <DetailsContent>
+                <MetaData
+                  rating={detailsData.movie.score}
+                  years={detailsData.movie.released}
+                  duration={detailsData.movie.runtime}
+                />
+                <Synopsis>{detailsData.movie.summary}</Synopsis>
+                <ButtonsContainer>
+                  <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
+                  <AddListButton />
+                </ButtonsContainer>
+                <MetaList
+                  cast={detailsData.movie.actors}
+                  genres={detailsData.movie.genres}
+                  production={detailsData.movie.production}
+                />
+              </DetailsContent>
+            </Shadow>}
           <GradientShadow />
           <CoverImage height={height}>
             <YouTubeContainer
@@ -85,7 +89,10 @@ const MovieDetails = ({
               resetDetailsData();
             }}
           />
-          <Footer />
+          <Footer
+            selectedSlide={selectedSlide}
+            handleChangeSelectedSlide={handleChangeSelectedSlide}
+          />
         </MovieDetailsContainer>
       }
       {height !== 0 &&
@@ -105,6 +112,15 @@ MovieDetails.propTypes = {
   detailsData: object,
   imdbId: string,
   resetDetailsData: func.isRequired,
+  selectedSlide: number.isRequired,
+  handleChangeSelectedSlide: func.isRequired,
 };
 
-export default MovieDetails;
+export default withStateHandlers(
+  {
+    selectedSlide: 0,
+  },
+  {
+    handleChangeSelectedSlide: () => newSelectedSlide => ({ selectedSlide: newSelectedSlide }),
+  },
+)(MovieDetails);

@@ -216,13 +216,3 @@ export const Cross = styled(MdClose)`
   z-index:6000;
   cursor:pointer;
 `;
-
-export const FooterContainer = styled.div`
-  postion:absolute;
-  display:flex;
-  height:200px;
-  background-color:red;
-  right:0;
-  left:0;
-  z-index:10000;
-`;
