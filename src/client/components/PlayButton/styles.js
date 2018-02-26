@@ -7,7 +7,6 @@ export const PlayButtonContainer = styled(Link)`
   justify-content: center;
   align-items: center;
   background-color: #e50914;
-  font-size: 1vw;
   font-weight: 700;
   text-transform: uppercase;
   margin-right: .75em;
@@ -26,7 +25,7 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   font-size:40px;
   margin-right:5px;
   @media (max-width: 1399px) {
-    font-size: 1.8vw;
+    font-size: 1em;
   };
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;

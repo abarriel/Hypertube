@@ -8,7 +8,7 @@ export const MovieDetailsContainer = styled.div`
   width:100vw;
   left:0;
   max-height: ${({ height }) => height}vh;
-  transition:0.5s ease-in-out;
+  transition:height 0.5s ease-in-out;
   z-index:4000;
   overflow:hidden;
   padding-bottom:100px;
@@ -54,9 +54,9 @@ export const Title = styled.p`
   margin-top:70px;
   user-select: none;
   color: white;
-  font-size: 2vw;
+  font-size: 2.5em;
   @media (max-width: 1399px) {
-    font-size: 3vw;
+    font-size: 2em;
   };
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;
@@ -99,6 +99,7 @@ export const DetailsContent = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   margin-left:25px;
+  margin-top:20px;
   width:calc(100% - 25px);
 `;
 
@@ -124,20 +125,20 @@ export const MetaListTitle = styled.p`
   color: #828282;
   font-weight: 700;
   margin-right: 5px;
-  font-size: 1.125vw;
-  @media (max-width: 1399px) {
-    font-size: 1.275vw;
-  };
+  font-size: 0.7em;
+  @media (min-width: 1000px) {
+    font-size: 1.2em;
+  }
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
 `;
 
 export const MetaListElem = styled.p`
   margin:0;
   color: #828282;
-  font-size: 1.125vw;
-  @media (max-width: 1399px) {
-    font-size: 1.275vw;
-  };
+  font-size: 0.7em;
+  @media (min-width: 1000px) {
+    font-size: 1.2em;
+  }
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;
 `;
@@ -145,14 +146,15 @@ export const MetaListElem = styled.p`
 export const Synopsis = styled.p`
   margin:0;
   margin-top:25px;
+  margin-bottom:25px;
   color: #999;
   line-height: 1.3;
   user-select: none;
   cursor: default;
-  font-size: 1.125vw;
-  @media (max-width: 1399px) {
-    font-size: 1.275vw;
-  };
+  font-size: 0.7em;
+  @media (min-width: 1000px) {
+    font-size: 1.2em;
+  }
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;
 `;
@@ -176,7 +178,6 @@ export const MetaDataYears = styled.p`
   margin-right: .5em;
   font-weight: 700;
   color: #666;
-  font-size: 1.1vw;
 `;
 
 export const FakeShadowContainer = styled.div`

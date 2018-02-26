@@ -38,7 +38,7 @@ const Shadow = ({
   >
     <TopSide onMouseEnter={() => handleChangeWichHover(1)}>
       <Title opacity={opacity}>{`${movie.title} (${movie.year})`}</Title>
-      <PlayLogoContainer opacity={opacity} to={`/watch/${movie.imdbId}`}>
+      <PlayLogoContainer opacity={opacity} to={`/video/${movie.imdbId}`}>
         <PlayLogo color={wichHover === 1 ? '#e50914' : 'white'} />
       </PlayLogoContainer>
     </TopSide>

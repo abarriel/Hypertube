@@ -7,7 +7,6 @@ export const AddListButtonContainer = styled.div`
   align-items: center;
   background-color: rgba(0,0,0,.4);
   border-color: #ff0a16;
-  font-size: 1vw;
   font-weight: 700;
   text-transform: uppercase;
   margin-right: .75em;
@@ -24,7 +23,7 @@ export const AddLogo = styled(GoPlus)`
   font-size:40px;
   margin-right:5px;
   @media (max-width: 1399px) {
-    font-size: 1.8vw;
+    font-size: 1em;
   };
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;
