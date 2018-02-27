@@ -1,18 +1,5 @@
-<p align="center">
-<img width="200px" src="https://user-images.githubusercontent.com/23408500/35879765-48f542ea-0b7c-11e8-8ff8-0edd1dc74049.png"/>
-</p>
-
-
 
 <img width="100%" src="https://user-images.githubusercontent.com/23408500/36753204-ca89a168-1c05-11e8-9d66-cb74d9d0a028.jpg"/>
-
-<img src="https://user-images.githubusercontent.com/23408500/35879545-c40f5854-0b7b-11e8-901e-ce5a9f98566f.png"/>
-
-<img src="https://user-images.githubusercontent.com/23408500/36633743-f7931d82-199a-11e8-8bb5-5063f2424dfc.png"/>
-
-<img src="https://user-images.githubusercontent.com/23408500/35879571-d6637f12-0b7b-11e8-827e-6d40cd1f850c.png"/>
-
-<img src="https://user-images.githubusercontent.com/23408500/35884036-937db114-0b89-11e8-82e9-666631daa9d7.png"/>
 
 ## Table des matières
 
