@@ -177,10 +177,17 @@ export const MoreButton = styled(MdKeyboardArrowDown)`
 export const MoviePreviewContent = styled.div`
 `;
 
-export const Rating = styled.p`
+export const RatingContainer = styled.div`
+  position:relative;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ color }) => color};
   color:${({ color }) => color};
-  font-weight:100;
   align-self:flex-start;
+  min-height:15px;
+  min-width:30px;
+  font-weight:100;
 `;
 
 export const TopSide = styled.div`

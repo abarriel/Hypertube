@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const CommentsContainer = styled.div`
-  position:absolute;
+  position:relative;
   display:flex;
   width:100vw;
   left:0;

@@ -15,9 +15,9 @@ import {
   PlayLogo,
   DesciptionText,
   MoreButton,
-  Rating,
   TopSide,
   BotSide,
+  RatingContainer,
 } from './styles';
 import { getColor } from '../../utils';
 
@@ -54,7 +54,9 @@ const Shadow = ({
       }}
     >
       <DescriptionContainer>
-        <Rating color={getColor(movie.imdbRating, 0, 5)} >{`${movie.imdbRating}/5`}</Rating>
+        <RatingContainer color={getColor(movie.imdbRating, 0, 5)}>
+          {`${movie.imdbRating}/5`}
+        </RatingContainer>
         <DesciptionText>
           {movie.summary.substring(1, 200)}
         </DesciptionText>

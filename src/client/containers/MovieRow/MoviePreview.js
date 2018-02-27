@@ -2,7 +2,7 @@ import React from 'react';
 import { number, func, object, bool } from 'prop-types';
 import { withStateHandlers } from 'recompose';
 
-import { getMoveDirection, isMovieHidden } from './utils';
+import { isMovieHidden } from './utils';
 import Shadow from './Shadow';
 import {
   MoviePreviewContainer,

@@ -64,7 +64,10 @@ const MovieDetails = ({
                   years={detailsData.movie.released}
                   duration={detailsData.movie.runtime}
                 />
-                <Synopsis>{detailsData.movie.summary}</Synopsis>
+                <Synopsis>
+                  {detailsData.movie.summary.slice(1, 400)}
+                  {detailsData.movie.summary.length > 400 && '...'}
+                </Synopsis>
                 <ButtonsContainer>
                   <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
                   <AddListButton />

@@ -82,19 +82,17 @@ export const PlayLogo = styled(GoPlaybackPlay)`
   font-size:2.8em;
   cursor: pointer;
   transition: all 0.2s;
-  transition-delay:0.2s;
-  &:hover {
-    color:${MAIN_COLOR};
-  }
   margin-left:5px;
+  color: ${({ color }) => color};
 `;
 
-export const LinkStyed = styled(Link)`
+export const PlayLogoContainer = styled(Link)`
   display:flex;
+  align-self:center;
   justify-content: center;
   align-items: center;
   text-decoration:none;
-  border-width:3px;
+  border-width:1px;
   border-style: solid;
   border-color:white;
   border-radius:100%;
@@ -106,17 +104,19 @@ export const LinkStyed = styled(Link)`
   &:focus {
     outline:none;
   }
-  transition: all ${TRANSITION + 1}s;
-  opacity: 1;
-  transition-delay: 1.2s;
+  transition: all 0.2s;
+  opacity: ${({ opacity }) => opacity};
   &:hover {
     color:${MAIN_COLOR};
-  }
+  };
 `;
 
 export const DescriptionContainer = styled.div`
   display:flex;
+  flex-direction:column;
   height: ${HEIGHT / 2}px;
+  opacity: ${({ opacity }) => opacity};
+  transition: all ${TRANSITION + 5}s;
   width:100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -126,14 +126,15 @@ export const DescriptionContainer = styled.div`
 
 export const DesciptionText = styled.p`
   color:white;
-  opacity: ${({ opacity }) => opacity};
-  transition: all ${TRANSITION + 1}s;
   user-select: none;
+  -webkit-text-align: justify;
+  user-select: none;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   background: linear-gradient(white, rgba(0,0,0,0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  -webkit-text-align: justify;
 `;
+
 
 export const MoreButton = styled(FaChevronDown)`
   position:absolute;
@@ -142,3 +143,32 @@ export const MoreButton = styled(FaChevronDown)`
   font-size:1.7em;
   left:calc(50% - 12px);
 `;
+
+export const RatingContainer = styled.div`
+  position:relative;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ color }) => color};
+  color:${({ color }) => color};
+  align-self:flex-start;
+  min-height:15px;
+  min-width:30px;
+  font-weight:100;
+`;
+
+export const TopSide = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  width:100%;
+`;
+
+export const BotSide = styled.div`
+  display:flex;
+  flex-direction:column;
+  flex:1;
+  width:100%;
+  cursor:pointer;
+`;
+
