@@ -27,6 +27,7 @@ import MetaData from './MetaData';
 import FakeShadow from './FakeShadow';
 import Footer from './Footer/index';
 import AddListButton from '../../components/AddListButton';
+import Comments from '../../containers/Comments';
 
 const MovieDetails = ({
   handleChangeIsPreviewOpen,
@@ -51,9 +52,9 @@ const MovieDetails = ({
 
   return (
     <FakeMovieDetailsContainer height={height}>
-      {(detailsData && imdbId === detailsData.movie.imdbId) &&
+      {(detailsData && selectedSlide !== -1 && imdbId === detailsData.movie.imdbId) &&
         <MovieDetailsContainer height={height}>
-          <FakeShadow />
+          {selectedSlide === 0 && <FakeShadow />}
           {selectedSlide === 0 &&
             <Shadow>
               <Title>{detailsData.movie.title}</Title>
@@ -75,14 +76,19 @@ const MovieDetails = ({
                 />
               </DetailsContent>
             </Shadow>}
-          <GradientShadow />
-          <CoverImage height={height}>
-            <YouTubeContainer
-              videoId={detailsData.movie.trailer}
-              onReady={event => event.target.playVideo()}
-              opts={opts}
-            />
-          </CoverImage>
+          {selectedSlide === 0 && <GradientShadow />}
+          {selectedSlide === 0 &&
+            <CoverImage height={height}>
+              <YouTubeContainer
+                videoId={detailsData.movie.trailer}
+                onReady={event => event.target.playVideo()}
+                opts={opts}
+              />
+            </CoverImage>
+          }
+          {selectedSlide === 1 &&
+            <Comments height={height} imdbId={imdbId} />
+          }
           <Cross
             onClick={() => {
               handleChangeIsPreviewOpen();
