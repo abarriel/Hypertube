@@ -120,6 +120,11 @@ class Req {
   async isAuth() {
     return this.axios('get', 'auth');
   }
+
+  @tryCatcher(true)
+  async authOmi(provider) {
+    return this.axios('get', `auth/${provider}`);
+  }
 }
 
 const req = new Req();

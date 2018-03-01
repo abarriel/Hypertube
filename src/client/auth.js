@@ -25,7 +25,7 @@ class Auth extends Component {
 
   render() {
     const { children } = this.props;
-    return children; // avoid auth for debug;
+    // return children; // avoid auth for debug;
 
     const { isAuthorized, isRequested } = this.state;
     const { pathname } = window.location;

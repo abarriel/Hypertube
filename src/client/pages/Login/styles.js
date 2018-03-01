@@ -18,13 +18,12 @@ export const FormContainer = styled.form`
   align-items: flex-start;
   min-width: 410px;
   color: red;
-  height: 487px;
   background-color: red;
   margin-bottom: 10px;
   background-color: #f3f3f3;
   color: #333;
   padding:40px;
-  height:487px;
+  height:600px;
   -webkit-font-smoothing:antialiased;
 `;
 
@@ -158,11 +157,11 @@ export const Logo = styled.div`
   background-repeat: no-repeat;
 `;
 
-export const ForgetPasswordLink = styled.p`
+export const ForgetPasswordLink = styled(Link)`
   text-decoration: none;
   color: #0080ff;
   cursor: pointer;
-  font-size: 15px;
+  font-size: 16px;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
   margin-bottom: 10px;
@@ -175,5 +174,54 @@ export const Spliter = styled.div`
   margin-top:0.5em;
   margin-bottom:0.5em;
   background-color: #ccc;
-  height: 2px;
+  height: 1px;
+`;
+
+export const OmniauthContainer = styled.div`
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: flex-start;
+  width:100%;
+`;
+
+export const OmniauthLogo = styled.div`
+  display:flex;
+  min-width: 27px;
+  min-height: 27px;
+  margin-right: 10px;
+  background-image:url('${({ logo }) => logo}');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+`;
+
+export const OmniauthLink = styled.div`
+  display:flex;
+  margin-top:10px;
+  margin-bottom:10px;
+  justify-content: flex-start;
+  align-items: center;
+  color: #0080ff;
+  cursor: pointer;
+  font-size: 16px;
+`;
+
+export const RegisterLinkContainer = styled.div`
+  display:flex;
+  width:100%;
+  color: #333;
+  font-size: 16px;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+`;
+
+export const RegisterLink = styled(Link)`
+  text-decoration: none;
+  color: #0080ff;
+  font-size: 16px;
+  margin-left:4px;
+  &:hover{
+    text-decoration:underline;
+  }
 `;

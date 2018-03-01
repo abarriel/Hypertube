@@ -13,6 +13,11 @@ import {
   Logo,
   ForgetPasswordLink,
   Spliter,
+  OmniauthContainer,
+  OmniauthLogo,
+  OmniauthLink,
+  RegisterLinkContainer,
+  RegisterLink,
 } from './styles';
 import req from '../../request';
 import { UserSchema } from '../../validation';
@@ -33,7 +38,7 @@ const Login = ({
     <FormContainer onSubmit={handleSubmit}>
       <Title>{'S\'identifier'}</Title>
       <InputContainer>
-        <Label>E-mail</Label>
+        <Label>Login</Label>
         <Input
           type="text"
           name="username"
@@ -55,13 +60,55 @@ const Login = ({
       </InputContainer>
       {touched.password && errors.password && <div>{errors.password}</div>}
       <ButtonContainer>
-        {/* <LinkStyled to={`/register`}>
-          Register
-        </LinkStyled> */}
-        <ForgetPasswordLink>E-mail ou mot de passe oublié ?</ForgetPasswordLink>
+        <ForgetPasswordLink to="/lost">E-mail ou mot de passe oublié ?</ForgetPasswordLink>
         <InputButton type="submit" value="S'identifier" />
         <Spliter />
-        {/* <LostLink to={`/lost`}>Forgot my password</LostLink> */}
+        <OmniauthContainer>
+          <OmniauthLink
+            onClick={() => {
+              req.authOmi('facebook');
+            }}
+          >
+            <OmniauthLogo logo="https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png" />
+            {'S\'identifier avec Facebook'}
+          </OmniauthLink>
+          <OmniauthLink
+            onClick={() => {
+              req.authOmi('42');
+            }}
+          >
+            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
+            {'S\'identifier avec 42'}
+          </OmniauthLink>
+          <OmniauthLink
+            onClick={() => {
+              req.authOmi('google');
+            }}
+          >
+            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
+            {'S\'identifier avec google'}
+          </OmniauthLink>
+          <OmniauthLink
+            onClick={() => {
+              req.authOmi('twitter');
+            }}
+          >
+            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
+            {'S\'identifier avec twitter'}
+          </OmniauthLink>
+          <OmniauthLink
+            onClick={() => {
+              req.authOmi('github');
+            }}
+          >
+            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
+            {'S\'identifier avec github'}
+          </OmniauthLink>
+        </OmniauthContainer>
+        <RegisterLinkContainer>
+          {'Première visite sur Hyperflix ?'}
+          <RegisterLink to="/register" > Inscrivez-vous</RegisterLink>.
+        </RegisterLinkContainer>
       </ButtonContainer>
     </FormContainer>
   </LoginContainer>
@@ -72,7 +119,7 @@ const MyForm = withFormik({
   // Transform outer props into form values
   mapPropsToValues: () => ({ username: '', password: '' }),
   // Add a custom validation function (this can be async too!)
-  validationSchema: UserSchema,
+  // validationSchema: UserSchema,
   // Submission handler
   handleSubmit: async (
     values,
