@@ -85,7 +85,7 @@ const Login = ({
               req.authOmi('google');
             }}
           >
-            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
+            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2000px-Google_%22G%22_Logo.svg.png" />
             {'S\'identifier avec google'}
           </OmniauthLink>
           <OmniauthLink
@@ -93,7 +93,7 @@ const Login = ({
               req.authOmi('twitter');
             }}
           >
-            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
+            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/1259px-Twitter_Bird.svg.png" />
             {'S\'identifier avec twitter'}
           </OmniauthLink>
           <OmniauthLink
@@ -101,7 +101,7 @@ const Login = ({
               req.authOmi('github');
             }}
           >
-            <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
+            <OmniauthLogo logo="https://image.flaticon.com/icons/svg/25/25231.svg" />
             {'S\'identifier avec github'}
           </OmniauthLink>
         </OmniauthContainer>
