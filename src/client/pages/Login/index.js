@@ -5,15 +5,15 @@ import {
   FormContainer,
   Input,
   ButtonContainer,
-  LinkStyled,
   InputButton,
-  LostLink,
   LoginContainer,
-  LogoContainer,
   InputContainer,
   Label,
+  Title,
+  Logo,
+  ForgetPasswordLink,
+  Spliter,
 } from './styles';
-import Logo from '../../components/Logo';
 import req from '../../request';
 import { UserSchema } from '../../validation';
 // Higher Order Component
@@ -29,10 +29,9 @@ const Login = ({
   isSubmitting,
 }) => (
   <LoginContainer>
-    <LogoContainer>
-      <Logo height={45} width={167}/>
-    </LogoContainer>
+    <Logo />
     <FormContainer onSubmit={handleSubmit}>
+      <Title>{'S\'identifier'}</Title>
       <InputContainer>
         <Label>E-mail</Label>
         <Input
@@ -59,7 +58,9 @@ const Login = ({
         {/* <LinkStyled to={`/register`}>
           Register
         </LinkStyled> */}
-        <InputButton type="submit" value="Login" />
+        <ForgetPasswordLink>E-mail ou mot de passe oublié ?</ForgetPasswordLink>
+        <InputButton type="submit" value="S'identifier" />
+        <Spliter />
         {/* <LostLink to={`/lost`}>Forgot my password</LostLink> */}
       </ButtonContainer>
     </FormContainer>
