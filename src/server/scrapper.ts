@@ -54,6 +54,7 @@ const addMovie = async (movieNub: any, movie: any) => {
     director: movieNub.Director,
     actors: _.split(movieNub.Actors, ','),
     ratings: movieNub.Ratings,
+    type: 'movie',
     box_office: movieNub.BoxOffice,
     production: movieNub.Production
   });
@@ -64,6 +65,7 @@ const addMovie = async (movieNub: any, movie: any) => {
  * Scrap for YTS for torrents details and OMDB API for details.
  *
 **/
+
 const scrapYTS = async () => {
   await deleteMovieTable();
   await createMoviesTable();
@@ -77,7 +79,7 @@ const scrapYTS = async () => {
     rejectUnauthorized: false
   });
   const { data: { data: { movies, movie_count } } } = await axios.get(`${YTS_URL}?${parsifyParams(params)}`, { httpsAgent: agent } );
-  const pageNumber = Math.round(movie_count / params.limit) + 1;
+  const pageNumber = Math.round(movie_count / params.limit);
   const promisesT = _.times(pageNumber, async (num) => {
     if (num < 1) return ;
     params.page = num;
@@ -95,6 +97,39 @@ const scrapYTS = async () => {
   return Promise.all(promisesT);
 }
 
+const EZTV = (page) => `https://eztv.ag/api/get-torrents?limit=100&page=${page}`;
+
+const scrapEZTV = async () => {
+  const { data: { torrents_count } } = await axios.get(EZTV(1));
+  const pageNumber = Math.round(torrents_count / 100);
+  let tvShows:any = [];
+  const promiseT = _.times(pageNumber, async (num) => {
+    if (num < 1) return ;
+    // console.log(num);
+    // try {
+      // const { data } = await axios.get(EZTV(num));
+      return axios.get(EZTV(num)).then(({ data }) => {
+        _.map(data.torrents, (v) => {
+        tvShows.push(v);
+        })
+      }).catch(e => e);
+      // _.map(data, (v) => {
+          // tvShows.push(v.imdb_id);
+        // console.log(v);
+      // })
+    // } catch (err) {
+      // console.log('num err: ', num);
+    // }
+  });
+  await Promise.all(promiseT);
+  console.log('tvShows Count ', tvShows.length);
+
+  // }
+  // catch (err) {
+  //   console.log(err);
+  //   console.log('tvShowsError', tvShows.length);
+  // }
+}
 /**
  *
  *  InitScrapper
@@ -103,7 +138,8 @@ const scrapYTS = async () => {
 const initScrapper = async () => {
   // const { OpenSubtitles } = Utils;
 
-  await scrapYTS();
+  // await scrapYTS();
+  // await scrapEZTV();
   console.log('Done scrapping');
 };
 

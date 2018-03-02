@@ -16,7 +16,7 @@ const Movies = {
     console.log(queryPattern);
     const querySQL = DB.select(previewMovieInfos)
       .from('movies')
-
+      .where('type', 'movie')
       .whereRaw('genres @> ?', [genres])
       .whereBetween('year', years)
       .whereBetween('imdb_rating', ratings)
@@ -47,7 +47,7 @@ const Movies = {
   },
 
   async getGenres() {
-    const querySQL = DB.select(DB.raw('array_agg(DISTINCT c) from (select unnest(genres) from movies) as dt(c)'));
+    const querySQL = DB.select(DB.raw('array_agg(DISTINCT c) from (select unnest(genres) from movies where type=\'movie\') as dt(c)'));
 
     console.log(colors.blue(querySQL.toString()));
     const [genres] = await querySQL;

@@ -12,8 +12,8 @@ const createUsersTable = (): Promise<any> => {
       table.string('lang').defaultTo('eng');
       table.string('profile_picture').defaultTo('default_picture.jpg');
       table.string('password');
-      table.specificType('my_list', 'TEXT[]');
-      table.specificType('history', 'TEXT[]');
+      table.specificType('my_list', 'TEXT[]').defaultTo('{}');
+      table.specificType('history', 'TEXT[]').defaultTo('{}');
       table.boolean('omniauth').defaultTo(true);
     })
 ]);

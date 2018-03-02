@@ -17,6 +17,7 @@ class MoviesController {
     res.json({ movies });
   }
 
+  @middlewaresBinding(['isAuthorize'])
   async single(req: express.Request, res: express.Response, next: any) {
     const { id } = req.params;
     if (id === 'genres') return this.genres(req, res);

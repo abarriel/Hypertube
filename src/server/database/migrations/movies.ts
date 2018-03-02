@@ -27,6 +27,9 @@ const createMoviesTable = (): Promise<any> => Promise.all([
     table.specificType('ratings', 'JSON[]').notNullable();
     table.text('box_office').defaultTo('unknown');
     table.text('production').defaultTo('unknown');
+    table.text('type').defaultTo('movie');
+    table.text('period').defaultTo('nan');
+    table.integer('seasons').defaultTo(0);
     }),
 ]);
 

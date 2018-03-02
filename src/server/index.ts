@@ -10,9 +10,9 @@ import initServer from './api';
  * @param {Config DB}
  */
 // const scrapperJob = new cron.CronJob({
-  // cronTime: '0 0 * * 1',
-  // onTick: initScrapper,
-  // runOnInit: true,
+//   cronTime: '0 0 * * 1',
+//   onTick: initScrapper,
+//   runOnInit: true,
 // })
 
  const init =  async () => {
