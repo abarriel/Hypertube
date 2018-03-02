@@ -13,13 +13,10 @@ class Auth extends Component {
 
   async componentWillMount() {
     try {
-      console.log('componentWillMount');
       await req.isAuth();
-      console.log('componentWillMount - Receive Data');
       this.setState({ isAuthorized: true, isRequested: true });
     } catch (err) {
       this.setState({ isRequested: true });
-      console.log('Not Authorized');
     }
   }
 

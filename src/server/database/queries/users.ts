@@ -5,7 +5,7 @@ import * as colors from 'colors/safe';
 import { stripIndent } from 'common-tags';
 import { DB } from '../../core';
 
-const singleDataUser = ['id', 'username', 'profilePicture', 'firstName', 'lastName', 'lang'];
+const singleDataUser = ['id', 'username', 'profilePicture', 'firstName', 'lastName', 'lang', 'my_list', 'history'];
 
 const Users = {
   async post(user: any) {

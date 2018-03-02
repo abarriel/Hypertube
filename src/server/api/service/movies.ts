@@ -23,7 +23,8 @@ class MoviesController {
     if (!/[a-zA-Z0-9]{5,20}/.test(id))
       return next({ type: 'validation', details: 'Wrong Id provided' });
     const movie = await Movies.single(id);
-    res.json({ movie });
+    const { myList, history } = req.user;
+    res.json({ movie: { ...movie, inMyList: _.includes(myList, id), seen: _.includes(history, id) } });
   }
 
   async genres(req: express.Request, res: express.Response) {

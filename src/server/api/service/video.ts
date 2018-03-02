@@ -16,9 +16,11 @@ class VideoController {
 
   @middlewaresBinding(['videoValidate'])
   async getVideo(req: express.Request, res: express.Response, next: any) {
+    this.getSub(req, res, next);
     const { getStreamTorrent } = Utils;
     let { video: { start, end, imdbId } } = req.app.locals;
     const { torrents } = await Movies.single(imdbId);
+    // console.log(torrents);
     const { hash } = torrents[0];
     const movieStream: any = await getStreamTorrent(hash, imdbId);
 
@@ -33,40 +35,44 @@ class VideoController {
     };
     res.writeHead(206, head);
     const stream_position = { start, end };
-    console.log('stream position ', stream_position);
+    // console.log('stream position ', stream_position);
     movieStream.createReadStream(stream_position).pipe(res);
   };
 
   // @middlewaresBinding(['isAuthorize'])
   async getSub(req: express.Request, res: express.Response, next: any) {
     // const { lang } = req.user;
+    console.log('getSub');
     const lang = 'fre';
     const { imdbId } = req.params;
     const { OpenSubtitles, buildPath } = Utils;
     try {
-      const subs = await OpenSubtitles.search({
+      const subsRequest = await OpenSubtitles.search({
         imdbid: imdbId,
         sublanguageid: [lang, 'eng'].join(),
       });
-      const sub = _.reduce(subs, (acc, value, key) => value, {});
-      const { data } = await axios({
-        method: 'get',
-        url: sub.url,
-        responseType: 'stream',
-      });
-      const pathSubs = buildPath(imdbId);
-      data.pipe(fs.createWriteStream(`${pathSubs}.srt`))
-      .on('finish', () => {
-        fs.createReadStream(`${pathSubs}.srt`)
-        .pipe(str2vtt())
-        .pipe(fs.createWriteStream(`${pathSubs}.vtt`))
-        .on('finish', () => {
-          fs.unlink(`${pathSubs}.srt`, () => {});
-          res.json({ path: `${pathSubs}.vtt` });
+      const subs = _.reduce(subsRequest, (acc, value, key) => ({...acc, [value.langcode]: value}), {});
+     const subsArry = await Promise.all(_.map(subs, async (value) => {
+        const { data } = await axios({
+          method: 'get',
+          url: value.url,
+          responseType: 'stream',
         });
-      });
+        const pathSubs = buildPath(imdbId, value.langcode);
+        data.pipe(fs.createWriteStream(`${pathSubs}.srt`))
+        .on('finish', () => {
+          fs.createReadStream(`${pathSubs}.srt`)
+          .pipe(str2vtt())
+          .pipe(fs.createWriteStream(`${pathSubs}.vtt`))
+          .on('finish', () => {
+            fs.unlink(`${pathSubs}.srt`, () => {});
+            // res.json({ path: `${pathSubs}.vtt` });
+          });
+        });
+      }))
+      await Promise.all(subsArry);
     } catch(err) {
-      next({ type: 'Torrent', details: 'failed to get sub', err });
+      // next({ type: 'Torrent', details: 'failed to get sub', err });
     }
   };
 }

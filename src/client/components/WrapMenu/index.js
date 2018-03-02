@@ -1,6 +1,6 @@
 import React from 'react';
 import { bool } from 'prop-types';
-
+import req from '../../request';
 import {
   WrapMenuContainer,
   WrapMenuElem,
@@ -18,7 +18,12 @@ const WrapMenu = ({
     </WrapMenuElem>
     <WrapMenuElem>
       <Icon />
-      <WrapMenuElemText to="/login">Deconnexion</WrapMenuElemText>
+      <WrapMenuElemText to="/" onClick={() => {
+        req.logout().then(() => {
+          window.location.replace('/login');
+        });
+      }
+      }>Deconnexion</WrapMenuElemText>
     </WrapMenuElem>
   </WrapMenuContainer>
 );

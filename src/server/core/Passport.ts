@@ -30,9 +30,10 @@ passport.use('local', new LocalStrategy({
   try {
     const { user } = req.app.locals;
     if (!await Users.isRegistered({ username: user.username, omniauth: 'false' })) return done({ type: 'db', details: 'User not found' });
-    const { password: passU, id, profilePicture, lang } = await Users.getByUsername(user.username, ['password', 'id', 'profilePicture', 'lang']);
+    const { password: passU, id, profilePicture, lang, history, myList } = await Users.getByUsername(user.username, ['password', 'id', 'profilePicture', 'lang', 'history', 'myList']);
+    console.log(user.password, user.username);
     if (!await bcrypt.compare(user.password, passU)) return done({ type: 'Auth', details: 'Failed to authenticate' });
-    return done(null, { id, username, omniauth: false, profilePicture, lang });
+    return done(null, { id, username, omniauth: false, profilePicture, lang, history, myList });
   } catch (err) {
     return done({ type: 'Auth', details: 'Failed', err });
   }

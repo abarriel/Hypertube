@@ -59,25 +59,18 @@ class Req {
 
   // my list
   @tryCatcher()
-  async getMylist() {
-    return this.axios('get', 'list/my_list');
+  async getMylist(list) {
+    return this.axios('get', `list/${list}`);
   }
 
   @tryCatcher()
-  async addMovieMylist(imdbId) {
-    return this.axios('post', `list/my_list${imdbId}`);
+  async addMovieMylist(list, imdbId) {
+    return this.axios('post', `list/${list}/${imdbId}`);
   }
 
   @tryCatcher()
-  async deleteMovieMylist(imdbId) {
-    return this.axios('post', `list/my_list/${imdbId}`);
-  }
-
-
-  // historic list
-  @tryCatcher()
-  async getHistory(imdbId) {
-    return this.axios('get', `list/history/${imdbId}`);
+  async deleteMovieMylist(list, imdbId) {
+    return this.axios('delete', `list/${list}/${imdbId}`);
   }
 
   // Users
@@ -93,7 +86,14 @@ class Req {
 
   @tryCatcher(true)
   async login(user) {
-    return this.axios('post', 'auth/login', user);
+    return this.axios('post', 'auth/login', user).then(() => {
+      window.location.replace('/');
+    });
+  }
+
+  @tryCatcher(true)
+  async logout(user) {
+    return this.axios('post', 'auth');
   }
 
   @tryCatcher(true)
@@ -123,7 +123,9 @@ class Req {
 
   @tryCatcher(true)
   async authOmi(provider) {
-    return this.axios('get', `auth/${provider}`);
+    return this.axios('get', `auth/${provider}`).then(() => {
+      window.location.replace('/');
+    });
   }
 }
 

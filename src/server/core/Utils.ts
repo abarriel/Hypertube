@@ -71,12 +71,12 @@ const Utils = {
     password: openSubApi.password,
   }),
 
-  buildPath: (fileName: string, extension?: string) => {
+  buildPath: (fileName: string, lang: boolean, extension?: string) => {
     let filePath;
     if (extension)
-    filePath =`public/upload/${fileName}/${fileName}${extension}`;
+    filePath =`public/upload/${fileName}/${lang + fileName}${extension}`;
     else
-    filePath =`public/upload/${fileName}/${fileName}`;
+    filePath =`public/upload/${fileName}/${lang + fileName}`;
     ensureDirectoryExistence(filePath);
     return filePath;
   },
@@ -107,9 +107,9 @@ const Utils = {
 
     Engine.on('ready', () => {
       Engine.files.forEach(file => {
-        console.log('file:  ', formatBytes(file.length).padStart(10),  Utils.isVideo(file.name), file.name);
+        // console.log('file:  ', formatBytes(file.length).padStart(10),  Utils.isVideo(file.name), file.name);
         if (Utils.isVideo(file.name) && file.length > movie.length) {
-          console.log('video: ', formatBytes(file.length).padStart(10), '     ', file.name);
+          // console.log('video: ', formatBytes(file.length).padStart(10), '     ', file.name);
           const ext = path.extname(file.name);
           movie = file;
           movie.size = file.length;
@@ -124,7 +124,7 @@ const Utils = {
     });
 
     Engine.on('idle', () => {
-      console.log(colors.green('DONE(idle)'));
+      // console.log(colors.green('DONE(idle)'));
     });
   }),
 };

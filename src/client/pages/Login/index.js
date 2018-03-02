@@ -64,43 +64,23 @@ const Login = ({
         <InputButton type="submit" value="S'identifier" />
         <Spliter />
         <OmniauthContainer>
-          <OmniauthLink
-            onClick={() => {
-              req.authOmi('facebook');
-            }}
-          >
+          <OmniauthLink onClick={() => window.location.replace('http://localhost:8888/api/auth/facebook')} >
             <OmniauthLogo logo="https://assets.nflxext.com/ffe/siteui/login/images/FB-f-Logo__blue_57.png" />
             {'S\'identifier avec Facebook'}
           </OmniauthLink>
-          <OmniauthLink
-            onClick={() => {
-              req.authOmi('42');
-            }}
-          >
+          <OmniauthLink onClick={() => window.location.replace('http://localhost:8888/api/auth/42')} >
             <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/42_Logo.svg/2000px-42_Logo.svg.png" />
             {'S\'identifier avec 42'}
           </OmniauthLink>
-          <OmniauthLink
-            onClick={() => {
-              req.authOmi('google');
-            }}
-          >
+          <OmniauthLink onClick={() => window.location.replace('http://localhost:8888/api/auth/google')} >
             <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/2000px-Google_%22G%22_Logo.svg.png" />
             {'S\'identifier avec google'}
           </OmniauthLink>
-          <OmniauthLink
-            onClick={() => {
-              req.authOmi('twitter');
-            }}
-          >
+          <OmniauthLink onClick={() => window.location.replace('http://localhost:8888/api/auth/twitter')} >
             <OmniauthLogo logo="https://upload.wikimedia.org/wikipedia/fr/thumb/c/c8/Twitter_Bird.svg/1259px-Twitter_Bird.svg.png" />
             {'S\'identifier avec twitter'}
           </OmniauthLink>
-          <OmniauthLink
-            onClick={() => {
-              req.authOmi('github');
-            }}
-          >
+          <OmniauthLink onClick={() => window.location.replace('http://localhost:8888/api/auth/github')} >
             <OmniauthLogo logo="https://image.flaticon.com/icons/svg/25/25231.svg" />
             {'S\'identifier avec github'}
           </OmniauthLink>
@@ -131,7 +111,7 @@ const MyForm = withFormik({
   ) => {
     try {
       await req.login(values);
-      window.location = '/';
+      // window.location.replace('/');
     } catch (err) {
       console.log(err);
       // setErrors(err);

@@ -49,7 +49,6 @@ const MovieDetails = ({
       rel: 0,
     },
   };
-
   return (
     <FakeMovieDetailsContainer height={height}>
       {(detailsData && selectedSlide !== -1 && imdbId === detailsData.movie.imdbId) &&
@@ -70,7 +69,7 @@ const MovieDetails = ({
                 </Synopsis>
                 <ButtonsContainer>
                   <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
-                  <AddListButton />
+                  <AddListButton movieId={detailsData.movie.imdbId} />
                 </ButtonsContainer>
                 <MetaList
                   cast={detailsData.movie.actors}

@@ -14,16 +14,17 @@ const List = {
     const isInside = await this.isInside(id, imdbId, list);
     if (isInside) throw ({ type: 'db', details: 'Movies already in list' });
     let querySQL;
+    console.log(id, imdbId, list);
     if (list === 'history') {
       querySQL = await DB.from('users').where('id', id).update({
-        history: DB.raw('array_append(history, ?', [imdbId]),
+        history: DB.raw('array_append(history, ?)', [imdbId]),
       });
     } else {
       querySQL = await DB.from('users').where('id', id).update({
         my_list: DB.raw('array_append(my_list, ?)', [imdbId]),
       });
     }
-    return querySQL;
+    return 'querySQL';
   },
 
   async isInside(id: any, imdbId: string, list: string) {

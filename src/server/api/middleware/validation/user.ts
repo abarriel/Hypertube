@@ -22,7 +22,6 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
   const { limit, offset } = req.query;
   let { path: pp }:any = req.file || {};
   const params: any = {};
-  console.log(req);
   if (pp)
   {
     pp = _.split(pp, '/');
@@ -47,6 +46,7 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
     req.app.locals = { ...req.app.locals, user: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };
     next();
   } catch (err) {
+    console.log("err");
     next({ type: 'JoiSchema', err });
   };
 };

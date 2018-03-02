@@ -39,9 +39,11 @@ class UsersController {
   @middlewaresBinding(['userFormValidate'])
   async local(req: express.Request, res: express.Response, next: any) {
     this.passport.authenticate('local', (err, user, info) => {
+      console.log(err);
       if (err) next({ type: 'validation', details: 'bad request' });
+      console.log('user:' ,user);
       req.logIn(user, err => {
-        if (err) next({ type: 'validation', details: 'bad request' });
+        if (err) next({ type: 'validation', details: 'bad request after login' });
         else res.redirect('/')
       })
     })(req, res, next);
@@ -58,6 +60,7 @@ class UsersController {
   facebookCB = (...args: any[]) => this.cb('facebook', this.opt)(...args);
   twitterCB = (...args: any[]) => this.cb('twitter', this.opt)(...args);
   githubCB = (...args: any[]) => this.cb('github', this.opt)(...args);
+  googleCB = (...args: any[]) => this.cb('google', this.opt)(...args)
   localCB = (...args: any[]) => this.cb('local', this.opt)(...args);
   // spotifyCB = (...args: any[]) => this.cb('spotify', this.opt)(...args);
 };

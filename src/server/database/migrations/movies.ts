@@ -6,14 +6,14 @@ const createMoviesTable = (): Promise<any> => Promise.all([
     table.string('imdb_id').primary();
     table.string('title').notNullable();
     table.integer('year').notNullable();
-    table.string('trailer');
-    table.text('released');
-    table.string('country');
-    table.text('awards');
-    table.text('dvd');
-    table.string('language');
+    table.string('trailer').defaultTo('uDy_cvf4nDg');
+    table.text('released').defaultTo('unknown');
+    table.string('country').defaultTo('unknown');
+    table.text('awards').defaultTo('unknown');
+    table.text('dvd').defaultTo('unknown');
+    table.string('language').defaultTo('English');
     table.integer('imdb_rating').notNullable();
-    table.integer('score');
+    table.integer('score').defaultTo(0);
     table.text('cover_image').defaultTo('/default_cover.png');
     table.text('background_image').defaultTo('/default_cover.png');
     table.text('summary').notNullable();
@@ -21,12 +21,12 @@ const createMoviesTable = (): Promise<any> => Promise.all([
     table.specificType('torrents', 'JSON[]');
     table.integer('seeds');
     table.string('pg').notNullable();
-    table.integer('runtime');
+    table.integer('runtime').defaultTo(0);
     table.text('director').notNullable();
     table.specificType('actors', 'TEXT[]').notNullable();
     table.specificType('ratings', 'JSON[]').notNullable();
-    table.text('box_office');
-    table.text('production');
+    table.text('box_office').defaultTo('unknown');
+    table.text('production').defaultTo('unknown');
     }),
 ]);
 

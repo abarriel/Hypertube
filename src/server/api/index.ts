@@ -38,8 +38,9 @@ var options: any = {
   const corsOptions = {
     origin: 'http://localhost:8080',
     credentials: true,
+    // allowedHeaders: 'Content-Type,Authorization',
+    // preflightContinue: true,
   };
-
   await app
     .use(cors(corsOptions))
     .use(compression())
