@@ -121,6 +121,9 @@ export const InputButton = styled.button`
   &:hover{
     background-color:#ff0a16;
   };
+  &:focus{
+    outline:none;
+  };
   &:disabled,
   button[disabled]{
     opacity:0.8;

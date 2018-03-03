@@ -28,7 +28,6 @@ import {
 } from './styles';
 import req from '../../request';
 import { UserSchema } from '../../validation';
-// Higher Order Component
 
 const propTypes = {
   values: object.isRequired,
@@ -37,10 +36,8 @@ const propTypes = {
   handleChange: func.isRequired,
   handleBlur: func.isRequired,
   handleSubmit: func.isRequired,
-  isSubmitting: bool.isRequired,
 };
 
-// Our inner form component which receives our form's state and updater methods as props
 const Login = ({
   values,
   errors,
@@ -48,7 +45,6 @@ const Login = ({
   handleChange,
   handleBlur,
   handleSubmit,
-  isSubmitting,
 }) => (
   <LoginContainer>
     <Logo />
@@ -62,7 +58,7 @@ const Login = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.username}
-          error={errors.username}
+          error={errors.username || errors.all}
         />
         <ErrorMessageContainer>
           {touched.username && errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
@@ -134,10 +130,10 @@ const MyForm = withFormik({
       window.location.replace('/');
     } catch (err) {
       if (err.details[0].type === 'any.empty') {
-        setErrors({ password: 'Veuillez remplir tout les champs' });
+        setErrors({ password: 'Veuillez remplir tout les champs', all: 'error' });
       }
       if (err.details === 'bad request') {
-        setErrors({ password: 'Login et/ou mot de passe incorects' });
+        setErrors({ password: 'Login et/ou mot de passe incorects', all: 'error' });
       }
     }
     // const d = await req.isAuth();
