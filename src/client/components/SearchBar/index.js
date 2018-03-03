@@ -62,7 +62,7 @@ const SearchBar = ({
           onKeyPress={e => { if (e.key === 'Enter') search(value, resetMovies, changeParams); }}
         />
       }
-      {!wrapped &&
+      {!wrapped && value.length > 0 &&
         <Cross
           onClick={() => {
           changeParams({ q: '' });
