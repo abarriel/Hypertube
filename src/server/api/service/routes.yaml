@@ -9,6 +9,12 @@ paths:
     path: movies/:id
     description: Get full details of film
 
+# Imdb Scrapper
+  imdb.scrapper:
+    verb: get
+    path: imdb/:imdbId
+    description: Scrapper
+
 # Users
   users.single:
     verb: get
