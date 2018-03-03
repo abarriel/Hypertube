@@ -6,6 +6,7 @@ import Video from './pages/Video';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Recents from './pages/Recents';
+import Lost from './pages/Lost';
 
 const routes = [
   {
@@ -22,21 +23,26 @@ const routes = [
   {
     path: '/movies',
     component: Movies,
-    id: 3,
+    id: 2,
   },
   {
     path: '/users',
     component: Users,
-    id: 4,
+    id: 3,
   },
   {
     path: '/video',
     component: Video,
-    id: 5,
+    id: 4,
   },
   {
     path: '/login',
     component: Login,
+    id: 5,
+  },
+  {
+    path: '/lost',
+    component: Lost,
     id: 6,
   },
   {

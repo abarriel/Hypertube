@@ -13,7 +13,7 @@ import {
 import { getColor } from '../../utils';
 
 const MetaData = ({
-  rating,
+  rating = undefined,
   years,
   duration,
 }) => (
@@ -27,7 +27,7 @@ const MetaData = ({
 );
 
 MetaData.propTypes = {
-  rating: number.isRequired,
+  rating: number,
   years: string.isRequired,
   duration: number.isRequired,
 };

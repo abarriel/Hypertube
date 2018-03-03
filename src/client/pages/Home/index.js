@@ -13,14 +13,6 @@ import { loadGenres } from '../../actions/movies';
 
 import req from '../../request';
 
-
-const init = loadGenres => {
-  req.genres()
-    .then(data => {
-      loadGenres(data);
-    });
-};
-
 const Home = () => (
   <HomeContainer>
     <MainContent>

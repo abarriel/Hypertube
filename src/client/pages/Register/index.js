@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import { withFormik } from 'formik';
 import _ from 'lodash';
-import {
-  func,
-  object,
-} from 'prop-types';
 
 import {
   RegisterContainer,
@@ -20,15 +15,14 @@ import {
   ErrorMessage,
   LoginLink,
   BackIcon,
+  Header,
+  InputFile,
+  DownLoadIcon,
+  InputFileContainer,
 } from './styles';
 import { validateUser } from '../../validation';
 import req from '../../request';
 
-const propTypes = {
-  handleChange: func.isRequired,
-  handleBlur: func.isRequired,
-  values: object.isRequired,
-};
 class Register extends Component {
   state = {
     username: '',
@@ -51,7 +45,7 @@ class Register extends Component {
       const _URL = window.URL || window.webkitURL;
       img.src = _URL.createObjectURL(file);
     } else {
-      this.setState({ [name]: value, errors });
+      this.setState({ [name]: value, errors: { ...this.state.errors, ...errors } });
     }
   }
 
@@ -73,7 +67,9 @@ class Register extends Component {
 
     return (
       <RegisterContainer>
-        <Logo />
+        <Header>
+          <Logo />
+        </Header>
         <FormContainer onSubmit={this.handleSubmit}>
           <Title>{'S\'enregistrer'}</Title>
           <InputContainer>
@@ -82,7 +78,6 @@ class Register extends Component {
               type="text"
               name="username"
               onChange={this.handleChange}
-              onBlur={this.handleBlur}
               value={username}
               error={errors.username || errors.all}
             />
@@ -96,7 +91,6 @@ class Register extends Component {
               type="password"
               name="password"
               onChange={this.handleChange}
-              onBlur={this.handleBlur}
               value={password}
               error={errors.password || errors.all}
             />
@@ -147,7 +141,12 @@ class Register extends Component {
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
-            <Input type="file" accept="image/*" name="profilePicture" onChange={this.handleChange} required />
+            <Label>Avatar</Label>
+            <InputFileContainer>
+              <InputFile type="file" accept="image/*" id="profilePicture" name="profilePicture" onChange={this.handleChange} required />
+              <label htmlFor="profilePicture"><DownLoadIcon />Choose a file </label>
+              {errors.profilePicture && <ErrorMessage>{errors.profilePicture}</ErrorMessage>}
+            </InputFileContainer>
             {errors.profilePicture && <div>{errors.profilePicture}</div>}
           </InputContainer>
           <ButtonContainer>

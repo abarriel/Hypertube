@@ -37,6 +37,7 @@ class Auth extends Component {
       window.location = '/login';
       return null;
     }
+
     return children;
   }
 }

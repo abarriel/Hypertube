@@ -8,10 +8,15 @@ export const LoginContainer = styled.div`
   align-items: center;
   width:100vw;
   min-height:100vh;
+  background-image:url("https://assets.nflxext.com/ffe/siteui/acquisition/login/login-the-crown_2-1500x1000.jpg");
   @media (max-width: 740px) {
     background-color: #f3f3f3;
     align-items: flex-start;
+    background-image:none;
   };
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 `;
 
 export const FormContainer = styled.form`
@@ -142,7 +147,6 @@ export const Logo = styled.div`
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  color:blue;
 `;
 
 export const ForgetPasswordLink = styled(Link)`
