@@ -42,10 +42,10 @@ class imdbId {
     // d.title = $('.title_wrapper h1:first-child').text(); // contain name and year
 
     // SHARABLE
-    d.title = $('meta[property="og:title"]').attr('content')
-    d.plot = $('[itemprop=description]').text();
-    d.genre = $('span[itemprop=genre]').map((i,el) => $(el).text()).get().join(' ');
-    d.country = $('#titleDetails a[href*="country_of_origin"]').text()
+    d.title = $('.originalTitle').text() .split('(original title')[0].trim()
+    d.plot = $('[itemprop=description]').text().replace(/\s\s+|Written by\n.*/gi, ' ').trim();
+    d.genre = $('span[itemprop=genre]').map((i,el) => $(el).text()).get().join(',').split(','); // loooook i was tired haha
+    d.country = $('#titleDetails a[href*="country_of_origin"]').text();
     d.language = $('#titleDetails a[href*="primary_language"]').map((i,el) => $(el).text()).get().join(', ');
     d.released = $('#titleDetails div:nth-of-type(4)').text()
     d.runtime = $('.title_wrapper time[itemprop=duration]').attr('datetime')
@@ -54,7 +54,7 @@ class imdbId {
     d.poster = $('meta[property="og:image"]').attr('content')
     d.imdbRating = $('.ratingValue span[itemprop=ratingValue]').text()
     d.imdbID = imdbId;
-    d.type = $('meta[property="og:type"]').attr('content');
+    d.type =  $('meta[property="og:type"]').attr('content').split('.')[1];
     d.imdbVotes = $('span[itemprop=ratingCount]').text();
 
     // movie
@@ -68,9 +68,9 @@ class imdbId {
     d.totalSeasons = $('.seasons-and-year-nav a[href*="season"]').contents().length;
     // sharable
     d.plotKeywords = $('[itemprop=keywords] nobr a').attr('href');
-    const { data: dataPlotKeywords } =  await axios.get(`http://www.imdb.com${d.plotKeywords}`);
-    const $$ = cheerio.load(dataPlotKeywords);
-    d.plotKeywords = $$('table .sodatext a').map((i,el) => $(el).text()).get().join(', ');
+    // const { data: dataPlotKeywords } =  await axios.get(`http://www.imdb.com${d.plotKeywords}`);
+    // const $$ = cheerio.load(dataPlotKeywords);
+    // d.plotKeywords = $$('table .sodatext a').map((i,el) => $(el).text()).get().join(', ');
 
     console.log(d);
     // res.json(comments);
