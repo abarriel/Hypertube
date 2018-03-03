@@ -2,7 +2,6 @@ import React from 'react';
 import { withFormik } from 'formik';
 import {
   object,
-  bool,
   func,
 } from 'prop-types';
 
@@ -25,6 +24,7 @@ import {
   RegisterLink,
   ErrorMessage,
   ErrorMessageContainer,
+  Header,
 } from './styles';
 import req from '../../request';
 import { UserSchema } from '../../validation';
@@ -47,7 +47,9 @@ const Login = ({
   handleSubmit,
 }) => (
   <LoginContainer>
-    <Logo />
+    <Header>
+      <Logo />
+    </Header>
     <FormContainer onSubmit={handleSubmit}>
       <Title>{'S\'identifier'}</Title>
       <InputContainer>

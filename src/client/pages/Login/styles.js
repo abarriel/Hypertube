@@ -134,17 +134,14 @@ export const InputButton = styled.button`
 export const Logo = styled.div`
   display:flex;
   width:200px;
-  min-height:100px;
+  min-height:75px;
   align-self:flex-start;
   margin-left:25px;
-  margin-bottom:50px;
   background-image:url('/logo.png');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
-  @media (max-width: 740px) {
-    margin-bottom:10px;
-  };
+  color:blue;
 `;
 
 export const ForgetPasswordLink = styled(Link)`
@@ -235,4 +232,14 @@ export const ErrorMessage = styled.p`
   font-size: 12px;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
+`;
+
+export const Header = styled.div`
+  display:flex;
+  width:100%;
+  height: 75px;
+  @media (max-width: 740px) {
+    background-color: #fafafa;
+    border-bottom: solid 1px #dcdde0;
+  };
 `;
