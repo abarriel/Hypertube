@@ -70,7 +70,7 @@ class Register extends Component {
 
   render() {
     const { username, password, email, firstName, lastName, errors } = this.state;
-    const { handleChange, handleBlur, values, touched} = this.props;
+
     return (
       <RegisterContainer>
         <Logo />
@@ -80,28 +80,28 @@ class Register extends Component {
             <Label>Login</Label>
             <Input
               type="text"
-              name="login"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.username}
+              name="username"
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              value={username}
               error={errors.username || errors.all}
             />
             <ErrorMessageContainer>
-              {touched.username && errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
+              {errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
             <Label>Mot de passe</Label>
             <Input
-              type="text"
+              type="password"
               name="password"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.password}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              value={password}
               error={errors.password || errors.all}
             />
             <ErrorMessageContainer>
-              {touched.password && errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+              {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
@@ -109,13 +109,13 @@ class Register extends Component {
             <Input
               type="text"
               name="email"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.email}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              value={email}
               error={errors.email || errors.all}
             />
             <ErrorMessageContainer>
-              {touched.email && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+              {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
@@ -123,13 +123,13 @@ class Register extends Component {
             <Input
               type="text"
               name="firstName"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.firstName}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              value={firstName}
               error={errors.firstName || errors.all}
             />
             <ErrorMessageContainer>
-              {touched.firstName && errors.firstName && <ErrorMessage>{errors.firstName}</ErrorMessage>}
+              {errors.firstName && <ErrorMessage>{errors.firstName}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
@@ -137,13 +137,13 @@ class Register extends Component {
             <Input
               type="text"
               name="lastName"
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values.lastName}
+              onChange={this.handleChange}
+              onBlur={this.handleBlur}
+              value={lastName}
               error={errors.lastName || errors.all}
             />
             <ErrorMessageContainer>
-              {touched.lastName && errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
+              {errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
@@ -161,45 +161,7 @@ class Register extends Component {
       </RegisterContainer>
     );
   }
-};
+}
 
-Register.propTypes = propTypes;
-
-// Wrap our form with the using withFormik HoC
-const MyForm = withFormik({
-  // Transform outer props into form values
-  mapPropsToValues: () => ({
-    login: '',
-    password: '',
-    email: '',
-    firstName: '',
-    lastName: '',
-  }),
-  // Add a custom validation function (this can be async too!)
-  // Submission handler
-  handleSubmit: async (
-    values,
-    {
-      // props,
-      setSubmitting,
-      setErrors /* setValues, setStatus, and other goodies */,
-    },
-  ) => {
-    console.log('submit values: ', values);
-    // const d = await req.isAuth();
-    // console.log(d);
-    //   user => {
-    //     setSubmitting(false);
-    //     // do whatevs...
-    //     // props.updateUser(user)
-    //   },
-    //   errors => {
-    //     setSubmitting(false);
-    //     // Maybe even transform your API's errors into the same shape as Formik's!
-    //   }
-    // );
-  },
-})(Register);
-
-export default MyForm;
+export default Register;
 
