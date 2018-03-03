@@ -8,7 +8,7 @@ export const LoginContainer = styled.div`
   align-items: center;
   width:100vw;
   min-height:100vh;
-  @media (max-width: 600px) {
+  @media (max-width: 740px) {
     background-color: #f3f3f3;
     align-items: flex-start;
   };
@@ -29,9 +29,10 @@ export const FormContainer = styled.form`
   padding:40px;
   padding-bottom:60px;
   -webkit-font-smoothing:antialiased;
-  @media (max-width: 600px) {
+  @media (max-width: 740px) {
     min-width: 200px;
     width:calc(100vw - 80px);
+    padding-top:20px;
   };
 `;
 
@@ -83,8 +84,12 @@ export const Input = styled.input`
   box-sizing: border-box;
   position: relative;
   z-index: 30;
-  background-color:rgb(250, 255, 189);
-  border: solid 1px #b3b3b3;
+  border: solid 1px ${({ error }) => error ? 'rgb(176, 5, 0)' : '#b3b3b3'};
+  background-color: white;
+  &:focus{
+    outline:none;
+    border: solid 1px ${({ error }) => error ? 'rgb(176, 5, 0)' : '#626262'};
+  }
 `;
 
 export const ButtonContainer = styled.div`
@@ -134,6 +139,9 @@ export const Logo = styled.div`
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;
+  @media (max-width: 740px) {
+    margin-bottom:10px;
+  };
 `;
 
 export const ForgetPasswordLink = styled(Link)`
@@ -211,13 +219,17 @@ export const RegisterLink = styled(Link)`
   }
 `;
 export const ErrorMessageContainer = styled.div`
+  position:absolute;
   display:flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;;
   width:100%;
-  height:40px;
+  height:20px;
 `;
 
 export const ErrorMessage = styled.p`
-  color:#e50914;
+  color: #b00500;
+  font-size: 12px;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
 `;

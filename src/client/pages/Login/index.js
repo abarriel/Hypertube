@@ -1,6 +1,5 @@
 import React from 'react';
 import { withFormik } from 'formik';
-import { isEmpty } from 'lodash';
 import {
   object,
   bool,
@@ -63,13 +62,13 @@ const Login = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.username}
+          error={errors.username}
         />
         <ErrorMessageContainer>
           {touched.username && errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
         </ErrorMessageContainer>
       </InputContainer>
       <InputContainer>
-        {console.log('errors: ', errors)}
         <Label>Mot de passe</Label>
         <Input
           type="password"
@@ -77,14 +76,15 @@ const Login = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.password}
+          error={errors.password}
         />
         <ErrorMessageContainer>
-          {touched.password && errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
+          {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
         </ErrorMessageContainer>
       </InputContainer>
       <ButtonContainer>
         <ForgetPasswordLink to="/lost">E-mail ou mot de passe oublié ?</ForgetPasswordLink>
-        <InputButton disabled={isSubmitting || !isEmpty(errors)} type="submit">{'S\'identifier'}</InputButton>
+        <InputButton type="submit">{'S\'identifier'}</InputButton>
         <Spliter />
         <OmniauthContainer>
           <OmniauthLink onClick={() => window.location.replace('http://localhost:8888/api/auth/facebook')} >
@@ -133,8 +133,12 @@ const MyForm = withFormik({
       await req.login(values);
       window.location.replace('/');
     } catch (err) {
-      console.log(err);
-      // setErrors(err);
+      if (err.details[0].type === 'any.empty') {
+        setErrors({ password: 'Veuillez remplir tout les champs' });
+      }
+      if (err.details === 'bad request') {
+        setErrors({ password: 'Login et/ou mot de passe incorects' });
+      }
     }
     // const d = await req.isAuth();
     // console.log(d);
