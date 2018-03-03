@@ -10,8 +10,8 @@ const Card = ({ width, height }) => (
 );
 
 Card.propTypes = {
-  width:string,
-  height:string,
+  width: string,
+  height: string,
 };
 
 export default Card;

@@ -22,18 +22,16 @@ const ratingArray = [
   },
 ];
 
-const Rating = ({ rating, opacity }) => {
-  return (
-    <RatingContainer opacity={opacity}>
-      {map(ratingArray, elem => {
-        if (elem.id < rating) {
-          return <Full key={elem.id} />;
-        }
-        return <Empty key={elem.id} />;
-      })}
-    </RatingContainer>
-  );
-};
+const Rating = ({ rating, opacity }) => (
+  <RatingContainer opacity={opacity}>
+    {map(ratingArray, elem => {
+      if (elem.id < rating) {
+        return <Full key={elem.id} />;
+      }
+      return <Empty key={elem.id} />;
+    })}
+  </RatingContainer>
+);
 
 Rating.propTypes = {
   rating: PropTypes.number.isRequired,

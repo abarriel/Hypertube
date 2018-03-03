@@ -1,5 +1,5 @@
 import React from 'react';
-import { bool, func } from 'prop-types';
+import { bool, func, object } from 'prop-types';
 
 import {
   MiniAvatarContainer,
@@ -11,6 +11,12 @@ const fakeProfil = {
   firstName: 'Lucas',
   lastName: 'Charvolin',
   avatar: 'https://secure.netflix.com/ffe/profiles/avatars_v2/32x32/PICON_026.png',
+};
+
+const propTypes = {
+  displayMenu: bool.isRequired,
+  handleChangeMenuDisplay: func.isRequired,
+  profil: object,
 };
 
 const MiniAvatar = ({
@@ -26,9 +32,6 @@ const MiniAvatar = ({
   </MiniAvatarContainer>
 );
 
-MiniAvatar.propTypes = {
-  displayMenu: bool.isRequired,
-  handleChangeMenuDisplay: func.isRequired,
-};
+MiniAvatar.propTypes = propTypes;
 
 export default MiniAvatar;
