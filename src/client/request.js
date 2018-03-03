@@ -86,9 +86,7 @@ class Req {
 
   @tryCatcher(true)
   async login(user) {
-    return this.axios('post', 'auth/login', user).then(() => {
-      window.location.replace('/');
-    });
+    return this.axios('post', 'auth/login', user);
   }
 
   @tryCatcher(true)

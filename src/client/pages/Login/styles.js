@@ -151,7 +151,7 @@ export const Logo = styled.div`
   align-self:flex-start;
   margin-left:25px;
   margin-bottom:50px;
-  background-image:url('logo.png');
+  background-image:url('/logo.png');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;

@@ -111,7 +111,7 @@ const MyForm = withFormik({
   ) => {
     try {
       await req.login(values);
-      // window.location.replace('/');
+      window.location.replace('/');
     } catch (err) {
       console.log(err);
       // setErrors(err);

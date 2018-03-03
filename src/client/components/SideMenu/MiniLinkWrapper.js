@@ -20,7 +20,7 @@ const MiniLinkWrapper = ({
     onClick={() => handleChangeWrapped()}
   >
     {menu.map(elem => (
-      <MiniLinkWrapperElem key={elem.id} to={elem.to} isSelected={isSelected(elem.to)}>
+      <MiniLinkWrapperElem key={elem.id} to={elem.to} isselected={isSelected(elem.to).toString()}>
         {isSelected(elem.to) && <SideLine />}
         {elem.label}
       </MiniLinkWrapperElem>

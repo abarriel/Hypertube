@@ -21,10 +21,10 @@ const Movies = {
       .whereBetween('year', years)
       .whereBetween('imdb_rating', ratings)
 
+      // OR    summary ILIKE '${queryPattern}'
       .whereRaw(stripIndent`CASE
         WHEN '${q}' NOT LIKE 'undefined'
         THEN  title ILIKE '${queryPattern}'
-        OR    summary ILIKE '${queryPattern}'
         OR    actors @> '{%${queryPattern}}'
         OR    director ILIKE '${queryPattern}'
         OR    production ILIKE '${queryPattern}'

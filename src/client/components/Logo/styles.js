@@ -22,7 +22,7 @@ export const LogoImage = styled.div`
   display:flex;
   width:100%;
   height:100%;
-  background-image:url('logo.png');
+  background-image:url('/logo.png');
   background-size: 100%;
   background-position: center;
   background-repeat: no-repeat;

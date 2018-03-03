@@ -71,12 +71,14 @@ const Utils = {
     password: openSubApi.password,
   }),
 
-  buildPath: (fileName: string, lang: boolean, extension?: string) => {
+  buildPath: (fileName: string, lang: string, extension?: string) => {
     let filePath;
+    if (lang !== 'en')
+      lang = 'fr';
     if (extension)
-    filePath =`public/upload/${fileName}/${lang + fileName}${extension}`;
+    filePath = `public/upload/${fileName}/${lang}-${fileName}${extension}`;
     else
-    filePath =`public/upload/${fileName}/${lang + fileName}`;
+    filePath = `public/upload/${fileName}/${lang}-${fileName}`;
     ensureDirectoryExistence(filePath);
     return filePath;
   },
