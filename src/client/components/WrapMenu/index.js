@@ -18,12 +18,17 @@ const WrapMenu = ({
     </WrapMenuElem>
     <WrapMenuElem>
       <Icon />
-      <WrapMenuElemText to="/" onClick={() => {
-        req.logout().then(() => {
-          window.location.replace('/login');
-        });
-      }
-      }>Deconnexion</WrapMenuElemText>
+      <WrapMenuElemText
+        to="/"
+        onClick={() => {
+          req.logout().then(() => {
+            window.location.replace('/login');
+          });
+        }
+        }
+      >
+        Deconnexion
+      </WrapMenuElemText>
     </WrapMenuElem>
   </WrapMenuContainer>
 );

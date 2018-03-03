@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStateHandlers, compose } from 'recompose';
-import { Debounce } from 'react-throttle';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {
@@ -10,7 +9,6 @@ import {
   array,
 } from 'prop-types';
 
-import req from '../../request';
 import {
   getMovies,
   getSelectedGenre,
@@ -38,8 +36,6 @@ const SearchBar = ({
   value,
   handleChangeWrapped,
   handleChangeValue,
-  movies,
-  selectedGenre,
   resetMovies,
   changeParams,
 }) => (
@@ -80,8 +76,6 @@ SearchBar.propTypes = {
   value: string.isRequired,
   handleChangeValue: func.isRequired,
   handleChangeWrapped: func.isRequired,
-  movies: array.isRequired,
-  selectedGenre: string.isRequired,
   resetMovies: func.isRequired,
   changeParams: func.isRequired,
 };

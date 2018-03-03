@@ -128,7 +128,8 @@ export const InputButton = styled.button`
   button[disabled]{
     opacity:0.8;
     cursor:default;
-  }
+  };
+  border-radius:2px;
 `;
 
 export const Logo = styled.div`
@@ -158,8 +159,8 @@ export const ForgetPasswordLink = styled(Link)`
 export const Spliter = styled.div`
   display:flex;
   width:100%;
-  margin-top:0.5em;
-  margin-bottom:0.5em;
+  margin-top:0.7em;
+  margin-bottom:0.7em;
   background-color: #ccc;
   height: 1px;
 `;
@@ -183,9 +184,10 @@ export const OmniauthLogo = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   opacity:0.7;
-  transition: opacity 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
   &:hover{
     opacity:1;
+    transform: scale(1.2);
   }
 `;
 
@@ -238,8 +240,10 @@ export const Header = styled.div`
   display:flex;
   width:100%;
   height: 75px;
+  margin-bottom:25px;
   @media (max-width: 740px) {
     background-color: #fafafa;
     border-bottom: solid 1px #dcdde0;
+    margin-bottom:15px;
   };
 `;

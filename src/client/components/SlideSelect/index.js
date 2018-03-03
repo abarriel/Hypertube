@@ -33,7 +33,6 @@ const SlideSelect = ({
   handleChangePress,
   length,
   isPressed,
-  updateFilterMovies,
 }) => (
   <SlideSelectContainer>
     <Label>{label}</Label>
@@ -71,7 +70,6 @@ SlideSelect.propTypes = {
   handleChangePress: func.isRequired,
   length: number.isRequired,
   isPressed: number.isRequired,
-  updateFilterMovies: func.isRequired,
 };
 
 const actions = { updateFilterMovies };
