@@ -45,12 +45,17 @@ class Register extends Component {
       const _URL = window.URL || window.webkitURL;
       img.src = _URL.createObjectURL(file);
     } else {
-      this.setState({ [name]: value, errors: { ...this.state.errors, ...errors } });
+      const { errors: prevErrors } = this.state;
+      console.log(prevErrors[name], errors);
+      if (prevErrors[name] && !errors) delete prevErrors[name];
+      this.setState({ [name]: value, errors: { ...errors, ...prevErrors } });
+      console.log(this.state);
     }
   }
 
   handleSubmit = async (e) => {
     e.preventDefault();
+
     const { errors } = this.state;
     const user = _.omit(this.state, ['errors']);
     if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) return;
@@ -79,7 +84,7 @@ class Register extends Component {
               name="username"
               onChange={this.handleChange}
               value={username}
-              error={errors.username || errors.all}
+              error={errors.username}
             />
             <ErrorMessageContainer>
               {errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
@@ -92,7 +97,7 @@ class Register extends Component {
               name="password"
               onChange={this.handleChange}
               value={password}
-              error={errors.password || errors.all}
+              error={errors.password}
             />
             <ErrorMessageContainer>
               {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
@@ -106,7 +111,7 @@ class Register extends Component {
               onChange={this.handleChange}
               onBlur={this.handleBlur}
               value={email}
-              error={errors.email || errors.all}
+              error={errors.email}
             />
             <ErrorMessageContainer>
               {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
