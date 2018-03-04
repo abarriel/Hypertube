@@ -73,6 +73,7 @@
     "joi": "^13.1.0",
     "js-yaml": "^3.10.0",
     "json-caching-proxy": "^1.2.4",
+    "jsonframe-cheerio": "^3.0.1",
     "jsonwebtoken": "^8.1.0",
     "knex": "^0.14.2",
     "lodash": "^4.17.4",
