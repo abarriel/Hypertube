@@ -11,7 +11,7 @@ const getUrl = (server) => `http://${server.address().address}:${server.address(
  * missing .dotenv for config will implemented later
  */
 
-const HOST = '127.0.0.1';
+const HOST = '0.0.0.0';
 const PORT = '8087';
 
 const initServer = (async () => {
@@ -19,7 +19,8 @@ const initServer = (async () => {
 
   await app
     .use(compression())
-    .get('/:imdbId', scrapper);
+    .get('/', (req, res) => res.json({ version: '1.0' }))
+    .get('/title/:imdbId', scrapper);
   const httpServer = await app.listen(PORT, HOST, () => {
     console.log(`[API] Server running: ${getUrl(httpServer)}`);
   });

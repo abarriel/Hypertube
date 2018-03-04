@@ -62,8 +62,10 @@ const scrapper = async (req, res) => {
       return { ...acc, [key]: value };
     }, {});
     const finalData = { ...setkeyToNull(KEY_BOILERPLATE[infosCast.type || 'movie']), ...infosCast };
+    console.log(`success\t${imdbId}\t${new Date().toLocaleString()}`); 
     res.json(finalData);
   } catch (err) {
+    console.log(`failed\t${imdbId}\t${new Date().toLocaleString()}`);
     res.json({ response: 'failed' });
   }
 };

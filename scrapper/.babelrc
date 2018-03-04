@@ -9,7 +9,6 @@
   ],
   "plugins": [
     "lodash",
-    "transform-class-properties",
     "@babel/proposal-object-rest-spread"
   ]
 }
