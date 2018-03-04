@@ -21,7 +21,7 @@ const scrapperJob = new cron.CronJob({
     await initServer(Environment.getConfig());
     // await axios.get('http://localhost:8888/api/imdb/tt0110912');
     // await axios.get('http://localhost:8888/api/imdb/tt0306414');
-    // await axios.get('http://localhost:8888/api/imdb/tt0749451/');
+    // await axios.get('http:///localhost:8888/api/imdb/tt0749451/');
     // scrapperJob.start();
   } catch (err) {
     console.log(err);
