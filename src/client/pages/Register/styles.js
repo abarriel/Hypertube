@@ -70,6 +70,7 @@ export const Input = styled.input`
     border: solid 1px ${({ error }) => error ? 'rgb(176, 5, 0)' : '#626262'};
   }
 `;
+
 export const ButtonContainer = styled.div`
   display:flex;
   justify-content: flex-start;
