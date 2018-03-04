@@ -11,12 +11,12 @@ const UserSchema = yup.object({
   // lang: yup.string().matches(/^\w+$/).min(2).max(3),
 });
 
-const validateUser = (values, props) => {
-  let errors = {};
+const validateUser = (values) => {
+  const errors = {};
   const keys = Object.keys(values);
   if (_.includes(keys, 'username') && !values.username) {
     errors.username = 'username Required';
-  } else if (!/^\w{3,30}$/.test(values.username)) {
+  } else if (!/^\w{5,25}$/.test(values.username)) {
     errors.username = 'Invalid username';
   }
   if (_.includes(keys, 'email') && !values.email) {
@@ -42,4 +42,17 @@ const validateUser = (values, props) => {
   if (_.isEmpty(errors)) return false;
   return errors;
 };
-export { UserSchema, validateUser };
+
+const validateLost = (values) => {
+  const errors = {};
+  const keys = Object.keys(values);
+  if (_.includes(keys, 'email') && !values.email) {
+    errors.email = 'email Required';
+  } else if (values.email && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+    errors.email = 'Invalid email address';
+  }
+  return errors;
+};
+
+
+export { UserSchema, validateUser, validateLost };
