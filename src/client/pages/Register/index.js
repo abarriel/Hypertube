@@ -46,10 +46,8 @@ class Register extends Component {
       img.src = _URL.createObjectURL(file);
     } else {
       const { errors: prevErrors } = this.state;
-      console.log(prevErrors[name], errors);
       if (prevErrors[name] && !errors) delete prevErrors[name];
       this.setState({ [name]: value, errors: { ...errors, ...prevErrors } });
-      console.log(this.state);
     }
   }
 
@@ -58,12 +56,14 @@ class Register extends Component {
 
     const { errors } = this.state;
     const user = _.omit(this.state, ['errors']);
-    if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) return;
+    if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) {
+      this.setState(({ errors: { all: 'Veuillez remplir tout les champs' } }));
+      return;
+    }
     try {
       await req.register(user);
       window.location = '/';
     } catch (err) {
-      console.log(err);
       this.setState(({ errors: { all: err.details } }));
     }
   }
@@ -149,15 +149,17 @@ class Register extends Component {
           <InputContainer>
             <Label>Avatar</Label>
             <InputFileContainer>
-              <InputFile type="file" accept="image/*" id="profilePicture" name="profilePicture" onChange={this.handleChange} required />
+              <InputFile type="file" accept="image/*" id="profilePicture" name="profilePicture" onChange={this.handleChange} />
               <label htmlFor="profilePicture"><DownLoadIcon />Choose a file </label>
               {errors.profilePicture && <ErrorMessage>{errors.profilePicture}</ErrorMessage>}
             </InputFileContainer>
-            {errors.profilePicture && <div>{errors.profilePicture}</div>}
+            {errors.profilePicture && <ErrorMessage>{errors.profilePicture}</ErrorMessage>}
           </InputContainer>
-          <ErrorMessageContainer>
-            {errors.all && <div>{errors.all}</div>}
-          </ErrorMessageContainer>
+          <InputContainer>
+            <ErrorMessageContainer>
+              {errors.all && <ErrorMessage>{errors.all}</ErrorMessage>}
+            </ErrorMessageContainer>
+          </InputContainer>
           <ButtonContainer>
             <InputButton type="submit">{'S\'enregistrer'}</InputButton>
             <LoginLink to="/login">

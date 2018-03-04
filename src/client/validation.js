@@ -12,11 +12,11 @@ const UserSchema = yup.object({
 });
 
 const validateUser = (values, props) => {
-  let errors = {};
+  const errors = {};
   const keys = Object.keys(values);
   if (_.includes(keys, 'username') && !values.username) {
     errors.username = 'username Required';
-  } else if (!/^\w{3,30}$/.test(values.username)) {
+  } else if (!/^\w{5,25}$/.test(values.username)) {
     errors.username = 'Invalid username';
   }
   if (_.includes(keys, 'email') && !values.email) {
