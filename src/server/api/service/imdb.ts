@@ -44,13 +44,14 @@ class imdbId {
     // SHARABLE
     d.title = $('.originalTitle').text() .split('(original title')[0].trim()
     d.plot = $('[itemprop=description]').text().replace(/\s\s+|Written by\n.*/gi, ' ').trim();
-    d.genre = $('span[itemprop=genre]').map((i,el) => $(el).text()).get().join(',').split(','); // loooook i was tired haha
+    d.genre = $('span[itemprop=genre]').map((i,el) => $(el).text()).get(); // loooook i was tired haha
     d.country = $('#titleDetails a[href*="country_of_origin"]').text();
-    d.language = $('#titleDetails a[href*="primary_language"]').map((i,el) => $(el).text()).get().join(', ');
-    d.released = $('#titleDetails div:nth-of-type(4)').text()
+    d.language = $('#titleDetails a[href*="primary_language"]:first-of-type').text();
+    // d.released = $('#titleDetails div:nth-of-type(4)').text();
+    d.released = $('meta[itemprop=datePublished]').attr("content");
     d.runtime = $('.title_wrapper time[itemprop=duration]').attr('datetime')
-    d.writer =  $('.plot_summary_wrapper a[href*="ov_wr"] span[itemprop=name]').map((i,el) => $(el).text()).get().join(', ');
-    d.actors =  $('.cast_list span[itemprop=name]').map((i,el) => $(el).text()).get().join(', ');
+    d.writer =  $('.plot_summary_wrapper a[href*="ov_wr"] span[itemprop=name]').map((i,el) => $(el).text()).get();
+    d.actors =  $('.cast_list span[itemprop=name]').map((i,el) => $(el).text()).get();
     d.poster = $('meta[property="og:image"]').attr('content')
     d.imdbRating = $('.ratingValue span[itemprop=ratingValue]').text()
     d.imdbID = imdbId;
@@ -64,13 +65,13 @@ class imdbId {
 
     // tvshow
     d.creators = d.writer;
-    d.popularity = $('div[class*="popularityTrend"] ~ div').text()
+  d.popularity = $('div[class*="popularityTrend"] ~ div').text().match(/[0-9].*/)[0];
     d.totalSeasons = $('.seasons-and-year-nav a[href*="season"]').contents().length;
     // sharable
     d.plotKeywords = $('[itemprop=keywords] nobr a').attr('href');
-    // const { data: dataPlotKeywords } =  await axios.get(`http://www.imdb.com${d.plotKeywords}`);
-    // const $$ = cheerio.load(dataPlotKeywords);
-    // d.plotKeywords = $$('table .sodatext a').map((i,el) => $(el).text()).get().join(', ');
+    const { data: dataPlotKeywords } =  await axios.get(`http://www.imdb.com${d.plotKeywords}`);
+    const $$ = cheerio.load(dataPlotKeywords);
+    d.plotKeywords = $$('table .sodatext a').map((i,el) => $(el).text()).get();
 
     console.log(d);
     // res.json(comments);
