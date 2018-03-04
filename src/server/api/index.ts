@@ -58,7 +58,12 @@ var options: any = {
     .use(listenErrorDB)
 
   await app
-    .get('/', (req, res) => {res.json({ redirect: '/' }) ;})
+    .get('/', (req, res) => {
+      console.log(req.user);
+      if (!req.user.omniauth)
+        return res.json({ redirect: '/' }) ;
+      res.redirect('http://localhost:8080', 301);
+    })
     .use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerDocument, options))
     .use('/api', dispatchRoute({ passport }));
 

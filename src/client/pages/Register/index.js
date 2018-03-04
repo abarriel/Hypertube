@@ -64,6 +64,7 @@ class Register extends Component {
       window.location = '/';
     } catch (err) {
       console.log(err);
+      this.setState(({ errors: { all: err.details } }));
     }
   }
 
@@ -125,7 +126,7 @@ class Register extends Component {
               onChange={this.handleChange}
               onBlur={this.handleBlur}
               value={firstName}
-              error={errors.firstName || errors.all}
+              error={errors.firstName}
             />
             <ErrorMessageContainer>
               {errors.firstName && <ErrorMessage>{errors.firstName}</ErrorMessage>}
@@ -139,7 +140,7 @@ class Register extends Component {
               onChange={this.handleChange}
               onBlur={this.handleBlur}
               value={lastName}
-              error={errors.lastName || errors.all}
+              error={errors.lastName}
             />
             <ErrorMessageContainer>
               {errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
@@ -154,6 +155,9 @@ class Register extends Component {
             </InputFileContainer>
             {errors.profilePicture && <div>{errors.profilePicture}</div>}
           </InputContainer>
+          <ErrorMessageContainer>
+            {errors.all && <div>{errors.all}</div>}
+          </ErrorMessageContainer>
           <ButtonContainer>
             <InputButton type="submit">{'S\'enregistrer'}</InputButton>
             <LoginLink to="/login">
