@@ -21,7 +21,7 @@ const KEY_BOILERPLATE = {
 const scrapper = async (req, res) => {
   const { imdbId } = req.params;
   try {
-    const { data } = await axios.get(`http://www.imdb.com/title/${imdbId}`);
+    const { data } = await axios.get(`http://localhost:3001/title/${imdbId}`);
     const $ = cheerio.load(data);
     jsonframe($);
 
