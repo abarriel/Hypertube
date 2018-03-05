@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "babel index.js scrapper.js -d dist",
-    "serve": "node dist/index.js",
-    "start": "yarn build && yarn serve"
+    "serve": "node dist/index.js"
   },
   "author": "",
   "license": "ISC",
