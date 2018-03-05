@@ -3,6 +3,8 @@ import { createMoviesTable, deleteMovieTable } from './database/migrations/movie
 import * as _ from 'lodash';
 import axios from 'axios';
 import * as https from 'https';
+import * as Promise from 'bluebird';
+
 /**
  *
  * query-string made home
@@ -102,17 +104,22 @@ const EZTV = (page: number) => `https://eztv.ag/api/get-torrents?limit=100&page=
 const scrapEZTV = async () => {
   const { data: { torrents_count } } = await axios.get(EZTV(1));
   const pageNumber = Math.round(torrents_count / 100);
+  // const pageNumber = 2;
   let tvShows:any = [];
   const promiseT = _.times(pageNumber, async (num) => {
     if (num < 1) return ;
-      return axios.get(EZTV(num)).then(({ data }) => {
-        console.log(num);
-        _.map(data.torrents, (v) => {
-        tvShows.push(v);
+      return new Promise(resolve => setTimeout(resolve, 200))
+      .then(() => axios.get(EZTV(num)))
+      .then(({ data }) => {
+        tvShows = tvShows.concat(data.torrents);
+        return Promise.map(data.torrents, async (v) => {
+          if(v.imdb_id)
+            return axios.get(`http://95.85.22.142:8087/title/tt${v.imdb_id}`);
         })
       }).catch(e => e);
-  });
+      });
   await Promise.all(promiseT);
+  // console.log('tvShows Count ', tvShows);
   console.log('tvShows Count ', tvShows.length);
 }
 
@@ -125,7 +132,7 @@ const initScrapper = async () => {
   // const { OpenSubtitles } = Utils;
 
   // await scrapYTS();
-  // await scrapEZTV();
+ //  await scrapEZTV();
   console.log('Done scrapping');
 };
 
