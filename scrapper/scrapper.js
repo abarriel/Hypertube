@@ -21,7 +21,8 @@ const KEY_BOILERPLATE = {
 const scrapper = async (req, res) => {
   const { imdbId } = req.params;
   try {
-    const { data } = await axios.get(`http://localhost:3001/title/${imdbId}`);
+   // const { data } = await axios.get(`http://localhost:3001/title/${imdbId}`);
+    const { data } = await axios.get(`http://www.imdb.com/title/${imdbId}`);
     const $ = cheerio.load(data);
     jsonframe($);
 
@@ -65,7 +66,8 @@ const scrapper = async (req, res) => {
     console.log('\x1b[32m%s\x1b[0m', `${new Date().toLocaleString()}\t${imdbId}`); 
     res.json(finalData);
   } catch (err) {
-    console.log('\x1b[31m%s\x1b[0m', `${new Date().toLocaleString()}\t${imdbId}`);
+	console.log(err);  
+  console.log('\x1b[31m%s\x1b[0m', `${new Date().toLocaleString()}\t${imdbId}`);
     res.json({ response: 'failed' });
   }
 };
