@@ -47,7 +47,7 @@ class Lost extends Component {
       return;
     }
     try {
-      await req.lostPassword(email);
+      await req.lostPassword({ email });
       window.location = '/';
     } catch (err) {
       console.log('err: ', err);

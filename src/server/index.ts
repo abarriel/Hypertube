@@ -9,6 +9,7 @@ import axios from 'axios';
  *
  * @param {Config DB}
  */
+
 const scrapperJob = new cron.CronJob({
   cronTime: '0 0 * * 1',
   onTick: initScrapper,

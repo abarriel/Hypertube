@@ -7,6 +7,7 @@
     }], "@babel/preset-react"],
   "plugins": [
     "lodash",
+    "transform-promise-to-bluebird",
     "ramda",
     "transform-class-properties",
     "@babel/proposal-object-rest-spread",

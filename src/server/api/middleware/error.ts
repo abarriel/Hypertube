@@ -15,7 +15,7 @@ const errorHandler = (err: any, req: express.Request, res: express.Response, nex
     errMsg = {type: err.type, details: err.details.toString().substr('\n') };
   }
   res.json(errMsg);
-  console.log(colors.red('ERROR: \n'), errMsg, colors.red('\nEND ERROR'));
+  console.log(colors.red('[ERROR]'), err.details.toString().substr('\n'));
 };
 
 // const notFoundErr = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

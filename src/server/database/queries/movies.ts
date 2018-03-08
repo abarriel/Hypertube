@@ -6,6 +6,7 @@ import { stripIndent } from 'common-tags';
 import { DB } from '../../core';
 
 const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
+// const previewShowsInfos = ['imdb_id', 'title', 'year', { imdb_rating: "rating" }, 'cover_image', 'summary',  { released: 'first_aired' }, { seeds: 'popularity'}, 'score', 'runtime'];
 
 const Movies = {
   async get(filters: any) {
@@ -16,7 +17,9 @@ const Movies = {
     console.log(queryPattern);
     const querySQL = DB.select(previewMovieInfos)
       .from('movies')
-      .where('type', 'movie')
+      // .union(function () {
+      //   this.select(previewShowsInfos).from('shows');
+      // })
       .whereRaw('genres @> ?', [genres])
       .whereBetween('year', years)
       .whereBetween('imdb_rating', ratings)

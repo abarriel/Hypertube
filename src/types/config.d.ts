@@ -34,10 +34,16 @@ interface Iconfig {
     password: string,
   }
   omdb: string,
+  tmdb: string,
   jwt: {
-    expiresIn: string;
-    accessTokenSecret: string;
+    expiresIn: string,
+    accessTokenSecret: string,
   };
+  TrakTv: {
+    clientID: string,
+    clientSecret: string,
+    access_token: string,
+  },
   auth: any,
   browserSync: {
     host: string;
