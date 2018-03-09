@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import _ from 'lodash';
+import queryString from 'query-string';
+
 import {
   LostContainer,
   FormContainer,
@@ -18,16 +20,16 @@ import {
 } from './styles';
 
 import req from '../../request';
-import { validateLost } from '../../validation';
+import { validateReset } from '../../validation';
 
 class Lost extends Component {
   state = {
-    email: '',
+    password: '',
     errors: {},
   };
 
   handleChange = async ({ target: { name, value } }) => {
-    const errors = validateLost({ [name]: value });
+    const errors = validateReset({ [name]: value });
     const { errors: prevErrors } = this.state;
     if (prevErrors[name] && !errors) delete prevErrors[name];
     this.setState({ [name]: value, errors: { ...errors } });
@@ -37,26 +39,27 @@ class Lost extends Component {
     e.preventDefault();
 
     const { errors } = this.state;
-    const { email } = this.state;
-    if (!email.length) {
-      this.setState(({ errors: { email: 'Veuillez remplir tout les champs' } }));
+    const { password } = this.state;
+    if (!password.length) {
+      this.setState(({ errors: { password: 'Veuillez remplir tout les champs' } }));
       return;
     }
     if (!_.isEmpty(errors)) {
-      this.setState(({ errors: { email: 'Email Incorect' } }));
+      this.setState(({ errors: { password: 'Password Incorect' } }));
       return;
     }
     try {
-      await req.lostPassword({ email });
+      const { token = 'token' } = queryString.parse(window.location.search)
+      await req.resetPassword(token, { password });
       window.location = '/';
     } catch (err) {
-      // console.log('err: ', err);
+      console.log('err: ', err);
       this.setState(({ errors: { all: err.details } }));
     }
   }
 
   render() {
-    const { email, errors } = this.state;
+    const { password, errors } = this.state;
 
     return (
       <LostContainer>
@@ -64,23 +67,23 @@ class Lost extends Component {
           <Logo />
         </Header>
         <FormContainer onSubmit={this.handleSubmit}>
-          <Title>Mot de passe Oublié</Title>
-          <Text>Nous allons vous envoyer un email avec les instructions nécessaire pour réinitialiser votre mot de passe.</Text>
+          <Title>Reset Password</Title>
+          <Text>Type your new password</Text>
           <InputContainer>
             <Input
-              type="text"
-              name="email"
-              value={email}
+              type="password"
+              name="password"
+              value={password}
               onChange={this.handleChange}
-              error={errors.email}
-              placeholder="name@example.com"
+              error={errors.password}
+              placeholder="password"
             />
             <ErrorMessageContainer>
-              {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+              {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <ButtonContainer>
-            <InputButton type="submit">Envoyer un Email</InputButton>
+            <InputButton type="submit">Reset Password</InputButton>
             <LoginLink to="/login">
               <BackIcon />
               Login

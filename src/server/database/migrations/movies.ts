@@ -7,6 +7,7 @@ const createMoviesTable = (): Promise<any> => Promise.all([
     table.string('title').notNullable();
     table.integer('year').notNullable();
     table.string('trailer').defaultTo('uDy_cvf4nDg');
+    table.text('first_aired');
     table.text('released').defaultTo('unknown');
     table.string('country').defaultTo('unknown');
     table.text('awards').defaultTo('unknown');

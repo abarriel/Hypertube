@@ -7,6 +7,7 @@ import axios, { AxiosInstance } from 'axios';
 import * as https from 'https';
 import * as Promise from 'bluebird';
 import * as colors from 'colors/safe';
+import * as moment from 'moment';
 import CommentsController from './api/service/comments';
 
 /**
@@ -36,33 +37,35 @@ const omdbUrl = (imdbId: string) => `http://www.omdbapi.com/?i=${imdbId}&plot=fu
  * @param {movie} // details from YTS
 **/
 const insertMovieInDb = (movie: any) => {
-  console.log('movie:', movie.title);
+  console.log('movie:', movie.Title);
   DB('movies').insert(_.pickBy({
     imdb_id: movie.imdbID,
     title: movie.Title,
     year: parseInt(movie.Year),
     trailer: movie.yt_trailer_code,
+    first_aired: moment(movie.Released, 'DD MMM YYYY').format('YYYY-MM-DD'),
     released: movie.Released,
     country: movie.Country,
     awards: movie.Awards,
     language: movie.language,
     imdb_rating: Math.round((Math.round(movie.imdbRating) / 2)),
     score: parseInt(movie.Metascore),
-    cover_image: movie.Poster,
-    background_image: movie.background_image,
+    cover_image: movie.poster_path ? `http://image.tmdb.org/t/p/w780/${movie.poster_path}` : null,
+    background_image: movie.backdrop_path ? `http://image.tmdb.org/t/p/w780/${movie.backdrop_path}` : null,
     summary: movie.Plot,
-    genres: _.split(movie.Genre, ','),
+    genres: _.isEmpty(movie.genres) ? (movie.Genre ? _.split(movie.Genre.replace(/\s+/g, ''), ',') : []) : movie.genres,
     seeds: _.reduce(movie.torrents, (acc, v) => (acc + (v ? v.seeds : 0)), 0),
     torrents: movie.torrents,
     pg: movie.Rated,
     runtime: parseInt(movie.runtime),
     director: movie.Director,
-    actors: _.split(movie.Actors, ','),
+    actors: movie.Actors ? _.split(movie.Actors.replace(/\s+/g, ''), ',') : [],
     ratings: movie.Ratings,
     type: 'movie',
     box_office: movie.BoxOffice,
     production: movie.Production
-  }, (v) => !((v === 'N/A' || (typeof v === 'number' && isNaN(v)))))).catch(e => console.log(colors.red('[ERROR]'), movie.title, movie.id, e.toString().substr('\n').split('- null value in column')[1]))};
+  }, (v) => !((v === 'N/A' || (typeof v === 'number' && isNaN(v)))))).catch(e => console.log(colors.red('[ERROR]'), movie.title, movie.id, e.toString().substr('\n').split('- null value in column')[1]))
+};
 
 const params = {
   limit: 50,
@@ -80,7 +83,7 @@ const agent = new https.Agent({
  *
 **/
 let moviesYTS:any = [];
-
+const getMovieTMDB = async (tmdbId: string) => axiosApiTMDB({ url: `3/movie/${tmdbId}` });
 
 const scrapYTS = async () => {
   await deleteMovieTable();
@@ -96,10 +99,15 @@ const scrapYTS = async () => {
           .then(({ data: { data: { movies } } }) => moviesYTS = [...moviesYTS, ...movies])
           .catch(e => e)}, { concurrency: 9 });
 
-          await Promise.map(moviesYTS, (movieYTS: any) =>
-          axios.get(omdbUrl(movieYTS.imdb_code))
-          .then(({ data: imdbInfos }) => insertMovieInDb({ ...movieYTS, ...imdbInfos }))
-          .catch(e => console.error(e)), { concurrency: 9 })
+  await Promise.mapSeries(moviesYTS, (movieYTS: any) => axios.get(omdbUrl(movieYTS.imdb_code))
+    .then(({ data: imdbInfos }) => ({ movieDetail: { ...movieYTS, ...imdbInfos } }))
+    .then(({ movieDetail }) => findTmdb(movieYTS.imdb_code)
+      .then(({ data: { movie_results } }) => {
+        if (_.isEmpty(movie_results)) throw 'no data';
+        return getMovieTMDB(movie_results[0].id).then(({ data: MovieInfo }) => ({ ...movieDetail, backdrop_path: MovieInfo.backdrop_path, poster_path: MovieInfo.poster_path }));
+      }))
+    .then(movieData => insertMovieInDb(movieData))
+    .catch(e => console.error(e)))
 }
 
 const headers = (TrakTv: any) => ({
@@ -140,17 +148,17 @@ const getEpisodeTmdb = async (showId: number, season: string, episode: string) =
     country: _.isArray(show.origin_country) ? show.origin_country[0] : null,
     in_production: show.in_production,
     language: show.original_language,
-    rating: Math.round((Math.round(show.vote_average) / 2)),
-    score: parseInt(show.vote_average),
-    cover_image: show.poster_path,
-    background_image: show.backdrop_path,
+    imdb_rating: Math.round((Math.round(show.vote_average) / 2)),
+    rating: parseInt(show.vote_average),
+    cover_image: show.poster_path ? `http://image.tmdb.org/t/p/w780/${show.poster_path}` : null,
+    background_image: show.backdrop_path ? `http://image.tmdb.org/t/p/w780/${show.backdrop_path}` : null,
     summary: show.overview,
     genres: _.reduce(show.genres, (acc, v) => ([...acc, v.name]),[]),
     runtime: _.isArray(show.episode_run_time) ? show.episode_run_time[0] : null,
     creators: _.reduce(show.created_by, (acc, v) => ([...acc, v.name]), []),
     episodes: show.number_of_episodes,
     seasons: show.number_of_seasons,
-    popularity: parseInt(show.popularity),
+    score: _.clamp(parseInt(show.popularity), 100),
     type: 'shows',
     production: _.isArray(show.production_companies) && !_.isEmpty(show.production_companies[0]) ? show.production_companies[0].name : null,
   }, (v) => !((v === 'N/A' || (typeof v === 'number' && isNaN(v)))))).catch(e => console.log(colors.red('[ERROR]'), e.toString().substr('\n')))};
@@ -201,8 +209,8 @@ const scrapEZTV = async () => {
     console.log('shows available: ', torrents_count);
     console.log('shows filtered (seeds > 30 && only keep qualite with most seed)', newShows.length);
     await
-    Promise.map(newShows,
-      async (shows:any) => Promise.map(shows, async (episodeEZTV: any, index: number) => findTmdb(`tt${episodeEZTV.imdb_id}`)
+    Promise.mapSeries(newShows,
+      async (shows:any) => Promise.mapSeries(shows, async (episodeEZTV: any, index: number) => findTmdb(`tt${episodeEZTV.imdb_id}`)
       .then(({ data: { tv_results } }) => {
         if (_.isEmpty(tv_results)) throw 'no data';
         return getShowTmdb(tv_results[0].id).then(({ data: showInfo }) => ({ show: showInfo, episodeEZTV }));
@@ -211,7 +219,7 @@ const scrapEZTV = async () => {
       .then(res => getEpisodeTmdb(res.show.id, res.episodeEZTV.season, res.episodeEZTV.episode).then(({ data }) => ({ ...res, episodeTMDB: data })).catch(e => res))
       .then((res: any) => addEpisode({ ...res.episodeTMDB, ...res.episodeEZTV, showId: res.show.id, showName: res.show.name }))
       .catch(e => console.log(e))
-    , { concurrency: 5 }), { concurrency: 5 });
+    ));
   }
 
   /*
@@ -221,8 +229,8 @@ const scrapEZTV = async () => {
 
  const initScrapper = async () => {
    console.log('Start scrapping');
-  //  await scrapYTS();
-  //  await scrapEZTV();
+   await scrapYTS();
+   await scrapEZTV();
   console.log('Done scrapping');
 };
 

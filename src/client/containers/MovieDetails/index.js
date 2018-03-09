@@ -60,26 +60,28 @@ const MovieDetails = ({
               <DetailsContent>
                 <MetaData
                   rating={detailsData.movie.score}
-                  years={detailsData.movie.released}
+                  years={detailsData.movie.firstAired}
                   duration={detailsData.movie.runtime}
                 />
                 <Synopsis>
-                  {detailsData.movie.summary.slice(1, 400)}
+                  {detailsData.movie.summary.slice(0, 400)}
                   {detailsData.movie.summary.length > 400 && '...'}
                 </Synopsis>
                 <ButtonsContainer>
                   <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
-                  <AddListButton movieId={detailsData.movie.imdbId} />
+                  { detailsData.movie.type === 'movie' && <AddListButton movieId={detailsData.movie.imdbId} />}
                 </ButtonsContainer>
                 <MetaList
-                  cast={detailsData.movie.actors}
+                  info={detailsData.movie.actors || detailsData.movie.seasons}
+                  type={detailsData.movie.type}
                   genres={detailsData.movie.genres}
                   production={detailsData.movie.production}
                 />
               </DetailsContent>
             </Shadow>}
-          {selectedSlide === 0 && <GradientShadow />}
-          {selectedSlide === 0 &&
+          {!selectedSlide && <GradientShadow />}
+          {!selectedSlide && detailsData.movie.type === 'shows' && <CoverImage height={height} image={detailsData.movie.backgroundImage} />}
+          {!selectedSlide && detailsData.movie.type === 'movie' &&
             <CoverImage height={height}>
               <YouTubeContainer
                 videoId={detailsData.movie.trailer}

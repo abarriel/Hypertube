@@ -1,5 +1,5 @@
-import React from 'react';
-import { bool, func, object } from 'prop-types';
+import React, { Component } from 'react';
+import req from '../../request';
 
 import {
   MiniAvatarContainer,
@@ -7,31 +7,31 @@ import {
   ChevDown,
 } from './styles';
 
-const fakeProfil = {
-  firstName: 'Lucas',
-  lastName: 'Charvolin',
-  avatar: 'https://secure.netflix.com/ffe/profiles/avatars_v2/32x32/PICON_026.png',
-};
 
-const propTypes = {
-  displayMenu: bool.isRequired,
-  handleChangeMenuDisplay: func.isRequired,
-  profil: object,
-};
+class MiniAvatar extends Component {
 
-const MiniAvatar = ({
-  profil = fakeProfil,
-  displayMenu,
-  handleChangeMenuDisplay,
-}) => (
-  <MiniAvatarContainer onMouseEnter={() => handleChangeMenuDisplay(!displayMenu)}>
-    <MiniAvatarImage
-      avatar={profil.avatar}
-    />
-    <ChevDown />
-  </MiniAvatarContainer>
-);
+  state = {
+    avatar: 'https://secure.netflix.com/ffe/profiles/avatars_v2/32x32/PICON_026.png',
+  }
 
-MiniAvatar.propTypes = propTypes;
+  componentDidMount() {
+    req.getMyInfos(['profilePicture']).then(({ user }) => {
+      this.setState({ avatar: user.profilePicture });
+    });
+  }
+
+  render() {
+    const { avatar } = this.state;
+    const { displayMenu, handleChangeMenuDisplay } = this.props; // eslint-disable-line
+    return (
+      <MiniAvatarContainer onMouseEnter={() => handleChangeMenuDisplay(!displayMenu)}>
+        <MiniAvatarImage
+          avatar={avatar}
+        />
+        <ChevDown />
+      </MiniAvatarContainer>
+    );
+  }
+}
 
 export default MiniAvatar;

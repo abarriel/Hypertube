@@ -47,10 +47,10 @@ const Shadow = ({
       onClick={event => {
         event.persist();
         handleChangeIsPreviewOpen(movie.imdbId);
-        req.movieDetail(movie.imdbId)
-          .then(data => {
-            loadDetailsData(data);
-          });
+        if (movie.type === 'movie')
+          req.movieDetail(movie.imdbId).then(data => loadDetailsData(data));
+        else
+          req.showDetail(movie.imdbId).then(data => loadDetailsData(data));
       }}
     >
       <DescriptionContainer>

@@ -28,12 +28,12 @@ class PasswordController {
 
   @middlewaresBinding(['userFormValidate'])
     async put(req: express.Request, res: express.Response, next: any) {
-      const { user: { password } } = req.app.locals;
-      const { token } = req.query;
-      const { sub }: any = jwt.decode(token);
-      if (!/[0-9]{1,5}/.test(sub)) return next({ type: 'validation', details: 'Wrong Id provided' });
-      if (!password) return  next({ type: 'validation', details: 'Password needed' });
       try {
+        const { user: { password } } = req.app.locals;
+        const { token } = req.query;
+        const { sub }: any = jwt.decode(token);
+        if (!/[0-9]{1,5}/.test(sub)) return next({ type: 'validation', details: 'Wrong Id provided' });
+        if (!password) return  next({ type: 'validation', details: 'Password needed' });
         const user = await Users.single({ id: sub, columns: 'all' });
         console.log(token, user.password);
         const decodedToken:any = jwt.verify(token, user.password);

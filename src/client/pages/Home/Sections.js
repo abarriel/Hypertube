@@ -17,11 +17,11 @@ const Sections = [
   },
   {
     id: 2,
-    label: 'Action et aventure',
+    label: 'Tv Shows',
     reqParams: {
       limit: 25,
-      sort: 'seeds.DESC',
-      genres: 'Action',
+      sort: 'score.DESC',
+      type: 'shows',
     },
   },
   {
