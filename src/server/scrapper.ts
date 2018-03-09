@@ -229,8 +229,8 @@ const scrapEZTV = async () => {
 
  const initScrapper = async () => {
    console.log('Start scrapping');
-   await scrapYTS();
-   await scrapEZTV();
+  //  await scrapYTS();
+  //  await scrapEZTV();
   console.log('Done scrapping');
 };
 
