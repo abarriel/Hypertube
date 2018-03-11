@@ -25,7 +25,8 @@ export const FormContainer = styled.form`
   flex-direction:column;
   justify-content: center;
   align-items: flex-start;
-  min-width: 410px;
+  min-width: 370px;
+  max-width: 370px;
   color: red;
   background-color: red;
   margin-bottom: 10px;
@@ -38,6 +39,7 @@ export const FormContainer = styled.form`
     min-width: 200px;
     width:calc(100vw - 80px);
     padding-top:20px;
+    max-width:1000px;
   };
 `;
 
@@ -250,4 +252,25 @@ export const Header = styled.div`
     border-bottom: solid 1px #dcdde0;
     margin-bottom:15px;
   };
+`;
+
+export const NotFoundCardContainer = styled.div`
+  display:flex;
+  flex-wrap:wrap;
+  width:calc(100% - 20px);
+  margin: 10px 0;
+  border-radius: 2px;
+  padding: 20px 10px;
+  font-size: 16px;
+  color: #fff;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #999;
+`;
+
+export const NotFoundCardLink = styled(Link)`
+  font-size: 16px;
+  color: #fff;
+  font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
 `;
