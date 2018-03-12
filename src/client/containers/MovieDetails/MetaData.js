@@ -4,6 +4,7 @@ import {
   string,
 } from 'prop-types';
 import { isNil } from 'lodash';
+import moment from 'moment';
 
 import {
   MetaDataContainer,
@@ -21,7 +22,7 @@ const MetaData = ({
     <MetaDataRating color={getColor(rating, 0, 100)}>
       {!isNil(rating) ? `Recommandé à  ${rating}%` : 'Pas encore recommandé'}
     </MetaDataRating>
-    <MetaDataYears>{years}</MetaDataYears>
+    <MetaDataYears>{moment(years).format('DD MMM YYYY')}</MetaDataYears>
     <MetaDataYears>{`${duration} min`}</MetaDataYears>
   </MetaDataContainer>
 );

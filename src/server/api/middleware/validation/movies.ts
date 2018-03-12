@@ -1,10 +1,11 @@
 import * as _ from 'lodash';
 import * as express from 'express';
 import * as Joi from 'joi';
-import * as querystring from 'querystring';
+
 
 const genreMovies = [
   'Action',
+  'Adult',
   'Adventure',
   'Animation',
   'Biography',
@@ -20,10 +21,11 @@ const genreMovies = [
   'Music',
   'Musical',
   'Mystery',
-  'Mews',
+  'News',
   'Reality-TV',
   'Romance',
   'Sci-Fi',
+  'Short',
   'Sport',
   'Thriller',
   'War',
@@ -37,6 +39,11 @@ const sortOptions = [
   'runtime',
 ];
 
+const typeOptions = [
+  'movie',
+  'shows',
+]
+
 const MoviesFilterSchema = Joi.object({
   limit: Joi.number().integer().min(0).max(50),
   offset: Joi.number().integer().min(0),
@@ -44,18 +51,20 @@ const MoviesFilterSchema = Joi.object({
   years: Joi.array().items(Joi.number().integer().min(1900).max(new Date().getFullYear())),
   ratings: Joi.array().items(Joi.number().integer().min(0).max(5)),
   q: Joi.string().optional().replace(/\s+/g, ' ').trim().max(100).truncate().normalize().regex(/^[a-z0-9 ]+$/i),
-  sort: Joi.array().ordered(Joi.string().valid(sortOptions), Joi.string().insensitive().valid(['asc', 'desc']))
+  sort: Joi.array().ordered(Joi.string().valid(sortOptions), Joi.string().insensitive().valid(['asc', 'desc'])),
+  type: Joi.string().insensitive().valid(typeOptions)
 });
 
 const moviesFormValidate = async (req: express.Request, res: express.Response, next: express.next) => {
   const { query } = req;
-  const { q, limit, offset, genres, years, ratings, sort } = query;
+  const { q, limit, offset, genres, years, ratings, sort, type } = query;
   const params: any = {};
 
   params.limit = limit ? parseInt(limit) : 50;
   params.offset = offset ? parseInt(offset) : 0;
   params.genres = genres ? _.split(genres, ',') : [];
   params.q = q;
+  params.type = type;
 
   params.sort = sort ? _.split(sort, '.') : [];
 

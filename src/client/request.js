@@ -41,6 +41,11 @@ class Req {
   }
 
   @tryCatcher()
+  async showDetail(imdbId) {
+    return this.axios('get', `shows/${imdbId}`);
+  }
+
+  @tryCatcher()
   async genres() {
     return this.axios('get', 'movies/genres');
   }
@@ -75,8 +80,8 @@ class Req {
 
   // Users
   @tryCatcher(true)
-  async getMyInfos() {
-    return this.axios('get', 'users/me');
+  async getMyInfos(get) {
+    return this.axios('get', 'users/me', { get });
   }
 
   @tryCatcher(true)
@@ -101,6 +106,7 @@ class Req {
 
   @tryCatcher(true)
   async resetPassword(token, password) {
+    console.log(password);
     return this.axios('put', 'password', password, { params: { token } });
   }
 

@@ -3,7 +3,7 @@ import _ from 'lodash';
 
 import req from './request';
 
-export const noAuthneeded = ['login', 'register', 'lost'];
+export const noAuthneeded = ['login', 'register', 'lost', 'reset'];
 
 class Auth extends Component {
   state = {

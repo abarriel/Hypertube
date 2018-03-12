@@ -6,6 +6,7 @@ import Video from './pages/Video';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Recents from './pages/Recents';
+import Reset from './pages/Reset';
 import Lost from './pages/Lost';
 import MyList from './pages/MyList';
 
@@ -47,14 +48,19 @@ const routes = [
     id: 6,
   },
   {
+    path: '/reset',
+    component: Reset,
+    id: 7,
+  },
+  {
     path: '/register',
     component: Register,
-    id: 7,
+    id: 8,
   },
   {
     path: '/recents',
     component: Recents,
-    id: 8,
+    id: 9,
   },
   {
     path: '/mylist',
