@@ -40,11 +40,11 @@ class Lost extends Component {
     const { email } = this.state;
     console.log('email: ', email);
     if (!email.length) {
-      this.setState(({ errors: { email: 'Veuillez remplir tout les champs' } }));
+      this.setState(({ errors: { email: 'Required' } }));
       return;
     }
     if (!_.isEmpty(errors)) {
-      this.setState(({ errors: { email: 'Email Incorect' } }));
+      this.setState(({ errors: { email: 'Incorect Email' } }));
       return;
     }
     try {
