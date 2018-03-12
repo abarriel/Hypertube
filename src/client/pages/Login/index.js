@@ -133,6 +133,7 @@ const MyForm = withFormik({
       await req.login(values);
       window.location.replace('/');
     } catch (err) {
+      console.log('err: ', err);
       if (err.details[0].message === PASSWORD_EMPTY) {
         setFieldError('password', 'Your password must contain between 4 and 60 characters.');
       } else if (err.details[0].type === EMPTY_REQUEST) {

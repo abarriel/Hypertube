@@ -273,4 +273,5 @@ export const NotFoundCardLink = styled(Link)`
   color: #fff;
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   -webkit-font-smoothing: antialiased;
+  margin-top:2px;
 `;

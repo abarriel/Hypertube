@@ -55,7 +55,9 @@ class Register extends Component {
     e.preventDefault();
 
     const { errors } = this.state;
+    console.log('errors: ', errors);
     const user = _.omit(this.state, ['errors']);
+    console.log('user: ', user);
     if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) {
       this.setState(({ errors: { all: 'Veuillez remplir tout les champs' } }));
       return;
@@ -77,7 +79,7 @@ class Register extends Component {
           <Logo />
         </Header>
         <FormContainer onSubmit={this.handleSubmit}>
-          <Title>{'S\'enregistrer'}</Title>
+          <Title>Sign Up</Title>
           <InputContainer>
             <Label>Login</Label>
             <Input
@@ -92,7 +94,7 @@ class Register extends Component {
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
-            <Label>Mot de passe</Label>
+            <Label>Password</Label>
             <Input
               type="password"
               name="password"
@@ -119,7 +121,7 @@ class Register extends Component {
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
-            <Label>Prenom</Label>
+            <Label>First Name</Label>
             <Input
               type="text"
               name="firstName"
@@ -133,7 +135,7 @@ class Register extends Component {
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
-            <Label>Nom</Label>
+            <Label>Last Name</Label>
             <Input
               type="text"
               name="lastName"
@@ -161,7 +163,7 @@ class Register extends Component {
             </ErrorMessageContainer>
           </InputContainer>
           <ButtonContainer>
-            <InputButton type="submit">{'S\'enregistrer'}</InputButton>
+            <InputButton type="submit">Sign Up</InputButton>
             <LoginLink to="/login">
               <BackIcon />
               Login

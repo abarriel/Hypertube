@@ -14,7 +14,7 @@ const WrapMenu = ({
   <WrapMenuContainer displayMenu={displayMenu}>
     <WrapMenuElem>
       <Icon />
-      <WrapMenuElemText to="/">Mon Compte</WrapMenuElemText>
+      <WrapMenuElemText to="/">My account</WrapMenuElemText>
     </WrapMenuElem>
     <WrapMenuElem>
       <Icon />
@@ -27,7 +27,7 @@ const WrapMenu = ({
         }
         }
       >
-        Deconnexion
+        Log out
       </WrapMenuElemText>
     </WrapMenuElem>
   </WrapMenuContainer>

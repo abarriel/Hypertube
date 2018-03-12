@@ -6,7 +6,7 @@ import {
 
 const NotFoundCard = () => (
   <NotFoundCardContainer>
-    {'Sorry, we can\'t find an account with this email address. Please try again or '}
+    {'Sorry, we can\'t find an account with this email address. Please try again or :'}
     <NotFoundCardLink to="/register">create a new account</NotFoundCardLink>
   </NotFoundCardContainer>
 );
