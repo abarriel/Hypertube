@@ -12,7 +12,7 @@ export const MiniAvatarImage = styled.div`
   position:relative;
   width:35px;
   height:35px;
-  background-image:${({ avatar }) => `url(${avatar})`};
+  background-image:${({ profilPicture }) => `url(${profilPicture})`};
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,37 +1,10 @@
-import React, { Component } from 'react';
-import req from '../../request';
+import { connect } from 'react-redux';
 
-import {
-  MiniAvatarContainer,
-  MiniAvatarImage,
-  ChevDown,
-} from './styles';
+import { getProfilPicture } from '../../selectors/user';
+import { MiniAvatar } from './component';
 
+const mapStateToProps = state => ({
+  profilPicture: getProfilPicture(state),
+});
 
-class MiniAvatar extends Component {
-
-  state = {
-    avatar: 'https://secure.netflix.com/ffe/profiles/avatars_v2/32x32/PICON_026.png',
-  }
-
-  componentDidMount() {
-    req.getMyInfos(['profilePicture']).then(({ user }) => {
-      this.setState({ avatar: user.profilePicture });
-    });
-  }
-
-  render() {
-    const { avatar } = this.state;
-    const { displayMenu, handleChangeMenuDisplay } = this.props; // eslint-disable-line
-    return (
-      <MiniAvatarContainer onMouseEnter={() => handleChangeMenuDisplay(!displayMenu)}>
-        <MiniAvatarImage
-          avatar={avatar}
-        />
-        <ChevDown />
-      </MiniAvatarContainer>
-    );
-  }
-}
-
-export default MiniAvatar;
+export default connect(mapStateToProps)(MiniAvatar);

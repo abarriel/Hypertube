@@ -97,6 +97,7 @@
     "pg-promise": "^7.4.0",
     "prop-types": "^15.6.0",
     "qs": "^6.5.1",
+    "query-string": "^5.0.1",
     "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -123,7 +124,6 @@
     "torrent-stream": "^1.0.3",
     "trakt.tv": "^6.0.2",
     "ts-node": "^4.0.1",
-    "query-string": "^5.0.1",
     "webpack": "^3.10.0",
     "yify-subs": "^1.0.0",
     "yup": "^0.24.0"
