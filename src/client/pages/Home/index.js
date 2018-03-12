@@ -4,12 +4,14 @@ import { isEmpty } from 'lodash';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getGenres } from '../../selectors/movies';
+import { getUser } from '../../selectors/user';
 import MoviePreviewSlider from '../../components/MoviePreviewSlider';
 import { HomeContainer, MainContent } from './styles';
 import Section from '../../containers/Section';
 import Sections from './Sections';
 
 import { loadGenres } from '../../actions/movies';
+import { loadUser } from '../../actions/user';
 
 import req from '../../request';
 
@@ -22,10 +24,11 @@ const Home = () => (
   </HomeContainer>
 );
 
-const actions = { loadGenres };
+const actions = { loadGenres, loadUser };
 
 const mapStateToProps = state => ({
   genres: getGenres(state),
+  user: getUser(state),
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
@@ -38,6 +41,12 @@ export default compose(
         req.genres()
           .then(data => {
             this.props.loadGenres(data);
+          });
+      }
+      if (isEmpty(this.props.user)) {
+        req.getMyInfos()
+          .then(data => {
+            this.props.loadUser(data);
           });
       }
     },

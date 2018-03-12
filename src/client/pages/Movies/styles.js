@@ -25,12 +25,12 @@ export const MoviePreviewContainer = styled.div`
 `;
 
 export const MoviePreviewContent = styled.div`
-postion:relative;
-  @media (max-width: 400px) {
-    width:100%;
-    height:150vw;
-    margin:0;
-  };
+  postion:relative;
+    @media (max-width: 400px) {
+      width:100%;
+      height:150vw;
+      margin:0;
+    };
 `;
 
 export const ParamsContainer = styled.div`
@@ -55,19 +55,19 @@ export const SlideSelectContainer = styled.div`
 `;
 
 export const Title = styled.p`
-color:white;
-cursor:default;
-display:block;
-font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
-font-size:31.95px;
-height:38px;
-margin-top:0;
-line-height:38.34px;
-margin-right:15px;
-text-size-adjust:100%;
-user-select:none;
-white-space:nowrap;
-width:75.7656px;
--webkit-box-direction:normal;
--webkit-font-smoothing:antialiased;
+  color:white;
+  cursor:default;
+  display:block;
+  font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size:31.95px;
+  height:38px;
+  margin-top:0;
+  line-height:38.34px;
+  margin-right:15px;
+  text-size-adjust:100%;
+  user-select:none;
+  white-space:nowrap;
+  width:75.7656px;
+  -webkit-box-direction:normal;
+  -webkit-font-smoothing:antialiased;
 `;

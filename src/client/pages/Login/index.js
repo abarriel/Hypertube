@@ -26,6 +26,12 @@ import {
   ErrorMessageContainer,
   Header,
 } from './styles';
+import {
+  NOT_FOUND_ACCOUNT,
+  EMPTY_REQUEST,
+  PASSWORD_EMPTY,
+} from './constants';
+import NotFoundCard from './NotFoundCard';
 import req from '../../request';
 import { UserSchema } from '../../validation';
 
@@ -51,7 +57,8 @@ const Login = ({
       <Logo />
     </Header>
     <FormContainer onSubmit={handleSubmit}>
-      <Title>{'S\'identifier'}</Title>
+      <Title>Sign In</Title>
+      {errors.all === NOT_FOUND_ACCOUNT && <NotFoundCard />}
       <InputContainer>
         <Label>Login</Label>
         <Input
@@ -60,14 +67,14 @@ const Login = ({
           onChange={handleChange}
           onBlur={handleBlur}
           value={values.username}
-          error={errors.username || errors.all}
+          error={errors.username || (errors.all && errors.all !== NOT_FOUND_ACCOUNT)}
         />
         <ErrorMessageContainer>
           {touched.username && errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
         </ErrorMessageContainer>
       </InputContainer>
       <InputContainer>
-        <Label>Mot de passe</Label>
+        <Label>Password</Label>
         <Input
           type="password"
           name="password"
@@ -81,8 +88,8 @@ const Login = ({
         </ErrorMessageContainer>
       </InputContainer>
       <ButtonContainer>
-        <ForgetPasswordLink to="/lost">E-mail ou mot de passe oublié ?</ForgetPasswordLink>
-        <InputButton type="submit">{'S\'identifier'}</InputButton>
+        <ForgetPasswordLink to="/lost">Forgot your email or password?</ForgetPasswordLink>
+        <InputButton type="submit">Sign In</InputButton>
         <Spliter />
         <OmniauthContainer>
           <OmniauthLink onClick={() => window.location.replace('http://localhost:8888/api/auth/facebook')} >
@@ -102,8 +109,8 @@ const Login = ({
           </OmniauthLink>
         </OmniauthContainer>
         <RegisterLinkContainer>
-          {'Première visite sur Hyperflix ?'}
-          <RegisterLink to="/register" > Inscrivez-vous</RegisterLink>.
+          {'New to Hyperflix ?'}
+          <RegisterLink to="/register" >Sign up now</RegisterLink>.
         </RegisterLinkContainer>
       </ButtonContainer>
     </FormContainer>
@@ -112,30 +119,31 @@ const Login = ({
 
 Login.propTypes = propTypes;
 
-// Wrap our form with the using withFormik HoC
 const MyForm = withFormik({
-  // Transform outer props into form values
   mapPropsToValues: () => ({ username: '', password: '' }),
-  // Add a custom validation function (this can be async too!)
   validationSchema: UserSchema,
-  // Submission handler
   handleSubmit: async (
     values,
     {
-      // props,
-      setSubmitting,
-      setErrors /* setValues, setStatus, and other goodies */,
+      setFieldError,
+      setErrors,
     },
   ) => {
     try {
       await req.login(values);
       window.location.replace('/');
     } catch (err) {
-      if (err.details[0].type === 'any.empty') {
-        setErrors({ password: 'Veuillez remplir tout les champs', all: 'error' });
-      }
-      if (err.details === 'bad request') {
-        setErrors({ password: 'Login et/ou mot de passe incorects', all: 'error' });
+      console.log('err: ', err);
+      if (err.details[0].message === PASSWORD_EMPTY) {
+        setFieldError('password', 'Your password must contain between 4 and 60 characters.');
+      } else if (err.details[0].type === EMPTY_REQUEST) {
+        setErrors({
+          username: 'Please enter a valid login.',
+          password: 'Your password must contain between 4 and 60 characters.',
+          all: 'error',
+        });
+      } else if (err.details === NOT_FOUND_ACCOUNT) {
+        setFieldError('all', NOT_FOUND_ACCOUNT);
       }
     }
     // const d = await req.isAuth();
