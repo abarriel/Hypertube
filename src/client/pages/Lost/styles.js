@@ -26,7 +26,8 @@ export const FormContainer = styled.form`
   flex-direction:column;
   justify-content: center;
   align-items: flex-start;
-  width: 410px;
+  min-width: 370px;
+  max-width: 370px;
   color: red;
   background-color: red;
   margin-bottom: 10px;
@@ -39,6 +40,7 @@ export const FormContainer = styled.form`
     min-width: 200px;
     width:calc(100vw - 80px);
     padding-top:20px;
+    max-width:1000px;
   };
 `;
 

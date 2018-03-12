@@ -55,15 +55,18 @@ class Register extends Component {
     e.preventDefault();
 
     const { errors } = this.state;
+    console.log('errors: ', errors);
     const user = _.omit(this.state, ['errors']);
+    console.log('user: ', user);
     if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) {
-      this.setState(({ errors: { all: 'Veuillez remplir tout les champs' } }));
+      this.setState(({ errors: { ...errors, all: 'Veuillez remplir tout les champs' } }));
       return;
     }
     try {
       await req.register(user);
       window.location = '/';
     } catch (err) {
+      console.log('err: ', err);
       this.setState(({ errors: { all: err.details } }));
     }
   }
@@ -77,7 +80,7 @@ class Register extends Component {
           <Logo />
         </Header>
         <FormContainer onSubmit={this.handleSubmit}>
-          <Title>{'S\'enregistrer'}</Title>
+          <Title>Sign Up</Title>
           <InputContainer>
             <Label>Login</Label>
             <Input
@@ -85,20 +88,20 @@ class Register extends Component {
               name="username"
               onChange={this.handleChange}
               value={username}
-              error={errors.username}
+              error={errors.username || (errors.all && !username)}
             />
             <ErrorMessageContainer>
               {errors.username && <ErrorMessage>{errors.username}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
-            <Label>Mot de passe</Label>
+            <Label>Password</Label>
             <Input
               type="password"
               name="password"
               onChange={this.handleChange}
               value={password}
-              error={errors.password}
+              error={errors.password || (errors.all && !password)}
             />
             <ErrorMessageContainer>
               {errors.password && <ErrorMessage>{errors.password}</ErrorMessage>}
@@ -112,35 +115,35 @@ class Register extends Component {
               onChange={this.handleChange}
               onBlur={this.handleBlur}
               value={email}
-              error={errors.email}
+              error={errors.email || (errors.all && !email)}
             />
             <ErrorMessageContainer>
               {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
-            <Label>Prenom</Label>
+            <Label>First Name</Label>
             <Input
               type="text"
               name="firstName"
               onChange={this.handleChange}
               onBlur={this.handleBlur}
               value={firstName}
-              error={errors.firstName}
+              error={errors.firstName || (errors.all && !firstName)}
             />
             <ErrorMessageContainer>
               {errors.firstName && <ErrorMessage>{errors.firstName}</ErrorMessage>}
             </ErrorMessageContainer>
           </InputContainer>
           <InputContainer>
-            <Label>Nom</Label>
+            <Label>Last Name</Label>
             <Input
               type="text"
               name="lastName"
               onChange={this.handleChange}
               onBlur={this.handleBlur}
               value={lastName}
-              error={errors.lastName}
+              error={errors.lastName || (errors.all && !lastName)}
             />
             <ErrorMessageContainer>
               {errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
@@ -161,7 +164,7 @@ class Register extends Component {
             </ErrorMessageContainer>
           </InputContainer>
           <ButtonContainer>
-            <InputButton type="submit">{'S\'enregistrer'}</InputButton>
+            <InputButton type="submit">Sign Up</InputButton>
             <LoginLink to="/login">
               <BackIcon />
               Login

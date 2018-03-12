@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import Recents from './pages/Recents';
 import Reset from './pages/Reset';
 import Lost from './pages/Lost';
+import MyList from './pages/MyList';
 
 const routes = [
   {
@@ -59,6 +60,11 @@ const routes = [
   {
     path: '/recents',
     component: Recents,
+    id: 9,
+  },
+  {
+    path: '/mylist',
+    component: MyList,
     id: 9,
   },
 ];
