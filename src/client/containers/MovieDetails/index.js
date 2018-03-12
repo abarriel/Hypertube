@@ -80,8 +80,8 @@ const MovieDetails = ({
               </DetailsContent>
             </Shadow>}
           {!selectedSlide && <GradientShadow />}
-          {!selectedSlide && detailsData.movie.type === 'shows' && <CoverImage height={height} image={detailsData.movie.backgroundImage} />}
-          {!selectedSlide && detailsData.movie.type === 'movie' &&
+          {!selectedSlide && <CoverImage height={height} image={detailsData.movie.backgroundImage} />}
+          {/* {!selectedSlide && detailsData.movie.type === 'movie' &&
             <CoverImage height={height}>
               <YouTubeContainer
                 videoId={detailsData.movie.trailer}
@@ -89,7 +89,7 @@ const MovieDetails = ({
                 opts={opts}
               />
             </CoverImage>
-          }
+          } */}
           {selectedSlide === 1 &&
             <Comments height={height} imdbId={imdbId} />
           }

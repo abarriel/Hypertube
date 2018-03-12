@@ -9,6 +9,9 @@ const Shows = {
   async single(id: string) {
       return DB.select().from('shows').where('imdb_id', id).first();
   },
+  async getFullEpisodes(id: string) {
+    return DB.select().from('episodes').groupBy('season').where('tmdb_shows_id', id);
+  }
 };
 
 export { Shows };

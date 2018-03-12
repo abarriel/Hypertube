@@ -99,7 +99,7 @@ const scrapYTS = async () => {
           .then(({ data: { data: { movies } } }) => moviesYTS = [...moviesYTS, ...movies])
           .catch(e => e)}, { concurrency: 9 });
 
-  await Promise.mapSeries(moviesYTS, (movieYTS: any) => axios.get(omdbUrl(movieYTS.imdb_code))
+  await Promise.map(moviesYTS, (movieYTS: any) => axios.get(omdbUrl(movieYTS.imdb_code))
     .then(({ data: imdbInfos }) => ({ movieDetail: { ...movieYTS, ...imdbInfos } }))
     .then(({ movieDetail }) => findTmdb(movieYTS.imdb_code)
       .then(({ data: { movie_results } }) => {
@@ -209,8 +209,8 @@ const scrapEZTV = async () => {
     console.log('shows available: ', torrents_count);
     console.log('shows filtered (seeds > 30 && only keep qualite with most seed)', newShows.length);
     await
-    Promise.mapSeries(newShows,
-      async (shows:any) => Promise.mapSeries(shows, async (episodeEZTV: any, index: number) => findTmdb(`tt${episodeEZTV.imdb_id}`)
+    Promise.map(newShows,
+      async (shows:any) => Promise.map(shows, async (episodeEZTV: any, index: number) => findTmdb(`tt${episodeEZTV.imdb_id}`)
       .then(({ data: { tv_results } }) => {
         if (_.isEmpty(tv_results)) throw 'no data';
         return getShowTmdb(tv_results[0].id).then(({ data: showInfo }) => ({ show: showInfo, episodeEZTV }));
@@ -219,7 +219,7 @@ const scrapEZTV = async () => {
       .then(res => getEpisodeTmdb(res.show.id, res.episodeEZTV.season, res.episodeEZTV.episode).then(({ data }) => ({ ...res, episodeTMDB: data })).catch(e => res))
       .then((res: any) => addEpisode({ ...res.episodeTMDB, ...res.episodeEZTV, showId: res.show.id, showName: res.show.name }))
       .catch(e => console.log(e))
-    ));
+    , { concurrency: 5}), { concurrency: 5 });
   }
 
   /*
