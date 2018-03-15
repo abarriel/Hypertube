@@ -36,17 +36,19 @@ const RatingButton = ({
     <Cross
       canreset={(rate.from !== 0 || rate.to !== 5).toString()}
       onClick={() => {
-        resetMovies();
-        handleChangeWrapped();
-        handleResetRate();
-        changeParams({
-          ratings: {
-            from: 0,
-            to: 5,
-          },
-          count: 0,
-          start: 0,
-        });
+        if ((rate.from !== 0 || rate.to !== 5).toString()) {
+          resetMovies();
+          handleChangeWrapped();
+          handleResetRate();
+          changeParams({
+            ratings: {
+              from: 0,
+              to: 5,
+            },
+            count: 0,
+            start: 0,
+          });
+        }
       }}
     />
     <Chev />

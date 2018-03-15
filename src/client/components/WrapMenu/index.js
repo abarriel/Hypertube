@@ -14,7 +14,7 @@ const WrapMenu = ({
   <WrapMenuContainer displayMenu={displayMenu}>
     <WrapMenuElem>
       <Icon />
-      <WrapMenuElemText to="/">My account</WrapMenuElemText>
+      <WrapMenuElemText to="/profil">My account</WrapMenuElemText>
     </WrapMenuElem>
     <WrapMenuElem>
       <Icon />

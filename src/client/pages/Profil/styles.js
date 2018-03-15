@@ -4,17 +4,16 @@ export const ProfilContainer = styled.div`
   display:flex;
   flex-direction:column;
   width:calc(100vw - 85px);
-  margin-left:85px;
+  margin-left:65px;
 `;
 
 export const ProfilHeader = styled.div`
   display:flex;
   width:100%;
-  padding-top:50px;
-  padding-left:50px;
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 25px;
+  margin-top:90px;
 `;
 
 export const ProfilContent = styled.div`
@@ -38,9 +37,11 @@ export const Avatar = styled.div`
 
 export const Name = styled.p`
   color:white;
-  font-size:1.1em;
+  font-size:2.1em;
   color:white;
   margin:0;
   margin-left:30px;
   user-select: none;
+  font-weight:0;
+  font-family: Helvetica Neue;
 `;

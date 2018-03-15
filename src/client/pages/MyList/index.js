@@ -5,7 +5,7 @@ import {
   string,
   func,
 } from 'prop-types';
-import { map } from 'lodash';
+import { map, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
 import { compose, withStateHandlers, lifecycle } from 'recompose';
 
@@ -17,9 +17,8 @@ import {
 } from './styles';
 import MoviePreview from '../../components/MoviePreview';
 import MovieDetails from '../../containers/MovieDetails';
-import {
-  getReqParams,
-} from '../../selectors/movies';
+import { getReqParams } from '../../selectors/movies';
+import { getUserList } from '../../selectors/user';
 import req from '../../request';
 
 const propTypes = {
@@ -71,6 +70,7 @@ MyList.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   reqParams: getReqParams(state),
+  userList: getUserList(state),
 });
 
 const enhance = compose(
@@ -90,9 +90,11 @@ const enhance = compose(
     },
   ),
   lifecycle({
-    componentWillMount() {
-      req.getMylist(1)
-        .then(movies => console.log('movies: ', movies));
+    componentDidMount() {
+      if (!isEmpty(this.props.userList)) {
+        req.getMylist(this.props.userList[0])
+          .then(movies => console.log('movies: ', movies));
+      }
     },
   }),
 );
