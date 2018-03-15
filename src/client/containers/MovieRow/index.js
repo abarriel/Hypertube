@@ -90,7 +90,7 @@ const MovieRow = ({
           </MoviePreviewContent>
         )) :
       <FakePreview />}
-      {start <  (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
+      {start < (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
         start={start}
         direction="right"
         move={move}

@@ -92,8 +92,8 @@ const enhance = compose(
   lifecycle({
     componentDidMount() {
       if (!isEmpty(this.props.userList)) {
-        req.getMylist(this.props.userList[0])
-          .then(movies => console.log('movies: ', movies));
+        req.getMylist('my_list')
+          .then(movies => this.props.loadMovies(movies));
       }
     },
   }),
