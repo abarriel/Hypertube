@@ -4,8 +4,10 @@ import {
   number,
   object,
   string,
+  array,
 } from 'prop-types';
-import { withStateHandlers } from 'recompose';
+import { connect } from 'react-redux';
+import { withStateHandlers, compose } from 'recompose';
 
 import {
   MovieDetailsContainer,
@@ -28,6 +30,18 @@ import FakeShadow from './FakeShadow';
 import Footer from './Footer/index';
 import AddListButton from '../../components/AddListButton';
 import Comments from '../../containers/Comments';
+import { getUserList } from '../../selectors/user';
+
+const propTypes = {
+  handleChangeIsPreviewOpen: func.isRequired,
+  height: number.isRequired,
+  detailsData: object,
+  imdbId: string,
+  resetDetailsData: func.isRequired,
+  selectedSlide: number.isRequired,
+  handleChangeSelectedSlide: func.isRequired,
+  myList: array,
+};
 
 const MovieDetails = ({
   handleChangeIsPreviewOpen,
@@ -37,6 +51,7 @@ const MovieDetails = ({
   resetDetailsData,
   selectedSlide,
   handleChangeSelectedSlide,
+  myList,
 }) => {
   const opts = {
     height: '100%',
@@ -69,7 +84,7 @@ const MovieDetails = ({
                 </Synopsis>
                 <ButtonsContainer>
                   <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
-                  { detailsData.movie.type === 'movie' && <AddListButton movieId={detailsData.movie.imdbId} />}
+                  { detailsData.movie.type === 'movie' && <AddListButton movieId={detailsData.movie.imdbId} myList={myList} initialIsAdded />}
                 </ButtonsContainer>
                 <MetaList
                   info={detailsData.movie.actors || detailsData.movie.seasons}
@@ -116,21 +131,21 @@ const MovieDetails = ({
   );
 };
 
-MovieDetails.propTypes = {
-  handleChangeIsPreviewOpen: func.isRequired,
-  height: number.isRequired,
-  detailsData: object,
-  imdbId: string,
-  resetDetailsData: func.isRequired,
-  selectedSlide: number.isRequired,
-  handleChangeSelectedSlide: func.isRequired,
-};
+MovieDetails.propTypes = propTypes;
 
-export default withStateHandlers(
-  {
-    selectedSlide: 0,
-  },
-  {
-    handleChangeSelectedSlide: () => newSelectedSlide => ({ selectedSlide: newSelectedSlide }),
-  },
+const mapStateToProps = state => ({
+  myList: getUserList(state),
+});
+
+
+export default compose(
+  connect(mapStateToProps),
+  withStateHandlers(
+    {
+      selectedSlide: 0,
+    },
+    {
+      handleChangeSelectedSlide: () => newSelectedSlide => ({ selectedSlide: newSelectedSlide }),
+    },
+  ),
 )(MovieDetails);

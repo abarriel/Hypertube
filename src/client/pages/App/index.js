@@ -3,6 +3,10 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
+import { isEmpty } from 'lodash';
+import { compose, lifecycle } from 'recompose';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import Scrollbar from 'react-smooth-scrollbar';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 
@@ -10,6 +14,9 @@ import './style.css';
 import SideMenu from '../../components/SideMenu';
 import routes from '../../routes';
 import { AppContainer } from './styles';
+import { loadGenres } from '../../actions/movies';
+import { loadUser } from '../../actions/user';
+import req from '../../request';
 
 const Fade = ({ children }) => (
   <CSSTransition
@@ -42,4 +49,27 @@ const App = () => (
   </AppContainer>
 );
 
-export default App;
+const actions = { loadGenres, loadUser };
+
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+export default compose(
+  connect(null, mapDispatchToProps),
+  lifecycle({
+    componentWillMount() {
+      if (isEmpty(this.props.genres)) {
+        req.genres()
+          .then(data => {
+            this.props.loadGenres(data);
+          });
+      }
+      if (isEmpty(this.props.user)) {
+        req.getMyInfos()
+          .then(data => {
+            this.props.loadUser(data);
+          });
+      }
+    },
+  }),
+)(App);
+
