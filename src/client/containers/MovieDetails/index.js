@@ -8,6 +8,7 @@ import {
 } from 'prop-types';
 import { connect } from 'react-redux';
 import { withStateHandlers, compose } from 'recompose';
+import { bindActionCreators } from 'redux';
 
 import {
   MovieDetailsContainer,
@@ -31,6 +32,7 @@ import Footer from './Footer/index';
 import AddListButton from '../../components/AddListButton';
 import Comments from '../../containers/Comments';
 import { getUserList } from '../../selectors/user';
+import { updateUserList } from '../../actions/user';
 
 const propTypes = {
   handleChangeIsPreviewOpen: func.isRequired,
@@ -41,6 +43,7 @@ const propTypes = {
   selectedSlide: number.isRequired,
   handleChangeSelectedSlide: func.isRequired,
   myList: array,
+  updateUserList: func.isRequired,
 };
 
 const MovieDetails = ({
@@ -52,6 +55,7 @@ const MovieDetails = ({
   selectedSlide,
   handleChangeSelectedSlide,
   myList,
+  updateUserList,
 }) => {
   const opts = {
     height: '100%',
@@ -84,7 +88,14 @@ const MovieDetails = ({
                 </Synopsis>
                 <ButtonsContainer>
                   <PlayButton to={`/video/${detailsData.movie.imdbId}`} />
-                  { detailsData.movie.type === 'movie' && <AddListButton movieId={detailsData.movie.imdbId} myList={myList} initialIsAdded />}
+                  {detailsData.movie.type === 'movie' &&
+                    <AddListButton
+                      movieId={detailsData.movie.imdbId}
+                      myList={myList}
+                      initialIsAdded
+                      updateUserList={updateUserList}
+                    />
+                  }
                 </ButtonsContainer>
                 <MetaList
                   info={detailsData.movie.actors || detailsData.movie.seasons}
@@ -133,13 +144,19 @@ const MovieDetails = ({
 
 MovieDetails.propTypes = propTypes;
 
+
+const actions = { updateUserList };
+
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+
 const mapStateToProps = state => ({
   myList: getUserList(state),
 });
 
 
 export default compose(
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
   withStateHandlers(
     {
       selectedSlide: 0,

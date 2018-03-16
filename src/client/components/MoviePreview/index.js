@@ -77,7 +77,7 @@ const enhance = compose(
     componentDidMount() {
       setTimeout(() => {
         this.props.handleChangeSize();
-      }, 1);
+      }, 0.2);
     },
   }),
 );

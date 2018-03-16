@@ -15,6 +15,7 @@ import {
   MoviePreviewContainer,
   MoviePreviewContent,
 } from './styles';
+import EmptyList from './EmptyList';
 import MoviePreview from '../../components/MoviePreview';
 import MovieDetails from '../../containers/MovieDetails';
 import { getReqParams } from '../../selectors/movies';
@@ -62,6 +63,7 @@ const MyList = ({
         </MoviePreviewContent>
       ))
     }
+      {movies.length === 0 && <EmptyList />}
     </MoviePreviewContainer>
   </MyListContainer>
 );
@@ -91,7 +93,7 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      if (!isEmpty(this.props.userList)) {
+      if (!this.props.userList || !isEmpty(this.props.userList)) {
         req.getMylist('my_list')
           .then(movies => this.props.loadMovies(movies));
       }

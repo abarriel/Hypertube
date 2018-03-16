@@ -1,19 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { compose, lifecycle } from 'recompose';
+import { compose, lifecycle, withStateHandlers } from 'recompose';
 import { map } from 'lodash';
 import {
   array,
-  number,
+  func,
+  object,
+  string,
 } from 'prop-types';
 import {
   RecentsContainer,
   MoviePreviewContainer,
+  MoviePreviewContent,
 } from './styles';
 import {
   getRecentMovies,
-  getMoviesCount,
 } from '../../selectors/movies';
 import {
   loadRecentMovies,
@@ -21,21 +23,47 @@ import {
 } from '../../actions/movies';
 import req from '../../request';
 import MoviePreview from '../../components/MoviePreview';
+import MovieDetails from '../../containers/MovieDetails';
 
 const Recents = ({
   recentMovies,
-  moviesCount,
+  previewOpen,
+  detailsData,
+  handleChangeIsPreviewOpen,
+  loadDetailsData,
+  resetDetailsData,
 }) => (
   <RecentsContainer>
     <MoviePreviewContainer>
-      {map(recentMovies, (movie, index) => <MoviePreview key={movie.imdbId} moviesCount={moviesCount} pos={index} movie={movie} />)}
+      {map(recentMovies, (movie, index) => (
+        <MoviePreviewContent key={movie.imdbId}>
+          <MoviePreview
+            moviesCount={50}
+            pos={index}
+            movie={movie}
+            handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+            loadDetailsData={loadDetailsData}
+          />
+          <MovieDetails
+            handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
+            height={previewOpen === movie.imdbId ? 50 : 0}
+            detailsData={detailsData}
+            imdbId={movie.imdbId}
+            resetDetailsData={resetDetailsData}
+          />
+        </MoviePreviewContent>
+      ))}
     </MoviePreviewContainer>
   </RecentsContainer>
 );
 
 Recents.propTypes = {
   recentMovies: array.isRequired,
-  moviesCount: number.isRequired,
+  previewOpen: string,
+  detailsData: object,
+  handleChangeIsPreviewOpen: func.isRequired,
+  loadDetailsData: func.isRequired,
+  resetDetailsData: func.isRequired,
 };
 
 const actions = { loadRecentMovies, resetMovies };
@@ -43,7 +71,6 @@ const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const mapStateToProps = state => ({
   recentMovies: getRecentMovies(state),
-  moviesCount: getMoviesCount(state),
 });
 
 const enhance = compose(
@@ -58,6 +85,17 @@ const enhance = compose(
       this.props.resetMovies();
     },
   }),
+  withStateHandlers(
+    {
+      previewOpen: null,
+      detailsData: null,
+    },
+    {
+      handleChangeIsPreviewOpen: () => openedPreview => ({ previewOpen: openedPreview }),
+      loadDetailsData: () => data => ({ detailsData: data }),
+      resetDetailsData: () => () => ({ detailsData: null }),
+    },
+  ),
 );
 
 export default enhance(Recents);

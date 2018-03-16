@@ -65,7 +65,7 @@ const routes = [
   {
     path: '/mylist',
     component: MyList,
-    id: 9,
+    id: 10,
   },
 ];
 
