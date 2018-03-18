@@ -27,6 +27,8 @@ export const Avatar = styled.div`
   display:flex;
   min-width:120px;
   min-height:120px;
+  max-width:120px;
+  max-height:120px;
   border-radius:2px;
   background-image:${({ avatar }) => `url(${avatar})`};
   background-size: 105%;

@@ -90,6 +90,11 @@ class Req {
   }
 
   @tryCatcher(true)
+  async getUsers(limit, offset) {
+    return this.axios('get', `users`);
+  }
+
+  @tryCatcher(true)
   async login(user) {
     return this.axios('post', 'auth/login', user);
   }

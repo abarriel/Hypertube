@@ -16,4 +16,11 @@ export const Title = styled.div`
   user-select: none;
   font-weight:0;
   font-family: Helvetica Neue;
+  margin-bottom:10px;
+`;
+
+export const UsersContent = styled.div`
+  display:flex;
+  flex-direction:column;
+  width:100%;
 `;

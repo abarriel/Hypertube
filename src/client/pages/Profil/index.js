@@ -19,7 +19,6 @@ import { getUser } from '../../selectors/user';
 const Profil = ({ user }) => (
   <MainContainer>
     <ProfilContainer>
-      {console.log('user: ', user)}
       <ProfilHeader>
         <Avatar avatar={user.profilePicture} />
         <Name>{`${user.firstName} ${user.lastName}`}</Name>
