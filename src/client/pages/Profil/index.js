@@ -12,6 +12,7 @@ import {
   Label,
   Text,
   ProfilElem,
+  EditProfilButton,
 } from './styles';
 import Users from '../../containers/Users';
 import { getUser } from '../../selectors/user';
@@ -22,6 +23,7 @@ const Profil = ({ user }) => (
       <ProfilHeader>
         <Avatar avatar={user.profilePicture} />
         <Name>{`${user.firstName} ${user.lastName}`}</Name>
+        <EditProfilButton />
       </ProfilHeader>
       <ProfilContent>
         <ProfilElem>

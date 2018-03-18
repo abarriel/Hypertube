@@ -18,7 +18,6 @@ const propTypes = {
 
 const Users = ({ users }) => (
   <UsersContainer>
-    {console.log('users: ', users)}
     <Title>Users</Title>
     <UsersContent>
       {map(users, user => <User key={user.id} user={user} />)}

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import MdCreate from 'react-icons/lib/md/create';
 
 export const ProfilContainer = styled.div`
   display:flex;
@@ -83,4 +84,16 @@ export const Text = styled.div`
 export const ProfilElem = styled.div`
   display:flex;
   margin-top:10px;
+`;
+
+export const EditProfilButton = styled(MdCreate)`
+  color:white;
+  position:absolute;
+  top:100px;
+  right:20px;
+  font-size:1.7em;
+  cursor:pointer;
+  &:hover{
+    color: #828282;
+  }
 `;
