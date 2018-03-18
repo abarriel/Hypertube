@@ -1,7 +1,6 @@
 import Home from './pages/Home';
 import Profil from './pages/Profil';
 import Movies from './pages/Movies';
-import Users from './pages/Users';
 import Video from './pages/Video';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -26,11 +25,6 @@ const routes = [
     path: '/movies',
     component: Movies,
     id: 2,
-  },
-  {
-    path: '/users',
-    component: Users,
-    id: 3,
   },
   {
     path: '/video',

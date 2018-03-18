@@ -36,10 +36,7 @@ const Shadow = ({
   handleChangeWichHover,
   history,
 }) => {
-  console.log('history: ', history);
-  console.log('movie.imdbId: ', movie.imdbId);
   const isView = includes(history, movie.imdbId);
-  console.log('isView: ', isView);
   return (
     <ShadowContainer
       opacity={opacity}
