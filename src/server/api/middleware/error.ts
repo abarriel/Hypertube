@@ -6,6 +6,8 @@ import * as colors from 'colors/safe';
 const errorHandler = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.status(201);
   let errMsg = {};
+  if (!err.details)
+    err.details = "check the errror";
   if (err.type === 'validation' || err.type === 'db' || err.type === 'Auth' || err.type === 'Torrent' || err.type === 'Stream') {
     errMsg = { type: err.type, details: err.details, err: err.err };
   }
@@ -15,7 +17,7 @@ const errorHandler = (err: any, req: express.Request, res: express.Response, nex
     errMsg = {type: err.type, details: err.details.toString().substr('\n') };
   }
   res.json(errMsg);
-  console.log(colors.red('ERROR: \n'), errMsg, colors.red('\nEND ERROR'));
+  console.log(colors.red('[ERROR]'), err.details.toString().substr('\n'));
 };
 
 // const notFoundErr = (err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {

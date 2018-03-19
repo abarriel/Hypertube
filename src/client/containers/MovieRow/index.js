@@ -30,6 +30,21 @@ const getMoviesLength = movies => {
   return length;
 };
 
+const propTypes = {
+  movies: array.isRequired,
+  start: number.isRequired,
+  end: number.isRequired,
+  width: number.isRequired,
+  move: func.isRequired,
+  isHover: bool.isRequired,
+  handleChangeIsHover: func.isRequired,
+  loadDetailsData: func.isRequired,
+  resetDetailsData: func.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
+  previewOpen: string,
+  detailsData: object,
+};
+
 const MovieRow = ({
   movies,
   start,
@@ -90,7 +105,7 @@ const MovieRow = ({
           </MoviePreviewContent>
         )) :
       <FakePreview />}
-      {start <  (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
+      {start < (getMoviesLength(movies) - getMoveLength(width)) && <Arrows
         start={start}
         direction="right"
         move={move}
@@ -102,20 +117,7 @@ const MovieRow = ({
   </MovieRowContent>
 );
 
-MovieRow.propTypes = {
-  movies: array.isRequired,
-  start: number.isRequired,
-  end: number.isRequired,
-  width: number.isRequired,
-  move: func.isRequired,
-  isHover: bool.isRequired,
-  handleChangeIsHover: func.isRequired,
-  loadDetailsData: func.isRequired,
-  resetDetailsData: func.isRequired,
-  handleChangeIsPreviewOpen: func.isRequired,
-  previewOpen: string,
-  detailsData: object,
-};
+MovieRow.propTypes = propTypes;
 
 export default withStateHandlers(
   {

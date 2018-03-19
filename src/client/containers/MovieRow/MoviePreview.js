@@ -1,13 +1,27 @@
 import React from 'react';
-import { number, func, object, bool } from 'prop-types';
-import { withStateHandlers } from 'recompose';
+import { number, func, object, bool, array } from 'prop-types';
+import { withStateHandlers, compose } from 'recompose';
+import { connect } from 'react-redux';
 
 import { isMovieHidden } from './utils';
+import { getHistory } from '../../selectors/user';
 import Shadow from './Shadow';
 import {
   MoviePreviewContainer,
   BackgroundImage,
 } from './styles';
+
+const propTypes = {
+  movie: object.isRequired,
+  start: number.isRequired,
+  end: number.isRequired,
+  displayShadow: bool.isRequired,
+  handleChangeShadowDisplay: func.isRequired,
+  index: number.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
+  loadDetailsData: func.isRequired,
+  history: array.isRequired,
+};
 
 const MoviePreview = ({
   movie,
@@ -18,6 +32,7 @@ const MoviePreview = ({
   index,
   handleChangeIsPreviewOpen,
   loadDetailsData,
+  history,
 }) => (
   <MoviePreviewContainer
     onMouseEnter={() => handleChangeShadowDisplay(true)}
@@ -38,29 +53,28 @@ const MoviePreview = ({
         displayShadow={displayShadow}
         handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
         loadDetailsData={loadDetailsData}
+        history={history}
       />
     }
   </MoviePreviewContainer>
 );
 
-MoviePreview.propTypes = {
-  movie: object.isRequired,
-  start: number.isRequired,
-  end: number.isRequired,
-  displayShadow: bool.isRequired,
-  handleChangeShadowDisplay: func.isRequired,
-  index: number.isRequired,
-  handleChangeIsPreviewOpen: func.isRequired,
-  loadDetailsData: func.isRequired,
-};
+MoviePreview.propTypes = propTypes;
 
-const enhance = withStateHandlers(
-  {
-    displayShadow: false,
-  },
-  {
-    handleChangeShadowDisplay: () => display => ({ displayShadow: display }),
-  },
+const mapStateToProps = state => ({
+  history: getHistory(state),
+});
+
+const enhance = compose(
+  connect(mapStateToProps),
+  withStateHandlers(
+    {
+      displayShadow: false,
+    },
+    {
+      handleChangeShadowDisplay: () => display => ({ displayShadow: display }),
+    },
+  ),
 );
 
 export default enhance(MoviePreview);

@@ -1,37 +1,10 @@
-import React from 'react';
-import { bool, func, object } from 'prop-types';
+import { connect } from 'react-redux';
 
-import {
-  MiniAvatarContainer,
-  MiniAvatarImage,
-  ChevDown,
-} from './styles';
+import { getProfilPicture } from '../../selectors/user';
+import { MiniAvatar } from './component';
 
-const fakeProfil = {
-  firstName: 'Lucas',
-  lastName: 'Charvolin',
-  avatar: 'https://secure.netflix.com/ffe/profiles/avatars_v2/32x32/PICON_026.png',
-};
+const mapStateToProps = state => ({
+  profilPicture: getProfilPicture(state),
+});
 
-const propTypes = {
-  displayMenu: bool.isRequired,
-  handleChangeMenuDisplay: func.isRequired,
-  profil: object,
-};
-
-const MiniAvatar = ({
-  profil = fakeProfil,
-  displayMenu,
-  handleChangeMenuDisplay,
-}) => (
-  <MiniAvatarContainer onMouseEnter={() => handleChangeMenuDisplay(!displayMenu)}>
-    <MiniAvatarImage
-      avatar={profil.avatar}
-    />
-    <ChevDown />
-  </MiniAvatarContainer>
-);
-
-MiniAvatar.propTypes = propTypes;
-
-export default MiniAvatar;
+export default connect(mapStateToProps)(MiniAvatar);

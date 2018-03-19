@@ -26,7 +26,7 @@ class ListController {
     const { imdbId, list } = req.params;
     const { id } = req.user;
     try {
-      if (!/[a-zA-Z0-9]{5,20}/.test(imdbId)) return next({ type: 'validation', details: 'Wrong imdb Id provided' });
+      if (!/[a-zA-Z0-9]{2,20}/.test(imdbId)) return next({ type: 'validation', details: 'Wrong imdb Id provided' });
       if (!_.includes(['history', 'my_list'], list)) return next({ type: 'validation', details: 'Wrong list provided' });
       await List.add(id, imdbId, list);
       res.json({ status: 'OK' });
@@ -40,7 +40,7 @@ class ListController {
     const { imdbId, list } = req.params;
     const { id } = req.user;
     try {
-      if (!/[a-zA-Z0-9]{5,20}/.test(imdbId)) return next({ type: 'validation', details: 'Wrong imdb Id provided' });
+      if (!/[a-zA-Z0-9]{2,20}/.test(imdbId)) return next({ type: 'validation', details: 'Wrong imdb Id provided' });
       if (!_.includes(['history', 'my_list'], list)) return next({ type: 'validation', details: 'Wrong list provided' });
       await List.delete(id, imdbId, list);
       res.json({ status: 'OK' });

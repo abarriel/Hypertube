@@ -39,6 +39,7 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
   params.lang = lang;
   try {
     const data: any = await Joi.validate(params, UserSchema);
+    console.log(data);
     if (data.password && req.originalUrl !== '/api/auth/login') {
       data.password = await bcrypt.hash(data.password, 10);
     }

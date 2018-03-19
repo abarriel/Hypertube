@@ -38,20 +38,21 @@ class Lost extends Component {
 
     const { errors } = this.state;
     const { email } = this.state;
+    console.log('email: ', email);
     if (!email.length) {
-      this.setState(({ errors: { email: 'Veuillez remplir tout les champs' } }));
+      this.setState(({ errors: { email: 'Required' } }));
       return;
     }
     if (!_.isEmpty(errors)) {
-      this.setState(({ errors: { email: 'Email Incorect' } }));
+      this.setState(({ errors: { email: 'Incorect Email' } }));
       return;
     }
     try {
-      await req.lostPassword(email);
+      await req.lostPassword({ email });
       window.location = '/';
     } catch (err) {
       console.log('err: ', err);
-      this.setState(({ errors: { all: err.details } }));
+      this.setState(({ errors: { email: err.details } }));
     }
   }
 
@@ -64,8 +65,8 @@ class Lost extends Component {
           <Logo />
         </Header>
         <FormContainer onSubmit={this.handleSubmit}>
-          <Title>Mot de passe Oublié</Title>
-          <Text>Nous allons vous envoyer un email avec les instructions nécessaire pour réinitialiser votre mot de passe.</Text>
+          <Title>Forgot Password</Title>
+          <Text>We will send you an email with instructions on how to reset your password.</Text>
           <InputContainer>
             <Input
               type="text"
@@ -80,7 +81,7 @@ class Lost extends Component {
             </ErrorMessageContainer>
           </InputContainer>
           <ButtonContainer>
-            <InputButton type="submit">Envoyer un Email</InputButton>
+            <InputButton type="submit">Email Me</InputButton>
             <LoginLink to="/login">
               <BackIcon />
               Login

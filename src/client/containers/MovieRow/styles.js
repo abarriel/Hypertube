@@ -177,6 +177,13 @@ export const MoreButton = styled(MdKeyboardArrowDown)`
 export const MoviePreviewContent = styled.div`
 `;
 
+export const RatingAndView = styled.div`
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  width:100%;
+`;
+
 export const RatingContainer = styled.div`
   position:relative;
   display:flex;
@@ -190,11 +197,28 @@ export const RatingContainer = styled.div`
   font-weight:100;
 `;
 
+export const ViewOrNot = styled.div`
+  position:relative;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid ${({ color }) => color};
+  color:${({ color }) => color};
+  align-self:flex-start;
+  min-height:15px;
+  min-width:30px;
+  font-weight:100;
+  padding-left:5px;
+  padding-right:5px;
+`;
+
+
 export const TopSide = styled.div`
   display:flex;
   flex-direction:column;
   flex:1;
   width:100%;
+  cursor:pointer;
 `;
 
 export const BotSide = styled.div`

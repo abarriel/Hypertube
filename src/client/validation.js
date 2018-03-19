@@ -54,5 +54,14 @@ const validateLost = (values) => {
   return errors;
 };
 
-
-export { UserSchema, validateUser, validateLost };
+const validateReset = (values) => {
+  const errors = {};
+  const keys = Object.keys(values);
+  if (_.includes(keys, 'password') && !values.password) {
+    errors.password = 'password Required';
+  } else if (values.password && !/^(?=.*[a-zA-Z])(?=.*\W)(?=.*[0-9]).{6,25}$/.test(values.password)) {
+    errors.password = 'Invalid password';
+  }
+  return errors;
+};
+export { UserSchema, validateUser, validateLost, validateReset };

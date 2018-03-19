@@ -1,5 +1,6 @@
 import React from 'react';
 import { object } from 'prop-types';
+import { connect } from 'react-redux';
 
 import {
   ProfilContainer,
@@ -7,30 +8,44 @@ import {
   ProfilContent,
   Avatar,
   Name,
+  MainContainer,
+  Label,
+  Text,
+  ProfilElem,
+  EditProfilButton,
 } from './styles';
-import Card from '../../components/Card';
+import Users from '../../containers/Users';
+import { getUser } from '../../selectors/user';
 
-const fakeProfil = {
-  firstName: 'Lucas',
-  lastName: 'Charvolin',
-  avatar: 'https://cdn.intra.42.fr/users/medium_lcharvol.jpg',
-};
-
-const Profil = ({ profil = fakeProfil }) => (
-  <ProfilContainer>
-    <ProfilHeader>
-      <Avatar avatar={profil.avatar}/>
-      <Name>{`${profil.firstName} ${profil.lastName}`}</Name>
-    </ProfilHeader>
-    <ProfilContent>
-      <Card height="500px" />
-      <Card />
-    </ProfilContent>
-  </ProfilContainer>
+const Profil = ({ user }) => (
+  <MainContainer>
+    <ProfilContainer>
+      <ProfilHeader>
+        <Avatar avatar={user.profilePicture} />
+        <Name>{`${user.firstName} ${user.lastName}`}</Name>
+        <EditProfilButton />
+      </ProfilHeader>
+      <ProfilContent>
+        <ProfilElem>
+          <Label>Email</Label>
+          <Text>{user.email}</Text>
+        </ProfilElem>
+        <ProfilElem>
+          <Label>View</Label>
+          <Text>{user.history && user.history.length}</Text>
+        </ProfilElem>
+      </ProfilContent>
+    </ProfilContainer>
+    <Users></Users>
+  </MainContainer>
 );
 
 Profil.propTypes = {
-  profil: object,
+  user: object,
 };
 
-export default Profil;
+const mapStateToProps = state => ({
+  user: getUser(state),
+});
+
+export default connect(mapStateToProps)(Profil);

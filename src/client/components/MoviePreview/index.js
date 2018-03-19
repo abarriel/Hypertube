@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
   object,
   bool,
   func,
   number,
+  array,
 } from 'prop-types';
 import {
   withStateHandlers,
@@ -16,6 +18,19 @@ import {
   BackgroundImage,
 } from './styles';
 import Shadow from './Shadow';
+import { getHistory } from '../../selectors/user';
+
+const propTypes = {
+  movie: object.isRequired,
+  isSmall: bool.isRequired,
+  displayShadow: bool.isRequired,
+  handleChangeShadowDisplay: func.isRequired,
+  pos: number.isRequired,
+  moviesCount: number.isRequired,
+  loadDetailsData: func.isRequired,
+  handleChangeIsPreviewOpen: func.isRequired,
+  history: array.isRequired,
+};
 
 const MoviePreview = ({
   movie,
@@ -26,6 +41,7 @@ const MoviePreview = ({
   pos,
   handleChangeIsPreviewOpen,
   loadDetailsData,
+  history,
 }) => (
   <MainContainer
     onMouseEnter={() => handleChangeShadowDisplay(true)}
@@ -41,6 +57,7 @@ const MoviePreview = ({
         loadDetailsData={loadDetailsData}
         movie={movie}
         displayShadow={displayShadow}
+        history={history}
       />
     }
     <BackgroundImage
@@ -50,19 +67,14 @@ const MoviePreview = ({
   </MainContainer>
 );
 
-MoviePreview.propTypes = {
-  movie: object.isRequired,
-  isSmall: bool.isRequired,
-  displayShadow: bool.isRequired,
-  handleChangeShadowDisplay: func.isRequired,
-  pos: number.isRequired,
-  moviesCount: number.isRequired,
-  loadDetailsData: func.isRequired,
-  handleChangeIsPreviewOpen: func.isRequired,
-};
+MoviePreview.propTypes = propTypes;
+
+const mapStateToProps = state => ({
+  history: getHistory(state),
+});
 
 const enhance = compose(
-
+  connect(mapStateToProps),
   withStateHandlers(
     {
       displayShadow: false,
@@ -77,7 +89,7 @@ const enhance = compose(
     componentDidMount() {
       setTimeout(() => {
         this.props.handleChangeSize();
-      }, 1);
+      }, 0.2);
     },
   }),
 );

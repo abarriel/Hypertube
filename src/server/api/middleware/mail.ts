@@ -14,7 +14,7 @@ const mailer = (who: any, token: any) => {
   const info = {
     to: who,
     subject: 'Reset Password - Hypertube',
-    text: `Please Click Here: http://localhost:8008/reset?token=${token}`,
+    text: `Please Click Here: http://localhost:8080/reset?token=${token}`,
   };
   transport.sendMail(info);
   transport.close();

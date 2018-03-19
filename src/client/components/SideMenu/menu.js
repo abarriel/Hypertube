@@ -7,16 +7,16 @@ export const menu = [
   {
     id: 1,
     to: '/movies',
-    label: 'Films',
+    label: 'Movies',
   },
   {
     id: 2,
     to: '/recents',
-    label: 'Ajouts récents',
+    label: 'Recent Movies',
   },
   {
     id: 3,
-    to: '/users',
-    label: 'Ma liste',
+    to: '/mylist',
+    label: 'My list',
   },
 ];

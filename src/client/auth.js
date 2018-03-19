@@ -1,9 +1,14 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import _ from 'lodash';
+import { node } from 'prop-types';
 
 import req from './request';
 
-export const noAuthneeded = ['login', 'register', 'lost'];
+export const noAuthneeded = ['login', 'register', 'lost', 'reset'];
+
+const propTypes = {
+  children: node,
+};
 
 class Auth extends Component {
   state = {
@@ -22,7 +27,6 @@ class Auth extends Component {
 
   render() {
     const { children } = this.props;
-    // return children; // avoid auth for debug;
 
     const { isAuthorized, isRequested } = this.state;
     const { pathname } = window.location;
@@ -41,5 +45,7 @@ class Auth extends Component {
     return children;
   }
 }
+
+Auth.propTypes = propTypes;
 
 export default Auth;

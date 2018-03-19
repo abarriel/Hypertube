@@ -5,45 +5,51 @@ import * as colors from 'colors/safe';
 import { stripIndent } from 'common-tags';
 import { DB } from '../../core';
 
-const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary'];
+const previewMovieInfos = ['imdb_id', 'title', 'year', 'imdb_rating', 'cover_image', 'summary', 'first_aired', 'seeds',' score', 'runtime', 'type'];
 
+// OR    director ILIKE '${queryPattern}'
 const Movies = {
   async get(filters: any) {
-    const { limit, offset, genres, years, ratings, q, sort } = filters;
+    const { limit, offset, genres, years, ratings, q, sort, type: typeVideo } = filters;
     const [type, order = 'asc'] = sort; // escaped and checked before
     console.log(colors.green('filters: '), filters, '\n');
     const queryPattern = [`%${_.replace(q, /\s/g, '%')}%`];
-    console.log(queryPattern);
-    const querySQL = DB.select(previewMovieInfos)
-      .from('movies')
-      .where('type', 'movie')
-      .whereRaw('genres @> ?', [genres])
-      .whereBetween('year', years)
-      .whereBetween('imdb_rating', ratings)
-
-      // OR    summary ILIKE '${queryPattern}'
-      .whereRaw(stripIndent`CASE
-        WHEN '${q}' NOT LIKE 'undefined'
-        THEN  title ILIKE '${queryPattern}'
+    const querySQL = DB.raw(stripIndent`select * from (SELECT * from (
+      SELECT
+        "type", "imdb_id" as "imdbId", "imdb_rating" as "imdbRating", "title", "year", "summary", "score", "genres", "production", "cover_image" as "coverImage", "runtime",
+        "seeds",
+        "actors",
+        "first_aired",
+        "director"
+        from "movies"
+        UNION
+      SELECT
+        "type", "imdb_id" as "imdbId", "imdb_rating" as "imdbRating", "title", "year", "summary", "score", "genres", "production", "cover_image" as "coverImage", "runtime",
+        null,
+        null,
+        "last_aired",
+        null
+      FROM "shows" ) t
+      WHERE ${typeVideo ? `type = '${typeVideo}' AND ` : ''}genres @> '{${genres}}' AND "year" BETWEEN ${years[0]} AND ${years[1]} AND "imdbRating" BETWEEN ${ratings[0]} AND ${ratings[1]} AND CASE
+      WHEN '${q}' NOT LIKE 'undefined'
+      THEN  title ILIKE '${queryPattern}'
         OR    actors @> '{%${queryPattern}}'
-        OR    director ILIKE '${queryPattern}'
         OR    production ILIKE '${queryPattern}'
         ELSE TRUE
-        END`)
-
-      .orderByRaw(stripIndent`CASE
-        WHEN '${type}' = 'date' THEN to_date(released, 'DD Mon YYYY') - date '1900-01-01'
-        WHEN '${type}' = 'seeds' THEN seeds
+      END
+      ORDER BY title asc) a
+      ORDER BY CASE
+        WHEN '${type}' = 'date' THEN to_date(first_aired, 'YYYY-DD-MM') - date '1900-01-01'
+        WHEN '${type}' = 'seeds' AND type = 'movie' THEN seeds
         WHEN '${type}' = 'score' THEN score
-        WHEN '${type}' = 'runtime' THEN runtime
-        END
-        ${order} NULLS LAST`)
-
-      .limit(limit)
-      .offset(offset);
-
+      END
+      ${order} NULLS LAST
+      LIMIT ${limit}
+      OFFSET ${offset}
+      `);
     console.log(colors.blue(querySQL.toString()));
-    return querySQL;
+    const { rows } = await querySQL;
+    return rows;
   },
 
   async getGenres() {
@@ -54,9 +60,11 @@ const Movies = {
     return genres.arrayAgg;
   },
 
-  async single(id: string) {
-    console.log('single', id);
-    return DB.select().from('movies').where('imdb_id', id).first();
+  async single(id: string, type = 'movie') {
+    if (type === 'movie')
+      return DB.select().from('movies').where('imdb_id', id).first();
+    if (type === 'shows')
+      return DB.select().from('shows').where('imdb_id', id).first();
   },
 
   async ids(ids: string[]) {

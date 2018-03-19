@@ -54,7 +54,11 @@ class UsersController {
     const params: any = { id };
     if (id === 'me') {
       params.id = myId;
-      params.columns = 'all';
+      const { get } = req.query;
+      if (get)
+        params.columns = _.takeWhile(_.isArray(get) ? get : [get], (v:any) => _.includes(v, ['profilePicture']))
+      else
+        params.columns = 'all';
     };
     if (!/[0-9]{1,5}/.test(params.id)) return next({ type: 'validation', details: 'Wrong Id provided' });
     const user = await Users.single(params);
