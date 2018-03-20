@@ -11,6 +11,8 @@ import {
 import req from '../../request';
 import {
   CommentsContainer,
+  CommentsContent,
+  PostCommentContainer,
 } from './styles';
 
 const Comments = ({
@@ -18,6 +20,10 @@ const Comments = ({
   comments,
 }) => (
   <CommentsContainer height={height}>
+    <CommentsContent>
+    </CommentsContent>
+    <PostCommentContainer>
+    </PostCommentContainer>
   </CommentsContainer>
 );
 

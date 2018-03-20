@@ -8,6 +8,7 @@ import Recents from './pages/Recents';
 import Reset from './pages/Reset';
 import Lost from './pages/Lost';
 import MyList from './pages/MyList';
+import EditProfil from './pages/EditProfil';
 
 const routes = [
   {
@@ -22,9 +23,14 @@ const routes = [
     id: 1,
   },
   {
+    path: '/editprofil',
+    component: EditProfil,
+    id: 2,
+  },
+  {
     path: '/movies',
     component: Movies,
-    id: 2,
+    id: 3,
   },
   {
     path: '/video',

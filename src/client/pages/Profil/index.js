@@ -13,8 +13,11 @@ import {
   Text,
   ProfilElem,
   EditProfilButton,
+  EditProfilLogo,
+  Shadow,
 } from './styles';
 import Users from '../../containers/Users';
+import Section from '../../containers/Section';
 import { getUser } from '../../selectors/user';
 
 const Profil = ({ user }) => (
@@ -23,9 +26,15 @@ const Profil = ({ user }) => (
       <ProfilHeader>
         <Avatar avatar={user.profilePicture} />
         <Name>{`${user.firstName} ${user.lastName}`}</Name>
-        <EditProfilButton />
+        <EditProfilButton to="editprofil">
+          <EditProfilLogo />
+        </EditProfilButton>
       </ProfilHeader>
       <ProfilContent>
+        <ProfilElem>
+          <Label>Login</Label>
+          <Text>{user.username}</Text>
+        </ProfilElem>
         <ProfilElem>
           <Label>Email</Label>
           <Text>{user.email}</Text>
@@ -36,6 +45,9 @@ const Profil = ({ user }) => (
         </ProfilElem>
       </ProfilContent>
     </ProfilContainer>
+    <Shadow>
+      <Section title="My List" />
+    </Shadow>
     <Users></Users>
   </MainContainer>
 );

@@ -35,8 +35,13 @@ const goRight = (start, length, end) => {
 
 const onChange = (isVisible, reqParams, updateMovies, movies) => {
   if (isVisible && movies.length === 0) {
-    req.movies(reqParams)
-      .then(data => updateMovies(data.movies));
+    if (reqParams) {
+      req.movies(reqParams)
+        .then(data => updateMovies(data.movies));
+    } else {
+      req.getMylist('my_list')
+        .then(movies => updateMovies(movies));
+    }
   }
 };
 
@@ -77,7 +82,7 @@ Section.propTypes = {
   title: string.isRequired,
   start: number.isRequired,
   move: func.isRequired,
-  reqParams: object.isRequired,
+  reqParams: object,
   updateMovies: func.isRequired,
 };
 
