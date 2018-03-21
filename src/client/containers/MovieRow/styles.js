@@ -227,4 +227,7 @@ export const BotSide = styled.div`
   flex:1;
   width:100%;
   cursor:pointer;
+  opacity:${({ opacity }) => opacity === 0 ? 0 : 1};
+  transition: opacity 1s;
+  transition-delay:0.2s;
 `;

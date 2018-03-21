@@ -109,3 +109,41 @@ export const ErrorMessage = styled.p`
   -webkit-font-smoothing: antialiased;
 `;
 
+export const ButtonContainer = styled.div`
+  display:flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction:column;
+  width:100%;
+  flex:1;
+`;
+
+export const InputButton = styled.button`
+  width: 100%;
+  max-width: 100%;
+  padding: 16px;
+  font-size: 18px;
+  background: #e50914;
+  height: 53px;
+  color:white;
+  border: 0;
+  cursor: pointer;
+  font-weight: 400;
+  letter-spacing: 0.1px;
+  -webkit-appearance: button;
+  user-select: none;
+  margin-top:9px;
+  margin-bottom:9px;
+  transition: background-color 0.3s ease-in-out;
+  &:hover{
+    background-color:#ff0a16;
+  };
+  &:disabled,
+  button[disabled]{
+    opacity:0.8;
+    cursor:default;
+  };
+  &:focus{
+    outline:none;
+  };
+`;

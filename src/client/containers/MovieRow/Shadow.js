@@ -50,6 +50,7 @@ const Shadow = ({
         </PlayLogoContainer>
       </TopSide>
       <BotSide
+        opacity={opacity}
         onMouseEnter={() => handleChangeWichHover(2)}
         onClick={event => {
           event.persist();

@@ -30,7 +30,7 @@ export default compose(
       },
     ) => {
       try {
-        await req.user(values);
+        await req.editUser(values);
         window.location.replace('/profil');
       } catch (err) {
         console.log('err: ', err);

@@ -13,6 +13,8 @@ import {
   Input,
   ErrorMessageContainer,
   ErrorMessage,
+  ButtonContainer,
+  InputButton,
 } from './styles';
 
 const propTypes = {
@@ -34,7 +36,6 @@ const EditProfil = ({
 }) => (
   <EditProfilContainer>
     <FormContainer onSubmit={handleSubmit}>
-      {console.log('values: ', values)}
       <Title>Update My Account</Title>
       <InputContainer>
         <Label>Login</Label>
@@ -78,6 +79,23 @@ const EditProfil = ({
           {touched.lastName && errors.lastName && <ErrorMessage>{errors.lastName}</ErrorMessage>}
         </ErrorMessageContainer>
       </InputContainer>
+      <InputContainer>
+        <Label>Emai</Label>
+        <Input
+          type="text"
+          name="email"
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={values.email}
+          error={errors.email}
+        />
+        <ErrorMessageContainer>
+          {touched.email && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+        </ErrorMessageContainer>
+      </InputContainer>
+      <ButtonContainer>
+        <InputButton type="submit">Edit</InputButton>
+      </ButtonContainer>
     </FormContainer>
   </EditProfilContainer>
 );
