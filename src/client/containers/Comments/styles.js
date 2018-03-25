@@ -18,6 +18,9 @@ export const CommentsContent = styled.div`
   dislay:flex;
   width:100%;
   flex:4;
+  max-height:500px;
+  background-color:black;
+  overflow-x:scroll;
 `;
 
 export const PostCommentContainer = styled.div`
@@ -25,14 +28,17 @@ export const PostCommentContainer = styled.div`
   dislay:flex;
   justify-content: center;
   align-items: flex-start;
-  flex-direction:row;
+  f
   width:100%;
-  flex:2;
+  margin-bottom:70px;
+  flex-wrap: no-wrap;
 `;
 
 export const Avatar = styled.div`
-  width:70px;
-  height:70px;
+  position:absolute;
+  width:44px;
+  height:44px;
+  margin:0;
   border-radius:2px;
   background-image:${({ avatar }) => `url(${avatar})`};
   background-size: 105%;
@@ -42,9 +48,9 @@ export const Avatar = styled.div`
 `;
 
 export const InputStyled = styled.input`
+  margin-left:130px;
   width: 50%;
   max-width: 100%;
-  margin-top: 3px;
   padding: 10px 11px;
   height: 44px;
   color: rgb(0, 0, 0);
@@ -59,7 +65,6 @@ export const InputStyled = styled.input`
   text-shadow: none;
   border-radius: 2px;
   box-sizing: border-box;
-  position: relative;
   z-index: 30;
   border: solid 1px ${({ error }) => error ? 'rgb(176, 5, 0)' : '#b3b3b3'};
   background-color: white;
@@ -67,4 +72,36 @@ export const InputStyled = styled.input`
     outline:none;
     border: solid 1px ${({ error }) => error ? 'rgb(176, 5, 0)' : '#626262'};
   }
+`;
+
+export const Comment = styled.div`
+  display:flex;
+  width:100%;
+  min-height:20px;
+  background-color:red;
+  margin-bottom:5px;
+`;
+
+export const SendButton = styled.div`
+  position:absolute;
+  right:25px;
+  top:0;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,.4);
+  border-color: #ff0a16;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-right: .75em;
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.4);
+  transition:0.3s ease-in-out;
+  &:hover {
+    border-color:rgba(255,255,255,.8);
+  }
+  width:150px;
+  height:42px;
+  text-decoration:none;
+  cursor:pointer;
 `;
