@@ -17,11 +17,13 @@ export const CommentsContainer = styled.div`
 export const CommentsContent = styled.div`
   dislay:flex;
   width:100%;
-  flex:4;
+  flex:3;
+  padding-top:25px;
   max-height:500px;
   background-color:black;
   overflow-x:hidden;
   overflow-y:scroll;
+  margin-bottom:25px;
 `;
 
 export const PostCommentContainer = styled.div`
@@ -78,9 +80,9 @@ export const InputStyled = styled.input`
 export const Comment = styled.div`
   display:flex;
   width:100%;
-  min-height:20px;
-  background-color:red;
-  margin-bottom:5px;
+  min-height:40px;
+  margin-top:7.5px;
+  margin-bottom:7.5px;
 `;
 
 export const SendButton = styled.div`
@@ -105,4 +107,26 @@ export const SendButton = styled.div`
   height:42px;
   text-decoration:none;
   cursor:pointer;
+`;
+
+export const CommentAvatar = styled.div`
+  position:relative;
+  width:44px;
+  height:44px;
+  margin:0;
+  border-radius:2px;
+  background-image:${({ avatar }) => `url(${avatar})`};
+  background-size: 105%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-left:50px;
+  background-color:grey;
+`;
+
+export const CommentText = styled.div`
+  display:flex;
+  color:white;
+  justify-content: center;
+  align-items: center;
+  margin-left:25px;
 `;

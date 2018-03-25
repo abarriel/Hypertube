@@ -24,6 +24,8 @@ import {
   InputStyled,
   Comment,
   SendButton,
+  CommentAvatar,
+  CommentText,
 } from './styles';
 
 const propTypes = {
@@ -49,7 +51,12 @@ const Comments = ({
     {console.log('comments: ', comments)}
     {console.log('value: ', value)}
     <CommentsContent>
-      {map(comments, comment => <Comment key={comment.id} />)}
+      {map(comments, comment => (
+        <Comment key={comment.id}>
+          <CommentAvatar />
+          <CommentText>{comment.body || 'Empty comment'}</CommentText>
+        </Comment>
+      ))}
     </CommentsContent>
     <PostCommentContainer>
       <Avatar avatar={user.profilePicture} />
@@ -86,7 +93,7 @@ const enhance = compose(
     {
       loadComments: () => comments => ({ comments }),
       handleChangeValue: () => newValue => ({ value: newValue }),
-      addComment: ({ comments }) => newComment => ({ comments: [...comments, { body: newComment }] }),
+      addComment: ({ comments }) => newComment => ({ comments: [...comments, { id: comments[comments.length - 1].id + 1, body: newComment }] }),
     },
   ),
   lifecycle({

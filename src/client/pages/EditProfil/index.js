@@ -31,7 +31,6 @@ export default compose(
         await req.editUser(values);
         window.location.replace('/profil');
       } catch (err) {
-        console.log('err: ', err);
         if (err.details[0].type === EMPTY_REQUEST) {
           setFieldError('all', 'Please complete all fields');
         } else if (err.type === AUTH_ERROR) {

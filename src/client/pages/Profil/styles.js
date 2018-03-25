@@ -31,6 +31,8 @@ export const ProfilContent = styled.div`
 
 export const Avatar = styled.div`
   display:flex;
+  justify-content: center;
+  align-items: center;
   min-width:120px;
   min-height:120px;
   max-width:120px;
@@ -40,6 +42,7 @@ export const Avatar = styled.div`
   background-size: 105%;
   background-position: center;
   background-repeat: no-repeat;
+  cursor:pointer;
 `;
 
 export const Name = styled.p`
@@ -117,4 +120,9 @@ export const Shadow = styled.div`
   padding-top:25px;
   background-color:black;
   margin-bottom:25px;
+`;
+
+export const UpdateAvatarLogo = styled(MdCreate)`
+  color:white;
+  font-size:1.7em;
 `;

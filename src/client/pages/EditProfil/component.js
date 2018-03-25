@@ -37,7 +37,6 @@ const EditProfil = ({
   <EditProfilContainer>
     <FormContainer onSubmit={handleSubmit}>
       <Title>Update My Account</Title>
-      {console.log('errors: ', errors)}
       <InputContainer>
         <Label>Login</Label>
         <Input
