@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 
 import req from '../../request';
 import EditProfil from './component';
-import { UserSchema } from '../../validation';
+import { UserSchema } from './validation';
 import { getUser } from '../../selectors/user';
+import { EMPTY_REQUEST, AUTH_ERROR } from './constants';
 
 const mapStateToProps = state => ({
   user: getUser(state),
@@ -24,16 +25,18 @@ export default compose(
     validationSchema: UserSchema,
     handleSubmit: async (
       values,
-      {
-        setFieldError,
-        setErrors,
-      },
+      { setFieldError },
     ) => {
       try {
         await req.editUser(values);
         window.location.replace('/profil');
       } catch (err) {
         console.log('err: ', err);
+        if (err.details[0].type === EMPTY_REQUEST) {
+          setFieldError('all', 'Please complete all fields');
+        } else if (err.type === AUTH_ERROR) {
+          setFieldError('all', 'You cant modify your profil');
+        }
       }
     },
   }),

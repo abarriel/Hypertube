@@ -37,6 +37,7 @@ const EditProfil = ({
   <EditProfilContainer>
     <FormContainer onSubmit={handleSubmit}>
       <Title>Update My Account</Title>
+      {console.log('errors: ', errors)}
       <InputContainer>
         <Label>Login</Label>
         <Input
@@ -91,6 +92,11 @@ const EditProfil = ({
         />
         <ErrorMessageContainer>
           {touched.email && errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+        </ErrorMessageContainer>
+      </InputContainer>
+      <InputContainer>
+        <ErrorMessageContainer>
+          {errors.all && <ErrorMessage>{errors.all}</ErrorMessage>}
         </ErrorMessageContainer>
       </InputContainer>
       <ButtonContainer>

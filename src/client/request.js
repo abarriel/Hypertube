@@ -57,8 +57,8 @@ class Req {
   }
 
   @tryCatcher()
-  async addComment(imdbId) {
-    return this.axios('post', `comments/${imdbId}`);
+  async addComment(imdbId, body) {
+    return this.axios('post', `comments/${imdbId}`, body);
   }
 
 

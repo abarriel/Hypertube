@@ -20,7 +20,8 @@ export const CommentsContent = styled.div`
   flex:4;
   max-height:500px;
   background-color:black;
-  overflow-x:scroll;
+  overflow-x:hidden;
+  overflow-y:scroll;
 `;
 
 export const PostCommentContainer = styled.div`
