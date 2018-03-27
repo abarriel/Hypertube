@@ -50,6 +50,7 @@ class UsersController {
   @middlewaresBinding(['isAuthorize'])
   async single(req: express.Request, res: express.Response, next: any) {
     const { id } = req.params;
+    console.log(req.user);
     const { id: myId } = req.user;
     const params: any = { id };
     if (id === 'me') {
@@ -60,7 +61,7 @@ class UsersController {
       else
         params.columns = 'all';
     };
-    if (!/[0-9]{1,5}/.test(params.id)) return next({ type: 'validation', details: 'Wrong Id provided' });
+    if (!/[0-9]{1,5}/.test(params.id)) return next({ type: 'validation', details: 'single oWrong Id provided' });
     const user = await Users.single(params);
     if (_.isEmpty(user)) return next({ type: 'db', details: 'ressources not present' });
     res.json({ user });

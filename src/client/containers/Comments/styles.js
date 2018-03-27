@@ -77,7 +77,8 @@ export const InputStyled = styled.textarea`
   z-index: 30;
   &:focus{
     outline:none;
-  }
+  };
+  line-height: 1.4;
 `;
 
 export const Comment = styled.div`
@@ -102,22 +103,25 @@ export const SendButton = styled.div`
   font-weight: 700;
   text-transform: uppercase;
   margin-right: .75em;
-  color: #fff;
+  color:${({ activate }) => activate ? 'white' : 'grey'};
   border: 1px solid rgba(255,255,255,.4);
   transition:0.3s ease-in-out;
   &:hover {
-    border-color:rgba(255,255,255,.8);
+    border-color:${({ activate }) => activate ? 'rgba(255,255,255,.8)' : 'rgba(255,255,255,.4)'};
   }
   width:150px;
   height:42px;
+  user-select:none;
   text-decoration:none;
   cursor:pointer;
 `;
 
 export const CommentAvatar = styled.div`
   position:relative;
-  width:44px;
-  height:44px;
+  min-width:44px;
+  min-height:44px;
+  max-width:44px;
+  max-height:44px;
   margin:0;
   border-radius:2px;
   background-image:${({ avatar }) => `url(${avatar})`};
@@ -134,6 +138,8 @@ export const CommentText = styled.div`
   justify-content: center;
   align-items: center;
   margin-left:25px;
+  line-height: 1.4;
+  padding-right:25px;
 `;
 
 export const BottomShadow = styled.div`

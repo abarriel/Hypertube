@@ -7,7 +7,7 @@ import {
   array,
   func,
 } from 'prop-types';
-import { map } from 'lodash';
+import { map, isEmpty } from 'lodash';
 import {
   compose,
   lifecycle,
@@ -55,7 +55,7 @@ const Comments = ({
     <CommentsContent>
       {map(comments, comment => (
         <Comment key={comment.id}>
-          <CommentAvatar />
+          <CommentAvatar avatar={comment.profilePicture}/>
           <CommentText>{comment.body || 'Empty comment'}</CommentText>
           <Separator />
         </Comment>
@@ -67,13 +67,16 @@ const Comments = ({
       <InputStyled
         value={value}
         onChange={e => handleChangeValue(e.target.value)}
+        maxlength="250"
       />
       <SendButton
         onClick={() => {
+          if (isEmpty(value)) return;
           req.addComment(imdbId, { body: value });
-          addComment(value);
+          addComment(value, user.profilePicture);
           handleChangeValue('');
         }}
+        activate={!isEmpty(value)}
       >
         Send
       </SendButton>
@@ -97,7 +100,13 @@ const enhance = compose(
     {
       loadComments: () => comments => ({ comments }),
       handleChangeValue: () => newValue => ({ value: newValue }),
-      addComment: ({ comments }) => newComment => ({ comments: [...comments, { id: comments.length > 0 ? comments[comments.length - 1].id + 1 : 1, body: newComment }] }),
+      addComment: ({ comments }) => (newComment, profilePicture) => ({
+        comments: [...comments, {
+          id: comments.length > 0 ? comments[comments.length - 1].id + 1 : 1,
+          body: newComment,
+          profilePicture,
+        }],
+      }),
     },
   ),
   lifecycle({

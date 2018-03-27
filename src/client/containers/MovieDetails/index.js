@@ -106,16 +106,7 @@ const MovieDetails = ({
               </DetailsContent>
             </Shadow>}
           {!selectedSlide && <GradientShadow />}
-          {!selectedSlide && detailsData.movie.type === 'shows' && <CoverImage height={height} image={detailsData.movie.backgroundImage} />}
-          {!selectedSlide && detailsData.movie.type === 'movie' &&
-            <CoverImage height={height}>
-              <YouTubeContainer
-                videoId={detailsData.movie.trailer}
-                onReady={event => event.target.playVideo()}
-                opts={opts}
-              />
-            </CoverImage>
-          }
+          {!selectedSlide && <CoverImage height={height} image={detailsData.movie.backgroundImage} />}
           {selectedSlide === 1 &&
             <Comments height={height} imdbId={imdbId} />
           }

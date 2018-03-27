@@ -13,7 +13,7 @@ class ShowsController {
   async single(req: express.Request, res: express.Response, next: any) {
     const { id } = req.params;
     if (!/[a-zA-Z0-9]{2,20}/.test(id))
-      return next({ type: 'validation', details: 'Wrong Id provided' });
+      return next({ type: 'validation', details: 'shows Wrong Id provided' });
     const show = await Shows.single(id);
     const { myList, history } = req.user;
     res.json({ movie: { ...show, inMyList: _.includes(myList, id), seen: _.includes(history, id) } });
