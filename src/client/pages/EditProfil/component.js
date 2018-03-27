@@ -80,7 +80,7 @@ const EditProfil = ({
         </ErrorMessageContainer>
       </InputContainer>
       <InputContainer>
-        <Label>Emai</Label>
+        <Label>Email</Label>
         <Input
           type="text"
           name="email"

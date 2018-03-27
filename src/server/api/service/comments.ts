@@ -18,6 +18,7 @@ class CommentsController {
   async add(req: express.Request, res: express.Response, next: any) {
     const { comment } = req.app.locals;
     const { username, id: userId } = req.user;
+    console.log(req.app.locals);
     try {
       const movie = await Movies.single(comment.imdbId);
       await Comments.post({ ...comment, username, userId });

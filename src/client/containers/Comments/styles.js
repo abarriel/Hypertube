@@ -15,10 +15,12 @@ export const CommentsContainer = styled.div`
 `;
 
 export const CommentsContent = styled.div`
+  position:relative;
   dislay:flex;
   width:100%;
   flex:3;
-  padding-top:25px;
+  padding-top:50px;
+  padding-bottom:50px;
   max-height:500px;
   background-color:black;
   overflow-x:hidden;
@@ -50,13 +52,17 @@ export const Avatar = styled.div`
   margin-left:50px;
 `;
 
-export const InputStyled = styled.input`
-  margin-left:130px;
+export const InputStyled = styled.textarea`
+  margin-left:104px;
   width: 50%;
-  max-width: 100%;
+  width: 50%;
+  resize:vertical;
+  max-height: 300px;
   padding: 10px 11px;
   height: 44px;
-  color: rgb(0, 0, 0);
+  min-height: 44px;
+  background-color: rgba(0,0,0,.4);
+  border: 1px solid rgba(255,255,255,.4);
   cursor: text;
   font-weight:400;
   font-size: 16px;
@@ -66,28 +72,27 @@ export const InputStyled = styled.input`
   text-transform: none;
   text-indent: 0px;
   text-shadow: none;
-  border-radius: 2px;
+  color:white;
   box-sizing: border-box;
   z-index: 30;
-  border: solid 1px ${({ error }) => error ? 'rgb(176, 5, 0)' : '#b3b3b3'};
-  background-color: white;
   &:focus{
     outline:none;
-    border: solid 1px ${({ error }) => error ? 'rgb(176, 5, 0)' : '#626262'};
   }
 `;
 
 export const Comment = styled.div`
+  position:relative;
   display:flex;
   width:100%;
   min-height:40px;
   margin-top:7.5px;
   margin-bottom:7.5px;
+  padding-bottom:10px;
 `;
 
 export const SendButton = styled.div`
   position:absolute;
-  right:25px;
+  left:calc(114px + 50%);
   top:0;
   display:flex;
   justify-content: center;
@@ -129,4 +134,33 @@ export const CommentText = styled.div`
   justify-content: center;
   align-items: center;
   margin-left:25px;
+`;
+
+export const BottomShadow = styled.div`
+  position:absolute;
+  top:-110px;
+  display:flex;
+  width:100%;
+  height:85px;
+  background-image: linear-gradient(to top,#000,transparent);
+`;
+
+export const TopShadow = styled.div`
+  position:absolute;
+  top:0px;
+  display:flex;
+  width:100%;
+  height:85px;
+  background-image: linear-gradient(to bottom,#000,transparent);
+  z-index:10000;
+`;
+
+export const Separator = styled.div`
+  position:absolute;
+  display:flex;
+  width:calc(70% - 50px);
+  height:1px;
+  margin-left:50px;
+  bottom:0px;
+  background-image:linear-gradient(to right,rgb(255,255,255),transparent);
 `;
