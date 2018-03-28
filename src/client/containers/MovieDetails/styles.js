@@ -7,7 +7,7 @@ export const MovieDetailsContainer = styled.div`
   display:flex;
   width:100vw;
   left:0;
-  max-height: ${({ height }) => height}vh;
+  max-height: ${({ height }) => height}px;
   transition:height 0.5s ease-in-out;
   z-index:4000;
   overflow:hidden;
@@ -16,7 +16,7 @@ export const MovieDetailsContainer = styled.div`
 export const FakeMovieDetailsContainer = styled.div`
   display:flex;
   width:100%;
-  min-height:${({ height }) => height}vh;
+  min-height:${({ height }) => height}px;
   transition:0.5s ease-in-out;
   margin-top:25px;
   margin-bottom:50px;

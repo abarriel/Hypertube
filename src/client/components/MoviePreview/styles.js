@@ -28,6 +28,7 @@ export const MainContainer = styled.div`
     height:150vw;
     margin:0;
   };
+  background-color:rgba(150,150,150,0.1);
 `;
 
 export const BackgroundImage = styled.div`

@@ -97,7 +97,7 @@ const MovieRow = ({
             />
             <MovieDetails
               handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
-              height={previewOpen === movie.imdbId ? 50 : 0}
+              height={previewOpen === movie.imdbId ? 600 : 0}
               detailsData={detailsData}
               imdbId={movie.imdbId}
               resetDetailsData={resetDetailsData}

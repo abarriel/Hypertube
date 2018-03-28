@@ -43,6 +43,7 @@ export const Avatar = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   cursor:pointer;
+  border-radius:2px;
 `;
 
 export const Name = styled.p`
