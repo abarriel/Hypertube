@@ -22,6 +22,7 @@ import {
   resetMovies,
 } from '../../actions/movies';
 import req from '../../request';
+import { MOVIE_PREVIEW_HEIGHT } from '../../constants';
 import MoviePreview from '../../components/MoviePreview';
 import MovieDetails from '../../containers/MovieDetails';
 
@@ -46,7 +47,7 @@ const Recents = ({
           />
           <MovieDetails
             handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
-            height={previewOpen === movie.imdbId ? 50 : 0}
+            height={previewOpen === movie.imdbId ? MOVIE_PREVIEW_HEIGHT : 0}
             detailsData={detailsData}
             imdbId={movie.imdbId}
             resetDetailsData={resetDetailsData}

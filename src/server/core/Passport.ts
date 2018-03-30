@@ -49,6 +49,7 @@ passport.use('42', new FortyTwoStrategy({
 
     let user = await Users.isRegistered({ username });
     if (!user) user = await Users.post({ username, email, profilePicture, first_name, last_name});
+    console.log("42", user);
     return done(null, user);
   } catch (err) {
     return done({ type: 'Auth', details: 'Failed', err });

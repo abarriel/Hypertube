@@ -17,10 +17,11 @@ class CommentsController {
   @middlewaresBinding(['isAuthorize', 'commentsValidate'])
   async add(req: express.Request, res: express.Response, next: any) {
     const { comment } = req.app.locals;
-    const { username, id: userId } = req.user;
+    const { username, id: userId, profilePicture } = req.user;
+    console.log(req.user);
     try {
       const movie = await Movies.single(comment.imdbId);
-      await Comments.post({ ...comment, username, userId });
+      await Comments.post({ ...comment, username,  userId, profilePicture });
       res.json({ status: 'Comments Added' });
     } catch (err) {
       console.log(err);

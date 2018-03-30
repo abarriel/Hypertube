@@ -4,8 +4,8 @@ import * as Joi from 'joi';
 import * as path from 'path';
 
 const CommentSchema = Joi.object({
-  body: Joi.string().min(5).max(250),
-  imdbId: Joi.string().min(5).alphanum(),
+  body: Joi.string().max(250),
+  imdbId: Joi.string().min(0).alphanum(),
   limit: Joi.number().integer().min(0).max(50).optional(),
   offset: Joi.number().integer().min(0).optional(),
 });

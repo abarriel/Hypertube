@@ -1,6 +1,7 @@
 import React from 'react';
-import { object } from 'prop-types';
+import { object, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
+import { compose, withStateHandlers } from 'recompose';
 
 import {
   ProfilContainer,
@@ -13,19 +14,44 @@ import {
   Text,
   ProfilElem,
   EditProfilButton,
+  EditProfilLogo,
+  Shadow,
+  UpdateAvatarLogo,
 } from './styles';
 import Users from '../../containers/Users';
+import Section from '../../containers/Section';
 import { getUser } from '../../selectors/user';
 
-const Profil = ({ user }) => (
+const propTypes = {
+  user: object,
+  isAvatarHovered: bool.isRequired,
+  handleChangeIsAvatarHovered: func.isRequired,
+};
+const Profil = ({
+  user,
+  isAvatarHovered,
+  handleChangeIsAvatarHovered,
+}) => (
   <MainContainer>
     <ProfilContainer>
       <ProfilHeader>
-        <Avatar avatar={user.profilePicture} />
+        <Avatar
+          avatar={user.profilePicture}
+          onMouseEnter={() => handleChangeIsAvatarHovered()}
+          onMouseLeave={() => handleChangeIsAvatarHovered()}
+        >
+          {isAvatarHovered && <UpdateAvatarLogo />}
+        </Avatar>
         <Name>{`${user.firstName} ${user.lastName}`}</Name>
-        <EditProfilButton />
+        <EditProfilButton to="editprofil">
+          <EditProfilLogo />
+        </EditProfilButton>
       </ProfilHeader>
       <ProfilContent>
+        <ProfilElem>
+          <Label>Login</Label>
+          <Text>{user.username}</Text>
+        </ProfilElem>
         <ProfilElem>
           <Label>Email</Label>
           <Text>{user.email}</Text>
@@ -36,16 +62,27 @@ const Profil = ({ user }) => (
         </ProfilElem>
       </ProfilContent>
     </ProfilContainer>
+    <Shadow>
+      <Section title="My List" />
+    </Shadow>
     <Users></Users>
   </MainContainer>
 );
 
-Profil.propTypes = {
-  user: object,
-};
+Profil.propTypes = propTypes;
 
 const mapStateToProps = state => ({
   user: getUser(state),
 });
 
-export default connect(mapStateToProps)(Profil);
+export default compose(
+  withStateHandlers(
+    () => ({
+      isAvatarHovered: false,
+    }),
+    {
+      handleChangeIsAvatarHovered: ({ isAvatarHovered }) => () => ({ isAvatarHovered: !isAvatarHovered }),
+    },
+  ),
+  connect(mapStateToProps),
+)(Profil);

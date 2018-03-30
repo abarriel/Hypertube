@@ -1,6 +1,15 @@
 const Sections = [
   {
     id: 0,
+    label: 'Tv Shows',
+    reqParams: {
+      limit: 25,
+      sort: 'score.DESC',
+      type: 'shows',
+    },
+  },
+  {
+    id: 1,
     label: 'Les plus gros succès sur Hypertix',
     reqParams: {
       sort: 'seeds.DESC',
@@ -8,20 +17,11 @@ const Sections = [
     },
   },
   {
-    id: 1,
+    id: 2,
     label: 'Les mieux notées',
     reqParams: {
       limit: 25,
       sort: 'score.DESC',
-    },
-  },
-  {
-    id: 2,
-    label: 'Tv Shows',
-    reqParams: {
-      limit: 25,
-      sort: 'score.DESC',
-      type: 'shows',
     },
   },
   {

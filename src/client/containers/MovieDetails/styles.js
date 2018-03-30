@@ -7,17 +7,16 @@ export const MovieDetailsContainer = styled.div`
   display:flex;
   width:100vw;
   left:0;
-  max-height: ${({ height }) => height}vh;
+  max-height: ${({ height }) => height}px;
   transition:height 0.5s ease-in-out;
   z-index:4000;
   overflow:hidden;
-  padding-bottom:100px;
 `;
 
 export const FakeMovieDetailsContainer = styled.div`
   display:flex;
   width:100%;
-  min-height:${({ height }) => height}vh;
+  min-height:${({ height }) => height}px;
   transition:0.5s ease-in-out;
   margin-top:25px;
   margin-bottom:50px;
@@ -73,6 +72,7 @@ export const Shadow = styled.div`
   width: 100%;
   z-index:5000;
   padding: 18px 0 12px 4%;
+  padding-bottom:100px;
 `;
 
 export const GradientShadow = styled.div`

@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const UsersContainer = styled.div`
   display:flex;
-  margin-top:75px;
   flex-direction:column;
   width:calc(100vw - 85px);
   margin-left:65px;
+  margin-bottom:100px;
 `;
 
 export const Title = styled.div`

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const UserContainer = styled.div`
   display:flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-end;
   widht:100%;
   flex-wrap:wrap;
   min-height:50px;
@@ -22,7 +22,6 @@ export const Avatar = styled.div`
   background-position: center;
   background-repeat: no-repeat;
   margin-right:15px;
-  margin-bottom:10px;
 `;
 
 export const Section = styled.div`

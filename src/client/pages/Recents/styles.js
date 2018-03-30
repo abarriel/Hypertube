@@ -5,7 +5,7 @@ export const RecentsContainer = styled.div`
   flex-direction:column;
   width:100vw;
   min-height:calc(100vh - 85px);
-  margin-top:25px;
+  margin-top:100px;
   margin-bottom:50px;
 `;
 

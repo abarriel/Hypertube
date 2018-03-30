@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import MdCreate from 'react-icons/lib/md/create';
+import { Link } from 'react-router-dom';
 
 export const ProfilContainer = styled.div`
   display:flex;
   flex-direction:column;
   width:calc(100vw - 85px);
   margin-left:65px;
+  margin-bottom:25px;
 `;
 
 export const ProfilHeader = styled.div`
@@ -15,6 +17,9 @@ export const ProfilHeader = styled.div`
   align-items: flex-start;
   margin-bottom: 25px;
   margin-top:90px;
+  @media (max-width: 570px) {
+    flex-wrap:wrap;
+  };
 `;
 
 export const ProfilContent = styled.div`
@@ -26,6 +31,8 @@ export const ProfilContent = styled.div`
 
 export const Avatar = styled.div`
   display:flex;
+  justify-content: center;
+  align-items: center;
   min-width:120px;
   min-height:120px;
   max-width:120px;
@@ -35,6 +42,8 @@ export const Avatar = styled.div`
   background-size: 105%;
   background-position: center;
   background-repeat: no-repeat;
+  cursor:pointer;
+  border-radius:2px;
 `;
 
 export const Name = styled.p`
@@ -46,6 +55,10 @@ export const Name = styled.p`
   user-select: none;
   font-weight:0;
   font-family: Helvetica Neue;
+  @media (max-width: 570px) {
+    margin-left:0px;
+    min-width:400px;
+  };
 `;
 
 export const MainContainer = styled.div`
@@ -86,14 +99,31 @@ export const ProfilElem = styled.div`
   margin-top:10px;
 `;
 
-export const EditProfilButton = styled(MdCreate)`
+export const EditProfilButton = styled(Link)`
+  text-decoration:none;
+`;
+
+export const EditProfilLogo = styled(MdCreate)`
   color:white;
   position:absolute;
   top:100px;
-  right:20px;
+  left:calc(100vw - 100px);
   font-size:1.7em;
   cursor:pointer;
   &:hover{
     color: #828282;
   }
+`;
+
+export const Shadow = styled.div`
+  display:flex;
+  width:100%;
+  padding-top:25px;
+  background-color:black;
+  margin-bottom:25px;
+`;
+
+export const UpdateAvatarLogo = styled(MdCreate)`
+  color:white;
+  font-size:1.7em;
 `;

@@ -28,6 +28,7 @@ export const MainContainer = styled.div`
     height:150vw;
     margin:0;
   };
+  background-color:rgba(150,150,150,0.1);
 `;
 
 export const BackgroundImage = styled.div`
@@ -158,6 +159,9 @@ export const BotSide = styled.div`
   flex:1;
   width:100%;
   cursor:pointer;
+  opacity:${({ opacity }) => opacity === 0 ? 0 : 1};
+  transition: opacity 1s;
+  transition-delay:0.2s;
 `;
 
 

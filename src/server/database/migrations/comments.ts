@@ -8,6 +8,7 @@ const createCommentsTable = (): Promise<any> => {
       table.timestamp('date').defaultTo(DB.fn.now())
       table.string('username').notNullable();
       table.integer('user_id').notNullable();
+      table.text('profile_picture').notNullable();
       table.string('imdb_id').notNullable();
       table.text('body');
     })
