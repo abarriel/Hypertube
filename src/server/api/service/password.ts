@@ -32,7 +32,7 @@ class PasswordController {
         const { user: { password } } = req.app.locals;
         const { token } = req.query;
         const { sub }: any = jwt.decode(token);
-        if (!/[0-9]{1,5}/.test(sub)) return next({ type: 'validation', details: 'Wrong Id provided' });
+        if (!/[0-9]{1,5}/.test(sub)) return next({ type: 'validation', details: 'password Wrong Id provided' });
         if (!password) return  next({ type: 'validation', details: 'Password needed' });
         const user = await Users.single({ id: sub, columns: 'all' });
         console.log(token, user.password);

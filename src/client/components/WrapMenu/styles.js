@@ -7,7 +7,7 @@ export const WrapMenuContainer = styled.div`
   flex-direction:column;
   min-width:150px;
   transition: background-color 0.3s ease-in-out;
-  height:${({ displayMenu }) => displayMenu ? '70px' : '0px'};
+  height:${({ displayMenu }) => displayMenu ? '105px' : '0px'};
   background-color:#000;
   top:70px;
   @media (max-width: 900px) {
@@ -39,6 +39,37 @@ export const WrapMenuElemText = styled(Link)`
   text-decoration: none;
 `;
 
-export const Icon = styled.div`
+export const LanguagesContainer = styled.div`
+  position:relative;
+  display:flex;
+  justify-content: space-around;
+  align-items: center;
+  width:100%;
+  height:30px;
+  padding-left:15px;
+  padding-right:15px;
+`;
 
+export const FrenchFlag = styled.div`
+  display:flex;
+  width:20px;
+  height:10px;
+  background-image:url('/french_flag.png');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor:pointer;
+  opacity:${({ selected }) => selected ? 1 : 0.5 };
+`;
+
+export const EnglishFlag = styled.div`
+  display:flex;
+  width:20px;
+  height:10px;
+  background-image:url('/english_flag.svg');
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor:pointer;
+  opacity:${({ selected }) => selected ? 1 : 0.5 };
 `;

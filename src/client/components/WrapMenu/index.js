@@ -1,23 +1,37 @@
 import React from 'react';
-import { bool } from 'prop-types';
+import { bool, string, func } from 'prop-types';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 import req from '../../request';
 import {
   WrapMenuContainer,
   WrapMenuElem,
   WrapMenuElemText,
-  Icon,
+  LanguagesContainer,
+  FrenchFlag,
+  EnglishFlag,
 } from './styles';
+import { getSelectedLanguage } from '../../selectors/user';
+import { updateUserLanguage } from '../../actions/user';
+import { FR, ENG } from './constants';
+
+const propTypes = {
+  displayMenu: bool.isRequired,
+  lang: string,
+  updateUserLanguage: func.isRequired,
+};
 
 const WrapMenu = ({
   displayMenu,
+  lang,
+  updateUserLanguage,
 }) => (
   <WrapMenuContainer displayMenu={displayMenu}>
     <WrapMenuElem>
-      <Icon />
       <WrapMenuElemText to="/profil">My account</WrapMenuElemText>
     </WrapMenuElem>
     <WrapMenuElem>
-      <Icon />
       <WrapMenuElemText
         to="/"
         onClick={() => {
@@ -30,11 +44,36 @@ const WrapMenu = ({
         Log out
       </WrapMenuElemText>
     </WrapMenuElem>
+    <WrapMenuElem>
+      <LanguagesContainer>
+        <FrenchFlag
+          selected={lang === FR}
+          onClick={() => {
+            if (lang !== FR) {
+              updateUserLanguage(FR)
+            }
+          }}
+        />
+        <EnglishFlag
+          selected={lang === ENG}
+          onClick={() => {
+            if (lang !== ENG) {
+              updateUserLanguage(ENG)
+            }
+          }}
+        />
+      </LanguagesContainer>
+    </WrapMenuElem>
   </WrapMenuContainer>
 );
 
-WrapMenu.propTypes = {
-  displayMenu: bool.isRequired,
-};
+WrapMenu.propTypes = propTypes;
 
-export default WrapMenu;
+const actions = { updateUserLanguage };
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
+const mapStateToProps = state => ({
+  lang: getSelectedLanguage(state),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(WrapMenu);

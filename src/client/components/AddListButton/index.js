@@ -1,6 +1,6 @@
 import React from 'react';
 import { string, array, func, bool } from 'prop-types';
-import { map } from 'lodash';
+import { map, filter } from 'lodash';
 import { withStateHandlers, compose, lifecycle } from 'recompose';
 
 import req from '../../request';
@@ -13,6 +13,7 @@ import {
 const propTypes = {
   movieId: string.isRequired,
   myList: array.isRequired,
+  updateUserList: func.isRequired,
   handleChangeisAdded: func.isRequired,
   isAdded: bool.isRequired,
 };
@@ -32,15 +33,23 @@ const AddListButton = ({
   movieId,
   isAdded,
   handleChangeisAdded,
+  myList,
+  updateUserList,
 }) => (
   <AddListButtonContainer
     onClick={() => {
       if (!isAdded) {
         req.addMovieMylist('my_list', movieId)
-          .then(() => handleChangeisAdded());
+          .then(() => {
+            updateUserList([...myList, movieId]);
+            handleChangeisAdded();
+          });
       } else {
         req.deleteMovieMylist('my_list', movieId)
-          .then(() => handleChangeisAdded());
+          .then(() => {
+            updateUserList(filter([...myList], id => id !== movieId));
+            handleChangeisAdded();
+          });
       }
     }}
   >

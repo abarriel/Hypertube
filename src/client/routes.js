@@ -1,7 +1,6 @@
 import Home from './pages/Home';
 import Profil from './pages/Profil';
 import Movies from './pages/Movies';
-import Users from './pages/Users';
 import Video from './pages/Video';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -9,6 +8,7 @@ import Recents from './pages/Recents';
 import Reset from './pages/Reset';
 import Lost from './pages/Lost';
 import MyList from './pages/MyList';
+import EditProfil from './pages/EditProfil';
 
 const routes = [
   {
@@ -23,13 +23,13 @@ const routes = [
     id: 1,
   },
   {
-    path: '/movies',
-    component: Movies,
+    path: '/editprofil',
+    component: EditProfil,
     id: 2,
   },
   {
-    path: '/users',
-    component: Users,
+    path: '/movies',
+    component: Movies,
     id: 3,
   },
   {
@@ -65,7 +65,7 @@ const routes = [
   {
     path: '/mylist',
     component: MyList,
-    id: 9,
+    id: 10,
   },
 ];
 

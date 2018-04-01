@@ -19,7 +19,7 @@ const Footer = ({
       <Underline color={selectedSlide === 0 ? '#e50914' : 'rgba(0,0,0,0)'} />
     </Button>
     <Button onClick={() => handleChangeSelectedSlide(1)}>
-      Commentaire
+      Comments
       <Underline color={selectedSlide === 1 ? '#e50914' : 'rgba(0,0,0,0)'} />
     </Button>
   </FooterContainer>

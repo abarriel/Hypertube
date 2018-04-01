@@ -57,8 +57,8 @@ class Req {
   }
 
   @tryCatcher()
-  async addComment(imdbId) {
-    return this.axios('post', `comments/${imdbId}`);
+  async addComment(imdbId, body) {
+    return this.axios('post', `comments/${imdbId}`, body);
   }
 
 
@@ -87,6 +87,11 @@ class Req {
   @tryCatcher(true)
   async getUserById(id) {
     return this.axios('get', `users/${id}`);
+  }
+
+  @tryCatcher(true)
+  async getUsers(limit, offset) {
+    return this.axios('get', `users`);
   }
 
   @tryCatcher(true)

@@ -33,6 +33,7 @@ import YearsWrapperButton from '../../components/YearsWrapperButton';
 import EmptySearch from '../../components/EmptySearch';
 import MovieDetails from '../../containers/MovieDetails';
 import req from '../../request';
+import { MOVIE_PREVIEW_HEIGHT } from '../../constants';
 import {
   addMovies,
   resetMovies,
@@ -92,7 +93,7 @@ const Movies = ({
           />
           <MovieDetails
             handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
-            height={previewOpen === movie.imdbId ? 50 : 0}
+            height={previewOpen === movie.imdbId ? MOVIE_PREVIEW_HEIGHT : 0}
             detailsData={detailsData}
             imdbId={movie.imdbId}
             resetDetailsData={resetDetailsData}

@@ -1,0 +1,1 @@
+export const MOVIE_PREVIEW_HEIGHT = 600;

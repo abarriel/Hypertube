@@ -32,6 +32,7 @@ export const AddLogo = styled(GoPlus)`
   };
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;
+  color:white;
 `;
 
 export const RemoveLogo = styled(MdRemove)`
@@ -42,4 +43,5 @@ export const RemoveLogo = styled(MdRemove)`
   };
   font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;
   font-weight:0;
+  color:white;
 `;

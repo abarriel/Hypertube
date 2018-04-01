@@ -4,6 +4,7 @@ import {
   object,
   string,
   func,
+  bool,
 } from 'prop-types';
 import { map, isEmpty } from 'lodash';
 import { connect } from 'react-redux';
@@ -15,11 +16,14 @@ import {
   MoviePreviewContainer,
   MoviePreviewContent,
 } from './styles';
+import EmptyList from './EmptyList';
 import MoviePreview from '../../components/MoviePreview';
 import MovieDetails from '../../containers/MovieDetails';
+import Spinner from '../../components/Spinner';
 import { getReqParams } from '../../selectors/movies';
 import { getUserList } from '../../selectors/user';
 import req from '../../request';
+import { MOVIE_PREVIEW_HEIGHT } from '../../constants';
 
 const propTypes = {
   movies: array.isRequired,
@@ -29,6 +33,7 @@ const propTypes = {
   handleChangeIsPreviewOpen: func.isRequired,
   loadDetailsData: func.isRequired,
   resetDetailsData: func.isRequired,
+  isFetching: bool.isRequired,
 };
 
 const MyList = ({
@@ -39,6 +44,7 @@ const MyList = ({
   handleChangeIsPreviewOpen,
   loadDetailsData,
   resetDetailsData,
+  isFetching,
 }) => (
   <MyListContainer>
     <Title>My List</Title>
@@ -54,7 +60,7 @@ const MyList = ({
           />
           <MovieDetails
             handleChangeIsPreviewOpen={handleChangeIsPreviewOpen}
-            height={previewOpen === movie.imdbId ? 50 : 0}
+            height={previewOpen === movie.imdbId ? MOVIE_PREVIEW_HEIGHT : 0}
             detailsData={detailsData}
             imdbId={movie.imdbId}
             resetDetailsData={resetDetailsData}
@@ -62,6 +68,8 @@ const MyList = ({
         </MoviePreviewContent>
       ))
     }
+      {movies.length === 0 && !isFetching && <EmptyList />}
+      {isFetching && <Spinner />}
     </MoviePreviewContainer>
   </MyListContainer>
 );
@@ -80,6 +88,7 @@ const enhance = compose(
     {
       previewOpen: null,
       detailsData: null,
+      isFetching: true,
       movies: [],
     },
     {
@@ -87,13 +96,17 @@ const enhance = compose(
       loadDetailsData: () => data => ({ detailsData: data }),
       resetDetailsData: () => () => ({ detailsData: null }),
       loadMovies: () => newMovies => ({ movies: newMovies }),
+      handleChangeIsFetching: ({ isFetching }) => () => ({ isFetching: !isFetching }),
     },
   ),
   lifecycle({
     componentDidMount() {
-      if (!isEmpty(this.props.userList)) {
+      if (!this.props.userList || !isEmpty(this.props.userList)) {
         req.getMylist('my_list')
-          .then(movies => this.props.loadMovies(movies));
+          .then(movies => {
+            this.props.loadMovies(movies);
+            this.props.handleChangeIsFetching();
+          });
       }
     },
   }),

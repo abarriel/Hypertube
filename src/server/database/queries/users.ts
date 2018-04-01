@@ -12,19 +12,19 @@ const Users = {
     console.log(colors.green('user: '), user, '\n');
     const querySQL = DB.insert(user)
       .from('users')
-      .returning(['id', 'username', 'omniauth']);
-
+      .returning(['id', 'username', 'omniauth', 'profilePicture']);
     console.log(colors.blue(querySQL.toString()));
-    return querySQL;
+    const [users] = await querySQL;
+    return users;
   },
 
   async isRegistered({ username, id, omniauth }:any) {
     let user;
     if (!omniauth) omniauth = true;
     if (username)
-      user = await DB.select(['id', 'username', 'omniauth']).from('users').where('username', username).andWhere('omniauth', omniauth).first();
+      user = await DB.select(['id', 'username', 'omniauth', 'profilePicture']).from('users').where('username', username).andWhere('omniauth', omniauth).first();
     if (id)
-      user = await DB.select(['id', 'username', 'omniauth']).from('users').where('id', id).andWhere('omniauth', omniauth).first();
+      user = await DB.select(['id', 'username', 'omniauth', 'profilePicture']).from('users').where('id', id).andWhere('omniauth', omniauth).first();
     if (_.isEmpty(user)) return false;
     return user;
   },
