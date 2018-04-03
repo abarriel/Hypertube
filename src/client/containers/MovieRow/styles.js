@@ -16,7 +16,7 @@ export const MovieRowContainer = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   transition: all ${TRANSITION}s ease-in-out;
-  margin-bottom:20px;
+  margin-bottom:-20px;
   margin-left:${({ margin }) => `${(margin * (WIDTH + (2 * MARGIN))) + 45}px`};
 `;
 
