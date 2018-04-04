@@ -36,6 +36,8 @@ class Register extends Component {
 
   handleChange = async ({ target: { name, value, files } }) => {
     const errors = validateUser({ [name]: value });
+    const { errors: prevErrors } = this.state;
+    if (prevErrors[name] && !errors) delete prevErrors[name];
     if (name === 'profilePicture') {
       const file = files[0];
       if (!file) return false;
@@ -44,11 +46,7 @@ class Register extends Component {
       img.onerror = () => this.setState({ errors: { ...errors, profilePicture: 'Not an image' } });
       const _URL = window.URL || window.webkitURL;
       img.src = _URL.createObjectURL(file);
-    } else {
-      const { errors: prevErrors } = this.state;
-      if (prevErrors[name] && !errors) delete prevErrors[name];
-      this.setState({ [name]: value, errors: { ...errors, ...prevErrors } });
-    }
+    } else this.setState({ [name]: value, errors: { ...errors, ...prevErrors } });
   }
 
   handleSubmit = async (e) => {
@@ -58,6 +56,7 @@ class Register extends Component {
     console.log('errors: ', errors);
     const user = _.omit(this.state, ['errors']);
     console.log('user: ', user);
+    if (errors['all'] && _.keys(errors).length === 1) delete errors['all'];
     if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) {
       this.setState(({ errors: { ...errors, all: 'Veuillez remplir tout les champs' } }));
       return;
@@ -73,7 +72,6 @@ class Register extends Component {
 
   render() {
     const { username, password, email, firstName, lastName, errors } = this.state;
-
     return (
       <RegisterContainer>
         <Header>
@@ -177,4 +175,3 @@ class Register extends Component {
 }
 
 export default Register;
-
