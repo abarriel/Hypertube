@@ -22,6 +22,7 @@ class Auth extends Component {
       this.setState({ isAuthorized: true, isRequested: true });
     } catch (err) {
       this.setState({ isRequested: true });
+      console.log(err);
     }
   }
 

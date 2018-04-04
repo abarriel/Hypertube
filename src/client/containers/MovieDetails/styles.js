@@ -100,7 +100,7 @@ export const DetailsContent = styled.div`
   align-items: flex-start;
   margin-left:25px;
   margin-top:20px;
-  width:calc(100% - 25px);
+  width:calc(150% - 25px);
 `;
 
 export const MetaListContainer = styled.div`
