@@ -30,7 +30,6 @@ const Users = {
   },
 
   async update(newUser: any, id: any) {
-
     const querySQL = DB.from('users').where('id', id).update(newUser);
     console.log(colors.blue(querySQL.toString()));
     return querySQL;
