@@ -65,7 +65,7 @@ class Register extends Component {
       const bodyFormData = new FormData();
       _.map(user, (value, key) => { bodyFormData.set(key, value); });
       await req.register(bodyFormData);
-      // window.location = '/';
+      window.location = '/';
     } catch (err) {
       console.log('err: ', err);
       this.setState(({ errors: { all: err.details } }));
