@@ -23,6 +23,7 @@ export default compose(
       profilePicture: props.user.profilePicture || '',
     }),
     validationSchema: UserSchema,
+    enableReinitialize: true,
     handleSubmit: async (
       values,
       { setFieldError },

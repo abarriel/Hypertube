@@ -120,6 +120,7 @@ export const Shadow = styled.div`
   width:100%;
   padding-top:25px;
   background-color:black;
+  padding-bottom:50px;
   margin-bottom:25px;
 `;
 

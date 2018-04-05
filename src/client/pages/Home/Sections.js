@@ -10,7 +10,7 @@ const Sections = [
   },
   {
     id: 1,
-    label: 'Les plus gros succès sur Hypertix',
+    label: 'The biggest hits on Hypertix',
     reqParams: {
       sort: 'seeds.DESC',
       limit: 25,
@@ -18,7 +18,7 @@ const Sections = [
   },
   {
     id: 2,
-    label: 'Les mieux notées',
+    label: 'Top rated',
     reqParams: {
       limit: 25,
       sort: 'score.DESC',
@@ -26,7 +26,7 @@ const Sections = [
   },
   {
     id: 3,
-    label: 'Comédie',
+    label: 'Comédy',
     reqParams: {
       limit: 25,
       sort: 'seeds.DESC',
@@ -55,7 +55,7 @@ const Sections = [
   },
   {
     id: 6,
-    label: 'Fantaisie',
+    label: 'Fantaisy',
     reqParams: {
       limit: 25,
       sort: 'seeds.DESC',
@@ -64,7 +64,7 @@ const Sections = [
   },
   {
     id: 7,
-    label: 'Films d\'animation',
+    label: 'Animation Movies',
     reqParams: {
       limit: 25,
       sort: 'seeds.DESC',

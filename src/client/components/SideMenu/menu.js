@@ -2,7 +2,7 @@ export const menu = [
   {
     id: 0,
     to: '/',
-    label: 'Accueil',
+    label: 'Home',
   },
   {
     id: 1,

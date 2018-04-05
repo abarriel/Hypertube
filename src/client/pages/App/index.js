@@ -61,13 +61,15 @@ export default compose(
         req.genres()
           .then(data => {
             this.props.loadGenres(data);
-          });
+          })
+          .catch(err => err);
       }
       if (isEmpty(this.props.user)) {
         req.getMyInfos()
           .then(data => {
             this.props.loadUser(data);
-          });
+          })
+          .catch(err => err);
       }
     },
   }),

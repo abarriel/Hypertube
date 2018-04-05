@@ -78,7 +78,7 @@ const Shadow = ({
             <ViewOrNot color={isView ? '#46d369' : 'white'} >{isView ? 'View' : 'Not View'}</ViewOrNot>
           </RatingAndView>
           <DesciptionText>
-            {movie.summary.substring(1, 200)}
+            {movie.summary.substring(0, 200)}
           </DesciptionText>
           <MoreButton
             color={wichHover === 2 ? '#e50914' : 'white'}

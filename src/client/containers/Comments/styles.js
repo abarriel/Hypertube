@@ -168,5 +168,5 @@ export const Separator = styled.div`
   height:1px;
   margin-left:50px;
   bottom:0px;
-  background-image:linear-gradient(to right,rgb(255,255,255),transparent);
+  background-image:linear-gradient(to right,transparent,rgb(255,255,255),transparent);
 `;
