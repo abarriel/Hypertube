@@ -11,6 +11,8 @@ const createCommentsTable = (): Promise<any> => {
       table.text('profile_picture').notNullable();
       table.string('imdb_id').notNullable();
       table.text('body');
+      // table.foreign('user_id').references('users.id').onDelete('CASCADE')
+      // table.foreign('username').references('users.username').onUpdate('CASCADE')
     })
 ]);
 };

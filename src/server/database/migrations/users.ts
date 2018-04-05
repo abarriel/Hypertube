@@ -5,6 +5,7 @@ const createUsersTable = (): Promise<any> => {
   return Promise.all([
     DB.schema.createTableIfNotExists('users', (table: Knex.CreateTableBuilder) => {
       table.increments('id').primary();
+      // table.string('username').notNullable().unique();
       table.string('username').notNullable();
       table.string('first_name');
       table.string('last_name');
