@@ -9,6 +9,7 @@ const createUsersTable = (): Promise<any> => {
       table.string('username').notNullable();
       table.string('first_name');
       table.string('last_name');
+      // table.string('email').unique();
       table.string('email');
       table.string('lang').defaultTo('eng');
       table.string('profile_picture').defaultTo('default_picture.jpg');
