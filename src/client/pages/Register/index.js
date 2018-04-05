@@ -56,14 +56,16 @@ class Register extends Component {
     console.log('errors: ', errors);
     const user = _.omit(this.state, ['errors']);
     console.log('user: ', user);
-    if (errors['all'] && _.keys(errors).length === 1) delete errors['all'];
+    if (errors.all && _.keys(errors).length === 1) delete errors.all;
     if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) {
       this.setState(({ errors: { ...errors, all: 'Veuillez remplir tout les champs' } }));
       return;
     }
     try {
-      await req.register(user);
-      window.location = '/';
+      const bodyFormData = new FormData();
+      _.map(user, (value, key) => { bodyFormData.set(key, value); });
+      await req.register(bodyFormData);
+      // window.location = '/';
     } catch (err) {
       console.log('err: ', err);
       this.setState(({ errors: { all: err.details } }));
