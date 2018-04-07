@@ -76,7 +76,7 @@ const Movies = ({
 }) => (
   <MoviesContainer>
     <ParamsContainer>
-      <Title>Films</Title>
+      <Title>Movies</Title>
       <GenresWrapperButton selectedGenre={reqParams.genres} />
       <RatingWrapperButton />
       <YearsWrapperButton />

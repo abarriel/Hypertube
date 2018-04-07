@@ -111,7 +111,6 @@ class Req {
 
   @tryCatcher(true)
   async resetPassword(token, password) {
-    console.log(password);
     return this.axios('put', 'password', password, { params: { token } });
   }
 

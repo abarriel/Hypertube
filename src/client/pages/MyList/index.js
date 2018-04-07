@@ -101,13 +101,11 @@ const enhance = compose(
   ),
   lifecycle({
     componentDidMount() {
-      if (!this.props.userList || !isEmpty(this.props.userList)) {
-        req.getMylist('my_list')
-          .then(movies => {
-            this.props.loadMovies(movies);
-            this.props.handleChangeIsFetching();
-          });
-      }
+      req.getMylist('my_list')
+        .then(movies => {
+          this.props.loadMovies(movies);
+          this.props.handleChangeIsFetching();
+        });
     },
   }),
 );
