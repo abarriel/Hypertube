@@ -27,7 +27,7 @@ class UsersController {
     const { user: { omniauth, id, profilePicture } } = req;
     if (omniauth || omniauth === 'true') return next({ type: 'Auth', details: 'Cannot update your info bc you user is update by your provider'});
     const { user: dataToUpdate } = req.app.locals;
-    if (dataToUpdate.username) return next({ type: 'Auth', details: 'Cannot update your login'});
+    if (dataToUpdate.username) delete dataToUpdate.username;
     try {
       await Users.update(dataToUpdate, id);
       res.json({ status: 'user updated'});
