@@ -11,12 +11,15 @@ import middlewaresBinding from '../middleware';
 import { Users, Movies, List } from '../../database/queries';
 import { Utils } from '../../core';
 
+let getSub = true;
+
 class VideoController {
   name = 'video';
 
   @middlewaresBinding(['videoValidate'])
   async getVideo(req: express.Request, res: express.Response, next: any) {
-    this.getSub(req, res, next);
+    if (getSub) this.getSub(req, res, next);
+    getSub = false;
     const { getStreamTorrent } = Utils;
     let { video: { start, end, imdbId } } = req.app.locals;
     const { torrents } = await Movies.single(imdbId);

@@ -16,10 +16,14 @@ class UsersController {
   @middlewaresBinding(['uploadImg', 'userFormValidate'])
   async post(req: express.Request, res: express.Response, next: any) {
     const { user } = req.app.locals;
-    if (await Users.isRegistered({ username: user.username, omniauth: 'false' })) return next({ type: 'db', details: 'User already register under a similar login' });
-    if (_.some(user, _.isNil)) return next({ type: 'Validation', details: 'One value is equired but is undefined' });
-    const userInDb = await Users.post({ ...user, omniauth: false });
-    res.json({ user: userInDb });
+    try {
+      if (await Users.isRegistered({ username: user.username, email: user.email })) return next({ type: 'db', details: 'User already register under a similar login' });
+      if (_.some(user, _.isNil)) return next({ type: 'Validation', details: 'One value is equired but is undefined' });
+      const userInDb = await Users.post({ ...user, omniauth: false });
+      res.json({ user: userInDb });
+    } catch (err) {
+      next({ type: 'db', details: 'err user already register', err });
+    }
   };
 
   @middlewaresBinding(['isAuthorize', 'uploadImg', 'userFormValidate'])

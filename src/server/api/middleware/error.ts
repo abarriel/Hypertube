@@ -8,6 +8,8 @@ const errorHandler = (err: any, req: express.Request, res: express.Response, nex
   let errMsg = {};
   if (!err.details)
     err.details = "check the errror";
+  // if (err.type === 'Auth')
+    // res.redirect('http://localhost:8080', 301);
   if (err.type === 'validation' || err.type === 'db' || err.type === 'Auth' || err.type === 'Torrent' || err.type === 'Stream') {
     errMsg = { type: err.type, details: err.details, err: err.err };
   }

@@ -1,19 +1,19 @@
 const Sections = [
   {
     id: 0,
-    label: 'Tv Shows',
-    reqParams: {
-      limit: 25,
-      sort: 'score.DESC',
-      type: 'shows',
-    },
-  },
-  {
-    id: 1,
     label: 'The biggest hits on Hypertix',
     reqParams: {
       sort: 'seeds.DESC',
       limit: 25,
+    },
+  },
+  {
+    id: 1,
+    label: 'Animation Movies',
+    reqParams: {
+      limit: 25,
+      sort: 'seeds.DESC',
+      genres: 'Animation',
     },
   },
   {
@@ -64,11 +64,11 @@ const Sections = [
   },
   {
     id: 7,
-    label: 'Animation Movies',
+    label: 'Tv Shows',
     reqParams: {
       limit: 25,
-      sort: 'seeds.DESC',
-      genres: 'Animation',
+      sort: 'score.DESC',
+      type: 'shows',
     },
   },
 ];

@@ -17,6 +17,7 @@ const createUsersTable = (): Promise<any> => {
       table.specificType('my_list', 'TEXT[]').defaultTo('{}');
       table.specificType('history', 'TEXT[]').defaultTo('{}');
       table.boolean('omniauth').defaultTo(true);
+      table.text('provider').defaultTo('local');
     })
 ]);
 };

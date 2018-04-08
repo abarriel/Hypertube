@@ -18,13 +18,14 @@ const Users = {
     return users;
   },
 
-  async isRegistered({ username, id, omniauth }:any) {
-    let user;
-    if (!omniauth) omniauth = true;
+  async isRegistered({ username, id, email }:any) {
+    let user = {};
     if (username)
-      user = await DB.select(['id', 'username', 'omniauth', 'profilePicture']).from('users').where('username', username).andWhere('omniauth', omniauth).first();
-    if (id)
-      user = await DB.select(['id', 'username', 'omniauth', 'profilePicture']).from('users').where('id', id).andWhere('omniauth', omniauth).first();
+      user = await DB.select(['provider', 'id', 'username', 'omniauth', 'profilePicture']).from('users').where('username', username).first();
+    if (id && _.isEmpty(user))
+      user = await DB.select(['provider', 'id', 'username', 'omniauth', 'profilePicture']).from('users').where('id', id).first();
+    if (email && _.isEmpty(user))
+      user = await DB.select(['provider', 'id', 'username', 'omniauth', 'profilePicture']).from('users').where('email', email).first();
     if (_.isEmpty(user)) return false;
     return user;
   },

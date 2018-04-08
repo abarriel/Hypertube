@@ -29,7 +29,7 @@ passport.use('local', new LocalStrategy({
 }, async (req: any, username: string , password: string, done: any) => {
   try {
     const { user } = req.app.locals;
-    if (!await Users.isRegistered({ username: user.username, omniauth: 'false' })) return done({ type: 'db', details: 'User not found' });
+    if (!await Users.isRegistered({ username : user.username, email: user.email, })) return done({ type: 'db', details: 'User not found' });
     const { password: passU, id, profilePicture, lang, history, myList } = await Users.getByUsername(user.username, ['password', 'id', 'profilePicture', 'lang', 'history', 'myList']);
     console.log(user.password, user.username);
     if (!await bcrypt.compare(user.password, passU)) return done({ type: 'Auth', details: 'Failed to authenticate' });
@@ -47,8 +47,11 @@ passport.use('42', new FortyTwoStrategy({
   try {
     const { login: username, email, image_url: profilePicture, first_name, last_name} = profile._json;
 
-    let user = await Users.isRegistered({ username });
-    if (!user) user = await Users.post({ username, email, profilePicture, first_name, last_name});
+    let user = await Users.isRegistered({ username, email });
+    if(user.provider !== '42') {
+      return done({ type: 'Auth', details: 'You need to register using your local account' });
+    }
+    if (!user) user = await Users.post({ provider: '42' ,username, email, profilePicture, first_name, last_name});
     console.log("42", user);
     return done(null, user);
   } catch (err) {
@@ -66,8 +69,11 @@ passport.use('facebook', new FacebookStrategy({
     const { email, picture: { data: { url: profilePicture } }, first_name, last_name} = profile._json;
     const username = `${first_name}-${last_name}`;
 
-    let user = await Users.isRegistered({ username });
-    if (!user) user = await Users.post({ username, email, profilePicture, first_name, last_name});
+    let user = await Users.isRegistered({ username, email });
+    if(user.provider !== 'facebook') {
+      return done({ type: 'Auth', details: 'You need to register using your local account' });
+    }
+    if (!user) user = await Users.post({ provider: 'facebook' ,username, email, profilePicture, first_name, last_name});
     return done(null, user);
   } catch (err) {
     return done({ type: 'Auth', details: 'Failed', err });
@@ -84,8 +90,11 @@ passport.use('twitter', new TwitterStrategy({
     const { username, emails, photos } = profile;
     const email = emails[0].value;
     const profilePicture = _.replace(photos[0].value || '', '_normal', '');
-    let user = await Users.isRegistered({ username });
-    if (!user) user = await Users.post({ username, email, profilePicture });
+    let user = await Users.isRegistered({ username, email });
+    if(user.provider !== 'twitter') {
+      return done({ type: 'Auth', details: 'You need to register using your local account' });
+    }
+    if (!user) user = await Users.post({ provider: 'twitter' ,username, email, profilePicture });
     return done(null, user);
   } catch (err) {
     return done({ type: 'Auth', details: 'Failed', err });
@@ -102,8 +111,11 @@ passport.use('github', new GithubStrategy({
     const { username, emails, photos } = profile;
     const email = emails[0].value;
     const profilePicture = photos[0].value;
-    let user = await Users.isRegistered({ username });
-    if (!user) user = await Users.post({ username, email, profilePicture });
+    let user = await Users.isRegistered({ username, email });
+    if(user.provider !== 'github') {
+      return done({ type: 'Auth', details: 'You need to register using your local account' });
+    }
+    if (!user) user = await Users.post({ provider: 'github' ,username, email, profilePicture });
     return done(null, user);
   } catch (err) {
     return done({ type: 'Auth', details: 'Failed', err });
@@ -122,8 +134,11 @@ passport.use('google', new GoogleStrategy({
     const profilePicture = _.replace(photos[0].value || '', '?sz=50', '');
     const { familyName: lastName, givenName: firstName } = name;
     const username = `${firstName}-${lastName}`;
-    let user = await Users.isRegistered({ username });
-    if (!user) user = await Users.post({ username, email, firstName, lastName, profilePicture });
+    let user = await Users.isRegistered({ username, email });
+    if(user.provider !== 'google') {
+      return done({ type: 'Auth', details: 'You need to register using your local account' });
+    }
+    if (!user) user = await Users.post({ provider: 'google' ,username, email, firstName, lastName, profilePicture });
     return done(null, user);
   } catch (err) {
     return done({ type: 'Auth', details: 'Failed', err });
@@ -142,7 +157,7 @@ passport.use('google', new GoogleStrategy({
 //   // const profilePicture = _.replace(photos[0].value || '', '?sz=50', '');
 //   // const { familyName: lastName, givenName: firstName } = name;
 //   // const username = `${firstName}-${lastName}`;
-//   // // if (await Users.isRegistered({ username })) return done({ type: 'db', details: 'User already register under a similar login' });
+//   // // if (await Users.isRegistered({ username, email })) return done({ type: 'db', details: 'User already register under a similar login' });
 //   // const user = await Users.post({ username, email, firstName, lastName, profilePicture });
 //   return done(null, profile);
 // }));
