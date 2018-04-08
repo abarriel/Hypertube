@@ -4,6 +4,7 @@ yarn.lock
 dist
 *.log
 upload/
+profile_picture/
 .vscode
 public/bundle.js
 config/parameters.js

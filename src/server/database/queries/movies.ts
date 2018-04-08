@@ -39,7 +39,7 @@ const Movies = {
       END
       ORDER BY title asc) a
       ORDER BY CASE
-        WHEN '${type}' = 'date' THEN to_date(first_aired, 'YYYY-DD-MM') - date '1900-01-01'
+        WHEN '${type}' = 'date' and first_aired != 'Invalid date' THEN to_date(first_aired, 'YYYY-MM-DD') - date '1900-01-01'
         WHEN '${type}' = 'seeds' AND type = 'movie' THEN seeds
         WHEN '${type}' = 'score' THEN score
       END

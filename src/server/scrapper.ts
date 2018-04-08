@@ -21,7 +21,7 @@ const parsifyParams = (params: object) => _.reduce(params, (res, value, key) => 
 const YTS_URL = 'https://yts.am/api/v2/list_movies.json';
 const YTS_DETAIL = 'https://yts.am/api/v2/movie_details.json?movie_id=6941';
 
-const EZTV = (page: number) => `http://95.85.22.142:3001/api/get-torrents?limit=100&page=${page}`;
+const EZTV = (page: number) => `https://eztv.ag/api/get-torrents?limit=100&page=${page}`;
 
 /**
  *
@@ -97,9 +97,9 @@ const scrapYTS = async () => {
     if (page >= 1)
     return axios.get(`${YTS_URL}?${parsifyParams({...params, page })}`, { httpsAgent: agent })
           .then(({ data: { data: { movies } } }) => moviesYTS = [...moviesYTS, ...movies])
-          .catch(e => e)}, { concurrency: 9 });
+          .catch(e => e)}, { concurrency: 6 });
 
-  await Promise.mapSeries(moviesYTS, (movieYTS: any) => axios.get(omdbUrl(movieYTS.imdb_code))
+  await Promise.map(moviesYTS, (movieYTS: any) => axios.get(omdbUrl(movieYTS.imdb_code))
     .then(({ data: imdbInfos }) => ({ movieDetail: { ...movieYTS, ...imdbInfos } }))
     .then(({ movieDetail }) => findTmdb(movieYTS.imdb_code)
       .then(({ data: { movie_results } }) => {
@@ -125,7 +125,7 @@ const axiosApiTrakt:any = axios.create({
 const TraktURL = async (imdbId: string) => axiosApiTrakt({ url: `${imdbId}?type=episode&extended=full` });
 
 const axiosApiTMDB:any = axios.create({
-  baseURL: 'http://95.85.22.142:3002' || 'https://api.themoviedb.org/3',
+  baseURL: 'https://api.themoviedb.org/',
   params: {
     api_key: Environment.getConfig().tmdb,
     language: 'en-US',
@@ -209,8 +209,8 @@ const scrapEZTV = async () => {
     console.log('shows available: ', torrents_count);
     console.log('shows filtered (seeds > 30 && only keep qualite with most seed)', newShows.length);
     await
-    Promise.mapSeries(newShows,
-      async (shows:any) => Promise.mapSeries(shows, async (episodeEZTV: any, index: number) => findTmdb(`tt${episodeEZTV.imdb_id}`)
+    Promise.map(newShows,
+      async (shows:any) => Promise.map(shows, async (episodeEZTV: any, index: number) => findTmdb(`tt${episodeEZTV.imdb_id}`)
       .then(({ data: { tv_results } }) => {
         if (_.isEmpty(tv_results)) throw 'no data';
         return getShowTmdb(tv_results[0].id).then(({ data: showInfo }) => ({ show: showInfo, episodeEZTV }));
@@ -219,7 +219,7 @@ const scrapEZTV = async () => {
       .then(res => getEpisodeTmdb(res.show.id, res.episodeEZTV.season, res.episodeEZTV.episode).then(({ data }) => ({ ...res, episodeTMDB: data })).catch(e => res))
       .then((res: any) => addEpisode({ ...res.episodeTMDB, ...res.episodeEZTV, showId: res.show.id, showName: res.show.name }))
       .catch(e => console.log(e))
-    ));
+    , { concurrency: 5}), { concurrency: 5 });
   }
 
   /*
@@ -229,8 +229,8 @@ const scrapEZTV = async () => {
 
  const initScrapper = async () => {
    console.log('Start scrapping');
-  //  await scrapYTS();
-  //  await scrapEZTV();
+  //await scrapYTS();
+  //await scrapEZTV();
   console.log('Done scrapping');
 };
 

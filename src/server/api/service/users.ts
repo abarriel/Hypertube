@@ -18,7 +18,6 @@ class UsersController {
     const { user } = req.app.locals;
     if (await Users.isRegistered({ username: user.username, omniauth: 'false' })) return next({ type: 'db', details: 'User already register under a similar login' });
     if (_.some(user, _.isNil)) return next({ type: 'Validation', details: 'One value is equired but is undefined' });
-
     const userInDb = await Users.post({ ...user, omniauth: false });
     res.json({ user: userInDb });
   };
