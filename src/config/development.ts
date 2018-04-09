@@ -28,10 +28,9 @@ const developmentConfig = {
   db: {
     client: 'postgresql',
     connection: {
-      host: '95.85.22.142',
+      host: '188.166.150.204',
       port: 5432,
       database: 'postgres',
-      user: 'postgres',
       },
     wrapIdentifier: (value: any, origImpl: any) => origImpl(_.snakeCase(value)),
     postProcessResponse: (res: any) => keysToCamelCase(res),
