@@ -63,7 +63,7 @@ class Req {
 
 
   // my list
-  @tryCatcher()
+  @tryCatcher(true)
   async getMylist(list) {
     return this.axios('get', `list/${list}`);
   }

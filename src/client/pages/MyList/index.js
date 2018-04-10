@@ -105,7 +105,8 @@ const enhance = compose(
         .then(movies => {
           this.props.loadMovies(movies);
           this.props.handleChangeIsFetching();
-        });
+        })
+        .catch(() => this.props.handleChangeIsFetching());
     },
   }),
 );

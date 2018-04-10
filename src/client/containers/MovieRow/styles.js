@@ -10,6 +10,7 @@ export const MovieRowContent = styled.div`
   display:flex;
   flex-direction:column;
   z-index:1000;
+  min-height:400px;
 `;
 export const MovieRowContainer = styled.div`
   display:flex;
@@ -148,6 +149,8 @@ export const DesciptionText = styled.p`
   background: linear-gradient(white, rgba(0,0,0,0));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  min-height:calc(100% - 25px);
+  margin-top:25px;
 `;
 
 export const BackgroundImage = styled.div`
@@ -207,7 +210,7 @@ export const ViewOrNot = styled.div`
   align-self:flex-start;
   min-height:15px;
   min-width:30px;
-  font-weight:100;
+  font-weight:0;
   padding-left:5px;
   padding-right:5px;
 `;

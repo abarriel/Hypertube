@@ -24,5 +24,5 @@ export const changeParams = data => ({ type: CHANGE_PARAMS, data });
 
 export const loadGenres = data => ({
   type: LOAD_GENRES,
-  genres: data.genres,
+  genres: data.genres || [],
 });
