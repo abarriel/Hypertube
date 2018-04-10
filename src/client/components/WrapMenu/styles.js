@@ -49,27 +49,3 @@ export const LanguagesContainer = styled.div`
   padding-left:15px;
   padding-right:15px;
 `;
-
-export const FrenchFlag = styled.div`
-  display:flex;
-  width:20px;
-  height:10px;
-  background-image:url('/french_flag.png');
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor:pointer;
-  opacity:${({ selected }) => selected ? 1 : 0.5 };
-`;
-
-export const EnglishFlag = styled.div`
-  display:flex;
-  width:20px;
-  height:10px;
-  background-image:url('/english_flag.svg');
-  background-size: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  cursor:pointer;
-  opacity:${({ selected }) => selected ? 1 : 0.5 };
-`;
