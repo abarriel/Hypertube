@@ -16,7 +16,6 @@ const videoValidate = async (req: express.Request, res: express.Response, next: 
   params.imdbId = imdbId;
   if (!range) return next({ type: 'Torrent', details: 'Range not provided' });
   try {
-  console.log(range, typeof range);
   const positions = range.replace(/bytes=/, '').split('-');
   const start = parseInt(positions[0], 10);
   const end = positions[1] ? parseInt(positions[1], 10) : undefined;

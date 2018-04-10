@@ -21,7 +21,6 @@ class PasswordController {
       mailer(user.email, token);
       res.json({ status: 'email sent' });
     } catch (err) {
-      console.log(err);
       next({ type: 'db', details: 'Failed to send email' });
     }
   };
@@ -35,7 +34,6 @@ class PasswordController {
         if (!/[0-9]{1,5}/.test(sub)) return next({ type: 'validation', details: 'password Wrong Id provided' });
         if (!password) return  next({ type: 'validation', details: 'Password needed' });
         const user = await Users.single({ id: sub, columns: 'all' });
-        console.log(token, user.password);
         const decodedToken:any = jwt.verify(token, user.password);
         if (_.isEmpty(decodedToken))  return next({ type: 'Auth', details: 'Wrong Token' });
         await Users.update({ password }, sub);

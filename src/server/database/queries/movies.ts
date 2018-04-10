@@ -12,7 +12,6 @@ const Movies = {
   async get(filters: any) {
     const { limit, offset, genres, years, ratings, q, sort, type: typeVideo } = filters;
     const [type, order = 'asc'] = sort; // escaped and checked before
-    // console.log(colors.green('filters: '), filters, '\n');
     const queryPattern = [`%${_.replace(q, /\s/g, '%')}%`];
     const querySQL = DB.raw(stripIndent`select * from (SELECT * from (
       SELECT
@@ -47,7 +46,6 @@ const Movies = {
       LIMIT ${limit}
       OFFSET ${offset}
       `);
-    // console.log(colors.blue(querySQL.toString()));
     const { rows } = await querySQL;
     return rows;
   },

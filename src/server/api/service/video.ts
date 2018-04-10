@@ -11,19 +11,18 @@ import middlewaresBinding from '../middleware';
 import { Users, Movies, List } from '../../database/queries';
 import { Utils } from '../../core';
 
-let getSub = true;
+let getSub:any = [];
 
 class VideoController {
   name = 'video';
 
   @middlewaresBinding(['videoValidate'])
   async getVideo(req: express.Request, res: express.Response, next: any) {
-    if (getSub) this.getSub(req, res, next);
-    getSub = false;
     const { getStreamTorrent } = Utils;
     let { video: { start, end, imdbId } } = req.app.locals;
+    if (_.isEmpty(getSub) || !_.includes(getSub, imdbId)) this.getSub(req, res, next);
+    getSub.push(imdbId);
     const { torrents } = await Movies.single(imdbId);
-    // console.log(torrents);
     const { hash } = torrents[0];
     const movieStream: any = await getStreamTorrent(hash, imdbId);
 
@@ -38,14 +37,10 @@ class VideoController {
     };
     res.writeHead(206, head);
     const stream_position = { start, end };
-    // console.log('stream position ', stream_position);
     movieStream.createReadStream(stream_position).pipe(res);
   };
 
-  // @middlewaresBinding(['isAuthorize'])
   async getSub(req: express.Request, res: express.Response, next: any) {
-    // const { lang } = req.user;
-    console.log('getSub');
     const lang = 'fre';
     const { imdbId } = req.params;
     const { OpenSubtitles, buildPath } = Utils;

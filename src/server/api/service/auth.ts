@@ -39,9 +39,7 @@ class UsersController {
   @middlewaresBinding(['userFormValidate'])
   async local(req: express.Request, res: express.Response, next: any) {
     this.passport.authenticate('local', (err, user, info) => {
-      console.log(err);
       if (err) next({ type: 'validation', details: 'bad request' });
-      console.log('user:' ,user);
       req.logIn(user, err => {
         if (err) next({ type: 'validation', details: 'bad request after login' });
         else res.redirect('/')

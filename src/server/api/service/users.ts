@@ -29,19 +29,17 @@ class UsersController {
   @middlewaresBinding(['isAuthorize', 'uploadImg', 'userFormValidate'])
   async put(req: express.Request, res: express.Response, next: any) {
     const { user: { omniauth, id, profilePicture } } = req;
-    console.log('user', req.user);
-    if (omniauth || omniauth === 'true') return next({ type: 'Auth', details: 'Cannot update your info bc you user is update by your provider'});
+    if (omniauth || omniauth === 'true' ) return next({ type: 'Auth', details: 'Cannot update your info bc you user is update by your provider'});
     const { user: dataToUpdate } = req.app.locals;
+    if (_.isEmpty(dataToUpdate)) return next({ type: 'db', details: 'nothing to update' });
     if (dataToUpdate.username) delete dataToUpdate.username;
     try {
-      console.log('user', req.user);
       await Users.update(dataToUpdate, id);
       res.json({ status: 'user updated'});
       // if (dataToUpdate.profilePicture && profilePicture !== 'upload/default.jpg') {
       //  const ok =  del.sync(path.join('../../../../public', profilePicture));
       // }
     } catch (err) {
-      console.log(err);
       next({ type: 'db', details: 'err while updating info', err });
     }
   };
@@ -56,7 +54,6 @@ class UsersController {
   @middlewaresBinding(['isAuthorize'])
   async single(req: express.Request, res: express.Response, next: any) {
     const { id } = req.params;
-    console.log(req.user);
     const { id: myId } = req.user;
     const params: any = { id };
     if (id === 'me') {

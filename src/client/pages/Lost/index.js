@@ -38,7 +38,6 @@ class Lost extends Component {
 
     const { errors } = this.state;
     const { email } = this.state;
-    console.log('email: ', email);
     if (!email.length) {
       this.setState(({ errors: { email: 'Required' } }));
       return;
@@ -51,7 +50,6 @@ class Lost extends Component {
       await req.lostPassword({ email });
       window.location = '/';
     } catch (err) {
-      console.log('err: ', err);
       this.setState(({ errors: { email: err.details } }));
     }
   }

@@ -18,13 +18,11 @@ class CommentsController {
   async add(req: express.Request, res: express.Response, next: any) {
     const { comment } = req.app.locals;
     const { username, id: userId, profilePicture } = req.user;
-    console.log(req.user);
     try {
       const movie = await Movies.single(comment.imdbId);
       await Comments.post({ ...comment, username,  userId, profilePicture });
       res.json({ status: 'Comments Added' });
     } catch (err) {
-      console.log(err);
       next({ type: 'db', details: 'failed to add comment', err });
     }
   };

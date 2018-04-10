@@ -11,7 +11,6 @@ class MoviesController {
 
   @middlewaresBinding('moviesFormValidate')
   async get(req: express.Request, res: express.Response) {
-    console.log('isAuthorized: ', req.isAuthenticated());
     const { filters } = req.app.locals;
     const movies = await Movies.get(filters);
     res.json({ movies });

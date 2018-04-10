@@ -63,7 +63,6 @@ export default ((args: any) => {
         instanciedController.__proto__[method] = mainFunc;
         funcs[indexMainFunc] =  (...args: any[]) => instanciedController[method](...args);
       }
-      // console.log(verbName, `/${pathName}`, funcs);
       router[verbName](`/${pathName}`, funcs);
 
     })

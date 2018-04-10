@@ -53,7 +53,6 @@ class Lost extends Component {
       await req.resetPassword(token, { password });
       window.location = '/';
     } catch (err) {
-      console.log('err: ', err);
       this.setState(({ errors: { all: err.details } }));
     }
   }

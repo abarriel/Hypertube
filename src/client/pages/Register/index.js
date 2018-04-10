@@ -53,9 +53,7 @@ class Register extends Component {
     e.preventDefault();
 
     const { errors } = this.state;
-    console.log('errors: ', errors);
     const user = _.omit(this.state, ['errors']);
-    console.log('user: ', user);
     if (errors.all && _.keys(errors).length === 1) delete errors.all;
     if (!_.isEmpty(errors) || !_.isEmpty(_.pickBy(user, _.isNil))) {
       this.setState(({ errors: { ...errors, all: 'Veuillez remplir tout les champs' } }));
@@ -67,7 +65,6 @@ class Register extends Component {
       await req.register(bodyFormData);
       window.location = '/';
     } catch (err) {
-      console.log('err: ', err);
       this.setState(({ errors: { all: err.details } }));
     }
   }

@@ -39,7 +39,8 @@ class Profil extends Component {
     const img = new Image();
     img.onload = () => {
       const bodyFormData = new FormData();
-      req.editUser(bodyFormData).catch(e => console.log(e));
+      bodyFormData.set('profilePicture', file);
+      req.editUser(bodyFormData).catch(e => e);
     };
     const _URL = window.URL || window.webkitURL;
     img.src = _URL.createObjectURL(file);
@@ -53,7 +54,6 @@ class Profil extends Component {
 
     return (
       <MainContainer>
-        {console.log(this.state.profilePicture)}
         <ProfilContainer>
           <ProfilHeader>
             <Avatar

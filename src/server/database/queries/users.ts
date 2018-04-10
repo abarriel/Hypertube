@@ -9,7 +9,6 @@ const singleDataUser = ['id', 'username', 'profilePicture', 'firstName', 'lastNa
 
 const Users = {
   async post(user: any) {
-    console.log(colors.green('user: '), user, '\n');
     const querySQL = DB.insert(user)
       .from('users')
       .returning(['id', 'username', 'omniauth', 'profilePicture']);
@@ -32,7 +31,7 @@ const Users = {
 
   async update(newUser: any, id: any) {
     let querySQL = 0;
-    await DB.select().from('users').where('email', newUser.email).then(response => {
+    await DB.select().from('users').where('id', id).then(response => {
       if (response.length === 0 || response[0].id === id) {
         querySQL = DB.from('users').where('id', id).update(newUser);
       } else {

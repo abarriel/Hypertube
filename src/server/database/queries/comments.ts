@@ -7,7 +7,6 @@ import { DB } from '../../core';
 
 const Comments = {
   async post(comment: any) {
-    console.log(colors.green('comment: '), comment, '\n');
     const querySQL = DB.insert(comment)
       .from('comments');
 

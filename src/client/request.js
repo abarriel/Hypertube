@@ -9,7 +9,6 @@ const tryCatcher = (shouldNotCatchedErr) => (target, key, descriptor) => {
       if (status === 201) throw data;
       return data;
     } catch (err) {
-      // console.log('errDecorators ', err, 'shoudCatacher err ', shouldNotCatchedErr);
       if (!shouldNotCatchedErr) return err;
       throw err;
     }

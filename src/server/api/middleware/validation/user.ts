@@ -38,7 +38,6 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
   params.lang = lang;
   try {
     const data: any = await Joi.validate(params, UserSchema);
-    console.log(data);
     if (data.password && req.originalUrl !== '/api/auth/login') {
       data.password = await bcrypt.hash(data.password, 10);
     }
@@ -46,7 +45,6 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
     req.app.locals = { ...req.app.locals, user: { ..._.omitBy(_.omit(data, ['limit', 'offset']), _.isNil) }, limit: data.limit, offset: data.offset };
     next();
   } catch (err) {
-    console.log("err");
     next({ type: 'JoiSchema', err });
   };
 };

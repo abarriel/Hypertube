@@ -25,7 +25,6 @@ class ShowsController {
     const { id } = req.params;
     const show = await Shows.single(id);
     const allEpisode = await Shows.getFullEpisodes(id);
-    console.log(allEpisode);
     // const groupBySeasons = _.groupBy(allEpisode, 'season');
     // console.log(_.map(groupBySeasons, (season) => _.keyBy(season, 'episode')))
     // const { myList, history } = req.user;

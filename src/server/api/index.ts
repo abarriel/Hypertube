@@ -59,7 +59,6 @@ var options: any = {
 
   await app
     .get('/', (req, res) => {
-      console.log(req.user);
       if (!req.user.omniauth)
         return res.json({ redirect: '/' }) ;
       res.redirect('http://localhost:8080', 301);

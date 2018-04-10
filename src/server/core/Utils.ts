@@ -109,9 +109,7 @@ const Utils = {
 
     Engine.on('ready', () => {
       Engine.files.forEach(file => {
-        // console.log('file:  ', formatBytes(file.length).padStart(10),  Utils.isVideo(file.name), file.name);
         if (Utils.isVideo(file.name) && file.length > movie.length) {
-          // console.log('video: ', formatBytes(file.length).padStart(10), '     ', file.name);
           const ext = path.extname(file.name);
           movie = file;
           movie.size = file.length;
@@ -126,7 +124,6 @@ const Utils = {
     });
 
     Engine.on('idle', () => {
-      // console.log(colors.green('DONE(idle)'));
     });
   }),
 };
