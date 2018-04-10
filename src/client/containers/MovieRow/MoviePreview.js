@@ -20,7 +20,7 @@ const propTypes = {
   index: number.isRequired,
   handleChangeIsPreviewOpen: func.isRequired,
   loadDetailsData: func.isRequired,
-  history: array.isRequired,
+  history: array,
 };
 
 const MoviePreview = ({

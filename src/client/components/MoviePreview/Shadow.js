@@ -33,7 +33,7 @@ const propTypes = {
   loadDetailsData: func.isRequired,
   wichHover: number.isRequired,
   handleChangeWichHover: func.isRequired,
-  history: array.isRequired,
+  history: array,
 };
 
 const Shadow = ({

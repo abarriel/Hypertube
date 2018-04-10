@@ -29,7 +29,7 @@ const propTypes = {
   moviesCount: number.isRequired,
   loadDetailsData: func.isRequired,
   handleChangeIsPreviewOpen: func.isRequired,
-  history: array.isRequired,
+  history: array,
 };
 
 const MoviePreview = ({
