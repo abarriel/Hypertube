@@ -28,7 +28,6 @@ const userFormValidate = async (req: express.Request, res: express.Response, nex
     pp = _.drop(pp, pp.length - 2 );
     params.profilePicture = `${pp[0]}/${pp[1]}`;
   }
-
   params.limit = limit ? parseInt(limit) : 20;
   params.offset = offset ? parseInt(offset) : 0;
   params.username = username;

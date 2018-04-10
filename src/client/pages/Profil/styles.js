@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export const ProfilContainer = styled.div`
   display:flex;
   flex-direction:column;
-  width:calc(100vw - 85px);
+  width:calc(100vw - 65px);
   margin-left:65px;
   margin-bottom:25px;
 `;
@@ -127,4 +127,14 @@ export const Shadow = styled.div`
 export const UpdateAvatarLogo = styled(MdCreate)`
   color:white;
   font-size:1.7em;
+  display: ${({ isAvatarHovered }) => isAvatarHovered ? 'none' : 'flex'};
+`;
+
+export const InputFile = styled.input`
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 `;
