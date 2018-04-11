@@ -36,6 +36,8 @@ export default compose(
           setFieldError('all', 'Please complete all fields');
         } else if (err.type === AUTH_ERROR) {
           setFieldError('all', 'You cant modify your profil');
+        } else if (err) {
+          setFieldError('all', 'You cant modify your profil');
         }
       }
     },

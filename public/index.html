@@ -3,7 +3,7 @@
   <head>
     <script>
     if(!window.console) window.console = {};
-    var methods = ["debug", "warn", "info"];
+    var methods = ["debug", "warn", "info", "log", "error"];
     for(var i=0;i<methods.length;i++){
       console[methods[i]] = function(){};
       }

@@ -31,15 +31,20 @@ const Users = {
 
   async update(newUser: any, id: any) {
     let querySQL = 0;
-    await DB.select().from('users').where('id', id).then(response => {
-      if (response.length === 0 || response[0].id === id) {
-        querySQL = DB.from('users').where('id', id).update(newUser);
-      } else {
-        querySQL = null
+    try {
+      const checkPresent = await DB.select().from('users').where('id', id);
+      if (checkPresent.length === 0)
+        return false;
+      if (newUser.email) {
+        const resp = await DB.select().from('users').where('email', newUser.email);
+        if (resp.length !== 0 && resp[0].id !== id)
+            return false;
       }
-    })
-    console.log(colors.blue(querySQL.toString()));
-    return querySQL;
+      await DB.from('users').where('id', id).update(newUser);
+      return true;
+    } catch (err) {
+      return false;
+    }
   },
 
   async getByUsername(username: string, columns: any) {

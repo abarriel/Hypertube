@@ -31,10 +31,11 @@ class UsersController {
     const { user: { omniauth, id, profilePicture } } = req;
     if (omniauth || omniauth === 'true' ) return next({ type: 'Auth', details: 'Cannot update your info bc you user is update by your provider'});
     const { user: dataToUpdate } = req.app.locals;
-    if (_.isEmpty(dataToUpdate)) return next({ type: 'db', details: 'nothing to update' });
     if (dataToUpdate.username) delete dataToUpdate.username;
+    if (_.isEmpty(dataToUpdate)) return next({ type: 'db', details: 'nothing to update' });
     try {
-      await Users.update(dataToUpdate, id);
+      const isGood = await Users.update(dataToUpdate, id);
+      if(!isGood) throw isGood;
       res.json({ status: 'user updated'});
       // if (dataToUpdate.profilePicture && profilePicture !== 'upload/default.jpg') {
       //  const ok =  del.sync(path.join('../../../../public', profilePicture));

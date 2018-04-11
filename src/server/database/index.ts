@@ -4,7 +4,8 @@ import { createCommentsTable, deleteCommentsTable } from './migrations/comments'
 
 const initDb = async () => {
   // await deleteCommentsTable();
-  // await deleteUsersTable();
+  // await deleteUsersTable()
+  // DB("users").;
   await createUsersTable();
   await createCommentsTable();
   // await createUsersTable();

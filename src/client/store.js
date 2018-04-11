@@ -11,7 +11,7 @@ const configureStore = (initialState) =>
   createStore(
     reducer,
     initialState,
-    applyMiddleware(thunk, logger),
+    applyMiddleware(thunk),
   );
 
 export default configureStore;

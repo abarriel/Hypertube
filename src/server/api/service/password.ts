@@ -15,7 +15,8 @@ class PasswordController {
   async get(req: express.Request, res: express.Response, next: any) {
     const { user: { email } } = req.app.locals;
     try {
-      const user = await Users.getByEmail(email, ['password', 'id', 'email']);
+      const user = await Users.getByEmail(email, ['password', 'id', 'email', 'omniauth']);
+      // if (user)) return next({ type: 'db', details: 'Failed to send email' });
       if (_.isEmpty(user)) return next({ type: 'db', details: 'Failed to send email' });
       const token = jwt.sign({ sub: user.id }, user.password);
       mailer(user.email, token);
