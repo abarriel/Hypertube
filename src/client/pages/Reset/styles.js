@@ -40,6 +40,7 @@ export const FormContainer = styled.form`
     width:calc(100vw - 80px);
     padding-top:20px;
   };
+  margin-bottom:50px;
 `;
 
 export const Logo = styled.div`

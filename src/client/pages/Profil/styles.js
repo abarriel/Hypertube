@@ -8,6 +8,7 @@ export const ProfilContainer = styled.div`
   width:calc(100vw - 65px);
   margin-left:65px;
   margin-bottom:25px;
+  margin-top:15px;
 `;
 
 export const ProfilHeader = styled.div`
@@ -42,7 +43,6 @@ export const Avatar = styled.div`
   background-size: 105%;
   background-position: center;
   background-repeat: no-repeat;
-  cursor:pointer;
   border-radius:2px;
 `;
 
@@ -109,7 +109,6 @@ export const EditProfilLogo = styled(MdCreate)`
   top:100px;
   left:calc(100vw - 100px);
   font-size:1.7em;
-  cursor:pointer;
   &:hover{
     color: #828282;
   }
@@ -128,6 +127,7 @@ export const UpdateAvatarLogo = styled(MdCreate)`
   color:white;
   font-size:1.7em;
   display: ${({ isAvatarHovered }) => isAvatarHovered ? 'none' : 'flex'};
+  cursor:pointer;
 `;
 
 export const InputFile = styled.input`

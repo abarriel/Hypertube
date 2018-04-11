@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { object, bool, func } from 'prop-types';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { compose, withStateHandlers } from 'recompose';
-import req from '../../request';
 
 import {
   ProfilContainer,
@@ -23,6 +23,8 @@ import {
 import Users from '../../containers/Users';
 import Section from '../../containers/Section';
 import { getUser } from '../../selectors/user';
+import { loadUser } from '../../actions/user';
+import req from '../../request'
 
 const propTypes = {
   user: object,
@@ -33,14 +35,14 @@ class Profil extends Component {
   state = {
     profilePicture: undefined,
   }
-  handleChange = async ({ target: { files } }) => {
+  handleChange = async ({ target: { files } }, loadUser) => {
     const file = files[0];
     if (!file) return false;
     const img = new Image();
     img.onload = () => {
       const bodyFormData = new FormData();
       bodyFormData.set('profilePicture', file);
-      req.editUser(bodyFormData).catch(e => e);
+      req.editUser(bodyFormData)
     };
     const _URL = window.URL || window.webkitURL;
     img.src = _URL.createObjectURL(file);
@@ -50,6 +52,7 @@ class Profil extends Component {
       user,
       isAvatarHovered,
       handleChangeIsAvatarHovered,
+      loadUser,
     } = this.props;
 
     return (
@@ -61,12 +64,12 @@ class Profil extends Component {
               onMouseEnter={() => handleChangeIsAvatarHovered()}
               onMouseLeave={() => handleChangeIsAvatarHovered()}
             >
-              <InputFile type="file" accept="image/*" id="profilePicture" onChange={this.handleChange} />
+              <InputFile type="file" accept="image/*" id="profilePicture" onChange={e => this.handleChange(e, loadUser).then(window.location.replace('/profil'))} />
               <label htmlFor="profilePicture">
                 {isAvatarHovered && <UpdateAvatarLogo />}
               </label>
             </Avatar>
-            <Name>{`${user.firstName} ${user.lastName}`}</Name>
+            <Name>{`${user.firstName || ''} ${user.lastName || ''}`}</Name>
             <EditProfilButton to="editprofil">
               <EditProfilLogo />
             </EditProfilButton>
@@ -101,6 +104,9 @@ const mapStateToProps = state => ({
   user: getUser(state),
 });
 
+const actions = { loadUser };
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+
 export default compose(
   withStateHandlers(
     () => ({
@@ -110,5 +116,5 @@ export default compose(
       handleChangeIsAvatarHovered: ({ isAvatarHovered }) => () => ({ isAvatarHovered: !isAvatarHovered }),
     },
   ),
-  connect(mapStateToProps),
+  connect(mapStateToProps, mapDispatchToProps),
 )(Profil);

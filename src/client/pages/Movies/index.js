@@ -58,7 +58,8 @@ const onChange = (isVisible, addMovies, reqParams) => {
     req.movies({
       ...body,
     })
-      .then(movies => addMovies(movies));
+      .then(movies => addMovies(movies))
+      .catch(() => addMovies({ movies: [] }));
   }
 };
 

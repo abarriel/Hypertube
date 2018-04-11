@@ -42,6 +42,7 @@ export const FormContainer = styled.form`
     padding-top:20px;
     max-width:1000px;
   };
+  margin-bottom:50px;
 `;
 
 export const Logo = styled.div`

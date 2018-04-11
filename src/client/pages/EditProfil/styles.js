@@ -35,6 +35,7 @@ export const FormContainer = styled.form`
     max-width:1000px;
   };
   margin-top:140px;
+  margin-bottom:50px;
 `;
 
 export const InputContainer = styled.div`
