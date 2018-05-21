@@ -1,9 +1,10 @@
 
-<img width="100%" src="https://user-images.githubusercontent.com/23408500/36753204-ca89a168-1c05-11e8-9d66-cb74d9d0a028.jpg"/>
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39268928-8035e204-48d1-11e8-944e-c7fe655a4f65.png"/>
 
 ## Table des matières
 
 - [Introduction](#introduction)
+- [Preview](#preview)
 - [Consignes générales](#consignes-générales)
 - [Partie utilisateur](#partie-utilisateur)
 - [Partie bibliothèque](#partie-bibliothèque)
@@ -26,6 +27,16 @@ par exemple http://www.legittorrents.info, ou encore https://archive.org.
 Une fois un élément sélectionné, il sera téléchargé sur le serveur et diffusé sur le player
 web en même temps. Autrement dit, le lecteur ne se contentera pas d’afficher la vidéo
 une fois le téléchargement complété, mais sera capable de streamer directement le flux.
+
+# Preview
+
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39144170-4cde3ad4-4730-11e8-96d8-21e487474363.png"/>
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39144130-2ebd44fa-4730-11e8-9c59-4be4506917c2.png"/>
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39144195-5b6c694a-4730-11e8-8857-50d148b4cfca.png"/>
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39144213-66a3f620-4730-11e8-9083-c8b44cbb074d.png"/>
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39144226-701fce9a-4730-11e8-8677-e1dc925bc137.png"/>
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39144238-7b03106a-4730-11e8-98da-63c42d22d6af.png"/>
+<img width="100%" src="https://user-images.githubusercontent.com/23408500/39144247-8665905e-4730-11e8-89fe-acaf2ec8de54.png"/>
 
 # Consignes générales
 
